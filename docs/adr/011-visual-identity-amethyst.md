@@ -1,0 +1,7 @@
+# ADR-011: Visual identity: Amethyst palette, Inter and Space Grotesk, 12px corners
+
+**Status:** Accepted
+**Date:** 2026-11-13
+**Decision:** The values of `src/ui/theme/tokens.css` change; no token is renamed. Colors follow the "Amethyst" direction (brand `#6d28d9` in the light theme, `#b69cff` in the dark one, violet-tinted neutrals). Text is Inter 400 and 600, titles and big numbers are Space Grotesk 700 (new token `--font-display`, new `--font-weight-display`), all three bundled as latin-subset woff2 files in `public/fonts/` with their OFL licenses and declared by `@font-face` in `tokens.css`. `--radius` is 12px and `--radius-sm` 6px. A new color token, `--color-brand-soft` (the weakest line of the thermometer, notices), gets its text pairs in `tokens.test.ts`. `theme-color` in `index.html`, `public/manifest.webmanifest` and the two icons take the same brand and background.
+**Why:** The owner picked this direction among the candidates (roadmap, "Identidade escolhida"). Violet on near-white and near-black passes WCAG AA in both themes, which `tokens.test.ts` checks. Only three font files (Inter 400 and 600, Space Grotesk 700, latin only, about 61 KB together) keep the first load light on a phone. Fonts are files under `'self'`, so the CSP needs no new origin (`docs/SEGURANCA.md`, ADR-002) and the app still talks to no CDN.
+**Alternatives:** System font stacks only: no download, but titles lose the character the owner chose. A variable font file: one file for every weight, but larger than the three static subsets we use.
