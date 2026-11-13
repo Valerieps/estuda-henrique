@@ -49,8 +49,14 @@ export interface Commands {
 export type QueryName = keyof Queries;
 export type CommandName = keyof Commands;
 
-/** What a live message says changed; the screens that show it refetch. */
-export type Topic = 'me' | 'members' | 'invites';
+/**
+ * What a live message says changed; the screens that show it refetch. Every open app gets every
+ * message, so a topic names a kind of data, never whose: `study` and `settings` are private, and a
+ * refetch only ever returns the reader's own (ADR-009).
+ * - `subjects`: subjects and topics. `cards`: notes and cards (system and personal).
+ * - `study`: card states, answers and study sessions. `settings`: the study settings (Ajustes).
+ */
+export type Topic = 'me' | 'members' | 'invites' | 'subjects' | 'cards' | 'study' | 'settings';
 
 export interface LiveMessage {
   readonly type: 'changed';

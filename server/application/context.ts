@@ -1,4 +1,5 @@
 import type { ApiError, Topic } from '../../src/application/api-contract';
+import { studyDay, type StudyDay } from '../../src/domain/study/study-day';
 import type { Clock, IdGenerator, Sql } from './ports';
 
 /** What every use case gets: the database, the time and new ids. */
@@ -20,6 +21,11 @@ export const failure = (error: ApiError) => ({ ok: false, error }) as const;
 
 export function nowIso(ctx: Context): string {
   return ctx.clock.now().toISOString();
+}
+
+/** Today's study day, in Brasília, from the server's clock (never the device's time zone). */
+export function today(ctx: Context): StudyDay {
+  return studyDay(ctx.clock.now());
 }
 
 /** A query's specific failure; returning null from a query still means `forbidden`. */

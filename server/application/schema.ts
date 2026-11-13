@@ -32,6 +32,98 @@ export const MIGRATIONS: readonly (readonly string[])[] = [
       revoked_at TEXT
     )`,
   ],
+  // 2: the study (phase 1). Subjects, topics, notes and cards are shared content; every table with
+  // a member_id is private to that member (ADR-009). The group starts with one subject, Biologia.
+  [
+    `CREATE TABLE subjects (
+      id TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      position INTEGER NOT NULL,
+      archived INTEGER NOT NULL DEFAULT 0
+    )`,
+    `INSERT INTO subjects (id, name, position) VALUES ('biologia', 'Biologia', 0)`,
+    `CREATE TABLE topics (
+      id TEXT PRIMARY KEY,
+      subject_id TEXT NOT NULL REFERENCES subjects(id),
+      name TEXT NOT NULL,
+      position INTEGER NOT NULL,
+      created_at TEXT NOT NULL
+    )`,
+    `CREATE INDEX topics_subject ON topics(subject_id, position)`,
+    `CREATE TABLE notes (
+      id TEXT PRIMARY KEY,
+      topic_id TEXT NOT NULL REFERENCES topics(id),
+      owner_id TEXT REFERENCES members(id),
+      kind TEXT NOT NULL CHECK (kind IN ('basic', 'cloze')),
+      front TEXT NOT NULL,
+      back TEXT NOT NULL DEFAULT '',
+      hint TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    )`,
+    `CREATE INDEX notes_topic ON notes(topic_id)`,
+    `CREATE INDEX notes_owner ON notes(owner_id)`,
+    `CREATE TABLE cards (
+      id TEXT PRIMARY KEY,
+      note_id TEXT NOT NULL REFERENCES notes(id),
+      cloze_index INTEGER NOT NULL,
+      UNIQUE (note_id, cloze_index)
+    )`,
+    `CREATE TABLE card_states (
+      member_id TEXT NOT NULL REFERENCES members(id),
+      card_id TEXT NOT NULL REFERENCES cards(id),
+      stage TEXT NOT NULL CHECK (stage IN ('new', 'learning', 'review', 'relearning')),
+      due TEXT NOT NULL,
+      stability REAL NOT NULL,
+      difficulty REAL NOT NULL,
+      scheduled_days INTEGER NOT NULL,
+      learning_steps INTEGER NOT NULL,
+      reps INTEGER NOT NULL,
+      lapses INTEGER NOT NULL,
+      last_review TEXT,
+      suspended INTEGER NOT NULL DEFAULT 0,
+      PRIMARY KEY (member_id, card_id)
+    )`,
+    `CREATE INDEX card_states_due ON card_states(member_id, due)`,
+    `CREATE TABLE study_sessions (
+      id TEXT PRIMARY KEY,
+      member_id TEXT NOT NULL REFERENCES members(id),
+      kind TEXT NOT NULL CHECK (kind IN ('review', 'cram', 'retry', 'selected')),
+      is_training INTEGER NOT NULL,
+      study_day TEXT NOT NULL,
+      started_at TEXT NOT NULL,
+      ended_at TEXT
+    )`,
+    `CREATE INDEX study_sessions_member ON study_sessions(member_id, study_day)`,
+    `CREATE TABLE reviews (
+      id TEXT PRIMARY KEY,
+      member_id TEXT NOT NULL REFERENCES members(id),
+      card_id TEXT NOT NULL REFERENCES cards(id),
+      session_id TEXT NOT NULL REFERENCES study_sessions(id),
+      rating TEXT NOT NULL CHECK (rating IN ('again', 'hard', 'good')),
+      reviewed_at TEXT NOT NULL,
+      study_day TEXT NOT NULL,
+      is_training INTEGER NOT NULL,
+      previous_state TEXT
+    )`,
+    `CREATE INDEX reviews_member_card ON reviews(member_id, card_id, reviewed_at)`,
+    `CREATE INDEX reviews_session ON reviews(session_id, reviewed_at)`,
+    `CREATE TABLE topic_snapshots (
+      member_id TEXT NOT NULL REFERENCES members(id),
+      topic_id TEXT NOT NULL REFERENCES topics(id),
+      week TEXT NOT NULL,
+      mastery REAL NOT NULL,
+      PRIMARY KEY (member_id, topic_id, week)
+    )`,
+    `CREATE TABLE study_settings (
+      member_id TEXT PRIMARY KEY REFERENCES members(id),
+      new_per_day INTEGER NOT NULL,
+      rest_days TEXT NOT NULL DEFAULT '[]',
+      routine_when TEXT,
+      routine_where TEXT,
+      streak_repair_month TEXT
+    )`,
+  ],
 ];
 
 export function migrate(sql: Sql): void {
