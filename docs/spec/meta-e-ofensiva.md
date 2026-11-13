@@ -9,23 +9,32 @@ A tela Hoje e o que faz ele voltar todo dia: a meta, a ofensiva, a rotina e o ca
 ## Hoje
 
 - O app abre em Hoje, de cima para baixo: a rotina dele numa linha (ex.: "no ônibus da escola"); a
-  meta do dia ou "Pronto por hoje"; Estudar e Só 5 cartas; o cartão de aviso; o termômetro. *(1)*
-- **Primeiro uso:** baralho inicial carregado, meta "10 novas", termômetro com cobertura 0 de N e
-  domínio "—". *(1)*
-- **Pronto por hoje:** meta cumprida e chama acesa. Sem Estudar nem Só 5 cartas; no lugar, os
-  atalhos Piores cartas e Prova. *(1)*
+  linha da memória de longo prazo e das cartas guardadas (`spec/diagnostico.md`); a meta do dia ou
+  "Pronto por hoje"; Estudar e Só 5 cartas; o cartão de aviso; o termômetro. *(1)*
+- **Primeiro uso:** baralho inicial carregado, meta "20 novas", termômetro com cobertura 0 de N,
+  domínio "—" e sem minilinha. *(1)*
+- **Pronto por hoje:** meta cumprida e chama acesa. Sem Estudar nem Só 5 cartas; no lugar, a frase
+  "Hoje você já fez o que mais rende", com a memória de longo prazo, e o que vale se ele quiser
+  mais: Adiantar mais 10 novas (`spec/estudo.md`) e Piores cartas. *(1)*
+  Por quê: constância vale mais que horas; o app mostra que voltar amanhã rende mais, sem travar.
 - **Dia de folga:** a frase "Hoje é folga", com Estudar ainda disponível se houver cartas. *(1)*
 - Para o admin, a tela inicial é a das cartas do sistema, não Hoje. *(1)*
 
 ## Meta diária
 
 - A meta é zerar as revisões do dia e as novas até o limite. *(1)*
-- O limite de cartas novas por dia (padrão: 10) é a única configuração de estudo. O app funciona
-  sem abrir os Ajustes nenhuma vez. *(1)*
+- O limite de cartas novas por dia (padrão: 20, de 5 a 50) é a única configuração de estudo. O app
+  funciona sem abrir os Ajustes nenhuma vez. *(1)*
+- Ao mudar o limite, o app avisa em uma linha que mais novas hoje significam mais revisões nos
+  próximos dias. *(1)*
+- Depois de zerar o dia, ele ainda pode adiantar novas (`spec/estudo.md`). *(1)*
 
 ## Ofensiva
 
-- A ofensiva conta os dias seguidos em que ele concluiu ao menos uma sessão. *(1)*
+- A ofensiva conta os dias seguidos de estudo. Um dia conta quando ele conclui ao menos uma sessão,
+  de qualquer tamanho e em qualquer modo, ou quando abre o app num dia em que não havia nada para
+  estudar. *(1)*
+  Por quê: zerar as revisões é a meta do dia, não a condição da ofensiva.
 - Ele escolhe nos Ajustes os dias de folga da semana (ex.: domingo). Uma folga não quebra a
   sequência; se ele estudar na folga, o dia conta normalmente. *(1)*
 - A chama, com o número de dias, fica na barra superior. Ela acende no Resumo da primeira sessão do
@@ -53,4 +62,4 @@ A tela Hoje e o que faz ele voltar todo dia: a meta, a ofensiva, a rotina e o ca
 ## Ajustes
 
 - Os Ajustes ficam na engrenagem da barra superior, não na barra inferior. Têm: limite de novas por
-  dia, rotina, dias de folga e Sobre. *(1)*
+  dia (com o aviso sobre as revisões dos próximos dias), rotina, dias de folga e Sobre. *(1)*
