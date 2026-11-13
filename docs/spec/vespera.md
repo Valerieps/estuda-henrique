@@ -5,9 +5,10 @@ O estudo intensivo perto da prova, na aba Prova.
 - **Entra aqui:** montar e fazer uma sessão de Véspera, e as datas de prova.
 - **Não entra aqui:** a sessão de todo dia (`spec/estudo.md`).
 
-## Em aberto
+## A prova
 
-- [ ] Qual é a prova-alvo dele: um vestibular seriado, o ENEM ou o de alguma universidade?
+- A prova-alvo dele é o PAS (Programa de Avaliação Seriada). A Véspera é feita para os dias antes
+  de uma prova do PAS, e as datas de prova abaixo são as dele. *(1)*
 
 ## Montar
 

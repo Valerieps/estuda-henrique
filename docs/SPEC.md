@@ -9,7 +9,7 @@ O que o app faz. É a fonte da verdade: quando outro documento diverge daqui, va
 ## O app
 
 Eu fiz o Estuda Henrique para o meu sobrinho, o Henrique, que está no 2º ano do Ensino Médio e
-estuda Biologia para o vestibular. O que mais pega para ele é decorar nomes e conceitos, e o Anki
+estuda Biologia para o PAS. O que mais pega para ele é decorar nomes e conceitos, e o Anki
 exige configuração demais: dá preguiça antes de começar. Aqui, ele abre o app em Hoje, toca Estudar
 e, em segundos, vê no termômetro quais tópicos estão fracos. Eu sou a admin: convido ele e adiciono
 as cartas do sistema, sem ver nada do que ele estuda.
