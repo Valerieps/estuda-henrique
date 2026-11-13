@@ -9,9 +9,6 @@ Matérias, tópicos e cartas: o que existe para estudar e como as cartas são cr
 
 ## Em aberto
 
-- [ ] O que acontece com o histórico do Henrique quando eu edito ou apago uma carta do sistema que
-  ele já estudou? (inclui mudar uma lacuna, somando ou tirando um trecho)
-- [ ] Em que ordem por bimestre ficam os tópicos de Biologia do 2º ano dele?
 - [ ] Quem escreve o baralho inicial: eu, pelas telas do admin, ou um arquivo colado de uma vez?
 
 ## Matérias e tópicos
@@ -42,8 +39,10 @@ Matérias, tópicos e cartas: o que existe para estudar e como as cartas são cr
   Por quê: eu adiciono cartas "do sistema"; o que ele faz é dele (ADR-009).
 - Ele pode editar tudo numa carta do sistema: frente, verso e macete, não só suspender e escrever o
   macete. *(1)*
+- Eu não posso mudar nem apagar nada do histórico dele. Editar ou apagar uma carta do sistema nunca
+  mexe no histórico de estudo dele (respostas e agendamento). *(1)*
 - Na interface dele, as duas aparecem juntas no tópico; só a origem muda. *(1)*
-- O baralho inicial são de 80 a 150 cartas do sistema, cobrindo os tópicos do bimestre atual,
+- O baralho inicial são de 80 a 150 cartas do sistema, cobrindo os tópicos da lista da escola,
   revisadas por mim antes de entrar no app. *(1)*
 
 ## Tipos de carta
