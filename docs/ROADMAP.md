@@ -11,7 +11,6 @@ O que ainda não está pronto.
 
 | Feature | Fase | Spec | Observação |
 | --- | --- | --- | --- |
-| Identidade visual | 1 | — | A dona escolhe entre 3 ou 4 direções (skill `visual-identity`); hoje são as cores do template |
 | Matérias, tópicos e cartas (básica, lacuna, macete, formatação) | 1 | `spec/cartas.md` | Cartas do sistema (admin) e pessoais (usuário) |
 | Colar várias com prévia | 1 | `spec/cartas.md` | |
 | Baralho inicial de Biologia | 1 | `spec/cartas.md` | Tópicos já definidos; falta a ordem por bimestre (Em aberto) |
