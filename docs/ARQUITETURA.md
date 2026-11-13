@@ -57,30 +57,36 @@ app (celular) ──POST /api/query|command──► Worker ──RPC──► G
 | `sessions` | `token_hash`, `member_id`, `expires_at` | Só o SHA-256 do token; o cron apaga as vencidas |
 | `invites` | `email`, `invited_by`, `state` (`pending`, `accepted`, `revoked`) | Um por e-mail |
 
-Tabelas do estudo (só o desenho; cada uma entra com a migração da sua feature):
+Tabelas do estudo (migração 2; a matéria Biologia já vem criada, com id `biologia`):
 
 | Tabela | Campos principais | Observação |
 | --- | --- | --- |
 | `subjects` | `id`, `name`, `position`, `archived` | Só Biologia na fase 1 |
 | `topics` | `id`, `subject_id`, `name`, `position` | Ordem do planejamento da escola |
-| `notes` | `id`, `topic_id`, `owner_id` (nulo = do sistema), `kind` (`basic`, `cloze`), `front`, `back`, `hint` | A nota é o que se escreve; uma lacuna gera várias cartas |
-| `cards` | `id`, `note_id`, `cloze_index` | Uma por nota básica, uma por trecho de lacuna |
-| `card_states` | `member_id`, `card_id`, estado do FSRS (`due`, `stability`, `difficulty`, `reps`, `lapses`, `state`, `last_review`), `suspended` | Por membro: a mesma carta do sistema tem um estado para cada usuário |
-| `reviews` | `id`, `member_id`, `card_id`, `session_id`, `rating`, `reviewed_at`, `is_training`, `previous_state` (JSON) | Registro de cada resposta; o acerto do histórico ignora `is_training` |
-| `study_sessions` | `id`, `member_id`, `kind` (`review`, `cram`, `retry`, `selected`), `started_at`, `ended_at` | Base do Resumo e da ofensiva |
-| `topic_snapshots` | `member_id`, `topic_id`, `week`, `mastery` | Uma por semana, gravada pelo cron; alimenta a minilinha |
-| `study_settings` | `member_id`, `new_per_day`, `rest_days`, `routine_when`, `routine_where`, `streak_repair_month` | Ajustes e rotina |
+| `notes` | `id`, `topic_id`, `owner_id` (nulo = do sistema), `kind` (`basic`, `cloze`), `front`, `back`, `hint` | A nota é o que se escreve; uma lacuna gera várias cartas (`src/domain/study/cloze.ts`) |
+| `cards` | `id`, `note_id`, `cloze_index` | Uma por nota básica (`cloze_index` 0), uma por trecho de lacuna (de 1 em diante) |
+| `card_states` | `member_id`, `card_id`, estado do FSRS (`stage`, `due`, `stability`, `difficulty`, `scheduled_days`, `learning_steps`, `reps`, `lapses`, `last_review`), `suspended` | Por membro: a mesma carta do sistema tem um estado para cada usuário. Sem linha, a carta é nova (ADR-010) |
+| `reviews` | `id`, `member_id`, `card_id`, `session_id`, `rating` (`again`, `hard`, `good`), `reviewed_at`, `study_day`, `is_training`, `previous_state` (JSON) | Registro de cada resposta; o acerto do histórico ignora `is_training` |
+| `study_sessions` | `id`, `member_id`, `kind` (`review`, `cram`, `retry`, `selected`), `is_training`, `study_day`, `started_at`, `ended_at` | Base do Resumo e da ofensiva; só `review` não é treino |
+| `topic_snapshots` | `member_id`, `topic_id`, `week` (a segunda-feira), `mastery` | Uma por semana, gravada pelo cron; alimenta a minilinha |
+| `study_settings` | `member_id`, `new_per_day`, `rest_days`, `routine_when`, `routine_where`, `streak_repair_month` | Ajustes e rotina. Sem linha, valem os padrões (`src/domain/study/settings.ts`) |
 
 - Toda tabela com `member_id` é privada desse membro: as consultas filtram pelo ator da sessão, e
   nenhuma devolve o estudo de outro membro, nem a um admin (ADR-009).
-- O dia do estudo (meta, ofensiva, "vence hoje") é o dia em `America/Sao_Paulo`; o servidor converte
-  a partir do `Clock`, nunca do fuso do aparelho.
+- As tabelas por membro só são lidas e gravadas por `server/application/study-store.ts`, cujas
+  funções recebem o `member_id` e filtram por ele.
+- O dia do estudo (meta, ofensiva, "vence hoje") é o dia em `America/Sao_Paulo`
+  (`src/domain/study/study-day.ts`); o servidor converte a partir do `Clock` (`today(ctx)`), nunca do
+  fuso do aparelho. Respostas e sessões guardam o seu `study_day`.
+- Os tópicos ao vivo dizem o tipo de dado (`study`, `settings`...), nunca de quem: todo app aberto
+  refaz a consulta e recebe só o que é dele.
 
 ## Fluxo de eventos
 
 Não há feed. As respostas ficam em `reviews`, gravadas na mesma transação que atualiza
-`card_states`. Desfazer apaga a última `reviews` da sessão e restaura o estado anterior da carta,
-guardado na própria linha.
+`card_states` (`recordAnswer`). Desfazer (`undoLastAnswer`) apaga a última `reviews` da sessão e
+restaura o estado anterior da carta, guardado na própria linha. Uma sessão encerrada não aceita
+respostas nem desfazer.
 
 ## Migrações
 
