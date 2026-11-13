@@ -1,0 +1,89 @@
+/*
+ * Design tokens: every color, font, size, spacing and duration the UI uses lives here, and only here.
+ * src/ui/theme/tokens.test.ts refuses a literal anywhere else, a var() of a token that does not
+ * exist, a type scale out of rhythm and a color pair below WCAG AA (docs/UI.md).
+ *
+ * Changing the look of the app means changing the VALUES below. Keep the names: the components,
+ * the tests and docs/UI.md use them. A new token is fine when no existing one fits; add it to
+ * both themes if it is a color.
+ */
+:root {
+  color-scheme: light;
+
+  /* Colors. Every one is redefined in the dark theme below. */
+  --color-bg: #f4f2ed;
+  --color-surface: #ffffff;
+  --color-text: #1f1f1f;
+  --color-text-muted: #635f57;
+  /* Decorative lines between areas (cards, dividers). Not for controls: see --color-border-strong. */
+  --color-border: #e4e0d8;
+  /* Edges people must see to use a control (inputs, secondary buttons): 3:1 on bg and surface. */
+  --color-border-strong: #8a857b;
+  --color-brand: #4b3fb3;
+  --color-on-brand: #ffffff;
+  --color-danger: #b3261e;
+  --color-on-danger: #ffffff;
+  --color-success: #1e6b3a;
+  --color-focus: #4b3fb3;
+
+  /* Type. The scale steps by 1.125 to 1.5 from one size to the next; nothing below 12px. */
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-size-caption: 12px;
+  --font-size-small: 14px;
+  /* 16px also keeps iOS from zooming into inputs. */
+  --font-size-body: 16px;
+  --font-size-title: 20px;
+  --font-size-heading: 24px;
+  --font-size-display: 32px;
+  --font-weight-regular: 400;
+  --font-weight-strong: 600;
+  --line-height-tight: 1.25;
+  --line-height-body: 1.5;
+
+  /* Spacing: a 4px grid. Gaps between related items are smaller than between groups. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+
+  /* Shapes and sizes */
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-full: 999px;
+  --border-width: 1px;
+  --border-width-strong: 2px;
+  /* The smallest box a finger can hit reliably (WCAG 2.5.5, Apple HIG). */
+  --size-touch: 44px;
+  --size-avatar: 40px;
+  --size-content: 720px;
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+
+  /* Motion. global.css turns it off under prefers-reduced-motion. */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --easing: cubic-bezier(0.2, 0, 0, 1);
+  --opacity-disabled: 0.55;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --color-bg: #17161a;
+    --color-surface: #211f25;
+    --color-text: #ecebef;
+    --color-text-muted: #a3a0aa;
+    --color-border: #34313a;
+    --color-border-strong: #807c88;
+    --color-brand: #a59cf0;
+    --color-on-brand: #17161a;
+    --color-danger: #f2b8b5;
+    --color-on-danger: #17161a;
+    --color-success: #8fd4a4;
+    --color-focus: #a59cf0;
+  }
+}
