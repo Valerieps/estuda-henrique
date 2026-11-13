@@ -57,10 +57,30 @@ app (celular) ──POST /api/query|command──► Worker ──RPC──► G
 | `sessions` | `token_hash`, `member_id`, `expires_at` | Só o SHA-256 do token; o cron apaga as vencidas |
 | `invites` | `email`, `invited_by`, `state` (`pending`, `accepted`, `revoked`) | Um por e-mail |
 
+Tabelas do estudo (só o desenho; cada uma entra com a migração da sua feature):
+
+| Tabela | Campos principais | Observação |
+| --- | --- | --- |
+| `subjects` | `id`, `name`, `position`, `archived` | Só Biologia na fase 1 |
+| `topics` | `id`, `subject_id`, `name`, `position` | Ordem do planejamento da escola |
+| `notes` | `id`, `topic_id`, `owner_id` (nulo = do sistema), `kind` (`basic`, `cloze`), `front`, `back`, `hint` | A nota é o que se escreve; uma lacuna gera várias cartas |
+| `cards` | `id`, `note_id`, `cloze_index` | Uma por nota básica, uma por trecho de lacuna |
+| `card_states` | `member_id`, `card_id`, estado do FSRS (`due`, `stability`, `difficulty`, `reps`, `lapses`, `state`, `last_review`), `suspended` | Por membro: a mesma carta do sistema tem um estado para cada usuário |
+| `reviews` | `id`, `member_id`, `card_id`, `session_id`, `rating`, `reviewed_at`, `is_training`, `previous_state` (JSON) | Registro de cada resposta; o acerto do histórico ignora `is_training` |
+| `study_sessions` | `id`, `member_id`, `kind` (`review`, `cram`, `retry`, `selected`), `started_at`, `ended_at` | Base do Resumo e da ofensiva |
+| `topic_snapshots` | `member_id`, `topic_id`, `week`, `mastery` | Uma por semana, gravada pelo cron; alimenta a minilinha |
+| `study_settings` | `member_id`, `new_per_day`, `rest_days`, `routine_when`, `routine_where`, `streak_repair_month` | Ajustes e rotina |
+
+- Toda tabela com `member_id` é privada desse membro: as consultas filtram pelo ator da sessão, e
+  nenhuma devolve o estudo de outro membro, nem a um admin (ADR-009).
+- O dia do estudo (meta, ofensiva, "vence hoje") é o dia em `America/Sao_Paulo`; o servidor converte
+  a partir do `Clock`, nunca do fuso do aparelho.
+
 ## Fluxo de eventos
 
-<Se o app tem histórico de eventos (um feed, transições de estado): quais tipos existem, quem grava,
-quem lê. Todo evento é gravado na mesma transação do comando que o causa.>
+Não há feed. As respostas ficam em `reviews`, gravadas na mesma transação que atualiza
+`card_states`. Desfazer apaga a última `reviews` da sessão e restaura o estado anterior da carta,
+guardado na própria linha.
 
 ## Migrações
 
