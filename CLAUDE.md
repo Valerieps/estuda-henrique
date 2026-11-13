@@ -1,7 +1,10 @@
-# <Nome do app> - Claude Code Context & Instructions
+# Estuda Henrique - Claude Code Context & Instructions
 
-<!-- BOOTSTRAP.md fills this paragraph: what the app is, for whom, and its core loop. -->
-<One paragraph: what the app does, who uses it, the loop a member repeats every day.>
+Estuda Henrique is a flashcard web app (PWA, Android) for one Ensino Médio student, Henrique, to
+study Biology with FSRS spaced repetition. Every day he opens "Hoje", taps Estudar, answers cards
+with three buttons and sees which topics are weak (the "termômetro"). The owner (his aunt) is the
+only admin: she adds the system cards and invites him, and she sees none of his study data. Online
+only; his progress is private to him (ADR-008, ADR-009).
 
 ## Docs
 

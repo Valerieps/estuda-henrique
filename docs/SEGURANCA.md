@@ -17,7 +17,11 @@ conferidas pelo `src/security.test.ts`, que roda em todo build.
   `send_metrics: false`.
 - Segredos nunca vão para o código do cliente: tudo que está no bundle é público. O segredo do login
   Google, e qualquer chave de API, ficam só no Worker (`wrangler secret put`; localmente no `.dev.vars`).
-- <O `BOOTSTRAP.md` escreve aqui quais dados pessoais o app guarda e se algum é sensível.>
+- Dados que o app guarda: nome, e-mail e foto da conta Google; as cartas; e o histórico de estudo do
+  Henrique (respostas, agendamento, ofensiva, rotina). Ele é menor de idade: o histórico é sensível e
+  fica só no Durable Object, sem analytics e sem terceiros. Não há exportação nem backup (ADR-008).
+- O histórico de estudo é privado de quem estudou: nenhuma consulta o devolve a outra pessoa, nem a
+  um admin (ADR-009).
 
 ## 2. Acesso e dados
 

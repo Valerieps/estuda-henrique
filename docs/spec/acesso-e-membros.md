@@ -1,14 +1,10 @@
 # Acesso e membros
 
-Quem entra no app, como entra e o que cada papel pode fazer. Já vem construído no template; o
-`BOOTSTRAP.md` ajusta as regras às respostas da dona.
+Quem entra no app, como entra e o que cada papel pode fazer. Já vem construído; aqui estão as
+regras do Estuda Henrique: eu sou a admin e o Henrique é o único usuário.
 
 - **Entra aqui:** login, convites, papéis, a lista de membros, remover membro e o nome no perfil.
 - **Não entra aqui:** as features do app em si (cada uma no seu arquivo de `spec/`).
-
-## Em aberto
-
-- [ ] Que papéis o app tem além de admin e membro, e o que cada um pode?
 
 ## Entrar
 
@@ -23,15 +19,19 @@ Quem entra no app, como entra e o que cada papel pode fazer. Já vem construído
 
 | Papel | O que pode |
 | --- | --- |
-| Membro | Usar o app e ver a lista de membros |
-| Admin | Tudo do membro; convidar e remover membros; dar e tirar o papel de admin |
+| Usuário | Estudar: tudo de `spec/cartas.md`, `spec/estudo.md`, `spec/diagnostico.md`, `spec/vespera.md` e `spec/meta-e-ofensiva.md`. No código, é o "membro" |
+| Admin | Convidar e remover pessoas; dar e tirar o papel de admin; adicionar e editar as cartas do sistema. Não estuda e não vê nada do que o usuário faz |
 
-- Pode haver mais de um admin. O app não deixa tirar o papel do último. *(1)*
+- Hoje há uma admin (eu) e um usuário (o Henrique). Pode haver mais de um admin; o app não deixa
+  tirar o papel do último. *(1)*
+- O admin não vê respostas, termômetro, ofensiva, rotina nem as cartas pessoais do usuário, e não
+  edita nada que ele fez. *(1)*
+  Por quê: ele é menor de idade e eu quis assim (ADR-009).
 
 ## Membros
 
-- Todos os membros veem a lista do grupo, com nome, foto e papéis. O e-mail de cada um só o admin
-  vê. *(1)*
+- O admin vê a lista do grupo, com nome, foto, e-mail e papéis. O usuário não precisa dela e a
+  tela de membros só aparece para o admin. *(1)*
 - O admin remove um membro depois de confirmar. Ele não remove a si mesmo: outro admin faz isso.
   Assim sempre sobra um admin. *(1)*
 - Quem é removido perde o acesso na hora, inclusive no app aberto. Um convite novo traz a pessoa de

@@ -8,7 +8,16 @@ O que o app faz. É a fonte da verdade: quando outro documento diverge daqui, va
 
 ## O app
 
-<Duas ou três frases, em primeira pessoa: o que eu faço com o app, com quem e por quê.>
+Eu fiz o Estuda Henrique para o meu sobrinho, o Henrique, que está no 2º ano do Ensino Médio e
+estuda Biologia para o vestibular. O que mais pega para ele é decorar nomes e conceitos, e o Anki
+exige configuração demais: dá preguiça antes de começar. Aqui, ele abre o app em Hoje, toca Estudar
+e, em segundos, vê no termômetro quais tópicos estão fracos. Eu sou a admin: convido ele e adiciono
+as cartas do sistema, sem ver nada do que ele estuda.
+
+- É um app pessoal, para um aluno, no celular Android dele, instalado na tela de início.
+- Fica na nuvem, com login Google, e precisa de internet (ADR-008). Não há backup em arquivo: os
+  dados ficam no Cloudflare.
+- Ele estuda de dois jeitos: um pouco por dia (Revisão) e intensivo perto da prova (Véspera).
 
 ## Fases
 
@@ -16,14 +25,27 @@ Cada fase precisa ser usável sozinha. Cada regra em `spec/` diz de que fase val
 
 | Fase | O que entra |
 | --- | --- |
-| 1 | <a menor versão útil> |
-| 2 | <o que vem depois> |
+| 1 | O ciclo completo de Biologia: estudar no dia a dia ou na véspera, ver o resumo, refazer os erros, olhar o termômetro, consultar as piores cartas, manter a ofensiva. Cartas do sistema (minhas) e pessoais (dele), lacuna, colar várias |
+| 2 | Biologia visual e provas: imagem e oclusão de imagem, data da prova e nota, gráfico de evolução, tags, cartas dominadas, momentos de virada, resumo semanal, recomeço |
+| 3 | Outras matérias de memorização (Química, História) e o lembrete diário |
+
+**Para passar à fase 2:** ele usar a fase 1 por 2 semanas, com pelo menos 3 sessões por semana. Se
+não usar, a próxima conversa é entender o porquê, não adicionar features.
+
+**Como saber se funcionou:** 3 ou mais sessões por semana no período letivo; olhando o termômetro,
+ele sabe dizer qual tópico precisa estudar; a nota de Biologia do bimestre seguinte, comparada com a
+anterior; uma conversa com ele depois de 2 semanas.
 
 ## Arquivos
 
 | Arquivo | O que cobre |
 | --- | --- |
-| [spec/acesso-e-membros.md](spec/acesso-e-membros.md) | Login com Google, convites, papéis e membros |
+| [spec/acesso-e-membros.md](spec/acesso-e-membros.md) | Login com Google, convites, papéis (admin e usuário) e membros |
+| [spec/cartas.md](spec/cartas.md) | Matérias, tópicos, cartas do sistema e pessoais, tipos, criar em lote, suspender |
+| [spec/estudo.md](spec/estudo.md) | A sessão de Revisão, FSRS, os três botões, Resumo, Refazer erros, treino |
+| [spec/diagnostico.md](spec/diagnostico.md) | Domínio, cobertura, termômetro, Piores cartas, tela Tópico |
+| [spec/vespera.md](spec/vespera.md) | A aba Prova e a sessão de Véspera; datas de prova |
+| [spec/meta-e-ofensiva.md](spec/meta-e-ofensiva.md) | A tela Hoje, meta diária, ofensiva, rotina, cartão de aviso, Ajustes |
 | [spec/_modelo.md](spec/_modelo.md) | Modelo para um arquivo de feature novo |
 
 Os termos estão definidos em [GLOSSARIO.md](GLOSSARIO.md).
