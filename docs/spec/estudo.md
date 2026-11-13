@@ -63,7 +63,7 @@ A sessão de estudo de todo dia: que cartas entram, em que ordem, e como ele res
 - Toda sessão termina no Resumo. De cima para baixo: a linha "Você lembrou N cartas que não via há
   7 dias ou mais" (só quando N é maior que zero); % de acerto; contagem por botão; o tempo da sessão
   e o do dia; quantas novas ele viu; os tópicos que mudaram de domínio na sessão, com antes e depois
-  (ex.: Citologia 62% → 71%); e a lista das cartas em que ele errou. *(1)*
+  (ex.: Verminoses 62% → 71%); e a lista das cartas em que ele errou. *(1)*
 - O acerto da sessão continua no Resumo, mas não é o número principal do app: esse é a memória de
   longo prazo (`spec/diagnostico.md`). *(1)*
 - Uma vez por dia, depois de 1 hora somada no dia, o Resumo mostra a linha "1h hoje. Daqui pra
