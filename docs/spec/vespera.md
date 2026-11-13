@@ -11,8 +11,8 @@ O estudo intensivo perto da prova, na aba Prova.
 
 ## Montar
 
-- A aba Prova lista os tópicos com caixa de seleção, domínio e número de cartas. No topo, a linha
-  "Treino: não entra no seu histórico de acerto". *(1)*
+- A aba Prova lista os tópicos com caixa de seleção; cada um mostra o domínio com barra e quantas
+  cartas já vistas e novas tem. No topo, a linha "Treino: não entra no seu histórico de acerto". *(1)*
 - Ao marcar tópicos, ele vê o total selecionado, separado entre vistas e novas. As novas também
   entram. *(1)*
 - Ele escolhe entre todas as cartas (novas incluídas) ou as 30 de menor domínio, só entre as
