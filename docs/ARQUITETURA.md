@@ -71,6 +71,9 @@ Tabelas do estudo (migração 2; a matéria Biologia já vem criada, com id `bio
 | `topic_snapshots` | `member_id`, `topic_id`, `week` (a segunda-feira), `mastery` | Uma por semana, gravada pelo cron; alimenta a minilinha |
 | `study_settings` | `member_id`, `new_per_day`, `rest_days`, `routine_when`, `routine_where`, `streak_repair_month` | Ajustes e rotina. Sem linha, valem os padrões (`src/domain/study/settings.ts`) |
 
+- `topic_snapshots` ainda é semanal e só guarda o domínio. O spec pede um snapshot por dia, com o
+  domínio de cada tópico, a memória de longo prazo e as cartas guardadas (`spec/diagnostico.md`); a
+  migração que troca `week` por dia vem com as regras de diagnóstico (`ROADMAP.md`).
 - Toda tabela com `member_id` é privada desse membro: as consultas filtram pelo ator da sessão, e
   nenhuma devolve o estudo de outro membro, nem a um admin (ADR-009).
 - As tabelas por membro só são lidas e gravadas por `server/application/study-store.ts`, cujas

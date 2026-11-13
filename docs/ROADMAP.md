@@ -13,7 +13,7 @@ O que ainda não está pronto.
 | --- | --- | --- | --- |
 | Matérias, tópicos e cartas (básica, lacuna, macete, formatação) | 1 | `spec/cartas.md` | Cartas do sistema (admin) e pessoais (usuário) |
 | Colar várias com prévia | 1 | `spec/cartas.md` | |
-| Baralho inicial de Biologia | 1 | `spec/cartas.md` | Depende dos tópicos da escola dele (Em aberto) |
+| Baralho inicial de Biologia | 1 | `spec/cartas.md` | Tópicos já definidos; falta a ordem por bimestre (Em aberto) |
 | Sessão de Revisão com FSRS, três botões, desfazer | 1 | `spec/estudo.md` | Base pronta: FSRS (ADR-010), `recordAnswer` e `undoLastAnswer`; faltam a fila, os comandos e a tela |
 | Resumo, Refazer erros, Mais 5?, Adiantar novas, tempo do dia | 1 | `spec/estudo.md` | |
 | Hoje, termômetro, memória de longo prazo e cartas guardadas | 1 | `spec/diagnostico.md`, `spec/meta-e-ofensiva.md` | Substitui a tela `Home` de exemplo e `src/domain/greeting.ts` |

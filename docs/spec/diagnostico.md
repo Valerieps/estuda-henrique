@@ -65,5 +65,5 @@ Onde ele está fraco: o termômetro em Hoje e a lista de Piores cartas.
 - A tela Tópico ganha o gráfico completo do domínio ao longo do tempo, com as datas e notas das
   provas marcadas na linha, e o contador de cartas guardadas do tópico. *(2)*
 - Abaixo do domínio, a tela Tópico mostra a previsão do FSRS: "Fazendo só as revisões do dia,
-  Citologia fica acima de 80% nos próximos 7 dias." É a primeira da fase 2. *(2)*
+  Verminoses fica acima de 80% nos próximos 7 dias." É a primeira da fase 2. *(2)*
   Por quê: precisa de alguns dias de dados dele para ter credibilidade.
