@@ -5,14 +5,15 @@ O estudo intensivo perto da prova, na aba Prova.
 - **Entra aqui:** montar e fazer uma sessão de Véspera, e as datas de prova.
 - **Não entra aqui:** a sessão de todo dia (`spec/estudo.md`).
 
-## Em aberto
+## A prova
 
-- [ ] Qual é a prova-alvo dele: um vestibular seriado, o ENEM ou o de alguma universidade?
+- A prova-alvo dele é o PAS (Programa de Avaliação Seriada). A Véspera é feita para os dias antes
+  de uma prova do PAS, e as datas de prova abaixo são as dele. *(1)*
 
 ## Montar
 
-- A aba Prova lista os tópicos com caixa de seleção, domínio e número de cartas. No topo, a linha
-  "Treino: não entra no seu histórico de acerto". *(1)*
+- A aba Prova lista os tópicos com caixa de seleção; cada um mostra o domínio com barra e quantas
+  cartas já vistas e novas tem. No topo, a linha "Treino: não entra no seu histórico de acerto". *(1)*
 - Ao marcar tópicos, ele vê o total selecionado, separado entre vistas e novas. As novas também
   entram. *(1)*
 - Ele escolhe entre todas as cartas (novas incluídas) ou as 30 de menor domínio, só entre as

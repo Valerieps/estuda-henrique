@@ -11,24 +11,28 @@ O que ainda não está pronto.
 
 | Feature | Fase | Spec | Observação |
 | --- | --- | --- | --- |
-| Identidade visual | 1 | — | A dona escolhe entre 3 ou 4 direções (skill `visual-identity`); hoje são as cores do template |
 | Matérias, tópicos e cartas (básica, lacuna, macete, formatação) | 1 | `spec/cartas.md` | Cartas do sistema (admin) e pessoais (usuário) |
 | Colar várias com prévia | 1 | `spec/cartas.md` | |
-| Baralho inicial de Biologia | 1 | `spec/cartas.md` | Depende dos tópicos da escola dele (Em aberto) |
+| Baralho inicial de Biologia | 1 | `spec/cartas.md` | Tópicos já definidos; falta a ordem por bimestre (Em aberto) |
 | Sessão de Revisão com FSRS, três botões, desfazer | 1 | `spec/estudo.md` | Base pronta: FSRS (ADR-010), `recordAnswer` e `undoLastAnswer`; faltam a fila, os comandos e a tela |
-| Resumo, Refazer erros, Mais 5? | 1 | `spec/estudo.md` | |
-| Hoje e termômetro | 1 | `spec/diagnostico.md`, `spec/meta-e-ofensiva.md` | Substitui a tela `Home` de exemplo e `src/domain/greeting.ts` |
+| Resumo, Refazer erros, Mais 5?, Adiantar novas, tempo do dia | 1 | `spec/estudo.md` | |
+| Hoje, termômetro, memória de longo prazo e cartas guardadas | 1 | `spec/diagnostico.md`, `spec/meta-e-ofensiva.md` | Substitui a tela `Home` de exemplo e `src/domain/greeting.ts` |
 | Piores cartas e tela Tópico | 1 | `spec/diagnostico.md` | |
 | Véspera | 1 | `spec/vespera.md` | |
 | Meta diária, ofensiva, rotina, cartão de aviso, Ajustes | 1 | `spec/meta-e-ofensiva.md` | |
 | Tela inicial do admin (cartas do sistema) | 1 | `spec/meta-e-ofensiva.md` | |
 | Imagem e oclusão de imagem | 2 | `spec/cartas.md` | Oclusão é a prioridade 1 da fase 2 |
 | Data e nota da prova | 2 | `spec/vespera.md` | |
-| Gráfico de evolução, dominadas, momentos de virada, resumo semanal, recomeço, tags | 2 | `spec/diagnostico.md`, `spec/estudo.md`, `spec/meta-e-ofensiva.md` | Tags ainda sem regra escrita |
+| Previsão por tópico | 2 | `spec/diagnostico.md` | Prioridade 1 da fase 2, ao lado da oclusão |
+| Gráfico de evolução, guardadas por tópico, momentos de virada, resumo semanal, recomeço, tags | 2 | `spec/diagnostico.md`, `spec/estudo.md`, `spec/meta-e-ofensiva.md` | Tags ainda sem regra escrita |
 | Outras matérias e lembrete diário | 3 | `spec/cartas.md`, `spec/meta-e-ofensiva.md` | O lembrete precisa de notificações push: origem nova e ADR |
 
 ## O código ainda não segue o spec
 
+- O limite de novas por dia é 20 por padrão, de 5 a 50 — hoje `DEFAULT_NEW_PER_DAY` é 10
+  (`src/domain/study/settings.ts`) e o servidor não limita a faixa.
+- O app grava uma vez por dia o domínio de cada tópico, a memória de longo prazo e as cartas
+  guardadas — hoje `topic_snapshots` é semanal e só guarda o domínio (`docs/ARQUITETURA.md`).
 - A tela de membros só aparece para o admin — hoje aparece para todos (`src/ui/App.tsx`), e a
   consulta de membros não exige admin no servidor.
 
@@ -45,5 +49,5 @@ O que ainda não está pronto.
 - [ ] Suspender uma carta do sistema vale só para o usuário que suspendeu (`spec/cartas.md`).
 - [ ] O admin cria, renomeia e reordena os tópicos; o usuário não (`spec/cartas.md`).
 - [ ] O cartão de aviso perdeu o aviso de backup vencido, porque não há backup (`spec/meta-e-ofensiva.md`).
-- [ ] A ofensiva conta qualquer sessão concluída, como na arquitetura da informação v3.1, e não
-  "zerar as revisões", como no PRD v3 (`spec/meta-e-ofensiva.md`).
+- [ ] Estudar <tópico>, em Piores cartas, é treino, como Estudar estas agora, porque a Revisão é
+  sempre da matéria inteira (`spec/diagnostico.md`).

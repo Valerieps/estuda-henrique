@@ -7,27 +7,60 @@
  * the tests and docs/UI.md use them. A new token is fine when no existing one fits; add it to
  * both themes if it is a color.
  */
+/*
+ * Fonts, bundled in public/fonts/ (never from a CDN: docs/SEGURANCA.md). Latin subset, three files:
+ * Inter 400 and 600 for text, Space Grotesk 700 for titles and big numbers (ADR-011).
+ * The @font-face rules live here because they must state a literal weight.
+ */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/inter-latin-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/inter-latin-600-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/space-grotesk-latin-700-normal.woff2') format('woff2');
+}
+
 :root {
   color-scheme: light;
 
   /* Colors. Every one is redefined in the dark theme below. */
-  --color-bg: #f4f2ed;
+  --color-bg: #f5f3f9;
   --color-surface: #ffffff;
-  --color-text: #1f1f1f;
-  --color-text-muted: #635f57;
+  --color-text: #17141f;
+  --color-text-muted: #5e5770;
   /* Decorative lines between areas (cards, dividers). Not for controls: see --color-border-strong. */
-  --color-border: #e4e0d8;
+  --color-border: #e4e0ec;
   /* Edges people must see to use a control (inputs, secondary buttons): 3:1 on bg and surface. */
-  --color-border-strong: #8a857b;
-  --color-brand: #4b3fb3;
+  --color-border-strong: #8c849c;
+  --color-brand: #6d28d9;
   --color-on-brand: #ffffff;
+  /* A quiet brand tint: the weakest line of the thermometer, a notice. Text on it: --color-text. */
+  --color-brand-soft: #eee7fb;
   --color-danger: #b3261e;
   --color-on-danger: #ffffff;
   --color-success: #1e6b3a;
-  --color-focus: #4b3fb3;
+  --color-focus: #6d28d9;
 
   /* Type. The scale steps by 1.125 to 1.5 from one size to the next; nothing below 12px. */
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  /* Titles and big numbers: Space Grotesk, falling back to the system stack. */
+  --font-display: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-size-caption: 12px;
   --font-size-small: 14px;
   /* 16px also keeps iOS from zooming into inputs. */
@@ -37,6 +70,7 @@
   --font-size-display: 32px;
   --font-weight-regular: 400;
   --font-weight-strong: 600;
+  --font-weight-display: 700;
   --line-height-tight: 1.25;
   --line-height-body: 1.5;
 
@@ -50,8 +84,8 @@
   --space-12: 48px;
 
   /* Shapes and sizes */
-  --radius-sm: 4px;
-  --radius: 8px;
+  --radius-sm: 6px;
+  --radius: 12px;
   --radius-full: 999px;
   --border-width: 1px;
   --border-width-strong: 2px;
@@ -73,17 +107,18 @@
   :root {
     color-scheme: dark;
 
-    --color-bg: #17161a;
-    --color-surface: #211f25;
-    --color-text: #ecebef;
-    --color-text-muted: #a3a0aa;
-    --color-border: #34313a;
-    --color-border-strong: #807c88;
-    --color-brand: #a59cf0;
-    --color-on-brand: #17161a;
+    --color-bg: #0f0d14;
+    --color-surface: #1a1722;
+    --color-text: #eeeaf5;
+    --color-text-muted: #a9a2b8;
+    --color-border: #2e2938;
+    --color-border-strong: #7f7890;
+    --color-brand: #b69cff;
+    --color-on-brand: #140f1f;
+    --color-brand-soft: #2a2140;
     --color-danger: #f2b8b5;
-    --color-on-danger: #17161a;
+    --color-on-danger: #140f1f;
     --color-success: #8fd4a4;
-    --color-focus: #a59cf0;
+    --color-focus: #b69cff;
   }
 }
