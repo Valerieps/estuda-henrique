@@ -3,7 +3,7 @@
 import type { ApiResult, CommandName, Commands, QueryName, Queries, Topic } from '../../src/application/api-contract';
 import { failure, QueryError, type CommandResult, type Context } from './context';
 import { createNote, createNotes, createTopic, deleteNote, listNotes, listSubjects, renameTopic, reorderTopics, suspendCard, updateNote } from './cards';
-import { recordDueSnapshots, thermometer, worstCards } from './diagnostics';
+import { examCards, recordDueSnapshots, thermometer, worstCards } from './diagnostics';
 import { createInvite, listInvites, revokeInvite } from './invites';
 import {
   listMembers,
@@ -35,6 +35,7 @@ const QUERIES: { [N in QueryName]: Handler<Queries[N]['output'] | QueryError | n
   notes: (ctx, actor, input) => listNotes(ctx, actor, input),
   thermometer: (ctx, actor) => thermometer(ctx, actor),
   worstCards: (ctx, actor, input) => worstCards(ctx, actor, input),
+  examCards: (ctx, actor, input) => examCards(ctx, actor, input),
 };
 
 /** Every command the API runs; each checks the actor's role itself. */
