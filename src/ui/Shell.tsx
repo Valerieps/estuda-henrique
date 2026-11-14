@@ -1,8 +1,9 @@
 import { useCallback, useState, type ReactNode } from 'react';
 import { strings } from '../domain/strings';
 import { Button } from './components/Button';
-import { Sheet } from './components/Sheet';
-import { Link, navigate, usePath } from './router';
+import { Notice } from './components/Notice';
+import { CreateSheet } from './CreateSheet';
+import { Link, usePath } from './router';
 
 interface Tab {
   readonly path: string;
@@ -39,12 +40,12 @@ const ADMIN_TABS: readonly Tab[] = [
 export function MemberShell({ children }: { children: ReactNode }) {
   const path = usePath();
   const [creating, setCreating] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
   const close = useCallback(() => setCreating(false), []);
-
-  function go(to: string) {
+  const done = useCallback((message: string) => {
     setCreating(false);
-    navigate(to);
-  }
+    setNotice(message);
+  }, []);
 
   return (
     <div className="shell">
@@ -54,22 +55,25 @@ export function MemberShell({ children }: { children: ReactNode }) {
           {strings.nav.settings}
         </Link>
       </header>
-      <main className="screen">{children}</main>
+      <main className="screen">
+        {notice && <Notice>{notice}</Notice>}
+        {children}
+      </main>
       <nav className="tabbar" aria-label={strings.nav.main}>
         <TabLinks tabs={MEMBER_LEFT} path={path} />
-        <Button className="create" aria-label={strings.nav.create} onClick={() => setCreating(true)}>
+        <Button
+          className="create"
+          aria-label={strings.nav.create}
+          onClick={() => {
+            setNotice(null);
+            setCreating(true);
+          }}
+        >
           +
         </Button>
         <TabLinks tabs={MEMBER_RIGHT} path={path} />
       </nav>
-      {creating && (
-        <Sheet title={strings.create.title} onClose={close}>
-          <Button onClick={() => go('/cartas/nova')}>{strings.create.newCard}</Button>
-          <Button variant="secondary" onClick={() => go('/cartas/colar')}>
-            {strings.create.pasteMany}
-          </Button>
-        </Sheet>
-      )}
+      {creating && <CreateSheet onClose={close} onDone={done} />}
     </div>
   );
 }
