@@ -1,6 +1,7 @@
 // The contract between the app and the server: query and command names, inputs and outputs.
 // Types only. The server imports it with `import type`, so nothing here runs on either side.
 import type { Role } from '../domain/group/roles';
+import type { NoteKind } from '../domain/study/cloze';
 
 export interface MemberView {
   readonly id: string;
@@ -28,8 +29,51 @@ export interface InviteView {
   readonly acceptedAt: string | null;
 }
 
+export interface TopicView {
+  readonly id: string;
+  readonly name: string;
+  readonly position: number;
+}
+
+export interface SubjectView {
+  readonly id: string;
+  readonly name: string;
+  readonly topics: readonly TopicView[];
+}
+
+/** One card of a note; `suspended` is the reader's own (a system card suspended stays for the others). */
+export interface CardView {
+  readonly id: string;
+  readonly clozeIndex: number;
+  readonly suspended: boolean;
+}
+
+export interface NoteView {
+  readonly id: string;
+  readonly topicId: string;
+  /** `system`: written by an admin. `personal`: the reader's own. */
+  readonly origin: 'system' | 'personal';
+  readonly kind: NoteKind;
+  readonly front: string;
+  readonly back: string;
+  readonly hint: string | null;
+  readonly cards: readonly CardView[];
+}
+
+export interface NoteInput {
+  readonly topicId: string;
+  readonly kind: NoteKind;
+  readonly front: string;
+  readonly back?: string;
+  readonly hint?: string | null;
+}
+
 /** Reads: `POST /api/query/<name>`. They never change anything. */
 export interface Queries {
+  /** Subjects with their topics in order. */
+  subjects: { input: Record<string, never>; output: SubjectView[] };
+  /** The notes of a topic the reader may see: the system's and their own. */
+  notes: { input: { topicId: string }; output: NoteView[] };
   me: { input: Record<string, never>; output: MeView };
   /** Admins only. */
   members: { input: Record<string, never>; output: MemberListItem[] };
@@ -45,6 +89,22 @@ export interface Commands {
   /** Admins; never oneself, so the last admin stays. */
   'member.remove': { input: { memberId: string }; output: null };
   'member.rename': { input: { name: string }; output: MeView };
+  /** Admins. */
+  'topic.create': { input: { subjectId: string; name: string }; output: TopicView };
+  /** Admins. */
+  'topic.rename': { input: { topicId: string; name: string }; output: TopicView };
+  /** Admins; `topicIds` is the subject's whole new order. */
+  'topic.reorder': { input: { subjectId: string; topicIds: string[] }; output: null };
+  /** An admin writes a system note; anyone else, a personal one. */
+  'note.create': { input: NoteInput; output: NoteView };
+  /** Several notes at once (Colar várias), all or none. */
+  'note.createMany': { input: { notes: NoteInput[] }; output: NoteView[] };
+  /** Front, back and hint; the kind stays. Anyone edits a system note; only the owner, a personal one. */
+  'note.update': { input: { noteId: string; front: string; back?: string; hint?: string | null }; output: NoteView };
+  /** Admins, system notes only. Hides the note; nobody's study history changes. */
+  'note.delete': { input: { noteId: string }; output: null };
+  /** Only the reader's own state of the card. */
+  'card.suspend': { input: { cardId: string; suspended: boolean }; output: null };
 }
 
 export type QueryName = keyof Queries;
