@@ -14,9 +14,12 @@ export function Settings({ onSignOut }: { onSignOut: () => void }) {
   const settings = useQuery('settings', {}, ['settings']);
   const { backend } = useServices();
   const [message, setMessage] = useState<{ tone: 'info' | 'error'; text: string } | null>(null);
+  const [busy, setBusy] = useState(false);
 
   async function save(change: Partial<SettingsView>, done: string): Promise<boolean> {
+    setBusy(true);
     const result = await backend.command('settings.update', change);
+    setBusy(false);
     setMessage(result.ok ? { tone: 'info', text: done } : { tone: 'error', text: s.saveFailed });
     if (result.ok) settings.reload();
     return result.ok;
@@ -44,9 +47,9 @@ export function Settings({ onSignOut }: { onSignOut: () => void }) {
     <section className="stack">
       <h1>{s.title}</h1>
       {message && <Notice tone={message.tone}>{message.text}</Notice>}
-      <NewPerDay current={data.newPerDay} save={(n) => save({ newPerDay: n }, `${s.saved} ${s.newPerDayWarning}`)} />
-      <RestDays current={data.restDays} save={(days) => save({ restDays: days }, s.saved)} />
-      <Routine when={data.routineWhen} where={data.routineWhere} save={(change) => save(change, s.saved)} />
+      <NewPerDay busy={busy} current={data.newPerDay} save={(n) => save({ newPerDay: n }, `${s.saved} ${s.newPerDayWarning}`)} />
+      <RestDays busy={busy} current={data.restDays} save={(days) => save({ restDays: days }, s.saved)} />
+      <Routine busy={busy} when={data.routineWhen} where={data.routineWhere} save={(change) => save(change, s.saved)} />
       <h2>{s.about}</h2>
       <p className="muted small">{s.aboutText}</p>
       <Button variant="secondary" onClick={onSignOut}>
@@ -56,7 +59,7 @@ export function Settings({ onSignOut }: { onSignOut: () => void }) {
   );
 }
 
-function NewPerDay({ current, save }: { current: number; save: (n: number) => Promise<boolean> }) {
+function NewPerDay({ busy, current, save }: { busy: boolean; current: number; save: (n: number) => Promise<boolean> }) {
   const [text, setText] = useState(String(current));
   useEffect(() => setText(String(current)), [current]);
   const value = Number(text);
@@ -79,14 +82,14 @@ function NewPerDay({ current, save }: { current: number; save: (n: number) => Pr
         onChange={(event) => setText(event.target.value)}
         error={valid ? null : s.newPerDayInvalid}
       />
-      <Button type="submit" disabled={!valid || value === current}>
+      <Button type="submit" variant="secondary" disabled={busy || !valid || value === current}>
         {s.save}
       </Button>
     </form>
   );
 }
 
-function RestDays({ current, save }: { current: readonly number[]; save: (days: number[]) => Promise<boolean> }) {
+function RestDays({ busy, current, save }: { busy: boolean; current: readonly number[]; save: (days: number[]) => Promise<boolean> }) {
   return (
     <div className="stack">
       <h2>{s.restDays}</h2>
@@ -94,7 +97,7 @@ function RestDays({ current, save }: { current: readonly number[]; save: (days: 
         {s.weekdays.map((name, day) => {
           const on = current.includes(day);
           return (
-            <Button key={name} variant="secondary" aria-pressed={on} onClick={() => void save(on ? current.filter((d) => d !== day) : [...current, day])}>
+            <Button key={name} variant="secondary" aria-pressed={on} disabled={busy} onClick={() => void save(on ? current.filter((d) => d !== day) : [...current, day])}>
               {name}
             </Button>
           );
@@ -105,7 +108,7 @@ function RestDays({ current, save }: { current: readonly number[]; save: (days: 
   );
 }
 
-function Routine({ when, where, save }: { when: string | null; where: string | null; save: (change: Partial<SettingsView>) => Promise<boolean> }) {
+function Routine({ busy, when, where, save }: { busy: boolean; when: string | null; where: string | null; save: (change: Partial<SettingsView>) => Promise<boolean> }) {
   const [whenText, setWhen] = useState(when ?? '');
   const [whereText, setWhere] = useState(where ?? '');
   useEffect(() => setWhen(when ?? ''), [when]);
@@ -121,7 +124,9 @@ function Routine({ when, where, save }: { when: string | null; where: string | n
       <h2>{s.routine}</h2>
       <Field label={s.routineWhen} placeholder={s.routineWhenHint} maxLength={MAX_ROUTINE_LENGTH} value={whenText} onChange={(event) => setWhen(event.target.value)} />
       <Field label={s.routineWhere} placeholder={s.routineWhereHint} maxLength={MAX_ROUTINE_LENGTH} value={whereText} onChange={(event) => setWhere(event.target.value)} />
-      <Button type="submit">{s.save}</Button>
+      <Button type="submit" variant="secondary" disabled={busy}>
+        {s.save}
+      </Button>
     </form>
   );
 }
