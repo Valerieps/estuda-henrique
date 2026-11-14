@@ -9,3 +9,4 @@ Quando a tela de um rascunho fica pronta, o rascunho é apagado: o código passa
 
 | Rascunho | Status |
 | --- | --- |
+| [gamificacao.md](gamificacao.md) | Brief do redesenho na direção Missões, por sessões e ondas. Aprovado; a implementar |
