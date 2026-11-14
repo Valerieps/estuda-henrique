@@ -1,0 +1,7 @@
+/* Resumo da sessão */
+
+.summary-figure {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-display);
+  font-size: var(--font-size-heading);
+}

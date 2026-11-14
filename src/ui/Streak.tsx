@@ -7,6 +7,7 @@ import { Button } from './components/Button';
 import { Icon } from './components/Icon';
 import { Notice } from './components/Notice';
 import { Sheet } from './components/Sheet';
+import './Streak.css';
 
 const s = strings.streak;
 

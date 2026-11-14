@@ -6,6 +6,7 @@ import { Button, ButtonLink } from '../components/Button';
 import { Field } from '../components/Field';
 import { Notice } from '../components/Notice';
 import { navigate } from '../router';
+import './SignIn.css';
 
 const ERRORS: Record<string, string> = {
   'sem-convite': strings.signIn.noInvite,

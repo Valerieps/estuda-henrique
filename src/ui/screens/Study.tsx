@@ -13,6 +13,7 @@ import { Sheet } from '../components/Sheet';
 import { navigate } from '../router';
 import { clearStudyRequest, currentStudyRequest, type StudyRequest } from '../study-launch';
 import { StudySummary } from './StudySummary';
+import './Study.css';
 
 const s = strings.study;
 /** The short buzz on each answer button, in ms. */

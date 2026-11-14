@@ -9,6 +9,7 @@ import { Notice } from '../components/Notice';
 import { takePreselectedTopic } from '../exam-launch';
 import { startStudy } from '../study-launch';
 import { useQuery } from '../use-query';
+import './Exam.css';
 
 const s = strings.exam;
 

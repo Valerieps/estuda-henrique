@@ -38,8 +38,8 @@ cima.
 - Coisas relacionadas ficam mais perto entre si do que de outros grupos (proximidade).
 
 **Componentes**
-- Use os de `src/ui/components/` (`Button`, `ButtonLink`, `Field`, `Notice`) antes de escrever
-  CSS novo. Quando um padrão se repete em duas telas, ele vira componente.
+- Use os de `src/ui/components/` (`Button`, `ButtonLink`, `Field`, `Notice`, `ProgressBar`, `Tile`,
+  `Chip`, `StateBadge`, `Hero`) antes de escrever CSS novo. Quando um padrão se repete em duas telas, ele vira componente.
 - Todo campo tem rótulo visível. Placeholder não é rótulo.
 - Ações que apagam ou removem usam `danger` e pedem confirmação.
 
@@ -47,6 +47,15 @@ cima.
 - Toda lista e toda tela que carrega dados tem os estados vazio, carregando e erro. O vazio diz o
   que fazer em seguida.
 - Botão que dispara uma ação fica desabilitado enquanto ela roda.
+- Botão desabilitado diz por quê, em texto embaixo dele (`disabledReason` do `Button`).
+- Estado de progresso de um tópico (novo, fraco, em andamento, dominado) usa `topicState`, o
+  `StateBadge` e as cores `--color-state-*`; nunca uma cor própria por tela nem por tópico.
+
+**Ritmo e progresso**
+- Barra de progresso sempre com número ("3 de 20"): use `ProgressBar`, que não existe sem o rótulo
+  (um teste recusa `role="progressbar"` fora dele).
+- Cada tela alterna largura total (`Hero`), grade de 2 colunas (`.tile-grid` com `Tile`) e chips
+  (`.chips` com `Chip`); nunca só uma coluna de cartões iguais.
 
 **Acessibilidade além do contraste**
 - Tudo funciona pelo teclado, na ordem visual, com foco visível (`:focus-visible` no

@@ -7,6 +7,7 @@ import { Notice } from '../components/Notice';
 import { navigate } from '../router';
 import type { StudyRequest } from '../study-launch';
 import { useQuery } from '../use-query';
+import './StudySummary.css';
 
 const s = strings.summary;
 /** Below this share right, Refazer erros comes first (docs/spec/estudo.md). */
