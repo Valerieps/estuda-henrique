@@ -125,6 +125,13 @@ export interface WorstCardsGroup {
   readonly cards: readonly WorstCard[];
 }
 
+/** The cards a Véspera takes from the chosen topics. */
+export interface ExamCards {
+  readonly cardIds: string[];
+  readonly seen: number;
+  readonly fresh: number;
+}
+
 export type StudyKind = 'review' | 'cram' | 'retry' | 'selected';
 
 /** A card in a study queue, with what the front and back need and the reader's own FSRS state. */
@@ -232,6 +239,8 @@ export interface Queries {
   thermometer: { input: Record<string, never>; output: Thermometer };
   /** The reader's own worst cards by topic, weakest topic first; `topicId` keeps one topic's group. */
   worstCards: { input: { topicId?: string }; output: WorstCardsGroup[] };
+  /** The reader's own cards for a Véspera: all of the topics' cards, or the 30 seen ones with the lowest mastery. */
+  examCards: { input: { topicIds: string[]; scope: 'all' | 'weakest' }; output: ExamCards };
   me: { input: Record<string, never>; output: MeView };
   /** Admins only. */
   members: { input: Record<string, never>; output: MemberListItem[] };

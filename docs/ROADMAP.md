@@ -15,8 +15,7 @@ O que ainda não está pronto.
 | Baralho inicial de Biologia | 1 | `spec/cartas.md` | Tópicos já definidos; falta a ordem por bimestre (Em aberto) |
 | Confete no "Pronto por hoje" e Adiantar mais 10 novas dentro de Hoje | 1 | `spec/estudo.md` | O Resumo (`src/ui/screens/StudySummary.tsx`) já faz o resto, mas sem confete. Em Hoje (Pronto por hoje), o botão chama `startStudy({ kind: 'review', aheadTopicId })` e lê a consulta `studyOutlook` |
 | Hoje, termômetro, memória de longo prazo e cartas guardadas | 1 | `spec/diagnostico.md`, `spec/meta-e-ofensiva.md` | Hoje é hoje uma tela vazia da casca (`src/ui/App.tsx`); Estudar e Só 5 cartas chamam `startStudy` (`src/ui/study-launch.ts`); a sessão já abre em `/estudo`; a consulta `thermometer` já devolve termômetro, memória de longo prazo e cartas guardadas |
-| Piores cartas e tela Tópico | 1 | `spec/diagnostico.md` | A consulta `worstCards` já devolve os grupos; falta a tela e a busca e os filtros do Tópico |
-| Véspera | 1 | `spec/vespera.md` | |
+| Piores cartas e tela Tópico | 1 | `spec/diagnostico.md` | A consulta `worstCards` já devolve os grupos; falta a tela e a busca e os filtros do Tópico; a tela Tópico também traz o atalho Véspera deste tópico, que chama `openExamWithTopic` (`src/ui/exam-launch.ts`) |
 | Meta diária, ofensiva, rotina, cartão de aviso, Ajustes | 1 | `spec/meta-e-ofensiva.md` | |
 | Tela inicial do admin (cartas do sistema) | 1 | `spec/meta-e-ofensiva.md` | |
 | Imagem e oclusão de imagem | 2 | `spec/cartas.md` | Oclusão é a prioridade 1 da fase 2 |

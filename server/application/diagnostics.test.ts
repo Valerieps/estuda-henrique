@@ -3,7 +3,7 @@ import type { WorstCardsGroup } from '../../src/application/api-contract';
 import { fixedClock, memorySql, sequentialIds } from '../testing/node-sql';
 import type { Context } from './context';
 import { QueryError } from './context';
-import { recordDueSnapshots, recordSnapshot, thermometer, worstCards } from './diagnostics';
+import { examCards, recordDueSnapshots, recordSnapshot, thermometer, worstCards } from './diagnostics';
 import type { Member } from './members';
 import { migrate } from './schema';
 import { recordAnswer, setSuspended, startStudySession, type StudySessionKind } from './study-store';
@@ -185,5 +185,28 @@ describe('daily snapshots', () => {
     recordDueSnapshots(ctx);
     recordDueSnapshots(ctx);
     expect(ctx.sql.all('SELECT day FROM daily_snapshots ORDER BY day')).toEqual([{ day: '2026-10-01' }, { day: '2026-10-02' }]);
+  });
+});
+
+describe('examCards', () => {
+  it('takes the chosen topics only, from the reader own cards, counting seen and new', () => {
+    const cito = addCards('citologia', 3);
+    addCards('genetica', 2);
+    addCards('citologia', 1, 'pessoal', 'outro');
+    answer('henrique', '2026-10-01T15:00:00Z', [cito[0]], 'again');
+    answer('henrique', '2026-10-01T15:01:00Z', [cito[1]], 'good');
+    clock.set('2026-10-02T15:00:00Z');
+
+    const all = examCards(ctx, henrique, { topicIds: ['citologia'], scope: 'all' }) as Exclude<ReturnType<typeof examCards>, QueryError>;
+    expect([...all.cardIds].sort()).toEqual(cito.slice().sort());
+    expect(all).toMatchObject({ seen: 2, fresh: 1 });
+
+    const weakest = examCards(ctx, henrique, { topicIds: ['citologia'], scope: 'weakest' }) as Exclude<ReturnType<typeof examCards>, QueryError>;
+    expect(weakest.cardIds).toEqual([cito[0], cito[1]]);
+  });
+
+  it('refuses input that is not a list of topics and a scope', () => {
+    expect(examCards(ctx, henrique, { topicIds: 'citologia', scope: 'all' })).toBeInstanceOf(QueryError);
+    expect(examCards(ctx, henrique, { topicIds: [], scope: 'x' })).toBeInstanceOf(QueryError);
   });
 });
