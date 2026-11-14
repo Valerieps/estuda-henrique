@@ -87,7 +87,7 @@ export function orderWorstCards<T extends DiagnosticCard>(cards: readonly T[]): 
 
 export type TopicFilter = 'all' | 'new' | 'suspended' | 'problem';
 
-interface TopicListCard extends DiagnosticCard {
+interface TopicListCard extends Pick<DiagnosticCard, 'mastery' | 'suspended' | 'againCount'> {
   readonly text: string;
 }
 
