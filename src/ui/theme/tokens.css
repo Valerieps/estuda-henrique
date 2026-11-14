@@ -59,20 +59,21 @@
   /* The base of the primary button (the "game button"): darker than --color-brand, seen as its lower edge. */
   --color-brand-deep: #4c1d95;
   /*
-   * Progress states of a topic (src/domain/topic-state.ts), the same in every screen. Each has the
-   * strong color (icon, bar, edge: 3:1 on bg and surface), a soft fill and the text on that fill.
+   * Progress states of a topic (src/domain/topic-state.ts), the same in every screen, as a traffic
+   * light: weak red, in progress yellow, mastered green; new is neutral gray (no signal yet). Each has
+   * the strong color (icon, bar, edge: 3:1 on bg and surface), a soft fill and the text on that fill.
    */
-  --color-state-new: #2563eb;
-  --color-state-new-soft: #e6efff;
-  --color-state-new-text: #1e40af;
-  --color-state-weak: #b45309;
-  --color-state-weak-soft: #fdf0dc;
-  --color-state-weak-text: #7c3a07;
-  --color-state-progress: #0f766e;
-  --color-state-progress-soft: #dff5f1;
-  --color-state-progress-text: #0b4f49;
-  --color-state-mastered: #1e6b3a;
-  --color-state-mastered-soft: #e0f3e6;
+  --color-state-new: #64748b;
+  --color-state-new-soft: #eef1f5;
+  --color-state-new-text: #334155;
+  --color-state-weak: #dc2626;
+  --color-state-weak-soft: #fde8e8;
+  --color-state-weak-text: #991b1b;
+  --color-state-progress: #a16207;
+  --color-state-progress-soft: #fdf6c8;
+  --color-state-progress-text: #713f12;
+  --color-state-mastered: #15803d;
+  --color-state-mastered-soft: #dcf7e4;
   --color-state-mastered-text: #14532d;
 
   /* Type. The scale steps by 1.125 to 1.5 from one size to the next; nothing below 12px. */
@@ -173,17 +174,17 @@
     --color-success: #8fd4a4;
     --color-focus: #b69cff;
     --color-brand-deep: #7a5ac8;
-    --color-state-new: #8ab4ff;
-    --color-state-new-soft: #1a2740;
-    --color-state-new-text: #b9d0ff;
-    --color-state-weak: #f5b865;
-    --color-state-weak-soft: #3a2a12;
-    --color-state-weak-text: #fbd9a3;
-    --color-state-progress: #5fd4c4;
-    --color-state-progress-soft: #12332f;
-    --color-state-progress-text: #a6ece2;
-    --color-state-mastered: #8fd4a4;
-    --color-state-mastered-soft: #14301d;
-    --color-state-mastered-text: #bde8c9;
+    --color-state-new: #94a3b8;
+    --color-state-new-soft: #1e2430;
+    --color-state-new-text: #cbd5e1;
+    --color-state-weak: #f87171;
+    --color-state-weak-soft: #3b1515;
+    --color-state-weak-text: #fecaca;
+    --color-state-progress: #facc15;
+    --color-state-progress-soft: #33290a;
+    --color-state-progress-text: #fde68a;
+    --color-state-mastered: #4ade80;
+    --color-state-mastered-soft: #10301c;
+    --color-state-mastered-text: #bbf7d0;
   }
 }

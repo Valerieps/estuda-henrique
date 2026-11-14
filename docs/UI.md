@@ -39,7 +39,7 @@ cima.
 
 **Componentes**
 - Use os de `src/ui/components/` (`Button`, `ButtonLink`, `Field`, `Notice`, `ProgressBar`, `Tile`,
-  `Chip`, `StateBadge`, `Hero`) antes de escrever CSS novo. Quando um padrão se repete em duas telas, ele vira componente.
+  `Chip`, `StateBadge`, `Hero`, `BackLink`, `MasteryHelp`) antes de escrever CSS novo. Quando um padrão se repete em duas telas, ele vira componente.
 - Todo campo tem rótulo visível. Placeholder não é rótulo.
 - Ações que apagam ou removem usam `danger` e pedem confirmação.
 
@@ -49,7 +49,10 @@ cima.
 - Botão que dispara uma ação fica desabilitado enquanto ela roda.
 - Botão desabilitado diz por quê, em texto embaixo dele (`disabledReason` do `Button`).
 - Estado de progresso de um tópico (novo, fraco, em andamento, dominado) usa `topicState`, o
-  `StateBadge` e as cores `--color-state-*`; nunca uma cor própria por tela nem por tópico.
+  `StateBadge` e as cores `--color-state-*`; nunca uma cor própria por tela nem por tópico. As
+  cores são de semáforo (fraco vermelho, em andamento amarelo, dominado verde; novo cinza, sem
+  sinal ainda), e o tópico leva a cor do bloco para a tela dele (`Hero` com `tone`).
+- Voltar para a tela de cima usa `BackLink`, nunca um link sublinhado solto.
 
 **Ritmo e progresso**
 - Barra de progresso sempre com número ("3 de 20"): use `ProgressBar`, que não existe sem o rótulo
