@@ -58,12 +58,24 @@ export function Today({ today }: { today: QueryState<TodayView> }) {
   }
 
   const topics = thermometer.data.topics;
+  const rate = thermometer.data.longTermRate;
   const routine = s.routine(view.routineWhen, view.routineWhere);
   return (
-    <section className="stack">
-      <h1>{s.title}</h1>
+    <section className="today">
+      {/* The tab bar already says where he is: the title is for screen readers only. */}
+      <h1 className="sr-only">{s.title}</h1>
       {routine && <p className="muted small">{routine}</p>}
-      <p className="small">{s.longTerm(thermometer.data.longTermRate, thermometer.data.savedCards)}</p>
+      <div className="stats">
+        <div className="stat">
+          <span className="eyebrow">{s.longTermLabel}</span>
+          <span className="stat-value">{s.longTermValue(rate)}</span>
+          <span className="muted small">{s.longTermHint(rate)}</span>
+        </div>
+        <div className="stat end">
+          <span className="eyebrow">{s.savedLabel}</span>
+          <span className="stat-value secondary">{thermometer.data.savedCards}</span>
+        </div>
+      </div>
       <Goal view={view} hasCards={topics.some((t) => t.total > 0)} />
       <WarningCard view={view} onReload={today.reload} />
       <Thermometer topics={topics} />
@@ -102,11 +114,15 @@ function Goal({ view, hasCards }: { view: TodayView; hasCards: boolean }) {
   }
   return (
     <div className="stack">
-      {view.restToday ? <p className="strong">{s.restDay}</p> : <p className="strong">{s.goal(view.reviewsLeft, view.newLeft)}</p>}
-      <Button onClick={() => startStudy({ kind: 'review' })}>{s.study}</Button>
-      <Button variant="secondary" onClick={() => startStudy({ kind: 'review', limit: 5 })}>
-        {s.five}
-      </Button>
+      {view.restToday ? <p className="goal strong">{s.restDay}</p> : <p className="goal strong">{s.goal(view.reviewsLeft, view.newLeft)}</p>}
+      <div className="actions">
+        <Button className="lg grow" onClick={() => startStudy({ kind: 'review' })}>
+          {s.study}
+        </Button>
+        <Button className="lg" variant="secondary" onClick={() => startStudy({ kind: 'review', limit: 5 })}>
+          {s.five}
+        </Button>
+      </div>
     </div>
   );
 }
@@ -161,14 +177,19 @@ function WarningCard({ view, onReload }: { view: TodayView; onReload: () => void
 
 function Thermometer({ topics }: { topics: readonly ThermometerTopic[] }) {
   return (
-    <div className="stack">
-      <h2>{strings.thermometer.title}</h2>
-      {topics.length === 0 && <p className="muted">{strings.thermometer.empty}</p>}
-      <div className="thermo">
-        {topics.map((topic) => (
-          <TopicRow key={topic.id} topic={topic} />
-        ))}
+    <div className="thermo">
+      <div className="thermo-head">
+        <h2>{strings.thermometer.title}</h2>
+        <span className="eyebrow">{strings.thermometer.masteryLabel}</span>
       </div>
+      {topics.length === 0 && <p className="muted small">{strings.thermometer.empty}</p>}
+      <ul className="list thermo-list">
+        {topics.map((topic) => (
+          <li key={topic.id}>
+            <TopicRow topic={topic} />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -189,18 +210,16 @@ function TopicRow({ topic }: { topic: ThermometerTopic }) {
       aria-label={strings.thermometer.open(topic.name)}
     >
       <div className="head">
-        <span className="strong grow">{topic.name}</span>
+        <span className="name grow">{topic.name}</span>
+        {topic.weak && <span className="tag">{strings.thermometer.weak}</span>}
         <span className="value">{strings.thermometer.mastery(topic.mastery)}</span>
       </div>
-      <div className="progress" aria-hidden="true">
-        <div className="progress-fill" style={{ width: `${shown}%` }} />
-      </div>
       <div className="foot">
-        <span className="muted small grow">
-          {strings.thermometer.coverage(topic.seen, topic.total)}
-          {topic.weak && ` · ${strings.thermometer.weak}`}
-        </span>
+        <div className="bar grow" aria-hidden="true">
+          <div className="bar-fill" style={{ width: `${shown}%` }} />
+        </div>
         <Spark topic={topic} />
+        <span className="coverage">{strings.thermometer.coverage(topic.seen, topic.total)}</span>
       </div>
     </Link>
   );

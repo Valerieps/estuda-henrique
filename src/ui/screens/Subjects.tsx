@@ -1,6 +1,7 @@
 import { strings } from '../../domain/strings';
 import { Button } from '../components/Button';
 import { EmptyState } from '../components/EmptyState';
+import { Icon } from '../components/Icon';
 import { Notice } from '../components/Notice';
 import { Link } from '../router';
 import { useQuery } from '../use-query';
@@ -37,10 +38,13 @@ export function Subjects() {
         <div key={subject.id}>
           {!single && <h2>{subject.name}</h2>}
           {subject.topics.length === 0 && <p className="muted">{strings.subjects.noTopics}</p>}
-          <ul className="list">
+          <ul className="list list-group">
             {subject.topics.map((topic) => (
-              <li key={topic.id} className="card">
-                <Link to={`/topico/${encodeURIComponent(topic.id)}`}>{topic.name}</Link>
+              <li key={topic.id}>
+                <Link className="list-row" to={`/topico/${encodeURIComponent(topic.id)}`}>
+                  <span className="grow">{topic.name}</span>
+                  <Icon name="chevron" className="trailing" />
+                </Link>
               </li>
             ))}
           </ul>

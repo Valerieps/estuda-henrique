@@ -4,6 +4,7 @@ import { strings } from '../domain/strings';
 import { weekday } from '../domain/study/study-day';
 import { useServices } from './backend-context';
 import { Button } from './components/Button';
+import { Icon } from './components/Icon';
 import { Notice } from './components/Notice';
 import { Sheet } from './components/Sheet';
 
@@ -17,9 +18,7 @@ export function Flame({ today, onReload }: { today: TodayView | undefined; onRel
   return (
     <>
       <button type="button" className="flame" data-lit={litToday} aria-label={s.flame(days, litToday)} onClick={() => setOpen(true)}>
-        <span className="icon" aria-hidden="true">
-          🔥
-        </span>
+        <Icon name="flame" />
         <span aria-hidden="true">{days}</span>
       </button>
       {open && <StreakSheet streak={today.streak} onClose={() => setOpen(false)} onReload={onReload} />}
