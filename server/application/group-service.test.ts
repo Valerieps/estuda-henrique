@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { fixedClock, memorySql, sequentialIds } from '../testing/node-sql';
+import { fixedClock, emptyDeckSql, sequentialIds } from '../testing/node-sql';
 import { GroupService } from './group-service';
 import type { GoogleProfile } from './members';
 
@@ -11,7 +11,7 @@ let service: GroupService;
 
 beforeEach(() => {
   clock = fixedClock('2026-10-21T12:00:00Z');
-  service = new GroupService(memorySql(), clock, sequentialIds());
+  service = new GroupService(emptyDeckSql(), clock, sequentialIds());
   service.migrate();
 });
 

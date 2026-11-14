@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import type { NoteView, SubjectView } from '../../src/application/api-contract';
-import { fixedClock, memorySql, sequentialIds } from '../testing/node-sql';
+import { fixedClock, emptyDeckSql, sequentialIds } from '../testing/node-sql';
 import { GroupService } from './group-service';
 
 const profile = (email: string) => ({ sub: `sub:${email}`, email, name: email.split('@')[0], picture: null });
@@ -17,7 +17,7 @@ function join(email: string, hash: string): string {
 }
 
 beforeEach(() => {
-  service = new GroupService(memorySql(), fixedClock('2026-11-14T12:00:00Z'), sequentialIds());
+  service = new GroupService(emptyDeckSql(), fixedClock('2026-11-14T12:00:00Z'), sequentialIds());
   service.migrate();
   service.signIn(profile('ana@example.com'), 'h-ana', ['ana@example.com']);
   admin = 'h-ana';

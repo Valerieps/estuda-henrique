@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { fixedClock, memorySql, sequentialIds } from '../testing/node-sql';
+import { fixedClock, emptyDeckSql, sequentialIds } from '../testing/node-sql';
 import type { Context } from './context';
 import { MIGRATIONS, migrate } from './schema';
 import {
@@ -18,7 +18,7 @@ let ctx: Context;
 
 beforeEach(() => {
   clock = fixedClock('2026-11-14T02:30:00Z'); // still the 13th in Brasília
-  ctx = { sql: memorySql(), clock, ids: sequentialIds() };
+  ctx = { sql: emptyDeckSql(), clock, ids: sequentialIds() };
   migrate(ctx.sql);
   for (const id of ['henrique', 'outro']) {
     ctx.sql.run("INSERT INTO members (id, email, name, joined_at) VALUES (?, ?, ?, '2026-11-01')", id, `${id}@example.com`, id);

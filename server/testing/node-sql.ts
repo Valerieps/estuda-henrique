@@ -38,3 +38,12 @@ export function sequentialIds(): IdGenerator {
   let n = 0;
   return { next: () => `id-${++n}` };
 }
+
+/**
+ * Like `memorySql`, but the migration that loads the initial deck inserts nothing, so a test starts
+ * with the empty subject it builds its own topics and cards on.
+ */
+export function emptyDeckSql(): Sql {
+  const sql = memorySql();
+  return { ...sql, run: (query, ...bindings) => (/^INSERT INTO (topics|notes|cards) .*VALUES \('seed-/.test(query) ? undefined : sql.run(query, ...bindings)) };
+}

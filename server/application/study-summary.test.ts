@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import type { StudyOutlook, StudySessionView, StudySummary } from '../../src/application/api-contract';
-import { fixedClock, memorySql, sequentialIds } from '../testing/node-sql';
+import { fixedClock, emptyDeckSql, sequentialIds } from '../testing/node-sql';
 import { GroupService } from './group-service';
 
 let clock: ReturnType<typeof fixedClock>;
@@ -16,7 +16,7 @@ function ok<T>(result: { ok: boolean; value?: unknown; error?: string }): T {
 
 beforeEach(() => {
   clock = fixedClock('2026-11-13T15:00:00Z');
-  service = new GroupService(memorySql(), clock, sequentialIds());
+  service = new GroupService(emptyDeckSql(), clock, sequentialIds());
   service.migrate();
   service.signIn(profile('ana@example.com'), 'h-ana', ['ana@example.com']);
   for (const who of ['henrique', 'bia']) {
