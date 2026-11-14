@@ -31,12 +31,14 @@ Onde ele está fraco: o termômetro em Hoje e a lista de Piores cartas.
 
 ## Termômetro
 
-- Fica em Hoje, logo abaixo do botão Estudar: os tópicos do mais fraco ao mais forte, com domínio,
-  cobertura e uma minilinha das últimas 4 semanas. *(1)*
+- Fica em Hoje, abaixo do botão Estudar e do cartão de aviso, em grade de duas colunas: um bloco
+  por tópico, do mais fraco ao mais forte, com o nome, o estado (Novo, Fraco, Em andamento ou
+  Dominado, com cor e ícone), o domínio em % ou "novo", uma barra, a cobertura ("3 de 11 vistas") e
+  uma minilinha das últimas 4 semanas. *(1)*
 - Uma vez por dia, desde o primeiro uso, o app grava o domínio de cada tópico, a memória de longo
   prazo e as cartas guardadas. *(1)*
   Por quê: sem isso, não há histórico para mostrar depois.
-- Abaixo de 60% de domínio, o tópico aparece em destaque. *(1)*
+- Abaixo de 60% de domínio, o tópico aparece como Fraco, em destaque. *(1)*
 - Ao voltar de uma sessão, as barras dos tópicos estudados animam do valor antigo para o novo. *(1)*
 - No celular dele, o tópico mais fraco aparece sem rolar a tela. *(1)*
 - Tocar num tópico abre Piores cartas filtrada por esse tópico. *(1)*
