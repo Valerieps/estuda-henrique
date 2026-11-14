@@ -385,3 +385,123 @@ input[aria-invalid='true'] {
 .sheet h2 {
   margin-bottom: var(--space-3);
 }
+
+/* The study session */
+
+.session-layer header {
+  gap: var(--space-3);
+}
+
+.progress {
+  height: var(--space-2);
+  border-radius: var(--radius-full);
+  background: var(--color-border);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--color-brand);
+  transition: width var(--duration-base) var(--easing);
+}
+
+.study {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-height: 100%;
+}
+
+.card-tools {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.card-tools[data-hidden='true'] {
+  visibility: hidden;
+}
+
+.flip {
+  flex: 1;
+  display: flex;
+  perspective: var(--flip-perspective);
+}
+
+.flip-inner {
+  flex: 1;
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform var(--duration-base) var(--easing);
+  cursor: pointer;
+}
+
+.flip-inner[data-flipped='true'] {
+  transform: rotateY(180deg);
+  cursor: default;
+}
+
+.face {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: var(--size-card-min);
+  padding: var(--space-6) var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  backface-visibility: hidden;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.face.back {
+  transform: rotateY(180deg);
+}
+
+.face .topic {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+}
+
+.face .question {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-display);
+  font-size: var(--font-size-title);
+  line-height: var(--line-height-tight);
+}
+
+.face .answer {
+  font-size: var(--font-size-title);
+  line-height: var(--line-height-tight);
+}
+
+.face .blank {
+  color: var(--color-brand);
+  font-weight: var(--font-weight-strong);
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+
+.answers .button {
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  line-height: var(--line-height-tight);
+}
+
+.answers .when {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-regular);
+}
+
+.field textarea {
+  min-height: calc(var(--size-touch) * 2);
+  resize: vertical;
+}

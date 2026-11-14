@@ -2,7 +2,7 @@
 // member changes them in Ajustes.
 
 /** Default limit of new cards a day (docs/spec/estudo.md). */
-export const DEFAULT_NEW_PER_DAY = 10;
+export const DEFAULT_NEW_PER_DAY = 20;
 
 export interface StudySettings {
   readonly newPerDay: number;

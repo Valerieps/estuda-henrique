@@ -2,6 +2,7 @@
 // Types only. The server imports it with `import type`, so nothing here runs on either side.
 import type { Role } from '../domain/group/roles';
 import type { NoteKind } from '../domain/study/cloze';
+import type { Answer, SchedulingState } from '../domain/study/scheduler';
 
 export interface MemberView {
   readonly id: string;
@@ -68,6 +69,31 @@ export interface NoteInput {
   readonly hint?: string | null;
 }
 
+export type StudyKind = 'review' | 'cram' | 'retry' | 'selected';
+
+/** A card in a study queue, with what the front and back need and the reader's own FSRS state. */
+export interface StudyCard {
+  readonly id: string;
+  readonly noteId: string;
+  readonly topicId: string;
+  readonly topicName: string;
+  readonly kind: NoteKind;
+  readonly clozeIndex: number;
+  readonly front: string;
+  readonly back: string;
+  readonly hint: string | null;
+  readonly state: SchedulingState;
+}
+
+/** A study session just opened, with its cards in the order they come. */
+export interface StudySessionView {
+  readonly sessionId: string;
+  readonly kind: StudyKind;
+  /** Training does not count toward accuracy (docs/spec/estudo.md). */
+  readonly training: boolean;
+  readonly cards: readonly StudyCard[];
+}
+
 /** Reads: `POST /api/query/<name>`. They never change anything. */
 export interface Queries {
   /** Subjects with their topics in order. */
@@ -105,6 +131,17 @@ export interface Commands {
   'note.delete': { input: { noteId: string }; output: null };
   /** Only the reader's own state of the card. */
   'card.suspend': { input: { cardId: string; suspended: boolean }; output: null };
+  /**
+   * Opens a study session. `review` builds the day's queue (learning, due, then new) and takes an
+   * optional `limit` (Só 5 cartas); the other kinds are training and take `cardIds`. Null when
+   * there is nothing to study.
+   */
+  'study.start': { input: { kind: StudyKind; limit?: number; cardIds?: string[] }; output: StudySessionView | null };
+  /** Records an answer; the output is the card's new state. */
+  'study.answer': { input: { sessionId: string; cardId: string; answer: Answer }; output: { state: SchedulingState } };
+  /** Undoes the session's last answer; the output is the card with its state before it. */
+  'study.undo': { input: { sessionId: string }; output: { cardId: string; state: SchedulingState } };
+  'study.end': { input: { sessionId: string }; output: null };
 }
 
 export type QueryName = keyof Queries;
