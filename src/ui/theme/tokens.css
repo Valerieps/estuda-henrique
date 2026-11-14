@@ -40,14 +40,14 @@
   color-scheme: light;
 
   /* Colors. Every one is redefined in the dark theme below. */
-  --color-bg: #f5f3f9;
+  --color-bg: #f1f4f8;
   --color-surface: #ffffff;
-  --color-text: #17141f;
-  --color-text-muted: #5e5770;
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
   /* Decorative lines between areas (cards, dividers). Not for controls: see --color-border-strong. */
-  --color-border: #e4e0ec;
+  --color-border: #e2e8f0;
   /* Edges people must see to use a control (inputs, secondary buttons): 3:1 on bg and surface. */
-  --color-border-strong: #8c849c;
+  --color-border-strong: #74819a;
   --color-brand: #6d28d9;
   --color-on-brand: #ffffff;
   /* A quiet brand tint: the weakest line of the thermometer, a notice. Text on it: --color-text. */
@@ -160,12 +160,12 @@
   :root {
     color-scheme: dark;
 
-    --color-bg: #0f0d14;
-    --color-surface: #1a1722;
-    --color-text: #eeeaf5;
-    --color-text-muted: #a9a2b8;
-    --color-border: #2e2938;
-    --color-border-strong: #7f7890;
+    --color-bg: #0d1117;
+    --color-surface: #161b22;
+    --color-text: #e6edf3;
+    --color-text-muted: #9aa6b2;
+    --color-border: #2a323d;
+    --color-border-strong: #6e7b8b;
     --color-brand: #b69cff;
     --color-on-brand: #140f1f;
     --color-brand-soft: #2a2140;
