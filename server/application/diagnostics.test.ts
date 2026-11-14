@@ -3,7 +3,7 @@ import type { WorstCardsGroup } from '../../src/application/api-contract';
 import { fixedClock, emptyDeckSql, sequentialIds } from '../testing/node-sql';
 import type { Context } from './context';
 import { QueryError } from './context';
-import { examCards, recordDueSnapshots, recordSnapshot, thermometer, worstCards } from './diagnostics';
+import { examCards, recordDueSnapshots, recordSnapshot, thermometer, topicCards, worstCards } from './diagnostics';
 import type { Member } from './members';
 import { migrate } from './schema';
 import { recordAnswer, setSuspended, startStudySession, type StudySessionKind } from './study-store';
@@ -161,6 +161,32 @@ describe('worstCards', () => {
     const cito = addCards('citologia', 1);
     answer('outro', '2026-10-01T15:00:00Z', cito, 'again');
     expect(worstCards(ctx, henrique, {})).toEqual([]);
+  });
+});
+
+describe('topicCards', () => {
+  it('lists every card of the topic, new and suspended ones too, with the topic mastery and coverage', () => {
+    const cito = addCards('citologia', 3);
+    answer('henrique', '2026-10-01T15:00:00Z', [cito[0]], 'good');
+    setSuspended(ctx, 'henrique', cito[2], true);
+    const view = topicCards(ctx, henrique, { topicId: 'citologia' }) as Exclude<ReturnType<typeof topicCards>, QueryError>;
+    expect(view).toMatchObject({ topicId: 'citologia', topicName: 'Citologia', seen: 1, total: 2 });
+    expect(view.mastery).not.toBeNull();
+    expect(view.cards.map((c) => [c.cardId, c.mastery === null, c.suspended])).toEqual([
+      [cito[0], false, false],
+      [cito[1], true, false],
+      [cito[2], true, true],
+    ]);
+    expect(view.cards[0]).toMatchObject({ lastSeenDay: '2026-10-01', back: 'b', hint: null });
+  });
+
+  it('fails on an unknown or malformed topic and never shows another member data', () => {
+    const cito = addCards('citologia', 1);
+    answer('outro', '2026-10-01T15:00:00Z', cito, 'again');
+    expect(topicCards(ctx, henrique, { topicId: 'nada' })).toEqual(new QueryError('not_found'));
+    expect(topicCards(ctx, henrique, {})).toEqual(new QueryError('invalid'));
+    const view = topicCards(ctx, henrique, { topicId: 'citologia' }) as Exclude<ReturnType<typeof topicCards>, QueryError>;
+    expect(view.cards[0]).toMatchObject({ mastery: null, againCount: 0, lastSeenDay: null });
   });
 });
 
