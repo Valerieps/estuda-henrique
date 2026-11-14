@@ -27,6 +27,11 @@ Matérias, tópicos e cartas: o que existe para estudar e como as cartas são cr
 - Eu, como admin, crio, renomeio e reordeno os tópicos. *(1)*
 - Com uma matéria só, a aba Matérias abre direto nos tópicos de Biologia. A partir da segunda, ganha
   um nível acima, por matéria. *(3)*
+- Na aba Matérias, os tópicos vêm na ordem do planejamento. Ele pode ligar "Mais fracos primeiro"
+  (do menor domínio para o maior, os novos no fim) e filtrar por estado (Fracos, Em andamento,
+  Novos, Dominados), com quantos tópicos há em cada um. *(1)*
+  Por quê: com dezenas de tópicos, achar os fracos rolando a grade não funciona.
+- Um toque em "O que é domínio?" explica a métrica, em Matérias e na tela Tópico. *(1)*
 
 ## Cartas do sistema e cartas pessoais
 

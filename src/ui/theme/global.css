@@ -537,28 +537,36 @@ input[aria-invalid='true'] {
   color: var(--color-text-muted);
 }
 
-.tile[data-tone='new'] {
+.tile[data-tone='new'],
+.hero[data-tone='new'] {
   border-color: var(--color-state-new);
   background: var(--color-state-new-soft);
   color: var(--color-state-new-text);
+  box-shadow: 0 var(--size-button-depth) 0 var(--color-state-new);
 }
 
-.tile[data-tone='weak'] {
+.tile[data-tone='weak'],
+.hero[data-tone='weak'] {
   border-color: var(--color-state-weak);
   background: var(--color-state-weak-soft);
   color: var(--color-state-weak-text);
+  box-shadow: 0 var(--size-button-depth) 0 var(--color-state-weak);
 }
 
-.tile[data-tone='progress'] {
+.tile[data-tone='progress'],
+.hero[data-tone='progress'] {
   border-color: var(--color-state-progress);
   background: var(--color-state-progress-soft);
   color: var(--color-state-progress-text);
+  box-shadow: 0 var(--size-button-depth) 0 var(--color-state-progress);
 }
 
-.tile[data-tone='mastered'] {
+.tile[data-tone='mastered'],
+.hero[data-tone='mastered'] {
   border-color: var(--color-state-mastered);
   background: var(--color-state-mastered-soft);
   color: var(--color-state-mastered-text);
+  box-shadow: 0 var(--size-button-depth) 0 var(--color-state-mastered);
 }
 
 .tile[data-tone] .icon {
@@ -567,6 +575,84 @@ input[aria-invalid='true'] {
 
 .tile[data-tone] .tile-support {
   color: inherit;
+}
+
+/* A toned tile stands on its state color, like the game button, and sinks into it when tapped. */
+.tile[data-tone] {
+  border-width: var(--border-width-strong);
+  transition: transform var(--duration-fast) var(--easing), box-shadow var(--duration-fast) var(--easing);
+}
+
+a.tile[data-tone]:active {
+  transform: translateY(var(--size-button-depth));
+  box-shadow: none;
+}
+
+.tile .progressbar {
+  align-self: stretch;
+  margin-top: auto;
+}
+
+.hero[data-tone] .hero-title .icon,
+.hero[data-tone] .mastery-help summary {
+  color: inherit;
+}
+
+/* The way back to the screen above: a pill with an arrow (BackLink). */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: var(--space-1);
+  min-height: var(--size-touch);
+  padding: 0 var(--space-3) 0 var(--space-2);
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  color: var(--color-brand);
+  font-weight: var(--font-weight-strong);
+  text-decoration: none;
+}
+
+.back-link:hover {
+  background: var(--color-brand-soft);
+}
+
+.back-link .icon {
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+}
+
+/* "O que é domínio?": a tap-to-open explanation, the phone's stand-in for a tooltip (MasteryHelp). */
+.mastery-help summary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--size-touch);
+  color: var(--color-brand);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-strong);
+  list-style: none;
+  cursor: pointer;
+}
+
+.mastery-help summary::-webkit-details-marker {
+  display: none;
+}
+
+.mastery-help summary .icon {
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+}
+
+.mastery-help p {
+  margin: 0;
+  padding: var(--space-3);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--font-size-small);
 }
 
 a.tile:hover {

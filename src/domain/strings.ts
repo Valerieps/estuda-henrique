@@ -85,8 +85,18 @@ export const strings = {
     noTopics: 'Sem tópicos ainda.',
     empty: 'Ainda não há matérias. Quando as cartas forem adicionadas, os tópicos aparecem aqui.',
     loading: 'Carregando...',
-    coverage: (seen: number, total: number) => `${seen} de ${total} vistas`,
     mastery: (value: number | null) => (value === null ? 'Domínio —' : `Domínio ${Math.round(value * 100)}%`),
+    coverageLabel: 'Cartas já vistas',
+    filters: 'Filtrar tópicos',
+    filterAll: (count: number) => `Todos ${count}`,
+    filterState: {
+      weak: (count: number) => `Fracos ${count}`,
+      progress: (count: number) => `Em andamento ${count}`,
+      new: (count: number) => `Novos ${count}`,
+      mastered: (count: number) => `Dominados ${count}`,
+    },
+    weakestFirst: 'Mais fracos primeiro',
+    noMatch: 'Nenhum tópico neste estado. Toque em Todos para ver os outros.',
   },
 
   // Empty screens of the shell: each later feature replaces its own.
@@ -325,6 +335,9 @@ export const strings = {
   components: {
     progress: (done: number, total: number) => `${done} de ${total}`,
     state: { new: 'Novo', weak: 'Fraco', progress: 'Em andamento', mastered: 'Dominado' },
+    masteryHelpLabel: 'O que é domínio?',
+    masteryHelp:
+      'Domínio é a chance de você lembrar hoje as cartas que já viu do tópico. Sobe quando você acerta e cai sozinho com o tempo. Abaixo de 60% o tópico fica Fraco; com 90% ou mais e pelo menos 80% das cartas vistas, Dominado. Cartas que você ainda não viu não entram na conta: elas aparecem em "3 de 11 vistas".',
   },
 
   streak: {

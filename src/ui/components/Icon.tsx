@@ -24,6 +24,13 @@ const PATHS = {
   ),
   plus: <path d="M12 5v14M5 12h14" />,
   chevron: <path d="M9 6l6 6-6 6" />,
+  back: <path d="M15 6l-6 6 6 6" />,
+  info: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 11v5.5M12 7.5v.01" />
+    </>
+  ),
   gear: (
     <>
       <circle cx="12" cy="12" r="3" />

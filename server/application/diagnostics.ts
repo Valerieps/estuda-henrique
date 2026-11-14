@@ -189,6 +189,8 @@ export function worstCards(ctx: Context, actor: Member, input: Record<string, un
       topicId: t.topic.id,
       topicName: t.topic.name,
       mastery: t.mastery,
+      seen: t.seen,
+      total: t.total,
       cards: orderWorstCards(t.own).map(
         (c): WorstCard => ({
           cardId: c.cardId,

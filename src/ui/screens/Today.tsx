@@ -230,7 +230,7 @@ function Thermometer({ topics }: { topics: readonly ThermometerTopic[] }) {
 }
 
 function TopicTile({ topic }: { topic: ThermometerTopic }) {
-  const state = topicState(topic.mastery, topic.seen);
+  const state = topicState(topic.mastery, topic.seen, topic.total);
   const target = Math.round((topic.mastery ?? 0) * 100);
   const [shown, setShown] = useState(lastShown.get(topic.id) ?? target);
   useEffect(() => {

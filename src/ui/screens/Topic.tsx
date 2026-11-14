@@ -6,7 +6,9 @@ import { Button } from '../components/Button';
 import { Chip } from '../components/Chip';
 import { EmptyState } from '../components/EmptyState';
 import { Field } from '../components/Field';
+import { BackLink } from '../components/BackLink';
 import { Hero } from '../components/Hero';
+import { MasteryHelp } from '../components/MasteryHelp';
 import { Notice } from '../components/Notice';
 import { ProgressBar } from '../components/ProgressBar';
 import { StateBadge, stateIcon } from '../components/StateBadge';
@@ -34,7 +36,7 @@ export function Topic({ topicId }: { topicId: string }) {
   if (!view.data) {
     return (
       <section className="stack">
-        <Link to="/materias">{s.back}</Link>
+        <BackLink to="/materias">{s.back}</BackLink>
         {view.error === 'not_found' ? (
           <EmptyState title={s.back} text={s.notFound}>
             <Link to="/materias">{s.backToSubjects}</Link>
@@ -52,7 +54,7 @@ export function Topic({ topicId }: { topicId: string }) {
   }
 
   const topic = view.data;
-  const state = topicState(topic.mastery, topic.seen);
+  const state = topicState(topic.mastery, topic.seen, topic.total);
   const worstPath = `/piores?topico=${encodeURIComponent(topic.topicId)}`;
   const shown = filterTopicCards(
     topic.cards.map((c) => ({ ...c, text: `${cardFront(c)} ${c.kind === 'basic' ? c.back : ''}` })),
@@ -61,13 +63,14 @@ export function Topic({ topicId }: { topicId: string }) {
   );
   return (
     <section className="stack">
-      <Link to="/materias">{s.back}</Link>
-      <Hero icon={stateIcon(state)} title={topic.topicName}>
+      <BackLink to="/materias">{s.back}</BackLink>
+      <Hero icon={stateIcon(state)} title={topic.topicName} tone={state}>
         <div className="topic-hero-stats">
           <span className="topic-mastery">{s.mastery(topic.mastery)}</span>
           <StateBadge state={state} />
         </div>
         <ProgressBar value={topic.seen} max={topic.total} label={s.coverageLabel} tone={state} />
+        <MasteryHelp />
       </Hero>
       <div className="chips">
         <Chip icon="worst" onClick={() => navigate(worstPath)}>

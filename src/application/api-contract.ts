@@ -166,6 +166,9 @@ export interface WorstCardsGroup {
   readonly topicId: string;
   readonly topicName: string;
   readonly mastery: number | null;
+  /** Cards seen and cards in the topic, suspended ones not counted (for the topic's state). */
+  readonly seen: number;
+  readonly total: number;
   readonly cards: readonly WorstCard[];
 }
 
