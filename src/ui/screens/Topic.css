@@ -1,0 +1,14 @@
+/* Tópico: the mastery number and its state badge inside the hero */
+
+.topic-hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.topic-mastery {
+  font-family: var(--font-display);
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-strong);
+}

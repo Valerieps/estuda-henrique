@@ -82,8 +82,10 @@ export const strings = {
     title: 'Matérias',
     topicsOf: (subject: string) => `Tópicos de ${subject}`,
     noTopics: 'Sem tópicos ainda.',
-    empty: 'Ainda não há matérias.',
+    empty: 'Ainda não há matérias. Quando as cartas forem adicionadas, os tópicos aparecem aqui.',
     loading: 'Carregando...',
+    coverage: (seen: number, total: number) => `${seen} de ${total} vistas`,
+    mastery: (value: number | null) => (value === null ? 'Domínio —' : `Domínio ${Math.round(value * 100)}%`),
   },
 
   // Empty screens of the shell: each later feature replaces its own.
@@ -95,7 +97,7 @@ export const strings = {
   worst: {
     title: 'Piores cartas',
     loading: 'Carregando…',
-    empty: 'As cartas em que você mais erra aparecem aqui, depois de algumas sessões.',
+    empty: 'As cartas em que você mais erra aparecem aqui, depois de algumas sessões. Comece estudando em Hoje.',
     emptyTopic: 'Neste tópico ainda não há cartas estudadas.',
     onlyTopic: (name: string) => `Piores cartas de ${name}`,
     allTopics: 'Ver todos os tópicos',
@@ -130,6 +132,7 @@ export const strings = {
     back: 'Matérias',
     mastery: (value: number | null) => (value === null ? 'Domínio —' : `Domínio ${Math.round(value * 100)}%`),
     coverage: (seen: number, total: number) => `${seen} de ${total} vistas`,
+    coverageLabel: 'Cartas já vistas',
     worstOfTopic: 'Piores deste tópico',
     examOfTopic: 'Véspera deste tópico',
     search: 'Buscar nas cartas',
@@ -138,8 +141,9 @@ export const strings = {
     filterNew: 'Novas',
     filterSuspended: 'Suspensas',
     filterProblem: 'Problema',
-    noCards: 'Este tópico ainda não tem cartas.',
-    noMatch: 'Nenhuma carta com esse filtro.',
+    noCards: 'Este tópico ainda não tem cartas. Toque no + para criar a primeira.',
+    noMatch: 'Nenhuma carta com esse filtro. Tente outro filtro ou limpe a busca.',
+    backToSubjects: 'Voltar para Matérias',
   },
 
   exam: {

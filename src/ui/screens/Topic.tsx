@@ -1,13 +1,20 @@
 import { useState } from 'react';
 import { strings } from '../../domain/strings';
 import { filterTopicCards, type TopicFilter } from '../../domain/study/diagnostic';
-import { Button, ButtonLink } from '../components/Button';
+import { topicState } from '../../domain/topic-state';
+import { Button } from '../components/Button';
+import { Chip } from '../components/Chip';
+import { EmptyState } from '../components/EmptyState';
 import { Field } from '../components/Field';
+import { Hero } from '../components/Hero';
 import { Notice } from '../components/Notice';
+import { ProgressBar } from '../components/ProgressBar';
+import { StateBadge, stateIcon } from '../components/StateBadge';
 import { CardLine, cardFront } from '../card-list';
 import { openExamWithTopic } from '../exam-launch';
 import { Link, navigate } from '../router';
 import { useQuery } from '../use-query';
+import './Topic.css';
 
 const s = strings.topic;
 
@@ -29,7 +36,9 @@ export function Topic({ topicId }: { topicId: string }) {
       <section className="stack">
         <Link to="/materias">{s.back}</Link>
         {view.error === 'not_found' ? (
-          <Notice>{s.notFound}</Notice>
+          <EmptyState title={s.back} text={s.notFound}>
+            <Link to="/materias">{s.backToSubjects}</Link>
+          </EmptyState>
         ) : view.error ? (
           <>
             <Notice tone="error">{strings.genericError}</Notice>
@@ -43,6 +52,7 @@ export function Topic({ topicId }: { topicId: string }) {
   }
 
   const topic = view.data;
+  const state = topicState(topic.mastery, topic.seen);
   const worstPath = `/piores?topico=${encodeURIComponent(topic.topicId)}`;
   const shown = filterTopicCards(
     topic.cards.map((c) => ({ ...c, text: `${cardFront(c)} ${c.kind === 'basic' ? c.back : ''}` })),
@@ -52,30 +62,27 @@ export function Topic({ topicId }: { topicId: string }) {
   return (
     <section className="stack">
       <Link to="/materias">{s.back}</Link>
-      <h1>{topic.topicName}</h1>
-      <p className="strong">{s.mastery(topic.mastery)}</p>
-      <p className="small muted">{s.coverage(topic.seen, topic.total)}</p>
-      <div className="card-line-actions">
-        <ButtonLink
-          href={worstPath}
-          variant="secondary"
-          onClick={(event) => {
-            event.preventDefault();
-            navigate(worstPath);
-          }}
-        >
+      <Hero icon={stateIcon(state)} title={topic.topicName}>
+        <div className="topic-hero-stats">
+          <span className="topic-mastery">{s.mastery(topic.mastery)}</span>
+          <StateBadge state={state} />
+        </div>
+        <ProgressBar value={topic.seen} max={topic.total} label={s.coverageLabel} tone={state} />
+      </Hero>
+      <div className="chips">
+        <Chip icon="worst" onClick={() => navigate(worstPath)}>
           {s.worstOfTopic}
-        </ButtonLink>
-        <Button variant="secondary" onClick={() => openExamWithTopic(topic.topicId)}>
+        </Chip>
+        <Chip icon="exam" onClick={() => openExamWithTopic(topic.topicId)}>
           {s.examOfTopic}
-        </Button>
+        </Chip>
       </div>
       <Field label={s.search} type="search" value={search} onChange={(e) => setSearch(e.target.value)} />
-      <div className="card-line-actions" role="group" aria-label={s.filters}>
+      <div className="chips" role="group" aria-label={s.filters}>
         {FILTERS.map((f) => (
-          <Button key={f.id} variant="secondary" aria-pressed={filter === f.id} onClick={() => setFilter(f.id)}>
+          <Chip key={f.id} pressed={filter === f.id} onClick={() => setFilter(f.id)}>
             {f.label}
-          </Button>
+          </Chip>
         ))}
       </div>
       {topic.cards.length === 0 ? (
