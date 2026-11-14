@@ -73,6 +73,10 @@
   --font-weight-display: 700;
   --line-height-tight: 1.25;
   --line-height-body: 1.5;
+  /* Small uppercase labels above a number ("MEMÓRIA DE LONGO PRAZO"): spaced so caps stay legible. */
+  --letter-spacing-caps: 0.06em;
+  /* Numbers line up digit under digit. */
+  --numeric: tabular-nums;
 
   /* Spacing: a 4px grid. Gaps between related items are smaller than between groups. */
   --space-1: 4px;
@@ -86,15 +90,26 @@
   /* Shapes and sizes */
   --radius-sm: 6px;
   --radius: 12px;
+  /* The + of the tab bar: a rounded square, not a circle (Amethyst). */
+  --radius-lg: 16px;
   --radius-full: 999px;
   --border-width: 1px;
   --border-width-strong: 2px;
   /* The smallest box a finger can hit reliably (WCAG 2.5.5, Apple HIG). */
   --size-touch: 44px;
+  /* The screen's main actions (Estudar, Só 5 cartas) and the tab bar: a bigger target for one thumb. */
+  --size-button-lg: 48px;
+  --size-icon: 22px;
+  --size-icon-sm: 18px;
+  /* Outline icons: regular, and heavier for the active tab. */
+  --icon-stroke: 1.8;
+  --icon-stroke-strong: 2.4;
+  /* The bar of a topic in the termômetro. */
+  --size-bar: 6px;
   --size-avatar: 40px;
   --size-content: 720px;
-  /* The fixed bottom bar: a touch-sized tab plus its padding above and below. */
-  --size-tabbar: calc(var(--size-touch) + 2 * var(--space-2));
+  /* The fixed bottom bar: a tab (icon over label) plus its padding above and below. */
+  --size-tabbar: calc(var(--size-button-lg) + 2 * var(--space-2));
   /* The termômetro's minilinha (last 4 weeks). */
   --size-spark-width: 64px;
   --size-spark-height: 24px;

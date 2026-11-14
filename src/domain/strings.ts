@@ -26,6 +26,8 @@ export const strings = {
     subjects: 'Matérias',
     exam: 'Prova',
     worst: 'Piores cartas',
+    // The tab bar has five slots at 320px: the label is short, the screen title stays "Piores cartas".
+    worstTab: 'Piores',
     systemCards: 'Cartas do sistema',
     members: 'Membros',
     invites: 'Convites',
@@ -127,7 +129,7 @@ export const strings = {
     notFound: 'Não achei esse tópico.',
     back: 'Matérias',
     mastery: (value: number | null) => (value === null ? 'Domínio —' : `Domínio ${Math.round(value * 100)}%`),
-    coverage: (seen: number, total: number) => `${seen} de ${total} cartas vistas`,
+    coverage: (seen: number, total: number) => `${seen} de ${total} vistas`,
     worstOfTopic: 'Piores deste tópico',
     examOfTopic: 'Véspera deste tópico',
     search: 'Buscar nas cartas',
@@ -267,8 +269,10 @@ export const strings = {
     title: 'Hoje',
     loading: 'Carregando...',
     routine: (when: string | null, where: string | null) => [when, where].filter(Boolean).join(' · '),
-    longTerm: (rate: number | null, saved: number) =>
-      `${rate === null ? 'Memória de longo prazo: ainda juntando respostas' : `Lembra ${Math.round(rate * 100)}% do que não via há 7+ dias`} · ${saved === 1 ? '1 carta guardada' : `${saved} cartas guardadas`}`,
+    longTermLabel: 'Memória de longo prazo',
+    longTermValue: (rate: number | null) => (rate === null ? '—' : `${Math.round(rate * 100)}%`),
+    longTermHint: (rate: number | null) => (rate === null ? 'ainda juntando respostas' : 'do que não via há 7+ dias'),
+    savedLabel: 'Cartas guardadas',
     goal: (reviews: number, fresh: number) => {
       const parts = [];
       if (reviews > 0) parts.push(reviews === 1 ? '1 revisão' : `${reviews} revisões`);
@@ -287,9 +291,10 @@ export const strings = {
 
   thermometer: {
     title: 'Termômetro',
+    masteryLabel: 'Domínio',
     empty: 'Os tópicos aparecem aqui quando houver cartas.',
     mastery: (value: number | null) => (value === null ? '—' : `${Math.round(value * 100)}%`),
-    coverage: (seen: number, total: number) => `${seen} de ${total} cartas vistas`,
+    coverage: (seen: number, total: number) => `${seen} de ${total} vistas`,
     weak: 'Fraco',
     trendLabel: (name: string) => `Evolução de ${name} nas últimas 4 semanas`,
     open: (name: string) => `Piores cartas de ${name}`,

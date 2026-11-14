@@ -9,8 +9,9 @@ A tela Hoje e o que faz ele voltar todo dia: a meta, a ofensiva, a rotina e o ca
 ## Hoje
 
 - O app abre em Hoje, de cima para baixo: a rotina dele numa linha (ex.: "no ônibus da escola"); a
-  linha da memória de longo prazo e das cartas guardadas (`spec/diagnostico.md`); a meta do dia ou
-  "Pronto por hoje"; Estudar e Só 5 cartas; o cartão de aviso; o termômetro. *(1)*
+  memória de longo prazo e as cartas guardadas, como dois números grandes lado a lado
+  (`spec/diagnostico.md`); a meta do dia ou "Pronto por hoje"; Estudar e Só 5 cartas, lado a lado;
+  o cartão de aviso; o termômetro. *(1)*
 - **Primeiro uso:** baralho inicial carregado, meta "20 novas", termômetro com cobertura 0 de N,
   domínio "—" e sem minilinha. *(1)*
 - **Pronto por hoje:** meta cumprida e chama acesa. Sem Estudar nem Só 5 cartas; no lugar, a frase

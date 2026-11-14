@@ -2,6 +2,7 @@ import { useCallback, useState, type ReactNode } from 'react';
 import type { TodayView } from '../application/api-contract';
 import { strings } from '../domain/strings';
 import { Button } from './components/Button';
+import { Icon, type IconName } from './components/Icon';
 import { Notice } from './components/Notice';
 import { CreateSheet } from './CreateSheet';
 import { Link, usePath } from './router';
@@ -11,6 +12,7 @@ import { useQuery, type QueryState } from './use-query';
 interface Tab {
   readonly path: string;
   readonly label: string;
+  readonly icon?: IconName;
 }
 
 function TabLinks({ tabs, path }: { tabs: readonly Tab[]; path: string }) {
@@ -18,7 +20,12 @@ function TabLinks({ tabs, path }: { tabs: readonly Tab[]; path: string }) {
     <>
       {tabs.map((tab) => (
         <Link key={tab.path} to={tab.path} aria-current={path === tab.path ? 'page' : undefined}>
-          {tab.label}
+          {tab.icon && (
+            <span className="tab-icon">
+              <Icon name={tab.icon} />
+            </span>
+          )}
+          <span className="tab-label">{tab.label}</span>
         </Link>
       ))}
     </>
@@ -26,13 +33,23 @@ function TabLinks({ tabs, path }: { tabs: readonly Tab[]; path: string }) {
 }
 
 const MEMBER_LEFT: readonly Tab[] = [
-  { path: '/', label: strings.nav.today },
-  { path: '/materias', label: strings.nav.subjects },
+  { path: '/', label: strings.nav.today, icon: 'home' },
+  { path: '/materias', label: strings.nav.subjects, icon: 'book' },
 ];
 const MEMBER_RIGHT: readonly Tab[] = [
-  { path: '/prova', label: strings.nav.exam },
-  { path: '/piores', label: strings.nav.worst },
+  { path: '/prova', label: strings.nav.exam, icon: 'exam' },
+  { path: '/piores', label: strings.nav.worstTab, icon: 'worst' },
 ];
+/** "Estuda Henrique", the second word in the brand color. */
+function Brand() {
+  const [first, ...rest] = strings.appName.split(' ');
+  return (
+    <span className="brand grow">
+      {first} <em>{rest.join(' ')}</em>
+    </span>
+  );
+}
+
 const ADMIN_TABS: readonly Tab[] = [
   { path: '/', label: strings.nav.systemCards },
   { path: '/membros', label: strings.nav.members },
@@ -54,29 +71,38 @@ export function MemberShell({ children }: { children: (today: QueryState<TodayVi
   return (
     <div className="shell">
       <header className="topbar">
-        <span className="brand grow">{strings.appName}</span>
-        <Flame today={today.data} onReload={today.reload} />
-        <Link to="/ajustes" aria-current={path === '/ajustes' ? 'page' : undefined}>
-          {strings.nav.settings}
-        </Link>
+        <div className="bar-inner">
+          <Brand />
+          <Flame today={today.data} onReload={today.reload} />
+          <Link
+            to="/ajustes"
+            className="icon-link"
+            aria-label={strings.nav.settings}
+            aria-current={path === '/ajustes' ? 'page' : undefined}
+          >
+            <Icon name="gear" />
+          </Link>
+        </div>
       </header>
       <main className="screen">
         {notice && <Notice>{notice}</Notice>}
         {children(today)}
       </main>
       <nav className="tabbar" aria-label={strings.nav.main}>
-        <TabLinks tabs={MEMBER_LEFT} path={path} />
-        <Button
-          className="create"
-          aria-label={strings.nav.create}
-          onClick={() => {
-            setNotice(null);
-            setCreating(true);
-          }}
-        >
-          +
-        </Button>
-        <TabLinks tabs={MEMBER_RIGHT} path={path} />
+        <div className="bar-inner">
+          <TabLinks tabs={MEMBER_LEFT} path={path} />
+          <Button
+            className="create"
+            aria-label={strings.nav.create}
+            onClick={() => {
+              setNotice(null);
+              setCreating(true);
+            }}
+          >
+            <Icon name="plus" />
+          </Button>
+          <TabLinks tabs={MEMBER_RIGHT} path={path} />
+        </div>
       </nav>
       {creating && <CreateSheet onClose={close} onDone={done} />}
     </div>
@@ -89,14 +115,18 @@ export function AdminShell({ children, onSignOut }: { children: ReactNode; onSig
   return (
     <div className="shell">
       <header className="topbar">
-        <span className="brand grow">{strings.appName}</span>
-        <Button variant="secondary" onClick={onSignOut}>
-          {strings.nav.signOut}
-        </Button>
+        <div className="bar-inner">
+          <Brand />
+          <Button variant="secondary" onClick={onSignOut}>
+            {strings.nav.signOut}
+          </Button>
+        </div>
       </header>
       <main className="screen">{children}</main>
       <nav className="tabbar" aria-label={strings.nav.main}>
-        <TabLinks tabs={ADMIN_TABS} path={path} />
+        <div className="bar-inner">
+          <TabLinks tabs={ADMIN_TABS} path={path} />
+        </div>
       </nav>
     </div>
   );
