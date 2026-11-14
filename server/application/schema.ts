@@ -124,6 +124,9 @@ export const MIGRATIONS: readonly (readonly string[])[] = [
       streak_repair_month TEXT
     )`,
   ],
+  // 3: deleting a note or dropping a cloze passage never touches the study history, so notes and
+  // cards are only hidden: `deleted_at` on the note, `retired` on a card whose passage is gone.
+  [`ALTER TABLE notes ADD COLUMN deleted_at TEXT`, `ALTER TABLE cards ADD COLUMN retired INTEGER NOT NULL DEFAULT 0`],
 ];
 
 export function migrate(sql: Sql): void {
