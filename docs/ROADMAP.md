@@ -14,10 +14,9 @@ O que ainda não está pronto.
 | Colar várias com prévia | 1 | `spec/cartas.md` | |
 | Baralho inicial de Biologia | 1 | `spec/cartas.md` | Tópicos já definidos; falta a ordem por bimestre (Em aberto) |
 | Resumo, Refazer erros, Mais 5?, Adiantar novas, tempo do dia | 1 | `spec/estudo.md` | A sessão (`src/ui/screens/Study.tsx`) acaba hoje numa tela mínima, sem Resumo; Adiantar novas pede abrir uma sessão de Revisão só com as novas de um tópico |
-| Hoje, termômetro, memória de longo prazo e cartas guardadas | 1 | `spec/diagnostico.md`, `spec/meta-e-ofensiva.md` | Hoje é hoje uma tela vazia da casca (`src/ui/App.tsx`); Estudar e Só 5 cartas chamam `startStudy` (`src/ui/study-launch.ts`); a sessão já abre em `/estudo`; a consulta `thermometer` já devolve termômetro, memória de longo prazo e cartas guardadas |
 | Piores cartas e tela Tópico | 1 | `spec/diagnostico.md` | A consulta `worstCards` já devolve os grupos; falta a tela e a busca e os filtros do Tópico |
 | Véspera | 1 | `spec/vespera.md` | |
-| Meta diária, ofensiva, rotina, cartão de aviso, Ajustes | 1 | `spec/meta-e-ofensiva.md` | |
+| Tela Rotina depois do primeiro Resumo, e a chama acender no Resumo | 1 | `spec/meta-e-ofensiva.md` | Hoje, a chama, a folha Ofensiva, o cartão de aviso e os Ajustes (com a rotina) já existem; falta a tela Rotina, que pertence ao fim da sessão (Resumo), e o botão Adiantar mais 10 novas em Hoje ("Pronto por hoje") |
 | Tela inicial do admin (cartas do sistema) | 1 | `spec/meta-e-ofensiva.md` | |
 | Imagem e oclusão de imagem | 2 | `spec/cartas.md` | Oclusão é a prioridade 1 da fase 2 |
 | Data e nota da prova | 2 | `spec/vespera.md` | |
@@ -27,8 +26,7 @@ O que ainda não está pronto.
 
 ## O código ainda não segue o spec
 
-- O limite de novas por dia vai de 5 a 50 — o servidor ainda não limita a faixa
-  (`src/domain/study/settings.ts`; o padrão de 20 já vale).
+- Nada no momento.
 
 ## Adiado
 
@@ -52,3 +50,9 @@ O que ainda não está pronto.
   anterior à carta em qualquer sessão (`spec/diagnostico.md`).
 - [ ] Piores cartas lista só cartas já estudadas e não suspensas; tópicos sem domínio ainda ficam
   por último no termômetro (`spec/diagnostico.md`).
+- [ ] Um dia conta para a ofensiva quando ele termina uma sessão com ao menos uma resposta; abrir
+  Hoje sem nada para estudar também conta (`spec/meta-e-ofensiva.md`).
+- [ ] Consertar ofensiva só aparece quando se perdeu um único dia de estudo logo depois de uma
+  sequência (folgas não contam como perdidas) e não houve conserto no mês (`spec/meta-e-ofensiva.md`).
+- [ ] "Pronto por hoje" aparece sempre que a fila do dia está vazia, mesmo antes de ele estudar,
+  como no primeiro dia sem cartas novas (`spec/meta-e-ofensiva.md`).

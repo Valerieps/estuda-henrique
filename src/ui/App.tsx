@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import type { TodayView } from '../application/api-contract';
 import { canManageGroup } from '../domain/group/roles';
 import { strings } from '../domain/strings';
 import { useLiveStatus, useServices } from './backend-context';
@@ -9,10 +10,12 @@ import { navigate, usePath } from './router';
 import { Invites } from './screens/Invites';
 import { Members } from './screens/Members';
 import { SignIn } from './screens/SignIn';
+import { Settings } from './screens/Settings';
 import { Study } from './screens/Study';
 import { Subjects } from './screens/Subjects';
+import { Today } from './screens/Today';
 import { AdminShell, MemberShell } from './Shell';
-import { useQuery } from './use-query';
+import { useQuery, type QueryState } from './use-query';
 
 export function App() {
   const { backend, live } = useServices();
@@ -63,10 +66,10 @@ const empty = strings.empty;
 function MemberApp({ onSignOut }: { onSignOut: () => void }) {
   const path = usePath();
   if (path === '/estudo') return <Study />;
-  return <MemberShell>{memberScreen(path, onSignOut)}</MemberShell>;
+  return <MemberShell>{(today) => memberScreen(path, onSignOut, today)}</MemberShell>;
 }
 
-function memberScreen(path: string, onSignOut: () => void) {
+function memberScreen(path: string, onSignOut: () => void, today: QueryState<TodayView>) {
   switch (path) {
     case '/materias':
       return <Subjects />;
@@ -75,15 +78,9 @@ function memberScreen(path: string, onSignOut: () => void) {
     case '/piores':
       return <EmptyState {...empty.worst} />;
     case '/ajustes':
-      return (
-        <EmptyState {...empty.settings}>
-          <Button variant="secondary" onClick={onSignOut}>
-            {strings.nav.signOut}
-          </Button>
-        </EmptyState>
-      );
+      return <Settings onSignOut={onSignOut} />;
     default:
-      return <EmptyState {...empty.today} />;
+      return <Today today={today} />;
   }
 }
 

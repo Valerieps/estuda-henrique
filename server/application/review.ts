@@ -86,7 +86,7 @@ const byDue = (a: StudyCard, b: StudyCard) => a.state.due.localeCompare(b.state.
  * The day's queue: cards in learning, then reviews due today, then new cards up to the daily
  * limit. Nothing comes before its time: a review due tomorrow stays out.
  */
-function dailyQueue(ctx: Context, actor: Member, limit: number | null): StudyCard[] {
+export function dailyQueue(ctx: Context, actor: Member, limit: number | null): StudyCard[] {
   const endOfDay = endOfStudyDay(ctx.clock.now()).toISOString();
   const cards = eligibleCards(ctx, actor);
   const dueToday = cards.filter((c) => c.state.stage !== 'new' && c.state.due < endOfDay);

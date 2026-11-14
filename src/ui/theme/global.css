@@ -505,3 +505,114 @@ input[aria-invalid='true'] {
   min-height: calc(var(--size-touch) * 2);
   resize: vertical;
 }
+
+/* Hoje: termômetro, ofensiva, cartão de aviso */
+
+.thermo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.thermo-row {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.thermo-row.weak {
+  border-color: var(--color-brand);
+  background: var(--color-brand-soft);
+}
+
+.thermo-row .head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.thermo-row .value {
+  font-family: var(--font-display);
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-display);
+}
+
+.thermo-row .foot {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.spark {
+  width: var(--size-spark-width);
+  height: var(--size-spark-height);
+  fill: none;
+  stroke: var(--color-brand);
+  stroke-width: var(--focus-ring-width);
+  flex: none;
+}
+
+.flame {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--size-touch);
+  min-width: var(--size-touch);
+  padding: 0 var(--space-2);
+  border: 0;
+  background: none;
+  color: var(--color-text);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-strong);
+  cursor: pointer;
+}
+
+.flame[data-lit='false'] .icon {
+  opacity: var(--opacity-disabled);
+  filter: grayscale(1);
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-1);
+  text-align: center;
+}
+
+.calendar .head {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+}
+
+.calendar .day {
+  padding: var(--space-2) 0;
+  border-radius: var(--radius-sm);
+  border: var(--border-width) solid var(--color-border);
+  font-size: var(--font-size-small);
+}
+
+.calendar .day[data-state='counted'] {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: var(--color-on-brand);
+  font-weight: var(--font-weight-strong);
+}
+
+.calendar .day[data-state='rest'] {
+  background: var(--color-brand-soft);
+}
+
+.calendar .day[data-state='missed'] {
+  color: var(--color-text-muted);
+}
+
+.day-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}

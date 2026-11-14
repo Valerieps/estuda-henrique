@@ -4,6 +4,11 @@
 /** Default limit of new cards a day (docs/spec/estudo.md). */
 export const DEFAULT_NEW_PER_DAY = 20;
 
+export const MIN_NEW_PER_DAY = 5;
+export const MAX_NEW_PER_DAY = 50;
+/** Longest routine text ("no ônibus da escola"). */
+export const MAX_ROUTINE_LENGTH = 60;
+
 export interface StudySettings {
   readonly newPerDay: number;
   /** Rest days of the week, 0 = Sunday ... 6 = Saturday. */

@@ -86,11 +86,9 @@ export const strings = {
 
   // Empty screens of the shell: each later feature replaces its own.
   empty: {
-    today: { title: 'Hoje', text: 'Quando houver cartas para estudar, elas aparecem aqui.' },
     exam: { title: 'Prova', text: 'Aqui você monta a Véspera: escolha os tópicos da prova e estude.' },
     worst: { title: 'Piores cartas', text: 'As cartas em que você mais erra aparecem aqui, depois de algumas sessões.' },
     systemCards: { title: 'Cartas do sistema', text: 'As cartas do sistema aparecem aqui.' },
-    settings: { title: 'Ajustes', text: 'Os ajustes de estudo aparecem aqui.' },
     study: { title: 'Sessão', text: 'Nenhuma carta para estudar agora.' },
   },
 
@@ -160,5 +158,77 @@ export const strings = {
     removeOf: (name: string) => `Remover ${name} do grupo`,
     removeConfirm: (name: string) => `Remover ${name} do grupo? O acesso acaba na hora. Para voltar, é só convidar de novo.`,
     empty: 'Só você por aqui. Convide alguém!',
+  },
+
+  today: {
+    title: 'Hoje',
+    loading: 'Carregando...',
+    routine: (when: string | null, where: string | null) => [when, where].filter(Boolean).join(' · '),
+    longTerm: (rate: number | null, saved: number) =>
+      `${rate === null ? 'Memória de longo prazo: ainda juntando respostas' : `Lembra ${Math.round(rate * 100)}% do que não via há 7+ dias`} · ${saved === 1 ? '1 carta guardada' : `${saved} cartas guardadas`}`,
+    goal: (reviews: number, fresh: number) => {
+      const parts = [];
+      if (reviews > 0) parts.push(reviews === 1 ? '1 revisão' : `${reviews} revisões`);
+      if (fresh > 0) parts.push(fresh === 1 ? '1 nova' : `${fresh} novas`);
+      return `Meta de hoje: ${parts.join(' e ')}`;
+    },
+    study: 'Estudar',
+    five: 'Só 5 cartas',
+    done: 'Pronto por hoje',
+    doneText: 'Hoje você já fez o que mais rende. Voltar amanhã rende mais do que mais uma hora hoje.',
+    worstLink: 'Ver as piores cartas',
+    restDay: 'Hoje é folga',
+    noCards: 'Ainda não há cartas para estudar.',
+    startFailed: 'Não deu para começar a sessão. Tenta de novo?',
+  },
+
+  thermometer: {
+    title: 'Termômetro',
+    empty: 'Os tópicos aparecem aqui quando houver cartas.',
+    mastery: (value: number | null) => (value === null ? '—' : `${Math.round(value * 100)}%`),
+    coverage: (seen: number, total: number) => `${seen} de ${total} cartas vistas`,
+    weak: 'Fraco',
+    trendLabel: (name: string) => `Evolução de ${name} nas últimas 4 semanas`,
+    open: (name: string) => `Piores cartas de ${name}`,
+  },
+
+  streak: {
+    title: 'Ofensiva',
+    flame: (days: number, lit: boolean) => `Ofensiva: ${days === 1 ? '1 dia' : `${days} dias`}${lit ? '' : ', ainda não acesa hoje'}`,
+    days: (days: number) => (days === 1 ? '1 dia seguido' : `${days} dias seguidos`),
+    help: 'Um dia conta quando você termina uma sessão. Dias de folga não quebram a sequência.',
+    weekdays: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+    counted: 'estudou',
+    rest: 'folga',
+    missed: 'sem estudo',
+    repair: 'Consertar ofensiva',
+    repairText: 'Você perdeu um dia, mas dá para consertar. Só uma vez por mês.',
+    repairFailed: 'Não deu para consertar agora. Tenta de novo?',
+  },
+
+  notice: {
+    install: 'Instale o app na tela inicial para abrir com um toque.',
+    installButton: 'Instalar',
+  },
+
+  settings: {
+    title: 'Ajustes',
+    loading: 'Carregando...',
+    newPerDay: 'Cartas novas por dia (de 5 a 50)',
+    newPerDayWarning: 'Mais novas hoje significam mais revisões nos próximos dias.',
+    newPerDayInvalid: 'Use um número de 5 a 50.',
+    restDays: 'Dias de folga',
+    restDaysHelp: 'Uma folga não quebra a ofensiva. Se você estudar nela, o dia conta.',
+    weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+    routine: 'Rotina',
+    routineWhen: 'Quando você vai estudar',
+    routineWhere: 'Onde',
+    routineWhenHint: 'ex.: de manhã',
+    routineWhereHint: 'ex.: no ônibus da escola',
+    save: 'Salvar',
+    saved: 'Salvo.',
+    saveFailed: 'Não deu para salvar. Tenta de novo?',
+    about: 'Sobre',
+    aboutText: 'Estuda Henrique: flashcards de Biologia com repetição espaçada (FSRS).',
   },
 } as const;

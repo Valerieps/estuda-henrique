@@ -19,6 +19,7 @@ import {
   type SignInResult,
 } from './members';
 import { answerCard, endStudy, startStudy, undoAnswer } from './review';
+import { repairStreak, settingsView, todayView, touchStreak, updateSettings } from './today';
 import type { Clock, IdGenerator, Sql } from './ports';
 import { migrate } from './schema';
 
@@ -35,6 +36,8 @@ const QUERIES: { [N in QueryName]: Handler<Queries[N]['output'] | QueryError | n
   notes: (ctx, actor, input) => listNotes(ctx, actor, input),
   thermometer: (ctx, actor) => thermometer(ctx, actor),
   worstCards: (ctx, actor, input) => worstCards(ctx, actor, input),
+  today: (ctx, actor) => todayView(ctx, actor),
+  settings: (ctx, actor) => settingsView(ctx, actor),
 };
 
 /** Every command the API runs; each checks the actor's role itself. */
@@ -56,6 +59,9 @@ const COMMANDS: { [N in CommandName]: Handler<CommandResult<Commands[N]['output'
   'study.answer': answerCard,
   'study.undo': undoAnswer,
   'study.end': endStudy,
+  'settings.update': updateSettings,
+  'streak.touch': touchStreak,
+  'streak.repair': repairStreak,
 };
 
 export class GroupService {

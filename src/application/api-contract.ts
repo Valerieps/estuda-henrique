@@ -100,6 +100,44 @@ export interface Thermometer {
   readonly savedCards: number;
 }
 
+/** One day of the Ofensiva sheet's calendar. */
+export interface StreakCalendarDay {
+  readonly day: string;
+  readonly counted: boolean;
+  readonly rest: boolean;
+}
+
+/** The streak: the flame in the top bar and the Ofensiva sheet. */
+export interface StreakView {
+  readonly days: number;
+  readonly litToday: boolean;
+  /** A missed day he can still fix this month (Consertar ofensiva). */
+  readonly canRepair: boolean;
+  readonly calendar: readonly StreakCalendarDay[];
+}
+
+/** What Hoje shows besides the termômetro: the routine, the day's goal and the streak. */
+export interface TodayView {
+  readonly routineWhen: string | null;
+  readonly routineWhere: string | null;
+  /** Today is one of his rest days of the week. */
+  readonly restToday: boolean;
+  /** What is left of the day's goal: reviews (learning and due) and new cards up to the limit. */
+  readonly reviewsLeft: number;
+  readonly newLeft: number;
+  /** He finished at least one session in his life: the install notice waits for it. */
+  readonly hasStudied: boolean;
+  readonly streak: StreakView;
+}
+
+/** The study settings (Ajustes). */
+export interface SettingsView {
+  readonly newPerDay: number;
+  readonly restDays: readonly number[];
+  readonly routineWhen: string | null;
+  readonly routineWhere: string | null;
+}
+
 /** A row of Piores cartas. Cloze cards show `front` with the passage `clozeIndex` hidden. */
 export interface WorstCard {
   readonly cardId: string;
@@ -160,6 +198,10 @@ export interface Queries {
   thermometer: { input: Record<string, never>; output: Thermometer };
   /** The reader's own worst cards by topic, weakest topic first; `topicId` keeps one topic's group. */
   worstCards: { input: { topicId?: string }; output: WorstCardsGroup[] };
+  /** The reader's own Hoje: routine, day's goal and streak. */
+  today: { input: Record<string, never>; output: TodayView };
+  /** The reader's own study settings. */
+  settings: { input: Record<string, never>; output: SettingsView };
   me: { input: Record<string, never>; output: MeView };
   /** Admins only. */
   members: { input: Record<string, never>; output: MemberListItem[] };
@@ -202,6 +244,12 @@ export interface Commands {
   /** Undoes the session's last answer; the output is the card with its state before it. */
   'study.undo': { input: { sessionId: string }; output: { cardId: string; state: SchedulingState } };
   'study.end': { input: { sessionId: string }; output: null };
+  /** Changes the given settings only; `newPerDay` goes from 5 to 50, texts are cleared with null. */
+  'settings.update': { input: Partial<SettingsView>; output: SettingsView };
+  /** Hoje opened with nothing left to study: the day counts for the streak. */
+  'streak.touch': { input: Record<string, never>; output: null };
+  /** Fixes the missed day, once a month. */
+  'streak.repair': { input: Record<string, never>; output: null };
 }
 
 export type QueryName = keyof Queries;
