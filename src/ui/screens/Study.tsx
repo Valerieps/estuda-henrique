@@ -7,8 +7,10 @@ import type { Answer } from '../../domain/study/scheduler';
 import { strings } from '../../domain/strings';
 import { useServices } from '../backend-context';
 import { Button } from '../components/Button';
+import { Chip } from '../components/Chip';
 import { EmptyState } from '../components/EmptyState';
 import { Notice } from '../components/Notice';
+import { ProgressBar } from '../components/ProgressBar';
 import { Sheet } from '../components/Sheet';
 import { navigate } from '../router';
 import { clearStudyRequest, currentStudyRequest, type StudyRequest } from '../study-launch';
@@ -149,12 +151,13 @@ function Answered({ card }: { card: StudyCard }) {
       ) : (
         <>
           <p className="question">{card.front}</p>
+          <hr className="divider" />
           <p className="answer">{card.back}</p>
         </>
       )}
       {cloze && card.back && <p className="muted">{card.back}</p>}
       {card.hint && (
-        <p className="muted small">
+        <p className="hint">
           <span className="strong">{s.hintLabel}:</span> {card.hint}
         </p>
       )}
@@ -171,6 +174,8 @@ function Session({ session, onFinish, onLeave }: { session: StudySessionView; on
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [soon, setSoon] = useState(false);
+  // How the last answer is shown on the next card: a success pulse, or the slide of Errei.
+  const [feedback, setFeedback] = useState<'pulse' | 'slide' | null>(null);
   const [panel, setPanel] = useState<'none' | 'exit' | 'menu' | 'edit'>('none');
   const total = session.cards.length;
   const card = queue[0];
@@ -200,12 +205,14 @@ function Session({ session, onFinish, onLeave }: { session: StudySessionView; on
     setHistory((h) => [...h, before]);
     setFlipped(false);
     setSoon(rating === 'again');
+    setFeedback(rating === 'again' ? 'slide' : 'pulse');
     const result = await backend.command('study.answer', { sessionId: session.sessionId, cardId: card.id, answer: rating });
     if (!result.ok) {
       setQueue(before);
       setHistory((h) => h.slice(0, -1));
       setFlipped(true);
       setSoon(false);
+      setFeedback(null);
       setError(s.answerFailed);
       setBusy(false);
       return;
@@ -229,6 +236,7 @@ function Session({ session, onFinish, onLeave }: { session: StudySessionView; on
     setHistory((h) => h.slice(0, -1));
     setFlipped(true);
     setSoon(false);
+    setFeedback(null);
   }
 
   async function suspend() {
@@ -259,19 +267,11 @@ function Session({ session, onFinish, onLeave }: { session: StudySessionView; on
 
   const header = (
     <>
-      <Button variant="secondary" aria-label={s.exit} onClick={() => setPanel('exit')}>
+      <Button variant="secondary" className="study-exit" aria-label={s.exit} onClick={() => setPanel('exit')}>
         ×
       </Button>
-      <div
-        className="progress grow"
-        role="progressbar"
-        aria-label={s.progress}
-        aria-valuemin={0}
-        aria-valuemax={total}
-        aria-valuenow={Math.max(0, total - queue.length)}
-        aria-valuetext={s.remaining(queue.length)}
-      >
-        <div className="progress-fill" style={{ width: `${total === 0 ? 0 : ((total - queue.length) / total) * 100}%` }} />
+      <div className="grow">
+        <ProgressBar value={total - queue.length} max={total} label={s.progress} />
       </div>
     </>
   );
@@ -297,17 +297,25 @@ function Session({ session, onFinish, onLeave }: { session: StudySessionView; on
     <Layer header={header}>
       <div className="study">
         <h1 className="sr-only">{s.title}</h1>
-        {session.training && <Notice>{s.training}</Notice>}
+        {session.training && (
+          <div className="training">
+            <Chip icon="target">{s.training}</Chip>
+          </div>
+        )}
         {error && <Notice tone="error">{error}</Notice>}
         <div className="card-tools" data-hidden={!flipped}>
-          <Button variant="secondary" disabled={busy || history.length === 0} onClick={() => void undo()}>
-            {s.undo}
-          </Button>
+          {history.length > 0 ? (
+            <Button variant="secondary" disabled={busy} onClick={() => void undo()}>
+              {s.undo}
+            </Button>
+          ) : (
+            <span />
+          )}
           <Button variant="secondary" aria-label={s.more} disabled={busy} onClick={() => setPanel('menu')}>
             ⋯
           </Button>
         </div>
-        <div className="flip">
+        <div className="flip" key={history.length} data-feedback={feedback}>
           <div className="flip-inner" data-flipped={flipped} onClick={() => setFlipped(true)}>
             <div className="face front" aria-hidden={flipped}>
               <span className="topic">{card.topicName}</span>
@@ -321,7 +329,7 @@ function Session({ session, onFinish, onLeave }: { session: StudySessionView; on
           </div>
         </div>
         {flipped ? (
-          <div className="answers">
+          <div className="study-answers">
             {(['again', 'hard', 'good'] as const).map((rating) => (
               <Button key={rating} variant={rating === 'good' ? 'primary' : 'secondary'} disabled={busy} onClick={() => void answer(rating)}>
                 <span>{s[rating]}</span>
@@ -330,7 +338,9 @@ function Session({ session, onFinish, onLeave }: { session: StudySessionView; on
             ))}
           </div>
         ) : (
-          <Button onClick={() => setFlipped(true)}>{s.showAnswer}</Button>
+          <Button className="show-answer" onClick={() => setFlipped(true)}>
+            {s.showAnswer}
+          </Button>
         )}
       </div>
       {panel === 'menu' && (

@@ -17,8 +17,21 @@
   visibility: hidden;
 }
 
+.study-exit {
+  min-height: var(--size-touch);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-size-title);
+  line-height: var(--line-height-tight);
+}
+
+.training {
+  display: flex;
+  justify-content: center;
+}
+
+/* The card is as tall as its content, with no empty space above it. */
 .flip {
-  flex: 1;
+  position: relative;
   display: flex;
   perspective: var(--flip-perspective);
 }
@@ -42,7 +55,6 @@
   flex-direction: column;
   justify-content: center;
   gap: var(--space-3);
-  min-height: var(--size-card-min);
   padding: var(--space-6) var(--space-4);
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius);
@@ -69,11 +81,101 @@
 }
 
 .face .answer {
-  font-size: var(--font-size-title);
+  font-size: var(--font-size-body);
   line-height: var(--line-height-tight);
+}
+
+.face .divider {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+.face .hint {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
 }
 
 .face .blank {
   color: var(--color-brand);
   font-weight: var(--font-weight-strong);
+}
+
+/* Answer feedback: a success pulse (Acertei, Acertei com esforço) or a slide in (Errei). */
+.flip[data-feedback='pulse']::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: var(--focus-ring-width) solid var(--color-success);
+  border-radius: var(--radius);
+  pointer-events: none;
+  animation: study-pulse var(--duration-pulse) var(--easing) both;
+}
+
+.flip[data-feedback='slide'] {
+  animation: study-slide var(--duration-base) var(--easing) both;
+}
+
+@keyframes study-pulse {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes study-slide {
+  from {
+    opacity: 0;
+    transform: translateX(var(--space-6));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The three answers: same height, game buttons, with when the card returns under each label. */
+.study-answers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  margin-bottom: var(--size-button-depth);
+}
+
+.study-answers .button {
+  flex-direction: column;
+  gap: var(--space-1);
+  min-height: var(--size-button-lg);
+  padding: var(--space-2);
+  line-height: var(--line-height-tight);
+}
+
+.study-answers .button.secondary {
+  box-shadow: 0 var(--size-button-depth) 0 var(--color-border-strong);
+  transition:
+    background-color var(--duration-fast) var(--easing),
+    transform var(--duration-fast) var(--easing),
+    box-shadow var(--duration-fast) var(--easing);
+}
+
+.study-answers .button.secondary:active:not(:disabled) {
+  transform: translateY(var(--size-button-depth));
+  box-shadow: 0 0 0 var(--color-border-strong);
+}
+
+.study-answers .when {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-regular);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .study-answers .button.secondary:active:not(:disabled) {
+    transform: none;
+  }
 }
