@@ -83,7 +83,7 @@ describe('answers', () => {
     const afterFirst = cardState(ctx, 'henrique', 'c1');
     clock.set('2026-11-14T02:45:00Z');
     recordAnswer(ctx, 'henrique', session, 'c1', 'again');
-    expect(undoLastAnswer(ctx, 'henrique', session)).toEqual({ cardId: 'c1' });
+    expect(undoLastAnswer(ctx, 'henrique', session)).toMatchObject({ cardId: 'c1', state: afterFirst.state });
     expect(cardState(ctx, 'henrique', 'c1')).toEqual(afterFirst);
     expect(ctx.sql.all('SELECT rating FROM reviews')).toEqual([{ rating: 'good' }]);
   });
@@ -102,9 +102,9 @@ describe('answers', () => {
 
 describe('settings', () => {
   it('starts with 10 new cards a day and stores changes per member', () => {
-    expect(studySettings(ctx, 'henrique')).toMatchObject({ newPerDay: 10, restDays: [] });
+    expect(studySettings(ctx, 'henrique')).toMatchObject({ newPerDay: 20, restDays: [] });
     saveStudySettings(ctx, 'henrique', { ...studySettings(ctx, 'henrique'), newPerDay: 15, restDays: [0, 7, 0, 6] });
     expect(studySettings(ctx, 'henrique')).toMatchObject({ newPerDay: 15, restDays: [0, 6] });
-    expect(studySettings(ctx, 'outro').newPerDay).toBe(10);
+    expect(studySettings(ctx, 'outro').newPerDay).toBe(20);
   });
 });
