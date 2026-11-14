@@ -42,7 +42,7 @@ export function Members({ me }: { me: MeView }) {
   }
 
   return (
-    <section>
+    <section className="stack">
       <h1>{strings.members.title}</h1>
       {members.error && !members.data && <Notice tone="error">{strings.genericError}</Notice>}
       {!members.data && !members.error && (

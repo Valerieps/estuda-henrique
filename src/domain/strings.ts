@@ -10,6 +10,7 @@ export const strings = {
   signIn: {
     tagline: 'Flashcards de Biologia: abra, estude e veja onde você está fraco.',
     button: 'Entrar com Google',
+    inviteOnly: 'Só entra quem foi convidado.',
     noInvite: 'Não há convite para esse e-mail. Peça a um admin para te convidar.',
     failed: 'O login não deu certo. Tenta de novo?',
     devTitle: 'Entrar sem Google (só para testes neste computador)',

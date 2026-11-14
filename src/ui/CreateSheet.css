@@ -1,0 +1,8 @@
+/* Criar sheet: each group of fields in a card (src/ui/CreateSheet.tsx) */
+
+.create-group {
+  padding: var(--space-3);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}

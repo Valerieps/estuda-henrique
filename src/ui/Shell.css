@@ -27,13 +27,21 @@
 .topbar .brand {
   font-family: var(--font-display);
   font-weight: var(--font-weight-display);
-  font-size: var(--font-size-title);
+  font-size: var(--font-size-body);
   line-height: var(--line-height-tight);
 }
 
 .brand em {
   font-style: normal;
   color: var(--color-brand);
+}
+
+/* The flame (Streak.tsx) as a chip. */
+.topbar .flame {
+  min-height: var(--size-touch);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
 }
 
 .topbar .button {
@@ -114,18 +122,26 @@
   stroke-width: var(--icon-stroke-strong);
 }
 
-/* Tabs without icons (the admin's): one line, still the full touch height. */
+/* Tabs without icons (the admin's): one line, still the full touch height; the active one gets an underline. */
 .tabbar a:not(:has(.tab-icon)) {
   font-size: var(--font-size-small);
+  border-bottom: var(--border-width-strong) solid transparent;
 }
 
+.tabbar a:not(:has(.tab-icon))[aria-current='page'] {
+  border-bottom-color: var(--color-brand);
+}
+
+/* The + sits in the middle with less weight than the tabs: an outline, the size of a touch target. */
 .tabbar .create {
   flex: none;
-  width: var(--size-button-lg);
-  height: var(--size-button-lg);
+  width: var(--size-touch);
+  min-width: var(--size-touch);
+  height: var(--size-touch);
   margin: 0 var(--space-2);
   padding: 0;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-full);
+  color: var(--color-brand);
 }
 
 .tabbar .create .icon {
