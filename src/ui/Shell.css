@@ -1,0 +1,133 @@
+/* App shell: top bar and bottom bar (src/ui/Shell.tsx) */
+
+.shell {
+  min-height: 100vh;
+  /* Room for the fixed bottom bar. */
+  padding-bottom: calc(var(--size-tabbar) + var(--space-4) + env(safe-area-inset-bottom));
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-bar);
+  padding: var(--space-1) var(--space-2) var(--space-1) var(--space-4);
+  border-bottom: var(--border-width) solid var(--color-border);
+  background: var(--color-surface);
+}
+
+/* The bars span the window; their content lines up with the screen's column. */
+.bar-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  max-width: var(--size-content);
+  margin: 0 auto;
+}
+
+.topbar .brand {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-display);
+  font-size: var(--font-size-title);
+  line-height: var(--line-height-tight);
+}
+
+.brand em {
+  font-style: normal;
+  color: var(--color-brand);
+}
+
+.topbar .button {
+  min-width: var(--size-touch);
+}
+
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--size-touch);
+  min-height: var(--size-touch);
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+}
+
+.icon-link:hover,
+.icon-link[aria-current='page'] {
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+}
+
+.tabbar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--z-bar);
+  padding: var(--space-2) var(--space-2) calc(var(--space-2) + env(safe-area-inset-bottom));
+  border-top: var(--border-width) solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.tabbar .bar-inner {
+  justify-content: space-around;
+}
+
+.tabbar a {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: var(--size-button-lg);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-tight);
+  text-align: center;
+  text-decoration: none;
+}
+
+.tab-icon {
+  display: flex;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-full);
+  transition: background-color var(--duration-fast) var(--easing);
+}
+
+.tab-label {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Active: brand color, a heavier icon and a pill behind it, so color is not the only sign. */
+.tabbar a[aria-current='page'] {
+  color: var(--color-brand);
+  font-weight: var(--font-weight-strong);
+}
+
+.tabbar a[aria-current='page'] .tab-icon {
+  background: var(--color-brand-soft);
+}
+
+.tabbar a[aria-current='page'] .icon {
+  stroke-width: var(--icon-stroke-strong);
+}
+
+/* Tabs without icons (the admin's): one line, still the full touch height. */
+.tabbar a:not(:has(.tab-icon)) {
+  font-size: var(--font-size-small);
+}
+
+.tabbar .create {
+  flex: none;
+  width: var(--size-button-lg);
+  height: var(--size-button-lg);
+  margin: 0 var(--space-2);
+  padding: 0;
+  border-radius: var(--radius-lg);
+}
+
+.tabbar .create .icon {
+  stroke-width: var(--icon-stroke-strong);
+}

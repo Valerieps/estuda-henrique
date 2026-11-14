@@ -5,6 +5,7 @@ import { Icon } from '../components/Icon';
 import { Notice } from '../components/Notice';
 import { Link } from '../router';
 import { useQuery } from '../use-query';
+import './Subjects.css';
 
 /**
  * The Matérias tab. With one subject it opens straight on its topics; from the second on, each

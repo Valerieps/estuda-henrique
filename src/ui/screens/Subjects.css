@@ -1,0 +1,35 @@
+/* Matérias: a list of rows in one card, split by thin lines */
+
+.list-group {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.list-group li + li {
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--size-button-lg);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text);
+  font-weight: var(--font-weight-strong);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: background-color var(--duration-fast) var(--easing);
+}
+
+.list-row:hover {
+  background: var(--color-brand-soft);
+}
+
+.list-row .trailing {
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+  color: var(--color-text-muted);
+}

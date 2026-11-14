@@ -1,0 +1,70 @@
+/* Ofensiva: the flame and the calendar (src/ui/Streak.tsx) */
+
+.flame {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--size-touch);
+  min-width: var(--size-touch);
+  padding: 0 var(--space-2);
+  border: 0;
+  background: none;
+  color: var(--color-text);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-strong);
+  cursor: pointer;
+}
+
+.flame {
+  font-family: var(--font-display);
+  font-variant-numeric: var(--numeric);
+  border-radius: var(--radius);
+}
+
+.flame:hover {
+  background: var(--color-brand-soft);
+}
+
+.flame .icon {
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+  color: var(--color-brand);
+}
+
+.flame[data-lit='false'] .icon {
+  color: var(--color-text-muted);
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-1);
+  text-align: center;
+}
+
+.calendar .head {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+}
+
+.calendar .day {
+  padding: var(--space-2) 0;
+  border-radius: var(--radius-sm);
+  border: var(--border-width) solid var(--color-border);
+  font-size: var(--font-size-small);
+}
+
+.calendar .day[data-state='counted'] {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: var(--color-on-brand);
+  font-weight: var(--font-weight-strong);
+}
+
+.calendar .day[data-state='rest'] {
+  background: var(--color-brand-soft);
+}
+
+.calendar .day[data-state='missed'] {
+  color: var(--color-text-muted);
+}

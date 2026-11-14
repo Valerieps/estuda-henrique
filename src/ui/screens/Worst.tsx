@@ -8,6 +8,7 @@ import { CardLine } from '../card-list';
 import { Link, useSearch } from '../router';
 import { startStudy } from '../study-launch';
 import { useQuery } from '../use-query';
+import './Worst.css';
 
 const s = strings.worst;
 

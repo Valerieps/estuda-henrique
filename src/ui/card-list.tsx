@@ -8,6 +8,7 @@ import { useServices } from './backend-context';
 import { Button } from './components/Button';
 import { Notice } from './components/Notice';
 import { Sheet } from './components/Sheet';
+import './card-list.css';
 
 const s = strings.worst;
 

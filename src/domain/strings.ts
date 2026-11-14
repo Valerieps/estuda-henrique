@@ -300,6 +300,12 @@ export const strings = {
     open: (name: string) => `Piores cartas de ${name}`,
   },
 
+  // Shared pieces of src/ui/components/ (progress bar, state badge).
+  components: {
+    progress: (done: number, total: number) => `${done} de ${total}`,
+    state: { new: 'Novo', weak: 'Fraco', progress: 'Em andamento', mastered: 'Dominado' },
+  },
+
   streak: {
     title: 'Ofensiva',
     flame: (days: number, lit: boolean) => `Ofensiva: ${days === 1 ? '1 dia' : `${days} dias`}${lit ? '' : ', ainda não acesa hoje'}`,

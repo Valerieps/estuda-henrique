@@ -1,0 +1,8 @@
+/* Entrar: the test sign-in, only on localhost */
+
+.dev-sign-in {
+  margin-top: var(--space-8);
+  padding: var(--space-4);
+  border: var(--border-width) dashed var(--color-border-strong);
+  border-radius: var(--radius);
+}

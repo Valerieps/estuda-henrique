@@ -8,6 +8,7 @@ import { Field } from '../components/Field';
 import { Notice } from '../components/Notice';
 import { Link } from '../router';
 import { useQuery } from '../use-query';
+import './Settings.css';
 
 const s = strings.settings;
 

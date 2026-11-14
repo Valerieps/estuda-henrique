@@ -56,6 +56,24 @@
   --color-on-danger: #ffffff;
   --color-success: #1e6b3a;
   --color-focus: #6d28d9;
+  /* The base of the primary button (the "game button"): darker than --color-brand, seen as its lower edge. */
+  --color-brand-deep: #4c1d95;
+  /*
+   * Progress states of a topic (src/domain/topic-state.ts), the same in every screen. Each has the
+   * strong color (icon, bar, edge: 3:1 on bg and surface), a soft fill and the text on that fill.
+   */
+  --color-state-new: #2563eb;
+  --color-state-new-soft: #e6efff;
+  --color-state-new-text: #1e40af;
+  --color-state-weak: #b45309;
+  --color-state-weak-soft: #fdf0dc;
+  --color-state-weak-text: #7c3a07;
+  --color-state-progress: #0f766e;
+  --color-state-progress-soft: #dff5f1;
+  --color-state-progress-text: #0b4f49;
+  --color-state-mastered: #1e6b3a;
+  --color-state-mastered-soft: #e0f3e6;
+  --color-state-mastered-text: #14532d;
 
   /* Type. The scale steps by 1.125 to 1.5 from one size to the next; nothing below 12px. */
   --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -123,6 +141,11 @@
   --duration-fast: 120ms;
   --duration-base: 200ms;
   --easing: cubic-bezier(0.2, 0, 0, 1);
+  /* A correct answer's pulse, and the confetti and flame that celebrate an emptied day. */
+  --duration-pulse: 400ms;
+  --duration-celebrate: 1200ms;
+  /* The primary button's lower edge: how thick it is, and how far the button sinks when pressed. */
+  --size-button-depth: 4px;
   --opacity-disabled: 0.55;
   --opacity-scrim: 0.5;
 
@@ -149,5 +172,18 @@
     --color-on-danger: #140f1f;
     --color-success: #8fd4a4;
     --color-focus: #b69cff;
+    --color-brand-deep: #7a5ac8;
+    --color-state-new: #8ab4ff;
+    --color-state-new-soft: #1a2740;
+    --color-state-new-text: #b9d0ff;
+    --color-state-weak: #f5b865;
+    --color-state-weak-soft: #3a2a12;
+    --color-state-weak-text: #fbd9a3;
+    --color-state-progress: #5fd4c4;
+    --color-state-progress-soft: #12332f;
+    --color-state-progress-text: #a6ece2;
+    --color-state-mastered: #8fd4a4;
+    --color-state-mastered-soft: #14301d;
+    --color-state-mastered-text: #bde8c9;
   }
 }

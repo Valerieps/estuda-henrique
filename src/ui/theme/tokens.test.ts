@@ -169,6 +169,14 @@ const TEXT_PAIRS = [
   ['--color-on-danger', '--color-danger'],
   ['--color-success', '--color-bg'],
   ['--color-success', '--color-surface'],
+  ['--color-state-new-text', '--color-state-new-soft'],
+  ['--color-state-new-text', '--color-surface'],
+  ['--color-state-weak-text', '--color-state-weak-soft'],
+  ['--color-state-weak-text', '--color-surface'],
+  ['--color-state-progress-text', '--color-state-progress-soft'],
+  ['--color-state-progress-text', '--color-surface'],
+  ['--color-state-mastered-text', '--color-state-mastered-soft'],
+  ['--color-state-mastered-text', '--color-surface'],
 ] as const;
 
 const NON_TEXT_PAIRS = [
@@ -176,6 +184,19 @@ const NON_TEXT_PAIRS = [
   ['--color-border-strong', '--color-surface'],
   ['--color-focus', '--color-bg'],
   ['--color-focus', '--color-surface'],
+  ['--color-brand-deep', '--color-bg'],
+  ['--color-state-mastered', '--color-state-mastered-soft'],
+  ['--color-state-progress', '--color-state-progress-soft'],
+  ['--color-state-weak', '--color-state-weak-soft'],
+  ['--color-state-new', '--color-state-new-soft'],
+  ['--color-state-new', '--color-bg'],
+  ['--color-state-new', '--color-surface'],
+  ['--color-state-weak', '--color-bg'],
+  ['--color-state-weak', '--color-surface'],
+  ['--color-state-progress', '--color-bg'],
+  ['--color-state-progress', '--color-surface'],
+  ['--color-state-mastered', '--color-bg'],
+  ['--color-state-mastered', '--color-surface'],
 ] as const;
 
 describe.each([

@@ -31,6 +31,27 @@ const PATHS = {
     </>
   ),
   flame: <path className="filled" d="M12 2c1 3.5 5 6 5 11a5 5 0 0 1-10 0c0-2.2 1-3.8 2.3-5 .2 1.6.9 2.7 2 3.2C11 9 11 5.5 12 2z" />,
+  crown: <path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z" />,
+  alert: (
+    <>
+      <path d="M12 3L2.5 20h19z" />
+      <path d="M12 10v4.5M12 17.5v.01" />
+    </>
+  ),
+  sparkle: (
+    <>
+      <path d="M11 3l1.8 5.2L18 10l-5.2 1.8L11 17l-1.8-5.2L4 10l5.2-1.8z" />
+      <path d="M19 15v5M16.5 17.5h5" />
+    </>
+  ),
+  check: <path d="M4 12.5l5 5L20 6.5" />,
+  target: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="1" />
+    </>
+  ),
 } as const;
 
 export type IconName = keyof typeof PATHS;

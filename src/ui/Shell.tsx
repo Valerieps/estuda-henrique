@@ -8,6 +8,7 @@ import { CreateSheet } from './CreateSheet';
 import { Link, usePath } from './router';
 import { Flame } from './Streak';
 import { useQuery, type QueryState } from './use-query';
+import './Shell.css';
 
 interface Tab {
   readonly path: string;

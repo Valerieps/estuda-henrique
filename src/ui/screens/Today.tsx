@@ -9,6 +9,7 @@ import { Link, navigate } from '../router';
 import { startStudy } from '../study-launch';
 import { RepairButton } from '../Streak';
 import { useQuery, type QueryState } from '../use-query';
+import './Today.css';
 
 const s = strings.today;
 

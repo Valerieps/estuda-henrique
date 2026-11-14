@@ -1,0 +1,79 @@
+/* The study session (src/ui/screens/Study.tsx) */
+
+.study {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-height: 100%;
+}
+
+.card-tools {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.card-tools[data-hidden='true'] {
+  visibility: hidden;
+}
+
+.flip {
+  flex: 1;
+  display: flex;
+  perspective: var(--flip-perspective);
+}
+
+.flip-inner {
+  flex: 1;
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform var(--duration-base) var(--easing);
+  cursor: pointer;
+}
+
+.flip-inner[data-flipped='true'] {
+  transform: rotateY(180deg);
+  cursor: default;
+}
+
+.face {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: var(--size-card-min);
+  padding: var(--space-6) var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  backface-visibility: hidden;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.face.back {
+  transform: rotateY(180deg);
+}
+
+.face .topic {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+}
+
+.face .question {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-display);
+  font-size: var(--font-size-title);
+  line-height: var(--line-height-tight);
+}
+
+.face .answer {
+  font-size: var(--font-size-title);
+  line-height: var(--line-height-tight);
+}
+
+.face .blank {
+  color: var(--color-brand);
+  font-weight: var(--font-weight-strong);
+}
