@@ -1,9 +1,12 @@
 import { useCallback, useState, type ReactNode } from 'react';
+import type { TodayView } from '../application/api-contract';
 import { strings } from '../domain/strings';
 import { Button } from './components/Button';
 import { Notice } from './components/Notice';
 import { CreateSheet } from './CreateSheet';
 import { Link, usePath } from './router';
+import { Flame } from './Streak';
+import { useQuery, type QueryState } from './use-query';
 
 interface Tab {
   readonly path: string;
@@ -37,8 +40,9 @@ const ADMIN_TABS: readonly Tab[] = [
 ];
 
 /** The student's frame: top bar, four tabs around the +, and the Criar sheet. */
-export function MemberShell({ children }: { children: ReactNode }) {
+export function MemberShell({ children }: { children: (today: QueryState<TodayView>) => ReactNode }) {
   const path = usePath();
+  const today = useQuery('today', {}, ['study', 'settings', 'cards']);
   const [creating, setCreating] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
   const close = useCallback(() => setCreating(false), []);
@@ -51,13 +55,14 @@ export function MemberShell({ children }: { children: ReactNode }) {
     <div className="shell">
       <header className="topbar">
         <span className="brand grow">{strings.appName}</span>
+        <Flame today={today.data} onReload={today.reload} />
         <Link to="/ajustes" aria-current={path === '/ajustes' ? 'page' : undefined}>
           {strings.nav.settings}
         </Link>
       </header>
       <main className="screen">
         {notice && <Notice>{notice}</Notice>}
-        {children}
+        {children(today)}
       </main>
       <nav className="tabbar" aria-label={strings.nav.main}>
         <TabLinks tabs={MEMBER_LEFT} path={path} />

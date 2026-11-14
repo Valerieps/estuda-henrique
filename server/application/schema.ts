@@ -148,6 +148,16 @@ export const MIGRATIONS: readonly (readonly string[])[] = [
       PRIMARY KEY (member_id, day)
     )`,
   ],
+  // 5: days that count for the streak without a finished session: the day he opened Hoje with
+  // nothing to study ('open') and a missed day he fixed ('repair') (docs/spec/meta-e-ofensiva.md).
+  [
+    `CREATE TABLE streak_days (
+      member_id TEXT NOT NULL REFERENCES members(id),
+      day TEXT NOT NULL,
+      kind TEXT NOT NULL,
+      PRIMARY KEY (member_id, day)
+    )`,
+  ],
 ];
 
 export function migrate(sql: Sql): void {

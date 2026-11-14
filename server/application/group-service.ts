@@ -20,6 +20,7 @@ import {
 } from './members';
 import { answerCard, endStudy, startStudy, studyOutlook, undoAnswer } from './review';
 import { studySummary } from './study-summary';
+import { repairStreak, settingsView, todayView, touchStreak, updateSettings } from './today';
 import type { Clock, IdGenerator, Sql } from './ports';
 import { migrate } from './schema';
 
@@ -36,6 +37,8 @@ const QUERIES: { [N in QueryName]: Handler<Queries[N]['output'] | QueryError | n
   notes: (ctx, actor, input) => listNotes(ctx, actor, input),
   thermometer: (ctx, actor) => thermometer(ctx, actor),
   worstCards: (ctx, actor, input) => worstCards(ctx, actor, input),
+  today: (ctx, actor) => todayView(ctx, actor),
+  settings: (ctx, actor) => settingsView(ctx, actor),
   studySummary,
   studyOutlook: (ctx, actor) => studyOutlook(ctx, actor),
   examCards: (ctx, actor, input) => examCards(ctx, actor, input),
@@ -60,6 +63,9 @@ const COMMANDS: { [N in CommandName]: Handler<CommandResult<Commands[N]['output'
   'study.answer': answerCard,
   'study.undo': undoAnswer,
   'study.end': endStudy,
+  'settings.update': updateSettings,
+  'streak.touch': touchStreak,
+  'streak.repair': repairStreak,
 };
 
 export class GroupService {
