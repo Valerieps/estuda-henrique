@@ -39,6 +39,11 @@ export function Members({ me }: { me: MeView }) {
     <section>
       <h1>{strings.members.title}</h1>
       {members.error && !members.data && <Notice tone="error">{strings.genericError}</Notice>}
+      {!members.data && !members.error && (
+        <p className="muted" role="status">
+          {strings.members.loading}
+        </p>
+      )}
       {error && <Notice tone="error">{error}</Notice>}
       {members.data?.length === 1 && <p className="muted">{strings.members.empty}</p>}
       <ul className="list">

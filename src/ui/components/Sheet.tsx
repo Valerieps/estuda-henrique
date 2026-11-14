@@ -13,7 +13,21 @@ export function Sheet({ title, onClose, children }: { title: string; onClose: ()
     const opener = document.activeElement as HTMLElement | null;
     ref.current?.focus();
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose();
+      if (event.key === 'Escape') return onClose();
+      if (event.key !== 'Tab' || !ref.current) return;
+      // Keep Tab inside the dialog: it is modal, so the screen behind is out of reach.
+      const items = [...ref.current.querySelectorAll<HTMLElement>('button, a[href], input, select, textarea')].filter((el) => !el.hasAttribute('disabled'));
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      const active = document.activeElement;
+      if (event.shiftKey && (active === first || active === ref.current)) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => {

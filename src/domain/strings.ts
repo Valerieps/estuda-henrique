@@ -162,6 +162,7 @@ export const strings = {
   },
 
   study: {
+    title: 'Sessão de estudo',
     exit: 'Sair da sessão',
     exitTitle: 'Sair da sessão?',
     exitText: 'As respostas ficam salvas.',
@@ -235,6 +236,8 @@ export const strings = {
 
   invites: {
     title: 'Convites',
+    loading: 'Carregando…',
+    revokeConfirm: (email: string) => `Revogar o convite de ${email}? Essa pessoa não conseguirá mais entrar com ele.`,
     emailLabel: 'E-mail da conta Google',
     send: 'Convidar',
     revoke: 'Revogar',
@@ -248,6 +251,7 @@ export const strings = {
 
   members: {
     title: 'Membros',
+    loading: 'Carregando…',
     you: '(você)',
     admin: 'Admin',
     member: 'Usuário',

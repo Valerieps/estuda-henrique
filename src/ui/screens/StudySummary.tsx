@@ -3,7 +3,6 @@ import type { StudySummary as Summary, SummaryCard } from '../../application/api
 import { clozeCard } from '../../domain/study/cloze';
 import { strings } from '../../domain/strings';
 import { Button } from '../components/Button';
-import { EmptyState } from '../components/EmptyState';
 import { Notice } from '../components/Notice';
 import { navigate } from '../router';
 import type { StudyRequest } from '../study-launch';
@@ -49,7 +48,16 @@ export function StudySummary({
   if (!data) {
     return (
       <div className="session-layer">
-        <div className="screen">{error ? <Notice tone="error">{s.failed}</Notice> : <p className="muted">{s.loading}</p>}</div>
+        <div className="screen">
+          <h1>{s.title}</h1>
+          {error ? (
+            <Notice tone="error">{s.failed}</Notice>
+          ) : (
+            <p className="muted" role="status">
+              {s.loading}
+            </p>
+          )}
+        </div>
       </div>
     );
   }
@@ -60,9 +68,10 @@ export function StudySummary({
         <h1>{partial ? s.partialTitle : s.title}</h1>
         {data.training && <Notice>{strings.study.training}</Notice>}
         {data.answers === 0 ? (
-          <EmptyState title={s.title} text={s.noAnswers}>
+          <>
+            <p className="muted">{s.noAnswers}</p>
             <Button onClick={onLeave}>{s.back}</Button>
-          </EmptyState>
+          </>
         ) : (
           <>
             <Numbers summary={data} />

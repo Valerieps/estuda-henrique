@@ -26,6 +26,7 @@ export function Invites() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [revoking, setRevoking] = useState<string | null>(null);
 
   async function submit(event: FormEvent) {
     event.preventDefault();
@@ -41,7 +42,10 @@ export function Invites() {
   }
 
   async function revoke(target: string) {
+    if (!window.confirm(strings.invites.revokeConfirm(target))) return;
+    setRevoking(target);
     const result = await backend.command('invite.revoke', { email: target });
+    setRevoking(null);
     if (!result.ok) setError(errorText(result.error));
   }
 
@@ -63,6 +67,12 @@ export function Invites() {
         </Button>
       </form>
       {error && <Notice tone="error">{error}</Notice>}
+      {invites.error && !invites.data && <Notice tone="error">{strings.genericError}</Notice>}
+      {!invites.data && !invites.error && (
+        <p className="muted" role="status">
+          {strings.invites.loading}
+        </p>
+      )}
       {invites.data?.length === 0 && <p className="muted">{strings.invites.empty}</p>}
       <ul className="list">
         {invites.data?.map((invite) => (
@@ -73,7 +83,7 @@ export function Invites() {
               <span className="muted small">{STATE_LABEL[invite.state]}</span>
             </span>
             {invite.state === 'pending' && (
-              <Button variant="secondary" onClick={() => void revoke(invite.email)}>
+              <Button variant="secondary-danger" disabled={revoking === invite.email} onClick={() => void revoke(invite.email)}>
                 {strings.invites.revoke}
               </Button>
             )}
