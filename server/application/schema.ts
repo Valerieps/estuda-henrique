@@ -1,6 +1,6 @@
 // The group's database (docs/ARQUITETURA.md). Migrations run in order, once each, when the
 // Durable Object starts. Never edit a migration that has shipped: add the next one.
-import { initialDeckStatements } from './initial-deck';
+import { addedDeckStatements, initialDeckStatements } from './initial-deck';
 import type { Sql } from './ports';
 
 export const MIGRATIONS: readonly (readonly string[])[] = [
@@ -161,6 +161,8 @@ export const MIGRATIONS: readonly (readonly string[])[] = [
   ],
   // 6: the initial Biologia deck, as system cards (docs/spec/cartas.md), so he finds cards on his first access.
   initialDeckStatements(),
+  // 7: the topics and cards of the file's decks the school's list has no topic for (Embriologia, Fisiologia humana, Ecologia).
+  addedDeckStatements(),
 ];
 
 export function migrate(sql: Sql): void {
