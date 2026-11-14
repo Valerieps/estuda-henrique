@@ -69,6 +69,62 @@ export interface NoteInput {
   readonly hint?: string | null;
 }
 
+/** One day of a topic's mastery, 0 to 1: a point of the termômetro's minilinha. */
+export interface TrendPoint {
+  readonly day: string;
+  readonly mastery: number;
+}
+
+/** A topic in the termômetro. `mastery` is 0 to 1, or null when no card was studied yet ("—"). */
+export interface ThermometerTopic {
+  readonly id: string;
+  readonly name: string;
+  readonly mastery: number | null;
+  /** Below 60%: shown highlighted. */
+  readonly weak: boolean;
+  /** Cards seen and cards in the topic, suspended ones not counted. */
+  readonly seen: number;
+  readonly total: number;
+  /** Snapshots of the last 4 weeks, oldest first. */
+  readonly trend: readonly TrendPoint[];
+}
+
+/** The termômetro and the line above it in Hoje. */
+export interface Thermometer {
+  /** Weakest first; topics with no mastery yet last. */
+  readonly topics: readonly ThermometerTopic[];
+  /** Share right of the cards not seen for 7+ days in the last 14 days; null before 20 answers. */
+  readonly longTermRate: number | null;
+  readonly longTermAnswers: number;
+  /** Cards he already got right after 21 days or more without seeing them. */
+  readonly savedCards: number;
+}
+
+/** A row of Piores cartas. Cloze cards show `front` with the passage `clozeIndex` hidden. */
+export interface WorstCard {
+  readonly cardId: string;
+  readonly noteId: string;
+  readonly origin: 'system' | 'personal';
+  readonly kind: NoteKind;
+  readonly front: string;
+  readonly clozeIndex: number;
+  /** 0 to 1. */
+  readonly mastery: number;
+  /** How many times he pressed Errei on it. */
+  readonly againCount: number;
+  /** Six or more Errei: marked, with the suggestion to rewrite it. */
+  readonly problem: boolean;
+  /** The study day of the last answer, or null. */
+  readonly lastSeenDay: string | null;
+}
+
+export interface WorstCardsGroup {
+  readonly topicId: string;
+  readonly topicName: string;
+  readonly mastery: number | null;
+  readonly cards: readonly WorstCard[];
+}
+
 export type StudyKind = 'review' | 'cram' | 'retry' | 'selected';
 
 /** A card in a study queue, with what the front and back need and the reader's own FSRS state. */
@@ -100,6 +156,10 @@ export interface Queries {
   subjects: { input: Record<string, never>; output: SubjectView[] };
   /** The notes of a topic the reader may see: the system's and their own. */
   notes: { input: { topicId: string }; output: NoteView[] };
+  /** The reader's own termômetro, long-term memory and saved cards. */
+  thermometer: { input: Record<string, never>; output: Thermometer };
+  /** The reader's own worst cards by topic, weakest topic first; `topicId` keeps one topic's group. */
+  worstCards: { input: { topicId?: string }; output: WorstCardsGroup[] };
   me: { input: Record<string, never>; output: MeView };
   /** Admins only. */
   members: { input: Record<string, never>; output: MemberListItem[] };

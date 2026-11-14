@@ -14,8 +14,8 @@ O que ainda não está pronto.
 | Colar várias com prévia | 1 | `spec/cartas.md` | |
 | Baralho inicial de Biologia | 1 | `spec/cartas.md` | Tópicos já definidos; falta a ordem por bimestre (Em aberto) |
 | Resumo, Refazer erros, Mais 5?, Adiantar novas, tempo do dia | 1 | `spec/estudo.md` | A sessão (`src/ui/screens/Study.tsx`) acaba hoje numa tela mínima, sem Resumo; Adiantar novas pede abrir uma sessão de Revisão só com as novas de um tópico |
-| Hoje, termômetro, memória de longo prazo e cartas guardadas | 1 | `spec/diagnostico.md`, `spec/meta-e-ofensiva.md` | Hoje é hoje uma tela vazia da casca (`src/ui/App.tsx`); Estudar e Só 5 cartas chamam `startStudy` (`src/ui/study-launch.ts`); a sessão já abre em `/estudo` |
-| Piores cartas e tela Tópico | 1 | `spec/diagnostico.md` | |
+| Hoje, termômetro, memória de longo prazo e cartas guardadas | 1 | `spec/diagnostico.md`, `spec/meta-e-ofensiva.md` | Hoje é hoje uma tela vazia da casca (`src/ui/App.tsx`); Estudar e Só 5 cartas chamam `startStudy` (`src/ui/study-launch.ts`); a sessão já abre em `/estudo`; a consulta `thermometer` já devolve termômetro, memória de longo prazo e cartas guardadas |
+| Piores cartas e tela Tópico | 1 | `spec/diagnostico.md` | A consulta `worstCards` já devolve os grupos; falta a tela e a busca e os filtros do Tópico |
 | Véspera | 1 | `spec/vespera.md` | |
 | Meta diária, ofensiva, rotina, cartão de aviso, Ajustes | 1 | `spec/meta-e-ofensiva.md` | |
 | Tela inicial do admin (cartas do sistema) | 1 | `spec/meta-e-ofensiva.md` | |
@@ -29,8 +29,6 @@ O que ainda não está pronto.
 
 - O limite de novas por dia vai de 5 a 50 — o servidor ainda não limita a faixa
   (`src/domain/study/settings.ts`; o padrão de 20 já vale).
-- O app grava uma vez por dia o domínio de cada tópico, a memória de longo prazo e as cartas
-  guardadas — hoje `topic_snapshots` é semanal e só guarda o domínio (`docs/ARQUITETURA.md`).
 
 ## Adiado
 
@@ -47,3 +45,10 @@ O que ainda não está pronto.
 - [ ] O cartão de aviso perdeu o aviso de backup vencido, porque não há backup (`spec/meta-e-ofensiva.md`).
 - [ ] Estudar <tópico>, em Piores cartas, é treino, como Estudar estas agora, porque a Revisão é
   sempre da matéria inteira (`spec/diagnostico.md`).
+- [ ] Domínio e cobertura de um tópico não contam as cartas suspensas; o domínio só conta cartas já
+  estudadas (`spec/diagnostico.md`).
+- [ ] As cartas guardadas contam cada carta uma vez, em qualquer sessão (Revisão ou treino); a
+  memória de longo prazo só conta Revisão. O "tempo sem ver" é em dias de estudo, desde a resposta
+  anterior à carta em qualquer sessão (`spec/diagnostico.md`).
+- [ ] Piores cartas lista só cartas já estudadas e não suspensas; tópicos sem domínio ainda ficam
+  por último no termômetro (`spec/diagnostico.md`).
