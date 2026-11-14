@@ -273,17 +273,20 @@ export const strings = {
     longTermValue: (rate: number | null) => (rate === null ? '—' : `${Math.round(rate * 100)}%`),
     longTermHint: (rate: number | null) => (rate === null ? 'ainda juntando respostas' : 'do que não via há 7+ dias'),
     savedLabel: 'Cartas guardadas',
-    goal: (reviews: number, fresh: number) => {
-      const parts = [];
-      if (reviews > 0) parts.push(reviews === 1 ? '1 revisão' : `${reviews} revisões`);
-      if (fresh > 0) parts.push(fresh === 1 ? '1 nova' : `${fresh} novas`);
-      return `Meta de hoje: ${parts.join(' e ')}`;
-    },
+    missionsTitle: 'Missões de hoje',
+    missionsDone: 'Missões cumpridas',
+    missionReviews: 'Zerar as revisões',
+    missionReviewsLabel: 'Revisões de hoje',
+    missionNew: (total: number) => (total === 1 ? 'Ver 1 nova' : `Ver ${total} novas`),
+    missionNewLabel: 'Cartas novas de hoje',
+    missionComplete: 'cumprida',
+    numbersPending: 'A memória de longo prazo e as cartas guardadas aparecem aqui depois de alguns dias de estudo.',
     study: 'Estudar',
     five: 'Só 5 cartas',
+    worstChip: 'Piores',
     done: 'Pronto por hoje',
     doneText: 'Hoje você já fez o que mais rende. Voltar amanhã rende mais do que mais uma hora hoje.',
-    worstLink: 'Ver as piores cartas',
+    worstLink: 'Piores cartas',
     restDay: 'Hoje é folga',
     noCards: 'Ainda não há cartas para estudar.',
     startFailed: 'Não deu para começar a sessão. Tenta de novo?',
@@ -293,9 +296,8 @@ export const strings = {
     title: 'Termômetro',
     masteryLabel: 'Domínio',
     empty: 'Os tópicos aparecem aqui quando houver cartas.',
-    mastery: (value: number | null) => (value === null ? '—' : `${Math.round(value * 100)}%`),
+    mastery: (value: number | null) => (value === null ? 'novo' : `${Math.round(value * 100)}%`),
     coverage: (seen: number, total: number) => `${seen} de ${total} vistas`,
-    weak: 'Fraco',
     trendLabel: (name: string) => `Evolução de ${name} nas últimas 4 semanas`,
     open: (name: string) => `Piores cartas de ${name}`,
   },

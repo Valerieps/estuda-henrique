@@ -1,4 +1,4 @@
-/* Hoje: números, meta, termômetro (src/ui/screens/Today.tsx) */
+/* Hoje: Missões de hoje, termômetro e números (src/ui/screens/Today.tsx) */
 
 /* Groups sit further apart than the items inside them. */
 .today {
@@ -11,156 +11,209 @@
   margin: 0;
 }
 
-.stats {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-4);
+/* The hero: the title and the flame on one line, then one row per mission. */
+.today .hero {
+  position: relative;
+  overflow: hidden;
 }
 
-.stat {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.stat.end {
-  align-items: flex-end;
-  text-align: right;
-}
-
-.stat-value {
-  font-family: var(--font-display);
-  font-size: var(--font-size-display);
-  font-weight: var(--font-weight-display);
-  font-variant-numeric: var(--numeric);
-  line-height: var(--line-height-tight);
-}
-
-.stat-value.secondary {
-  font-size: var(--font-size-heading);
-}
-
-.goal {
-  margin: 0;
-}
-
-.actions {
-  display: flex;
-  gap: var(--space-2);
-}
-
-.thermo {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  padding: var(--space-4) var(--space-2) var(--space-2);
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-}
-
-.thermo-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 0 var(--space-2);
-}
-
-.thermo-head h2 {
-  margin: 0;
-}
-
-.thermo-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
-.thermo-row {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  min-height: var(--size-touch);
-  padding: var(--space-2);
-  border-radius: var(--radius-sm);
-  color: var(--color-text);
-  text-decoration: none;
-  transition: background-color var(--duration-fast) var(--easing);
-}
-
-.thermo-row:hover {
-  background: var(--color-bg);
-}
-
-.thermo-row .coverage {
-  flex: none;
-  color: var(--color-text-muted);
-  font-size: var(--font-size-caption);
-  font-variant-numeric: var(--numeric);
-}
-
-.thermo-row.weak {
-  background: var(--color-brand-soft);
-}
-
-.thermo-row .head {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-size: var(--font-size-small);
-}
-
-.thermo-row .name {
-  min-width: 0;
-  font-weight: var(--font-weight-strong);
-  overflow-wrap: anywhere;
-}
-
-.thermo-row .value {
-  font-family: var(--font-display);
-  font-weight: var(--font-weight-display);
-  font-variant-numeric: var(--numeric);
-}
-
-.thermo-row .tag {
-  padding: 0 var(--space-2);
-  border-radius: var(--radius-full);
-  background: var(--color-brand);
-  color: var(--color-on-brand);
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-strong);
-}
-
-.thermo-row .foot {
+.mission-head {
   display: flex;
   align-items: center;
   gap: var(--space-3);
 }
 
-.bar {
+.mission-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.mission {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.mission-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-weight: var(--font-weight-strong);
+}
+
+.mission-label .icon {
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+}
+
+.mission[data-complete='true'] .mission-label {
+  color: var(--color-success);
+}
+
+/* The hero's flame is bigger than the one in the top bar. */
+.flame.hero-flame {
+  font-size: var(--font-size-heading);
+}
+
+.flame.hero-flame .icon {
+  width: var(--size-icon);
+  height: var(--size-icon);
+}
+
+.flame.celebrate .icon {
+  animation: flare var(--duration-celebrate) var(--easing);
+}
+
+@keyframes flare {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* A simple burst of bits that fall once; the Resumo's shared confetti replaces it later. */
+.confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.confetti span {
+  position: absolute;
+  top: 0;
+  width: var(--space-2);
+  height: var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-brand);
+  opacity: 0;
+  animation: fall var(--duration-celebrate) var(--easing) forwards;
+}
+
+.confetti span:nth-child(3n + 2) {
+  background: var(--color-state-weak);
+}
+
+.confetti span:nth-child(3n) {
+  background: var(--color-state-mastered);
+}
+
+.confetti span:nth-child(4n) {
+  background: var(--color-state-new);
+}
+
+.confetti span:nth-child(1) {
+  left: 5%;
+}
+.confetti span:nth-child(2) {
+  left: 13%;
+  animation-delay: var(--duration-fast);
+}
+.confetti span:nth-child(3) {
+  left: 22%;
+}
+.confetti span:nth-child(4) {
+  left: 31%;
+  animation-delay: var(--duration-fast);
+}
+.confetti span:nth-child(5) {
+  left: 40%;
+}
+.confetti span:nth-child(6) {
+  left: 48%;
+  animation-delay: var(--duration-fast);
+}
+.confetti span:nth-child(7) {
+  left: 56%;
+}
+.confetti span:nth-child(8) {
+  left: 64%;
+  animation-delay: var(--duration-fast);
+}
+.confetti span:nth-child(9) {
+  left: 72%;
+}
+.confetti span:nth-child(10) {
+  left: 80%;
+  animation-delay: var(--duration-fast);
+}
+.confetti span:nth-child(11) {
+  left: 88%;
+}
+.confetti span:nth-child(12) {
+  left: 95%;
+  animation-delay: var(--duration-fast);
+}
+
+@keyframes fall {
+  0% {
+    opacity: 1;
+    transform: translateY(calc(-1 * var(--space-4))) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(calc(var(--space-8) * 3)) rotate(270deg);
+  }
+}
+
+/* A termômetro tile: state, mastery, an animated bar and the minilinha. */
+.topic-value {
+  font-family: var(--font-display);
+  font-size: var(--font-size-heading);
+  font-weight: var(--font-weight-display);
+  font-variant-numeric: var(--numeric);
+  line-height: var(--line-height-tight);
+}
+
+.topic-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  align-self: stretch;
+}
+
+.topic-bar {
+  align-self: stretch;
   height: var(--size-bar);
   border-radius: var(--radius-full);
   background: var(--color-border);
   overflow: hidden;
 }
 
-.bar-fill {
+.topic-bar-fill {
   height: 100%;
   border-radius: var(--radius-full);
-  background: var(--color-border-strong);
+  background: var(--color-brand);
   transition: width var(--duration-base) var(--easing);
 }
 
-.weak .bar-fill {
-  background: var(--color-brand);
+.topic-bar[data-state='new'] .topic-bar-fill {
+  background: var(--color-state-new);
+}
+
+.topic-bar[data-state='weak'] .topic-bar-fill {
+  background: var(--color-state-weak);
+}
+
+.topic-bar[data-state='progress'] .topic-bar-fill {
+  background: var(--color-state-progress);
+}
+
+.topic-bar[data-state='mastered'] .topic-bar-fill {
+  background: var(--color-state-mastered);
 }
 
 .spark {
   width: var(--size-spark-width);
   height: var(--size-spark-height);
   fill: none;
-  stroke: var(--color-brand);
+  stroke: var(--color-text-muted);
   stroke-width: var(--focus-ring-width);
   flex: none;
 }

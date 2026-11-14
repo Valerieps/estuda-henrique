@@ -13,16 +13,32 @@ const s = strings.streak;
 
 /** The flame of the top bar; tapping it opens the Ofensiva sheet. */
 export function Flame({ today, onReload }: { today: TodayView | undefined; onReload: () => void }) {
-  const [open, setOpen] = useState(false);
   if (!today) return null;
-  const { days, litToday } = today.streak;
+  return <FlameButton streak={today.streak} onReload={onReload} />;
+}
+
+/** The flame with the streak's days, in the top bar and in the Hoje hero; `celebrate` makes it flare once. */
+export function FlameButton({
+  streak,
+  onReload,
+  celebrate,
+  className,
+}: {
+  streak: StreakView;
+  onReload: () => void;
+  celebrate?: boolean;
+  className?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const { days, litToday } = streak;
+  const classes = ['flame', className, celebrate && litToday ? 'celebrate' : null].filter(Boolean).join(' ');
   return (
     <>
-      <button type="button" className="flame" data-lit={litToday} aria-label={s.flame(days, litToday)} onClick={() => setOpen(true)}>
+      <button type="button" className={classes} data-lit={litToday} aria-label={s.flame(days, litToday)} onClick={() => setOpen(true)}>
         <Icon name="flame" />
         <span aria-hidden="true">{days}</span>
       </button>
-      {open && <StreakSheet streak={today.streak} onClose={() => setOpen(false)} onReload={onReload} />}
+      {open && <StreakSheet streak={streak} onClose={() => setOpen(false)} onReload={onReload} />}
     </>
   );
 }

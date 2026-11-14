@@ -13,7 +13,7 @@ O que ainda não está pronto.
 | --- | --- | --- | --- |
 | Interface gamificada (direção Missões) em todas as telas | 1 | `spec/meta-e-ofensiva.md`, `spec/diagnostico.md`, `spec/estudo.md` | Plano por sessões em [`rascunhos/gamificacao.md`](rascunhos/gamificacao.md) |
 | Colar várias com prévia | 1 | `spec/cartas.md` | |
-| Confete no "Pronto por hoje" | 1 | `spec/estudo.md` | O Resumo (`src/ui/screens/StudySummary.tsx`) já faz o resto, mas sem confete (em Hoje também). |
+| Confete no "Pronto por hoje" | 1 | `spec/estudo.md` | O Resumo (`src/ui/screens/StudySummary.tsx`) já faz o resto, mas sem confete. |
 | Tela Rotina depois do primeiro Resumo, e a chama acender no Resumo | 1 | `spec/meta-e-ofensiva.md` | Hoje, a chama, a folha Ofensiva, o cartão de aviso e os Ajustes (com a rotina) já existem; falta a tela Rotina, que pertence ao fim da sessão (Resumo) |
 | Tela inicial do admin (cartas do sistema) | 1 | `spec/meta-e-ofensiva.md` | |
 | Imagem e oclusão de imagem | 2 | `spec/cartas.md` | Oclusão é a prioridade 1 da fase 2 |

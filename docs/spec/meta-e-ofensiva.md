@@ -8,17 +8,25 @@ A tela Hoje e o que faz ele voltar todo dia: a meta, a ofensiva, a rotina e o ca
 
 ## Hoje
 
-- O app abre em Hoje, de cima para baixo: a rotina dele numa linha (ex.: "no ônibus da escola"); a
-  memória de longo prazo e as cartas guardadas, como dois números grandes lado a lado
-  (`spec/diagnostico.md`); a meta do dia ou "Pronto por hoje"; Estudar e Só 5 cartas, lado a lado;
-  o cartão de aviso; o termômetro. *(1)*
+- O app abre em Hoje, de cima para baixo: a rotina dele numa linha (ex.: "no ônibus da escola"); o
+  herói "Missões de hoje", com a chama da ofensiva (tocar abre a folha Ofensiva) e uma barra por
+  missão: "Zerar as revisões" e "Ver N novas", cada uma com "feito de total"; Estudar, em largura
+  total, e abaixo os chips Só 5 cartas e Piores; o cartão de aviso; o termômetro em grade de duas
+  colunas (`spec/diagnostico.md`); no fim, a memória de longo prazo e as cartas guardadas, lado a
+  lado. *(1)*
+  Por quê: Missões é só a apresentação da meta, sem pontos; o que pesa é a constância.
+- Uma missão cumprida ganha um check e a cor de sucesso. Uma missão sem cartas (0 novas, por
+  exemplo) não aparece. *(1)*
+- A memória de longo prazo e as cartas guardadas só aparecem quando há dado (taxa calculada ou
+  pelo menos uma carta guardada); antes, uma linha diz que aparecem depois de alguns dias de estudo. *(1)*
 - **Primeiro uso:** baralho inicial carregado, meta "20 novas", termômetro com cobertura 0 de N,
   domínio "—" e sem minilinha. *(1)*
-- **Pronto por hoje:** meta cumprida e chama acesa. Sem Estudar nem Só 5 cartas; no lugar, a frase
-  "Hoje você já fez o que mais rende", com a memória de longo prazo, e o que vale se ele quiser
-  mais: Adiantar mais 10 novas (`spec/estudo.md`) e Piores cartas. *(1)*
+- **Pronto por hoje:** o herói vira "Missões cumpridas", com confete (ao zerar o dia enquanto ele
+  está em Hoje) e a chama acesa. Sem Estudar nem os chips; no lugar, a frase "Hoje você já fez o que
+  mais rende" e o que vale se ele quiser mais: Adiantar mais 10 novas (`spec/estudo.md`) e Piores
+  cartas. *(1)*
   Por quê: constância vale mais que horas; o app mostra que voltar amanhã rende mais, sem travar.
-- **Dia de folga:** a frase "Hoje é folga", com Estudar ainda disponível se houver cartas. *(1)*
+- **Dia de folga:** o herói diz "Hoje é folga" (sem barras de missão, mas com a chama), com Estudar ainda disponível se houver cartas. *(1)*
 - Para o admin, a tela inicial é a das cartas do sistema, não Hoje. *(1)*
 
 ## Meta diária
