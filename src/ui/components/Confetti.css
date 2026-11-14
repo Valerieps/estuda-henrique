@@ -1,0 +1,65 @@
+/* Confetti (src/ui/components/Confetti.tsx): pieces fall once from the top of the screen. */
+
+.confetti {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-session);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: calc(-1 * var(--space-4));
+  width: var(--space-2);
+  height: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-brand);
+  opacity: 0;
+  animation: confetti-fall var(--duration-celebrate) var(--easing) both;
+}
+
+.confetti-piece:nth-child(4n + 2) {
+  background: var(--color-state-new);
+}
+
+.confetti-piece:nth-child(4n + 3) {
+  background: var(--color-state-weak);
+}
+
+.confetti-piece:nth-child(4n) {
+  background: var(--color-state-progress);
+}
+
+.confetti-piece:nth-child(1) { left: 4%; animation-delay: 0s; }
+.confetti-piece:nth-child(2) { left: 11%; animation-delay: calc(var(--duration-fast) * 2); }
+.confetti-piece:nth-child(3) { left: 18%; animation-delay: var(--duration-fast); }
+.confetti-piece:nth-child(4) { left: 27%; animation-delay: calc(var(--duration-fast) * 3); }
+.confetti-piece:nth-child(5) { left: 34%; animation-delay: calc(var(--duration-fast) * 0.5); }
+.confetti-piece:nth-child(6) { left: 42%; animation-delay: calc(var(--duration-fast) * 2.5); }
+.confetti-piece:nth-child(7) { left: 49%; animation-delay: calc(var(--duration-fast) * 1.5); }
+.confetti-piece:nth-child(8) { left: 57%; animation-delay: calc(var(--duration-fast) * 3.5); }
+.confetti-piece:nth-child(9) { left: 64%; animation-delay: var(--duration-fast); }
+.confetti-piece:nth-child(10) { left: 71%; animation-delay: calc(var(--duration-fast) * 2); }
+.confetti-piece:nth-child(11) { left: 79%; animation-delay: 0s; }
+.confetti-piece:nth-child(12) { left: 86%; animation-delay: calc(var(--duration-fast) * 3); }
+.confetti-piece:nth-child(13) { left: 92%; animation-delay: calc(var(--duration-fast) * 1.5); }
+.confetti-piece:nth-child(14) { left: 97%; animation-delay: calc(var(--duration-fast) * 2.5); }
+
+@keyframes confetti-fall {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) rotate(540deg);
+  }
+}
+
+/* Under reduced motion nothing falls: the component renders nothing, and this is the backstop. */
+@media (prefers-reduced-motion: reduce) {
+  .confetti {
+    display: none;
+  }
+}

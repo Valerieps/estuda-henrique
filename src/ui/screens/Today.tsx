@@ -5,6 +5,7 @@ import { topicState } from '../../domain/topic-state';
 import { useServices } from '../backend-context';
 import { Button, ButtonLink } from '../components/Button';
 import { Chip } from '../components/Chip';
+import { Confetti } from '../components/Confetti';
 import { Hero } from '../components/Hero';
 import { Icon } from '../components/Icon';
 import { Notice } from '../components/Notice';
@@ -163,17 +164,6 @@ function Mission({ label, barLabel, done, total }: { label: string; barLabel: st
       </span>
       <ProgressBar value={done} max={total} label={barLabel} tone={complete ? 'mastered' : undefined} />
     </li>
-  );
-}
-
-/** A plain burst of colored bits that fall once. The Resumo's shared confetti replaces it (note for S9). */
-function Confetti() {
-  return (
-    <div className="confetti" aria-hidden="true">
-      {Array.from({ length: 12 }, (_, i) => (
-        <span key={i} />
-      ))}
-    </div>
   );
 }
 

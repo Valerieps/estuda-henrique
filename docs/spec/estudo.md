@@ -30,7 +30,7 @@ A sessão de estudo de todo dia: que cartas entram, em que ordem, e como ele res
 
 - A frente mostra a barra de progresso (quantas cartas faltam), o tópico e a pergunta. Ele vira a
   carta tocando nela ou em Mostrar resposta. Não há gestos de deslizar. *(1)*
-- A carta vira em 3D, em cerca de 200 ms. O verso mostra frente, verso e macete, e embaixo, na zona
+- A carta vira em 3D, em cerca de 200 ms. O cartão tem a altura do conteúdo. O verso mostra a pergunta, um divisor, a resposta (em tamanho igual ou menor que o da pergunta) e o macete, e embaixo, na zona
   do polegar, os três botões. *(1)*
 - Virar a carta e registrar a resposta levam menos de 150 ms. *(1)*
 
@@ -46,8 +46,8 @@ A sessão de estudo de todo dia: que cartas entram, em que ordem, e como ele res
 - Não existe botão "Fácil". *(1)*
   Por quê: ele costuma ser usado quando a resposta só estava certa, e isso infla os intervalos.
 - Cada botão dá uma vibração curta. Errei desliza a carta para trás com "volta já já", sem vermelho
-  e sem som. O verso não comemora Acertei nem pune Errei. *(1)*
-- No topo do verso: Desfazer (desfaz a última resposta da sessão) e um menu com Editar carta e
+  e sem som. Acertei e Acertei com esforço dão um pulso na cor de sucesso. O verso não comemora Acertei nem pune Errei. *(1)*
+- No topo do verso: Desfazer (desfaz a última resposta da sessão; só aparece quando há o que desfazer) e um menu com Editar carta e
   Suspender. Editar salva e volta para o mesmo verso; Suspender passa para a próxima carta. *(1)*
 - Uma carta que vira guardada ganha uma pequena animação no verso. *(2)*
 
@@ -60,10 +60,12 @@ A sessão de estudo de todo dia: que cartas entram, em que ordem, e como ele res
 
 ## Resumo
 
-- Toda sessão termina no Resumo. De cima para baixo: a linha "Você lembrou N cartas que não via há
-  7 dias ou mais" (só quando N é maior que zero); % de acerto; contagem por botão; o tempo da sessão
-  e o do dia; quantas novas ele viu; os tópicos que mudaram de domínio na sessão, com antes e depois
-  (ex.: Verminoses 62% → 71%); e a lista das cartas em que ele errou. *(1)*
+- Toda sessão termina no Resumo, a tela de comemoração. De cima para baixo: o título grande e a
+  chama acesa (a sessão conta para a ofensiva); os números em grade de duas colunas: % de acerto,
+  cartas respondidas (com quantas eram novas), tempo da sessão (com o do dia) e, só quando maior que
+  zero, quantas cartas ele lembrou depois de 7 dias ou mais sem ver; a contagem por botão; os tópicos
+  que mudaram de domínio, com antes e depois (ex.: Verminoses 62% → 71%) numa barra que cresce do antes
+  para o depois; e a lista das cartas em que ele errou. *(1)*
 - O acerto da sessão continua no Resumo, mas não é o número principal do app: esse é a memória de
   longo prazo (`spec/diagnostico.md`). *(1)*
 - Uma vez por dia, depois de 1 hora somada no dia, o Resumo mostra a linha "1h hoje. Daqui pra
@@ -74,7 +76,7 @@ A sessão de estudo de todo dia: que cartas entram, em que ordem, e como ele res
   total. As repetições de uma carta errada não inflam o número. *(1)*
 - Abaixo de 80% de acerto, Refazer erros aparece em destaque: uma sessão de treino só com as cartas
   em que ele apertou Errei ou Acertei com esforço. *(1)*
-- Enquanto houver cartas para hoje, o Resumo oferece Mais 5?. Ao zerar o dia, mostra confete e,
+- Enquanto houver cartas para hoje, o Resumo oferece Mais 5? (um chip, abaixo de Refazer erros). Ao zerar o dia, mostra confete (desligado para quem pediu menos movimento no aparelho) e,
   no lugar de Mais 5?, "Pronto por hoje": "Hoje você já fez o que mais rende", com a memória de longo
   prazo, e abaixo Adiantar mais 10 novas e Piores cartas. Não existe sessão infinita: continuar é
   escolha dele. *(1)*

@@ -1,7 +1,64 @@
-/* Resumo da sessão */
+/* Resumo da sessão: the celebration screen */
 
 .summary-figure {
   font-family: var(--font-display);
   font-weight: var(--font-weight-display);
   font-size: var(--font-size-heading);
+}
+
+.summary-top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.summary-top h1 {
+  font-size: var(--font-size-display);
+}
+
+.summary-flame {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-brand);
+  font-weight: var(--font-weight-strong);
+}
+
+.summary-flame .icon {
+  width: var(--size-icon);
+  height: var(--size-icon);
+  animation: summary-flame-light var(--duration-celebrate) var(--easing) both;
+}
+
+@keyframes summary-flame-light {
+  0% {
+    opacity: 0.2;
+    transform: scale(0.6);
+  }
+  60% {
+    transform: scale(1.3);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.summary-tiles .tile-title {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-display);
+  font-size: var(--font-size-heading);
+  font-variant-numeric: var(--numeric);
+}
+
+.summary-topic {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.summary-topic-head {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
 }
