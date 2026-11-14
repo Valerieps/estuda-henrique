@@ -505,3 +505,9 @@ input[aria-invalid='true'] {
   min-height: calc(var(--size-touch) * 2);
   resize: vertical;
 }
+
+.summary-figure {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-display);
+  font-size: var(--font-size-heading);
+}

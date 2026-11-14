@@ -7,6 +7,8 @@ export interface StudyRequest {
   readonly kind: StudyKind;
   /** Review only: cap the session (Só 5 cartas). */
   readonly limit?: number;
+  /** Review only: Adiantar novas, 10 new cards of this topic past the daily limit. */
+  readonly aheadTopicId?: string;
   /** Training only: the cards to study. */
   readonly cardIds?: readonly string[];
 }

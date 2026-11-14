@@ -18,7 +18,8 @@ import {
   type Member,
   type SignInResult,
 } from './members';
-import { answerCard, endStudy, startStudy, undoAnswer } from './review';
+import { answerCard, endStudy, startStudy, studyOutlook, undoAnswer } from './review';
+import { studySummary } from './study-summary';
 import type { Clock, IdGenerator, Sql } from './ports';
 import { migrate } from './schema';
 
@@ -35,6 +36,8 @@ const QUERIES: { [N in QueryName]: Handler<Queries[N]['output'] | QueryError | n
   notes: (ctx, actor, input) => listNotes(ctx, actor, input),
   thermometer: (ctx, actor) => thermometer(ctx, actor),
   worstCards: (ctx, actor, input) => worstCards(ctx, actor, input),
+  studySummary,
+  studyOutlook: (ctx, actor) => studyOutlook(ctx, actor),
 };
 
 /** Every command the API runs; each checks the actor's role itself. */

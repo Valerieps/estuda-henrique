@@ -13,7 +13,7 @@ O que ainda não está pronto.
 | --- | --- | --- | --- |
 | Colar várias com prévia | 1 | `spec/cartas.md` | |
 | Baralho inicial de Biologia | 1 | `spec/cartas.md` | Tópicos já definidos; falta a ordem por bimestre (Em aberto) |
-| Resumo, Refazer erros, Mais 5?, Adiantar novas, tempo do dia | 1 | `spec/estudo.md` | A sessão (`src/ui/screens/Study.tsx`) acaba hoje numa tela mínima, sem Resumo; Adiantar novas pede abrir uma sessão de Revisão só com as novas de um tópico |
+| Confete no "Pronto por hoje" e Adiantar mais 10 novas dentro de Hoje | 1 | `spec/estudo.md` | O Resumo (`src/ui/screens/StudySummary.tsx`) já faz o resto, mas sem confete. Em Hoje (Pronto por hoje), o botão chama `startStudy({ kind: 'review', aheadTopicId })` e lê a consulta `studyOutlook` |
 | Hoje, termômetro, memória de longo prazo e cartas guardadas | 1 | `spec/diagnostico.md`, `spec/meta-e-ofensiva.md` | Hoje é hoje uma tela vazia da casca (`src/ui/App.tsx`); Estudar e Só 5 cartas chamam `startStudy` (`src/ui/study-launch.ts`); a sessão já abre em `/estudo`; a consulta `thermometer` já devolve termômetro, memória de longo prazo e cartas guardadas |
 | Piores cartas e tela Tópico | 1 | `spec/diagnostico.md` | A consulta `worstCards` já devolve os grupos; falta a tela e a busca e os filtros do Tópico |
 | Véspera | 1 | `spec/vespera.md` | |
