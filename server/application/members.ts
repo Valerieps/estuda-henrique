@@ -87,7 +87,8 @@ export function signIn(ctx: Context, profile: GoogleProfile, sessionHash: string
       const [invite] = ctx.sql.all<{ email: string }>("SELECT email FROM invites WHERE email = ? AND state = 'pending'", email);
       const bootstrap = activeAdminIds(ctx).length === 0 && bootstrapAdminEmails.map(normalizeEmail).includes(email);
       if (!invite && !bootstrap) return { ok: false, error: 'no_invite' } as const;
-      const roles: Role[] = bootstrap ? ['admin'] : [];
+      // The first admin manages the group; whoever comes by invite studies (an admin adds roles later).
+      const roles: Role[] = bootstrap ? ['admin'] : ['user'];
 
       if (row) {
         // Back by a new invite: same member, same history.
@@ -158,13 +159,14 @@ export function rename(ctx: Context, actor: Member, input: { name?: unknown }): 
   return { ok: true, value: me({ ...actor, name }), changed: ['me', 'members'] };
 }
 
-/** Only admins give and take roles, and the last admin keeps theirs. */
+/** Only admins give and take roles; everyone keeps at least one, and the last admin keeps theirs. */
 export function setRoles(ctx: Context, actor: Member, input: { memberId?: unknown; roles?: unknown }): CommandResult<MemberView> {
   if (!isAdmin(actor)) return failure('forbidden');
   if (typeof input.memberId !== 'string' || !Array.isArray(input.roles)) return failure('invalid');
   const target = findMember(ctx, input.memberId);
   if (!target || !target.active) return failure('not_found');
   const roles = normalizeRoles(input.roles.filter((r): r is string => typeof r === 'string'));
+  if (roles.length === 0) return failure('invalid');
   if (isAdmin(target) && !roles.includes('admin') && !keepsAnAdmin(activeAdminIds(ctx), target.id)) {
     return failure('last_admin');
   }

@@ -163,6 +163,21 @@ export const MIGRATIONS: readonly (readonly string[])[] = [
   initialDeckStatements(),
   // 7: the topics and cards of the file's decks the school's list has no topic for (Embriologia, Fisiologia humana, Ecologia).
   addedDeckStatements(),
+  // 8: roles are admin and user, and a member may hold both (docs/spec/acesso-e-membros.md). Who
+  // had no role was the student: now a user. A user's edit of a system note is theirs alone: it
+  // lives in `note_edits`, the note itself stays as the admin wrote it (docs/spec/cartas.md).
+  [
+    `UPDATE members SET roles = '["user"]' WHERE roles = '[]'`,
+    `CREATE TABLE note_edits (
+      member_id TEXT NOT NULL REFERENCES members(id),
+      note_id TEXT NOT NULL REFERENCES notes(id),
+      front TEXT NOT NULL,
+      back TEXT NOT NULL,
+      hint TEXT,
+      updated_at TEXT NOT NULL,
+      PRIMARY KEY (member_id, note_id)
+    )`,
+  ],
 ];
 
 export function migrate(sql: Sql): void {

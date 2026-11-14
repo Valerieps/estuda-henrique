@@ -1,6 +1,7 @@
 // The single entry to the group's data. The Durable Object calls it; every method is synchronous,
 // so a command runs alone and inside one transaction (ADR-004).
 import type { ApiResult, CommandName, Commands, QueryName, Queries, Topic } from '../../src/application/api-contract';
+import { isUser } from '../../src/domain/group/roles';
 import { failure, QueryError, type CommandResult, type Context } from './context';
 import { createNote, createNotes, createTopic, deleteNote, listNotes, listSubjects, renameTopic, reorderTopics, suspendCard, updateNote } from './cards';
 import { examCards, recordDueSnapshots, thermometer, worstCards } from './diagnostics';
@@ -68,6 +69,22 @@ const COMMANDS: { [N in CommandName]: Handler<CommandResult<Commands[N]['output'
   'streak.repair': repairStreak,
 };
 
+/**
+ * What only a user does: study, with data private to them (ADR-009). An admin who is not also a
+ * user gets `forbidden`.
+ */
+const STUDY_QUERIES: ReadonlySet<string> = new Set<QueryName>(['thermometer', 'worstCards', 'today', 'settings', 'studySummary', 'studyOutlook', 'examCards']);
+const STUDY_COMMANDS: ReadonlySet<string> = new Set<CommandName>([
+  'card.suspend',
+  'study.start',
+  'study.answer',
+  'study.undo',
+  'study.end',
+  'settings.update',
+  'streak.touch',
+  'streak.repair',
+]);
+
 export class GroupService {
   private readonly ctx: Context;
 
@@ -96,6 +113,7 @@ export class GroupService {
     if (!actor) return failure('unauthenticated');
     const handler = Object.hasOwn(QUERIES, name) ? QUERIES[name as QueryName] : undefined;
     if (!handler) return failure('not_found');
+    if (STUDY_QUERIES.has(name) && !isUser(actor)) return failure('forbidden');
     const value = handler(this.ctx, actor, asInput(input));
     if (value instanceof QueryError) return failure(value.error);
     return value === null ? failure('forbidden') : { ok: true, value };
@@ -106,6 +124,7 @@ export class GroupService {
     if (!actor) return failure('unauthenticated');
     const handler = Object.hasOwn(COMMANDS, name) ? COMMANDS[name as CommandName] : undefined;
     if (!handler) return failure('not_found');
+    if (STUDY_COMMANDS.has(name) && !isUser(actor)) return failure('forbidden');
     return this.ctx.sql.transaction(() => handler(this.ctx, actor, asInput(input)));
   }
 

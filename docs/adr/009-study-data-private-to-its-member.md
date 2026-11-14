@@ -3,7 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-11-13
 **Decision:** Every table of study data (answers, FSRS state, sessions, streak, routine, personal
-cards) carries `member_id`, and every query and command filters by the actor's id taken from the
+cards, a user's version of a system card in `note_edits`) carries `member_id`, and every query and command filters by the actor's id taken from the
 session, never from the input. No endpoint returns another member's study data, admins included.
 The admin's only access to cards is to the system cards (the ones with no owner), to add and edit
 them.

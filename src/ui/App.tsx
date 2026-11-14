@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import type { TodayView } from '../application/api-contract';
-import { canManageGroup } from '../domain/group/roles';
+import type { MeView, TodayView } from '../application/api-contract';
+import { canManageGroup, isUser } from '../domain/group/roles';
 import { strings } from '../domain/strings';
 import { useLiveStatus, useServices } from './backend-context';
 import { Button } from './components/Button';
@@ -50,7 +50,7 @@ export function App() {
   return (
     <>
       <OfflineNotice />
-      {canManageGroup(me.data) ? <AdminApp me={me.data} onSignOut={onSignOut} /> : <MemberApp onSignOut={onSignOut} />}
+      {isUser(me.data) ? <MemberApp me={me.data} onSignOut={onSignOut} /> : <AdminApp me={me.data} onSignOut={onSignOut} />}
     </>
   );
 }
@@ -63,14 +63,20 @@ function OfflineNotice() {
 
 const empty = strings.empty;
 
-/** The student's screens. Each empty state is replaced by its feature (docs/ROADMAP.md). */
-function MemberApp({ onSignOut }: { onSignOut: () => void }) {
+/**
+ * The user's screens. Each empty state is replaced by its feature (docs/ROADMAP.md). A user who is
+ * also admin reaches Members and Invites from Ajustes.
+ */
+function MemberApp({ me, onSignOut }: { me: MeView; onSignOut: () => void }) {
   const path = usePath();
   if (path === '/estudo') return <Study />;
-  return <MemberShell>{(today) => memberScreen(path, onSignOut, today)}</MemberShell>;
+  return <MemberShell>{(today) => memberScreen(me, path, onSignOut, today)}</MemberShell>;
 }
 
-function memberScreen(path: string, onSignOut: () => void, today: QueryState<TodayView>) {
+function memberScreen(me: MeView, path: string, onSignOut: () => void, today: QueryState<TodayView>) {
+  const admin = canManageGroup(me);
+  if (admin && path === '/membros') return <Members me={me} />;
+  if (admin && path === '/convites') return <Invites />;
   switch (path) {
     case '/materias':
       return <Subjects />;
@@ -79,14 +85,14 @@ function memberScreen(path: string, onSignOut: () => void, today: QueryState<Tod
     case '/piores':
       return <EmptyState {...empty.worst} />;
     case '/ajustes':
-      return <Settings onSignOut={onSignOut} />;
+      return <Settings admin={admin} onSignOut={onSignOut} />;
     default:
       return <Today today={today} />;
   }
 }
 
-/** The admin does not study: her home is the system cards, and Members and Invites are hers alone. */
-function AdminApp({ me, onSignOut }: { me: Parameters<typeof Members>[0]['me']; onSignOut: () => void }) {
+/** An admin who is not a user does not study: her home is the system cards, Members and Invites. */
+function AdminApp({ me, onSignOut }: { me: MeView; onSignOut: () => void }) {
   const path = usePath();
   return (
     <AdminShell onSignOut={onSignOut}>

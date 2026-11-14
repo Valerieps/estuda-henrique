@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { ApiError, MeView, MemberListItem } from '../../application/api-contract';
-import { canManageGroup, isAdmin } from '../../domain/group/roles';
+import { canManageGroup, ROLES, type Role } from '../../domain/group/roles';
 import { strings } from '../../domain/strings';
 import { useServices } from '../backend-context';
 import { Button } from '../components/Button';
@@ -10,6 +10,7 @@ import { useQuery } from '../use-query';
 function errorText(error: ApiError): string {
   if (error === 'last_admin') return strings.members.lastAdmin;
   if (error === 'forbidden') return strings.forbidden;
+  if (error === 'invalid') return strings.members.oneRole;
   return strings.genericError;
 }
 
@@ -20,9 +21,14 @@ export function Members({ me }: { me: MeView }) {
   const [busy, setBusy] = useState<string | null>(null);
   const manages = canManageGroup(me);
 
-  async function toggleAdmin(member: MemberListItem) {
+  async function toggleRole(member: MemberListItem, role: Role) {
+    const roles = member.roles.includes(role) ? member.roles.filter((r) => r !== role) : [...member.roles, role];
+    if (roles.length === 0) {
+      setError(strings.members.oneRole);
+      return;
+    }
     setBusy(member.id);
-    const result = await backend.command('member.setRoles', { memberId: member.id, roles: isAdmin(member) ? [] : ['admin'] });
+    const result = await backend.command('member.setRoles', { memberId: member.id, roles });
     setBusy(null);
     setError(result.ok ? null : errorText(result.error));
   }
@@ -48,7 +54,7 @@ export function Members({ me }: { me: MeView }) {
             <span className="grow">
               {member.name} {member.id === me.id && <span className="muted">{strings.members.you}</span>}
               <br />
-              <span className="muted small">{isAdmin(member) ? strings.members.admin : strings.members.member}</span>
+              <span className="muted small">{member.roles.map((role) => strings.members.roleNames[role]).join(' · ')}</span>
               {member.email && (
                 <>
                   <br />
@@ -58,14 +64,17 @@ export function Members({ me }: { me: MeView }) {
             </span>
             {manages && (
               <span className="row" role="group" aria-label={strings.members.rolesOf(member.name)}>
-                <Button
-                  variant="secondary"
-                  aria-pressed={isAdmin(member)}
-                  disabled={busy === member.id}
-                  onClick={() => void toggleAdmin(member)}
-                >
-                  {strings.members.makeAdmin}
-                </Button>
+                {ROLES.map((role) => (
+                  <Button
+                    key={role}
+                    variant="secondary"
+                    aria-pressed={member.roles.includes(role)}
+                    disabled={busy === member.id}
+                    onClick={() => void toggleRole(member, role)}
+                  >
+                    {strings.members.roleNames[role]}
+                  </Button>
+                ))}
                 {member.id !== me.id && (
                   <Button
                     variant="secondary-danger"

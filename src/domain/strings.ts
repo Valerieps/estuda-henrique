@@ -200,11 +200,10 @@ export const strings = {
   members: {
     title: 'Membros',
     you: '(você)',
-    admin: 'Admin',
-    member: 'Usuário',
-    makeAdmin: 'Admin',
+    roleNames: { admin: 'Admin', user: 'Usuário' },
     rolesOf: (name: string) => `Papéis de ${name}`,
     lastAdmin: 'O grupo precisa de pelo menos um admin. Dê o papel a outra pessoa antes.',
+    oneRole: 'Cada pessoa precisa de pelo menos um papel.',
     remove: 'Remover',
     removeOf: (name: string) => `Remover ${name} do grupo`,
     removeConfirm: (name: string) => `Remover ${name} do grupo? O acesso acaba na hora. Para voltar, é só convidar de novo.`,
@@ -281,5 +280,6 @@ export const strings = {
     saveFailed: 'Não deu para salvar. Tenta de novo?',
     about: 'Sobre',
     aboutText: 'Estuda Henrique: flashcards de Biologia com repetição espaçada (FSRS).',
+    admin: 'Admin',
   },
 } as const;

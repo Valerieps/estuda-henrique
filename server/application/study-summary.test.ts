@@ -116,7 +116,7 @@ describe('the Resumo', () => {
     const session = start('henrique')!;
     expect(summary('henrique', session.sessionId)).toMatchObject({ answers: 0, accuracy: null, wrong: [], topics: [] });
     expect(service.query('h-bia', 'studySummary', { sessionId: session.sessionId })).toMatchObject({ ok: false, error: 'not_found' });
-    expect(service.query('h-ana', 'studySummary', { sessionId: session.sessionId })).toMatchObject({ ok: false, error: 'not_found' });
+    expect(service.query('h-ana', 'studySummary', { sessionId: session.sessionId })).toMatchObject({ ok: false, error: 'forbidden' });
     expect(service.query('h-henrique', 'studySummary', {})).toMatchObject({ ok: false, error: 'invalid' });
   });
 

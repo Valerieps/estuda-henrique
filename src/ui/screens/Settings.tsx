@@ -6,11 +6,12 @@ import { useServices } from '../backend-context';
 import { Button } from '../components/Button';
 import { Field } from '../components/Field';
 import { Notice } from '../components/Notice';
+import { Link } from '../router';
 import { useQuery } from '../use-query';
 
 const s = strings.settings;
 
-export function Settings({ onSignOut }: { onSignOut: () => void }) {
+export function Settings({ admin = false, onSignOut }: { admin?: boolean; onSignOut: () => void }) {
   const settings = useQuery('settings', {}, ['settings']);
   const { backend } = useServices();
   const [message, setMessage] = useState<{ tone: 'info' | 'error'; text: string } | null>(null);
@@ -47,6 +48,15 @@ export function Settings({ onSignOut }: { onSignOut: () => void }) {
       <NewPerDay current={data.newPerDay} save={(n) => save({ newPerDay: n }, `${s.saved} ${s.newPerDayWarning}`)} />
       <RestDays current={data.restDays} save={(days) => save({ restDays: days }, s.saved)} />
       <Routine when={data.routineWhen} where={data.routineWhere} save={(change) => save(change, s.saved)} />
+      {admin && (
+        <>
+          <h2>{s.admin}</h2>
+          <p className="row">
+            <Link to="/membros">{strings.nav.members}</Link>
+            <Link to="/convites">{strings.nav.invites}</Link>
+          </p>
+        </>
+      )}
       <h2>{s.about}</h2>
       <p className="muted small">{s.aboutText}</p>
       <Button variant="secondary" onClick={onSignOut}>

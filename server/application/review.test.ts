@@ -130,7 +130,8 @@ describe('answers and undo', () => {
     expect(answer('henrique', session.sessionId, card, 'easy')).toEqual({ ok: false, error: 'invalid' });
     expect(answer('henrique', session.sessionId, personal.cards[0].id, 'good')).toEqual({ ok: false, error: 'not_found' });
     expect(service.command('h-bia', 'study.undo', { sessionId: session.sessionId })).toEqual({ ok: false, error: 'not_found' });
-    expect(service.command('h-ana', 'study.start', { kind: 'review' })).toMatchObject({ ok: true });
+    // An admin who is not also a user does not study.
+    expect(service.command('h-ana', 'study.start', { kind: 'review' })).toEqual({ ok: false, error: 'forbidden' });
   });
 
   it('refuses answers after the session ends', () => {

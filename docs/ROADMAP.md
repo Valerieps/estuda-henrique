@@ -33,3 +33,9 @@ O que ainda não está pronto.
 ## Revisar as lacunas que o agente decidiu
 
 - [ ] O admin cria, renomeia e reordena os tópicos; o usuário não (`spec/cartas.md`).
+- [ ] Papéis: quem entra por convite é usuário; ninguém fica sem papel; só quem é usuário estuda
+  (o servidor recusa o estudo a um admin que não é usuário); quem tem os dois papéis chega a
+  Membros e Convites pelos Ajustes e, no estudo, cria cartas pessoais e versões só suas
+  (`spec/acesso-e-membros.md`, `spec/cartas.md`).
+- [ ] A versão de um usuário de uma lacuna do sistema mantém os mesmos trechos; quando eu mudo os
+  trechos da minha, a versão dele não acompanha (`spec/cartas.md`).

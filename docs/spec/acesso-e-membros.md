@@ -19,19 +19,24 @@ regras do Estuda Henrique: eu sou a admin e o Henrique é o único usuário.
 
 | Papel | O que pode |
 | --- | --- |
-| Usuário | Estudar: tudo de `spec/cartas.md`, `spec/estudo.md`, `spec/diagnostico.md`, `spec/vespera.md` e `spec/meta-e-ofensiva.md`. No código, é o "membro" |
-| Admin | Convidar e remover pessoas; dar e tirar o papel de admin; adicionar e editar as cartas do sistema. Não estuda e não vê nada do que o usuário faz |
+| Usuário | Estudar: tudo de `spec/cartas.md`, `spec/estudo.md`, `spec/diagnostico.md`, `spec/vespera.md` e `spec/meta-e-ofensiva.md` |
+| Admin | Convidar e remover pessoas; dar e tirar os papéis; adicionar e editar as cartas do sistema. Sem o papel de usuário, não estuda |
 
+- Eu dou a cada pessoa o papel de admin, de usuário ou os dois. Ninguém fica sem papel. *(1)*
+- Quem entra por convite entra como usuário; os primeiros admins (os e-mails do servidor) entram
+  como admin. *(1)*
 - Hoje há uma admin (eu) e um usuário (o Henrique). Pode haver mais de um admin; o app não deixa
   tirar o papel do último. *(1)*
-- O admin não vê respostas, termômetro, ofensiva, rotina nem as cartas pessoais do usuário, e não
-  edita nada que ele fez. *(1)*
+- Ninguém vê nada do estudo de ninguém: respostas, termômetro, ofensiva, rotina, cartas pessoais e
+  as versões que cada um fez das cartas do sistema são só de quem as fez. Vale também para o admin,
+  e para quem tem os dois papéis: estudando, vê só o próprio estudo. *(1)*
   Por quê: ele é menor de idade e eu quis assim (ADR-009).
+- Quem tem os dois papéis estuda como usuário e chega a Membros e Convites pelos Ajustes. *(1)*
 
 ## Membros
 
-- O admin vê a lista do grupo, com nome, foto, e-mail e papéis. O usuário não precisa dela e a
-  tela de membros só aparece para o admin. *(1)*
+- O admin vê a lista do grupo, com nome, foto, e-mail e papéis, e liga ou desliga cada papel de
+  cada pessoa. O usuário não precisa dela e a tela de membros só aparece para o admin. *(1)*
 - O admin remove um membro depois de confirmar. Ele não remove a si mesmo: outro admin faz isso.
   Assim sempre sobra um admin. *(1)*
 - Quem é removido perde o acesso na hora, inclusive no app aberto. Um convite novo traz a pessoa de

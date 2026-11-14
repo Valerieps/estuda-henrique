@@ -7,6 +7,7 @@ import { isAnswer, newCardState, type SchedulingState } from '../../src/domain/s
 import { endOfStudyDay } from '../../src/domain/study/study-day';
 import { failure, today, type CommandResult, type Context } from './context';
 import type { Member } from './members';
+import { NOTE_EDITS, noteText } from './note-text';
 import { endStudySession, recordAnswer, startStudySession, stateFromRow, studySettings, undoLastAnswer, type CardStateRow } from './study-store';
 
 type Input = Record<string, unknown>;
@@ -37,7 +38,8 @@ function eligibleCards(ctx: Context, actor: Member): StudyCard[] {
   const now = ctx.clock.now();
   return ctx.sql
     .all<EligibleRow>(
-      `SELECT cards.id, cards.cloze_index, notes.id AS note_id, notes.kind AS note_kind, notes.front, notes.back, notes.hint,
+      `SELECT cards.id, cards.cloze_index, notes.id AS note_id, notes.kind AS note_kind,
+              ${noteText('front')} AS front, ${noteText('back')} AS back, ${noteText('hint')} AS hint,
               topics.id AS topic_id, topics.name AS topic_name,
               cs.stage, cs.due, cs.stability, cs.difficulty, cs.scheduled_days, cs.learning_steps, cs.reps, cs.lapses, cs.last_review
        FROM cards
@@ -45,10 +47,12 @@ function eligibleCards(ctx: Context, actor: Member): StudyCard[] {
        JOIN topics ON topics.id = notes.topic_id
        JOIN subjects ON subjects.id = topics.subject_id
        LEFT JOIN card_states cs ON cs.card_id = cards.id AND cs.member_id = ?
+       ${NOTE_EDITS}
        WHERE cards.retired = 0 AND notes.deleted_at IS NULL AND subjects.archived = 0
          AND (notes.owner_id IS NULL OR notes.owner_id = ?)
          AND COALESCE(cs.suspended, 0) = 0
        ORDER BY topics.position, topics.created_at, notes.created_at, notes.rowid, cards.cloze_index`,
+      actor.id,
       actor.id,
       actor.id,
     )

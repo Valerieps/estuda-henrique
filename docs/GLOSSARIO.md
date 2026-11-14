@@ -10,8 +10,8 @@ O app fala a língua da escola, não a do Anki: os termos entre parênteses em "
 aparecem na interface.
 
 - **Adiantar novas:** estudar mais 10 cartas novas depois de zerar o dia (não usar: estudo extra, modo livre). (`spec/estudo.md`)
-- **Admin:** quem convida, remove, dá papéis e adiciona as cartas do sistema; não estuda. Sempre há
-  pelo menos um. (`spec/acesso-e-membros.md`)
+- **Admin:** o papel de quem convida, remove, dá papéis e adiciona as cartas do sistema; sem o papel
+  de usuário, não estuda. Sempre há pelo menos um. (`spec/acesso-e-membros.md`)
 - **Carta do sistema:** carta criada pelo admin, que aparece para o usuário estudar. (`spec/cartas.md`)
 - **Carta pessoal:** carta criada pelo usuário; só ele a vê. (`spec/cartas.md`)
 - **Carta-problema:** carta em que ele apertou Errei 6 vezes ou mais (não usar: leech). (`spec/diagnostico.md`)
@@ -41,4 +41,4 @@ aparecem na interface.
 - **Termômetro:** a lista de tópicos por domínio em Hoje (não usar: estatísticas). (`spec/diagnostico.md`)
 - **Tópico:** um assunto de uma matéria, como Citologia (não usar: baralho, deck). (`spec/cartas.md`)
 - **Treino:** sessão que não entra no histórico de acerto: Véspera, Refazer erros, Estudar estas agora, Estudar <tópico> (não usar: modo livre, prática). (`spec/estudo.md`)
-- **Usuário:** o papel de quem estuda; hoje, só o Henrique. (`spec/acesso-e-membros.md`)
+- **Usuário:** o papel de quem estuda; hoje, só o Henrique. Uma pessoa pode ser admin e usuário. (`spec/acesso-e-membros.md`)

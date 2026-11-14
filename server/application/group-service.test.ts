@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { fixedClock, emptyDeckSql, sequentialIds } from '../testing/node-sql';
 import { GroupService } from './group-service';
 import type { GoogleProfile } from './members';
+import { MIGRATIONS, migrate } from './schema';
 
 const profile = (email: string, name = email.split('@')[0]): GoogleProfile => ({ sub: `sub:${email}`, email, name, picture: null });
 const ADMIN = 'ana@example.com';
@@ -42,7 +43,7 @@ describe('sign-in', () => {
     invite(admin, 'Carla@Example.com');
     expect(service.signIn(profile('carla@example.com'), 'h-carla', [])).toMatchObject({ ok: true });
     expect(service.query(admin, 'invites', {})).toMatchObject({ ok: true, value: [{ email: 'carla@example.com', state: 'accepted' }] });
-    expect(service.query('h-carla', 'me', {})).toMatchObject({ ok: true, value: { roles: [] } });
+    expect(service.query('h-carla', 'me', {})).toMatchObject({ ok: true, value: { roles: ['user'] } });
   });
 
   it('ends the session on sign-out and when it expires', () => {
@@ -98,9 +99,29 @@ describe('members', () => {
   it('never lose the last admin', () => {
     const { admin, carlaId } = withCarla();
     const anaId = (service.query(admin, 'me', {}) as { value: { id: string } }).value.id;
-    expect(service.command(admin, 'member.setRoles', { memberId: anaId, roles: [] })).toEqual({ ok: false, error: 'last_admin' });
-    expect(service.command(admin, 'member.setRoles', { memberId: carlaId, roles: ['admin'] })).toMatchObject({ ok: true });
-    expect(service.command(admin, 'member.setRoles', { memberId: anaId, roles: [] })).toMatchObject({ ok: true });
+    expect(service.command(admin, 'member.setRoles', { memberId: anaId, roles: ['user'] })).toEqual({ ok: false, error: 'last_admin' });
+    expect(service.command(admin, 'member.setRoles', { memberId: carlaId, roles: ['admin', 'user'] })).toMatchObject({ ok: true });
+    expect(service.command(admin, 'member.setRoles', { memberId: anaId, roles: ['user'] })).toMatchObject({ ok: true });
+  });
+
+  it('give each member admin, user or both, never none', () => {
+    const { admin, carlaId } = withCarla();
+    expect(service.command(admin, 'member.setRoles', { memberId: carlaId, roles: [] })).toEqual({ ok: false, error: 'invalid' });
+    expect(service.command(admin, 'member.setRoles', { memberId: carlaId, roles: ['user', 'admin', 'king'] })).toMatchObject({
+      ok: true,
+      value: { roles: ['admin', 'user'] },
+    });
+    expect(service.command('h-carla', 'invite.create', { email: 'x@example.com' })).toMatchObject({ ok: true });
+    expect(service.query('h-carla', 'today', {})).toMatchObject({ ok: true });
+  });
+
+  it('let only users study', () => {
+    const admin = signInAdmin();
+    for (const name of ['today', 'thermometer', 'settings', 'studyOutlook']) {
+      expect(service.query(admin, name, {})).toEqual({ ok: false, error: 'forbidden' });
+    }
+    expect(service.command(admin, 'streak.touch', {})).toEqual({ ok: false, error: 'forbidden' });
+    expect(service.query(admin, 'subjects', {})).toMatchObject({ ok: true });
   });
 
   it('lose access at once when removed, and come back with a new invite', () => {
@@ -132,5 +153,24 @@ describe('the API surface', () => {
     const admin = signInAdmin();
     expect(service.query(admin, 'toString', {})).toEqual({ ok: false, error: 'not_found' });
     expect(service.command(admin, 'constructor', {})).toEqual({ ok: false, error: 'not_found' });
+  });
+});
+
+describe('migration 8', () => {
+  it('turns a member with no role (the student) into a user and keeps the admins as they were', () => {
+    const sql = emptyDeckSql();
+    sql.run('CREATE TABLE schema_migrations (version INTEGER PRIMARY KEY, applied_at TEXT NOT NULL)');
+    MIGRATIONS.slice(0, 7).forEach((statements, i) => {
+      for (const statement of statements) sql.run(statement);
+      sql.run('INSERT INTO schema_migrations (version, applied_at) VALUES (?, ?)', i + 1, 'x');
+    });
+    const insert = 'INSERT INTO members (id, email, name, roles, joined_at) VALUES (?, ?, ?, ?, ?)';
+    sql.run(insert, 'ana', 'ana@example.com', 'Ana', '["admin"]', 'x');
+    sql.run(insert, 'henrique', 'henrique@example.com', 'Henrique', '[]', 'x');
+    migrate(sql);
+    expect(sql.all('SELECT id, roles FROM members ORDER BY id')).toEqual([
+      { id: 'ana', roles: '["admin"]' },
+      { id: 'henrique', roles: '["user"]' },
+    ]);
   });
 });
