@@ -101,6 +101,12 @@
   --duration-base: 200ms;
   --easing: cubic-bezier(0.2, 0, 0, 1);
   --opacity-disabled: 0.55;
+  --opacity-scrim: 0.5;
+
+  /* Stacking: bars over the screen, the session over the bars, the sheet over everything. */
+  --z-bar: 10;
+  --z-session: 20;
+  --z-sheet: 30;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -1,18 +1,18 @@
 import { useEffect } from 'react';
-import type { MeView } from '../application/api-contract';
 import { canManageGroup } from '../domain/group/roles';
 import { strings } from '../domain/strings';
 import { useLiveStatus, useServices } from './backend-context';
 import { Button } from './components/Button';
+import { EmptyState } from './components/EmptyState';
 import { Notice } from './components/Notice';
-import { Link, navigate, usePath } from './router';
-import { Home } from './screens/Home';
+import { navigate, usePath } from './router';
 import { Invites } from './screens/Invites';
 import { Members } from './screens/Members';
 import { SignIn } from './screens/SignIn';
+import { Study } from './screens/Study';
+import { AdminShell, MemberShell } from './Shell';
 import { useQuery } from './use-query';
 
-/** The app's screens. Replace Home with the app's first real screen (BOOTSTRAP.md). */
 export function App() {
   const { backend, live } = useServices();
   const me = useQuery('me', {}, ['me']);
@@ -27,13 +27,13 @@ export function App() {
   if (me.loading && !me.data) return null;
   if (!me.data && me.error && me.error !== 'unauthenticated') {
     return (
-      <main className="app">
+      <main className="screen">
         <Notice tone="error">{strings.genericError}</Notice>
         <Button onClick={me.reload}>{strings.retry}</Button>
       </main>
     );
   }
-  if (!signedIn) return <SignIn />;
+  if (!signedIn || !me.data) return <SignIn />;
 
   async function signOut() {
     await backend.signOut();
@@ -41,34 +41,12 @@ export function App() {
     me.reload();
   }
 
+  const onSignOut = () => void signOut();
   return (
-    <div className="app">
-      <Navigation me={me.data} onSignOut={() => void signOut()} />
+    <>
       <OfflineNotice />
-      <Screen me={me.data} />
-    </div>
-  );
-}
-
-function Navigation({ me, onSignOut }: { me: MeView; onSignOut: () => void }) {
-  const path = usePath();
-  const tabs = [
-    { path: '/', label: strings.nav.home },
-    { path: '/membros', label: strings.nav.members },
-    ...(canManageGroup(me) ? [{ path: '/convites', label: strings.nav.invites }] : []),
-  ];
-  return (
-    <nav className="row tabs" aria-label={strings.nav.main}>
-      {tabs.map((tab) => (
-        <Link key={tab.path} to={tab.path} aria-current={path === tab.path ? 'page' : undefined}>
-          {tab.label}
-        </Link>
-      ))}
-      <span className="grow" />
-      <Button variant="secondary" onClick={onSignOut}>
-        {strings.nav.signOut}
-      </Button>
-    </nav>
+      {canManageGroup(me.data) ? <AdminApp me={me.data} onSignOut={onSignOut} /> : <MemberApp onSignOut={onSignOut} />}
+    </>
   );
 }
 
@@ -78,9 +56,46 @@ function OfflineNotice() {
   return <Notice>{strings.offline}</Notice>;
 }
 
-function Screen({ me }: { me: MeView }) {
+const empty = strings.empty;
+
+/** The student's screens. Each empty state is replaced by its feature (docs/ROADMAP.md). */
+function MemberApp({ onSignOut }: { onSignOut: () => void }) {
   const path = usePath();
-  if (path === '/membros') return <Members me={me} />;
-  if (path === '/convites' && canManageGroup(me)) return <Invites />;
-  return <Home me={me} />;
+  if (path === '/estudo') return <Study />;
+  return <MemberShell>{memberScreen(path, onSignOut)}</MemberShell>;
+}
+
+function memberScreen(path: string, onSignOut: () => void) {
+  switch (path) {
+    case '/materias':
+      return <EmptyState {...empty.subjects} />;
+    case '/prova':
+      return <EmptyState {...empty.exam} />;
+    case '/piores':
+      return <EmptyState {...empty.worst} />;
+    case '/cartas/nova':
+      return <EmptyState {...empty.newCard} />;
+    case '/cartas/colar':
+      return <EmptyState {...empty.pasteMany} />;
+    case '/ajustes':
+      return (
+        <EmptyState {...empty.settings}>
+          <Button variant="secondary" onClick={onSignOut}>
+            {strings.nav.signOut}
+          </Button>
+        </EmptyState>
+      );
+    default:
+      return <EmptyState {...empty.today} />;
+  }
+}
+
+/** The admin does not study: her home is the system cards, and Members and Invites are hers alone. */
+function AdminApp({ me, onSignOut }: { me: Parameters<typeof Members>[0]['me']; onSignOut: () => void }) {
+  const path = usePath();
+  return (
+    <AdminShell onSignOut={onSignOut}>
+      {path === '/membros' ? <Members me={me} /> : path === '/convites' ? <Invites /> : <EmptyState {...empty.systemCards} />}
+    </AdminShell>
+  );
 }

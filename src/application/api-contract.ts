@@ -10,7 +10,7 @@ export interface MemberView {
   readonly roles: readonly Role[];
 }
 
-/** A row of the members screen: the e-mail only reaches admins. */
+/** A row of the members screen (admins only). */
 export interface MemberListItem extends MemberView {
   readonly email?: string;
 }
@@ -75,6 +75,7 @@ export interface Queries {
   /** The notes of a topic the reader may see: the system's and their own. */
   notes: { input: { topicId: string }; output: NoteView[] };
   me: { input: Record<string, never>; output: MeView };
+  /** Admins only. */
   members: { input: Record<string, never>; output: MemberListItem[] };
   /** Admins only. */
   invites: { input: Record<string, never>; output: InviteView[] };

@@ -22,16 +22,44 @@ export const strings = {
 
   nav: {
     main: 'Navegação principal',
-    home: 'Início',
+    today: 'Hoje',
+    subjects: 'Matérias',
+    exam: 'Prova',
+    worst: 'Piores cartas',
+    systemCards: 'Cartas do sistema',
     members: 'Membros',
     invites: 'Convites',
+    create: 'Criar',
+    settings: 'Ajustes',
     signOut: 'Sair',
   },
 
-  home: {
-    greeting: (greeting: string, name: string) => `${greeting}, ${name}!`,
-    nameLabel: 'Meu nome',
-    save: 'Salvar',
+  create: {
+    title: 'Criar',
+    close: 'Fechar',
+    newCard: 'Nova carta',
+    pasteMany: 'Colar várias',
+  },
+
+  // Empty screens of the shell: each later feature replaces its own.
+  empty: {
+    today: { title: 'Hoje', text: 'Quando houver cartas para estudar, elas aparecem aqui.' },
+    subjects: { title: 'Matérias', text: 'Suas matérias e tópicos aparecem aqui.' },
+    exam: { title: 'Prova', text: 'Aqui você monta a Véspera: escolha os tópicos da prova e estude.' },
+    worst: { title: 'Piores cartas', text: 'As cartas em que você mais erra aparecem aqui, depois de algumas sessões.' },
+    systemCards: { title: 'Cartas do sistema', text: 'As cartas do sistema aparecem aqui.' },
+    settings: { title: 'Ajustes', text: 'Os ajustes de estudo aparecem aqui.' },
+    newCard: { title: 'Nova carta', text: 'O formulário de carta nova chega em breve.' },
+    pasteMany: { title: 'Colar várias', text: 'Colar várias cartas de uma vez chega em breve.' },
+    study: { title: 'Sessão', text: 'Nenhuma carta para estudar agora.' },
+  },
+
+  study: {
+    exit: 'Sair da sessão',
+    exitTitle: 'Sair da sessão?',
+    exitText: 'As respostas ficam salvas.',
+    exitNow: 'Sair agora',
+    keepGoing: 'Continuar',
   },
 
   invites: {

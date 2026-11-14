@@ -89,11 +89,10 @@ describe('members', () => {
     return { admin, carlaId: (me.value as { id: string }).id };
   }
 
-  it('shows e-mails to admins only', () => {
+  it('lists members for admins only', () => {
     const { admin } = withCarla();
     expect(service.query(admin, 'members', {})).toMatchObject({ ok: true, value: [{ name: 'Ana', email: ADMIN }, { name: 'Carla' }] });
-    const seen = service.query('h-carla', 'members', {});
-    expect(seen.ok && (seen.value as object[]).every((m) => !('email' in m))).toBe(true);
+    expect(service.query('h-carla', 'members', {})).toEqual({ ok: false, error: 'forbidden' });
   });
 
   it('never lose the last admin', () => {
