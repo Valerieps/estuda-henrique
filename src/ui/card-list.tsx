@@ -6,6 +6,7 @@ import { strings } from '../domain/strings';
 import { clozeCard } from '../domain/study/cloze';
 import { useServices } from './backend-context';
 import { Button } from './components/Button';
+import { Icon } from './components/Icon';
 import { Notice } from './components/Notice';
 import { Sheet } from './components/Sheet';
 import './card-list.css';
@@ -55,7 +56,8 @@ export function CardLine({ card, selected, onSelect, onChanged }: CardLineProps)
         )}
         <div className="grow stack">
           {card.problem && (
-            <span className="small strong" role="note">
+            <span className="small strong problem-mark" role="note">
+              <Icon name="alert" />
               {s.problem} · <span className="muted">{s.problemHint}</span>
             </span>
           )}
