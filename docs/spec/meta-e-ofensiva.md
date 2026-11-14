@@ -24,6 +24,10 @@ A tela Hoje e o que faz ele voltar todo dia: a meta, a ofensiva, a rotina e o ca
 ## Meta diária
 
 - A meta é zerar as revisões do dia e as novas até o limite. *(1)*
+- Hoje mostra quanto da meta já foi feito, em revisões e novas: "feito de total", onde o total é o
+  feito mais o que falta. Cada carta conta uma vez, pela primeira resposta do dia: revisão se ele já
+  a tinha visto antes de hoje, nova se não. O treino (Véspera, Refazer erros, Estudar estas) não
+  conta para a meta. O dia vira à meia-noite de Brasília. *(1)*
 - O limite de cartas novas por dia (padrão: 20, de 5 a 50) é a única configuração de estudo. O app
   funciona sem abrir os Ajustes nenhuma vez. *(1)*
 - Ao mudar o limite, o app avisa em uma linha que mais novas hoje significam mais revisões nos
