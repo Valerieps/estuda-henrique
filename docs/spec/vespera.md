@@ -12,12 +12,14 @@ O estudo intensivo perto da prova, na aba Prova.
 
 ## Montar
 
-- A aba Prova lista os tópicos com caixa de seleção; cada um mostra o domínio com barra e quantas
-  cartas já vistas e novas tem. No topo, a linha "Treino: não entra no seu histórico de acerto". *(1)*
+- A aba Prova lista os tópicos em blocos de duas colunas que eu marco com um toque (o bloco marcado
+  ganha borda forte e um check); cada um mostra o estado, o domínio e quantas cartas já vistas e
+  novas tem. No topo, a linha "Treino: não entra no seu histórico de acerto". *(1)*
 - Ao marcar tópicos, ele vê o total selecionado, separado entre vistas e novas. As novas também
   entram. *(1)*
-- Ele escolhe entre todas as cartas (novas incluídas) ou as 30 de menor domínio, só entre as
-  vistas, e toca Começar Véspera. *(1)*
+- Ele escolhe, em dois botões de opção, entre todas as cartas (novas incluídas) ou as 30 de menor
+  domínio, só entre as vistas, e toca Começar Véspera. O total e o botão ficam fixos embaixo; sem
+  tópico marcado, o botão diz "Marque ao menos um tópico". *(1)*
   Por quê: as novas ainda não têm domínio.
 - A tela Tópico tem o atalho Véspera deste tópico, que abre a aba Prova com ele marcado. *(1)*
 

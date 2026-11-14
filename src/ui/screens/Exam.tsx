@@ -2,10 +2,15 @@ import { useState } from 'react';
 import type { ExamCards } from '../../application/api-contract';
 import type { ExamScope } from '../../domain/study/exam';
 import { strings } from '../../domain/strings';
+import { topicState } from '../../domain/topic-state';
 import { useServices } from '../backend-context';
 import { Button } from '../components/Button';
+import { Chip } from '../components/Chip';
 import { EmptyState } from '../components/EmptyState';
+import { Icon } from '../components/Icon';
 import { Notice } from '../components/Notice';
+import { StateBadge } from '../components/StateBadge';
+import { Tile } from '../components/Tile';
 import { takePreselectedTopic } from '../exam-launch';
 import { startStudy } from '../study-launch';
 import { useQuery } from '../use-query';
@@ -83,48 +88,52 @@ export function Exam() {
       <h1>{s.title}</h1>
       <p className="muted">{s.training}</p>
       <h2>{s.topics}</h2>
-      <ul className="list">
+      <div className="chips" role="group" aria-label={s.scopeLabel}>
+        <Chip icon="target" pressed={scope === 'all'} onClick={() => setScope('all')}>
+          {s.scopeAll}
+        </Chip>
+        <Chip icon="alert" pressed={scope === 'weakest'} onClick={() => setScope('weakest')}>
+          {s.scopeWeakest}
+        </Chip>
+      </div>
+      {scope === 'weakest' && <p className="small muted">{s.scopeWeakestHint}</p>}
+      <ul className="tile-grid exam-grid">
         {topics.map((topic) => {
           const pct = topic.mastery === null ? null : Math.round(topic.mastery * 100);
+          const on = chosen.has(topic.id);
           return (
-            <li key={topic.id} className="card">
-              <label className="exam-topic">
-                <input type="checkbox" checked={chosen.has(topic.id)} onChange={() => toggle(topic.id)} />
-                <span className="grow stack">
-                  <span className="strong">{topic.name}</span>
-                  <span className="progress" role="img" aria-label={pct === null ? s.noMastery : s.mastery(pct)}>
-                    <span className="progress-fill" style={{ width: `${pct ?? 0}%` }} />
-                  </span>
-                  <span className="small muted">
-                    {pct === null ? s.noMastery : s.mastery(pct)} · {s.cards(topic.seen, topic.total - topic.seen)}
-                  </span>
-                </span>
+            <li key={topic.id} className="exam-pick" data-selected={on}>
+              <label>
+                <input type="checkbox" className="sr-only" checked={on} onChange={() => toggle(topic.id)} />
+                <Tile title={topic.name} support={s.cards(topic.seen, topic.total - topic.seen)}>
+                  <StateBadge state={topicState(topic.mastery, topic.seen)} />
+                  <span className="small muted">{pct === null ? s.noMastery : s.mastery(pct)}</span>
+                  {on && (
+                    <span className="exam-check">
+                      <Icon name="check" />
+                      <span className="sr-only">{s.selected}</span>
+                    </span>
+                  )}
+                </Tile>
               </label>
             </li>
           );
         })}
       </ul>
-      <p role="status" className="strong">
-        {none || !total ? s.nothingChosen : s.total(total.seen, total.fresh)}
-      </p>
-      <fieldset className="exam-scope">
-        <legend className="field-label">{s.scopeLabel}</legend>
-        <label>
-          <input type="radio" name="scope" checked={scope === 'all'} onChange={() => setScope('all')} />
-          {s.scopeAll}
-        </label>
-        <label>
-          <input type="radio" name="scope" checked={scope === 'weakest'} onChange={() => setScope('weakest')} />
-          <span>
-            {s.scopeWeakest} <span className="small muted">{s.scopeWeakestHint}</span>
-          </span>
-        </label>
-      </fieldset>
       {failure === 'error' && <Notice tone="error">{s.error}</Notice>}
       {failure === 'empty' && <Notice>{s.nothingToStudy}</Notice>}
-      <Button className="exam-start" onClick={() => void begin()} disabled={none || busy || (picked.data !== undefined && picked.data.cardIds.length === 0)}>
-        {s.start}
-      </Button>
+      <div className="exam-summary">
+        <p role="status" className="strong">
+          {none || !total ? s.nothingChosen : s.total(total.seen, total.fresh)}
+        </p>
+        <Button
+          onClick={() => void begin()}
+          disabled={none || busy || (picked.data !== undefined && picked.data.cardIds.length === 0)}
+          disabledReason={none ? s.pickOne : undefined}
+        >
+          {s.start}
+        </Button>
+      </div>
     </section>
   );
 }

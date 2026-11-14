@@ -1,34 +1,49 @@
-/* Prova: topics with a checkbox, mastery bar and card counts */
+/* Prova: selectable topic tiles in two columns and a summary pinned above the tab bar */
 
-.exam-topic {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  min-height: var(--size-touch);
+.exam-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 var(--space-12);
+}
+
+.exam-pick label {
+  display: block;
+  height: 100%;
   cursor: pointer;
 }
 
-.exam-topic input {
-  flex-shrink: 0;
-  width: var(--space-6);
-  min-height: var(--space-6);
-  height: var(--space-6);
-  accent-color: var(--color-brand);
+.exam-pick .tile {
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
 }
 
-.exam-topic .grow {
-  min-width: 0;
+.exam-pick[data-selected='true'] .tile {
+  border-color: var(--color-brand);
+  border-width: var(--border-width-strong);
 }
 
-.exam-scope {
-  border: 0;
-  padding: 0;
-  margin: 0 0 var(--space-4);
+.exam-pick label:has(input:focus-visible) .tile {
+  outline: var(--border-width-strong) solid var(--color-brand);
+  outline-offset: var(--border-width-strong);
 }
 
-.exam-scope label {
+.exam-check {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  display: inline-flex;
+  color: var(--color-brand);
+}
+
+.exam-summary {
+  position: sticky;
+  bottom: calc(var(--size-tabbar) + var(--space-2));
   display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  min-height: var(--size-touch);
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
 }
