@@ -11,9 +11,8 @@ O que ainda não está pronto.
 
 | Feature | Fase | Spec | Observação |
 | --- | --- | --- | --- |
-| Interface gamificada (direção Missões) em todas as telas | 1 | `spec/meta-e-ofensiva.md`, `spec/diagnostico.md`, `spec/estudo.md` | Plano por sessões em [`rascunhos/gamificacao.md`](rascunhos/gamificacao.md) |
 | Colar várias com prévia | 1 | `spec/cartas.md` | |
-| Tela Rotina depois do primeiro Resumo, e a chama acender no Resumo | 1 | `spec/meta-e-ofensiva.md` | Hoje, a chama, a folha Ofensiva, o cartão de aviso e os Ajustes (com a rotina) já existem; falta a tela Rotina, que pertence ao fim da sessão (Resumo) |
+| Tela Rotina depois do primeiro Resumo | 1 | `spec/meta-e-ofensiva.md` | Hoje, a chama, a folha Ofensiva, o cartão de aviso e os Ajustes (com a rotina) já existem; falta a tela Rotina, que pertence ao fim da sessão (Resumo, onde a chama já acende) |
 | Tela inicial do admin (cartas do sistema) | 1 | `spec/meta-e-ofensiva.md` | |
 | Imagem e oclusão de imagem | 2 | `spec/cartas.md` | Oclusão é a prioridade 1 da fase 2 |
 | Data e nota da prova | 2 | `spec/vespera.md` | |
@@ -41,4 +40,9 @@ O que ainda não está pronto.
 - [ ] Na tela Tópico, o filtro Todas mostra também as cartas suspensas (marcadas); Novas são as
   nunca estudadas e não suspensas; Problema são as com 6 ou mais Errei; a busca ignora maiúsculas
   e acentos e olha frente e verso (`spec/diagnostico.md`).
-
+- [ ] Interface "Missões" (`spec/meta-e-ofensiva.md`, `spec/diagnostico.md`, `spec/estudo.md`):
+  Missões é só a apresentação da meta do dia, sem XP, pontos, ligas nem conquistas; o termômetro é
+  uma grade de duas colunas, do mais fraco ao mais forte; os tópicos não têm ícone próprio, o ícone
+  é o do estado (novo, fraco, em andamento, dominado), com as mesmas cores em todas as telas; o +
+  fica no meio da barra inferior, mas com menos peso; Acertei e Acertei com esforço dão um pulso
+  de sucesso, e Errei desliza a carta sem vermelho; a fonte e o roxo da marca não mudaram.
