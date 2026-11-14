@@ -4,6 +4,8 @@ import { strings } from '../../domain/strings';
 import { Button } from '../components/Button';
 import { EmptyState } from '../components/EmptyState';
 import { Notice } from '../components/Notice';
+import { StateBadge } from '../components/StateBadge';
+import { topicState } from '../../domain/topic-state';
 import { CardLine } from '../card-list';
 import { Link, useSearch } from '../router';
 import { startStudy } from '../study-launch';
@@ -66,6 +68,7 @@ export function Worst() {
                 {group.topicName}
               </Link>
             </h2>
+            <StateBadge state={topicState(group.mastery, group.mastery === null ? 0 : 1)} />
             <Button variant="secondary" onClick={() => startStudy({ kind: 'selected', cardIds: group.cards.map((c) => c.cardId) })}>
               {s.studyTopic(group.topicName)}
             </Button>
