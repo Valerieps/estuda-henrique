@@ -106,7 +106,7 @@ export function Exam() {
               <label>
                 <input type="checkbox" className="sr-only" checked={on} onChange={() => toggle(topic.id)} />
                 <Tile title={topic.name} support={s.cards(topic.seen, topic.total - topic.seen)}>
-                  <StateBadge state={topicState(topic.mastery, topic.seen)} />
+                  <StateBadge state={topicState(topic.mastery, topic.seen, topic.total)} />
                   <span className="small muted">{pct === null ? s.noMastery : s.mastery(pct)}</span>
                   {on && (
                     <span className="exam-check">
