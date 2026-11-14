@@ -378,6 +378,8 @@ input[aria-invalid='true'] {
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius) var(--radius) 0 0;
   background: var(--color-surface);
+  max-height: 90%;
+  overflow-y: auto;
 }
 
 .sheet h2 {

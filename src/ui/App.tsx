@@ -10,6 +10,7 @@ import { Invites } from './screens/Invites';
 import { Members } from './screens/Members';
 import { SignIn } from './screens/SignIn';
 import { Study } from './screens/Study';
+import { Subjects } from './screens/Subjects';
 import { AdminShell, MemberShell } from './Shell';
 import { useQuery } from './use-query';
 
@@ -68,15 +69,11 @@ function MemberApp({ onSignOut }: { onSignOut: () => void }) {
 function memberScreen(path: string, onSignOut: () => void) {
   switch (path) {
     case '/materias':
-      return <EmptyState {...empty.subjects} />;
+      return <Subjects />;
     case '/prova':
       return <EmptyState {...empty.exam} />;
     case '/piores':
       return <EmptyState {...empty.worst} />;
-    case '/cartas/nova':
-      return <EmptyState {...empty.newCard} />;
-    case '/cartas/colar':
-      return <EmptyState {...empty.pasteMany} />;
     case '/ajustes':
       return (
         <EmptyState {...empty.settings}>
