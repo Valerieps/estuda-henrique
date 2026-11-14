@@ -93,6 +93,9 @@
   --size-touch: 44px;
   --size-avatar: 40px;
   --size-content: 720px;
+  /* The study card: its smallest height, and how far the flip is seen from. */
+  --size-card-min: 240px;
+  --flip-perspective: 1000px;
   --focus-ring-width: 2px;
   --focus-ring-offset: 2px;
 

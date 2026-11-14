@@ -18,6 +18,7 @@ import {
   type Member,
   type SignInResult,
 } from './members';
+import { answerCard, endStudy, startStudy, undoAnswer } from './review';
 import type { Clock, IdGenerator, Sql } from './ports';
 import { migrate } from './schema';
 
@@ -51,6 +52,10 @@ const COMMANDS: { [N in CommandName]: Handler<CommandResult<Commands[N]['output'
   'note.update': updateNote,
   'note.delete': deleteNote,
   'card.suspend': suspendCard,
+  'study.start': startStudy,
+  'study.answer': answerCard,
+  'study.undo': undoAnswer,
+  'study.end': endStudy,
 };
 
 export class GroupService {

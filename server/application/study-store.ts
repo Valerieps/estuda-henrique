@@ -6,7 +6,7 @@ import { newCardState, schedule, type Answer, type SchedulingState } from '../..
 import { DEFAULT_STUDY_SETTINGS, normalizeRestDays, type StudySettings } from '../../src/domain/study/settings';
 import { nowIso, today, type Context } from './context';
 
-interface CardStateRow {
+export interface CardStateRow {
   stage: SchedulingState['stage'];
   due: string;
   stability: number;
@@ -28,19 +28,20 @@ export interface MemberCardState {
 export function cardState(ctx: Context, memberId: string, cardId: string): MemberCardState {
   const [row] = ctx.sql.all<CardStateRow>('SELECT * FROM card_states WHERE member_id = ? AND card_id = ?', memberId, cardId);
   if (!row) return { state: newCardState(ctx.clock.now()), suspended: false };
+  return { state: stateFromRow(row), suspended: row.suspended === 1 };
+}
+
+export function stateFromRow(row: Omit<CardStateRow, 'suspended'>): SchedulingState {
   return {
-    state: {
-      stage: row.stage,
-      due: row.due,
-      stability: row.stability,
-      difficulty: row.difficulty,
-      scheduledDays: row.scheduled_days,
-      learningSteps: row.learning_steps,
-      reps: row.reps,
-      lapses: row.lapses,
-      lastReview: row.last_review,
-    },
-    suspended: row.suspended === 1,
+    stage: row.stage,
+    due: row.due,
+    stability: row.stability,
+    difficulty: row.difficulty,
+    scheduledDays: row.scheduled_days,
+    learningSteps: row.learning_steps,
+    reps: row.reps,
+    lapses: row.lapses,
+    lastReview: row.last_review,
   };
 }
 
@@ -136,7 +137,7 @@ export function recordAnswer(ctx: Context, memberId: string, sessionId: string, 
 }
 
 /** Undoes the session's last answer: deletes it and restores the card's previous state. */
-export function undoLastAnswer(ctx: Context, memberId: string, sessionId: string): { cardId: string } | null {
+export function undoLastAnswer(ctx: Context, memberId: string, sessionId: string): { cardId: string; state: SchedulingState } | null {
   if (!openSession(ctx, memberId, sessionId)) return null;
   const [last] = ctx.sql.all<{ id: string; card_id: string; previous_state: string }>(
     'SELECT id, card_id, previous_state FROM reviews WHERE session_id = ? AND member_id = ? ORDER BY reviewed_at DESC, rowid DESC LIMIT 1',
@@ -144,9 +145,10 @@ export function undoLastAnswer(ctx: Context, memberId: string, sessionId: string
     memberId,
   );
   if (!last) return null;
-  saveCardState(ctx, memberId, last.card_id, JSON.parse(last.previous_state) as SchedulingState);
+  const state = JSON.parse(last.previous_state) as SchedulingState;
+  saveCardState(ctx, memberId, last.card_id, state);
   ctx.sql.run('DELETE FROM reviews WHERE id = ?', last.id);
-  return { cardId: last.card_id };
+  return { cardId: last.card_id, state };
 }
 
 interface SettingsRow {

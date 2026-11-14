@@ -13,9 +13,8 @@ O que ainda não está pronto.
 | --- | --- | --- | --- |
 | Colar várias com prévia | 1 | `spec/cartas.md` | |
 | Baralho inicial de Biologia | 1 | `spec/cartas.md` | Tópicos já definidos; falta a ordem por bimestre (Em aberto) |
-| Sessão de Revisão com FSRS, três botões, desfazer | 1 | `spec/estudo.md` | Base pronta: FSRS (ADR-010), `recordAnswer` e `undoLastAnswer`; faltam a fila, os comandos e a tela |
-| Resumo, Refazer erros, Mais 5?, Adiantar novas, tempo do dia | 1 | `spec/estudo.md` | |
-| Hoje, termômetro, memória de longo prazo e cartas guardadas | 1 | `spec/diagnostico.md`, `spec/meta-e-ofensiva.md` | Hoje é hoje uma tela vazia da casca (`src/ui/App.tsx`); a consulta `thermometer` já devolve termômetro, memória de longo prazo e cartas guardadas |
+| Resumo, Refazer erros, Mais 5?, Adiantar novas, tempo do dia | 1 | `spec/estudo.md` | A sessão (`src/ui/screens/Study.tsx`) acaba hoje numa tela mínima, sem Resumo; Adiantar novas pede abrir uma sessão de Revisão só com as novas de um tópico |
+| Hoje, termômetro, memória de longo prazo e cartas guardadas | 1 | `spec/diagnostico.md`, `spec/meta-e-ofensiva.md` | Hoje é hoje uma tela vazia da casca (`src/ui/App.tsx`); Estudar e Só 5 cartas chamam `startStudy` (`src/ui/study-launch.ts`); a sessão já abre em `/estudo`; a consulta `thermometer` já devolve termômetro, memória de longo prazo e cartas guardadas |
 | Piores cartas e tela Tópico | 1 | `spec/diagnostico.md` | A consulta `worstCards` já devolve os grupos; falta a tela e a busca e os filtros do Tópico |
 | Véspera | 1 | `spec/vespera.md` | |
 | Meta diária, ofensiva, rotina, cartão de aviso, Ajustes | 1 | `spec/meta-e-ofensiva.md` | |
@@ -28,8 +27,8 @@ O que ainda não está pronto.
 
 ## O código ainda não segue o spec
 
-- O limite de novas por dia é 20 por padrão, de 5 a 50 — hoje `DEFAULT_NEW_PER_DAY` é 10
-  (`src/domain/study/settings.ts`) e o servidor não limita a faixa.
+- O limite de novas por dia vai de 5 a 50 — o servidor ainda não limita a faixa
+  (`src/domain/study/settings.ts`; o padrão de 20 já vale).
 
 ## Adiado
 
