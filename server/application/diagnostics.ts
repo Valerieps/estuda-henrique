@@ -21,6 +21,7 @@ import { retrievability, type CardStage, type SchedulingState } from '../../src/
 import { addDays } from '../../src/domain/study/study-day';
 import { QueryError, today, type Context } from './context';
 import type { Member } from './members';
+import { NOTE_EDITS, noteText } from './note-text';
 
 /** The minilinha shows the last 4 weeks. */
 const TREND_DAYS = 28;
@@ -71,13 +72,16 @@ function memberCards(ctx: Context, memberId: string): MemberCard[] {
       .map((r) => [r.card_id, r.n]),
   );
   const rows = ctx.sql.all<CardRow>(
-    `SELECT cards.id AS card_id, cards.cloze_index, notes.id AS note_id, notes.topic_id, notes.owner_id, notes.kind, notes.front, notes.back, notes.hint,
+    `SELECT cards.id AS card_id, cards.cloze_index, notes.id AS note_id, notes.topic_id, notes.owner_id, notes.kind,
+            ${noteText('front')} AS front, ${noteText('back')} AS back, ${noteText('hint')} AS hint,
             cs.stage, cs.due, cs.stability, cs.difficulty, cs.scheduled_days, cs.learning_steps, cs.reps, cs.lapses, cs.last_review, cs.suspended
      FROM cards
      JOIN notes ON notes.id = cards.note_id
      LEFT JOIN card_states cs ON cs.card_id = cards.id AND cs.member_id = ?
+     ${NOTE_EDITS}
      WHERE cards.retired = 0 AND notes.deleted_at IS NULL AND (notes.owner_id IS NULL OR notes.owner_id = ?)
      ORDER BY notes.created_at, notes.rowid, cards.cloze_index`,
+    memberId,
     memberId,
     memberId,
   );

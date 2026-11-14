@@ -128,8 +128,8 @@ describe('privacy (ADR-009)', () => {
 
     for (const who of [bia, admin]) {
       expect(service.command(who, 'note.update', { noteId: mine.id, front: 'hack', back: 'hack' })).toEqual({ ok: false, error: 'not_found' });
-      expect(service.command(who, 'card.suspend', { cardId: mine.cards[0].id, suspended: true })).toEqual({ ok: false, error: 'not_found' });
     }
+    expect(service.command(bia, 'card.suspend', { cardId: mine.cards[0].id, suspended: true })).toEqual({ ok: false, error: 'not_found' });
     expect(service.command(admin, 'note.delete', { noteId: mine.id })).toEqual({ ok: false, error: 'not_found' });
     expect(notes(henrique, t).find((n) => n.id === mine.id)?.front).toBe('segredo');
   });
@@ -157,12 +157,57 @@ describe('privacy (ADR-009)', () => {
 });
 
 describe('editing and deleting', () => {
-  it('lets the student edit everything on a system note, and the admin too', () => {
+  it('lets the student edit everything on a system note, and only he sees his version', () => {
+    const t = topic();
+    const note = ok<NoteView>(service.command(admin, 'note.create', { ...basic(t), hint: 'macete' }));
+    const edited = ok<NoteView>(service.command(henrique, 'note.update', { noteId: note.id, front: 'Novo', back: 'Nova', hint: null }));
+    expect(edited).toMatchObject({ front: 'Novo', back: 'Nova', hint: null, origin: 'system' });
+    expect(notes(henrique, t)[0]).toMatchObject({ front: 'Novo', back: 'Nova', hint: null, cards: note.cards });
+    expect(notes(bia, t)[0]).toMatchObject({ front: 'O que é ATP?', back: 'Energia', hint: 'macete' });
+    expect(notes(admin, t)[0]).toMatchObject({ front: 'O que é ATP?' });
+
+    // The admin's edit is everyone's, except where a user has his own version.
+    ok(service.command(admin, 'note.update', { noteId: note.id, front: 'Outro', back: 'Nova' }));
+    expect(notes(bia, t)[0]).toMatchObject({ front: 'Outro', hint: null });
+    expect(notes(henrique, t)[0]).toMatchObject({ front: 'Novo' });
+  });
+
+  it('shows the user his version while studying, in the Resumo and in Piores cartas', () => {
     const t = topic();
     const note = ok<NoteView>(service.command(admin, 'note.create', basic(t)));
-    const edited = ok<NoteView>(service.command(henrique, 'note.update', { noteId: note.id, front: 'Novo', back: 'Nova', hint: 'dica' }));
-    expect(edited).toMatchObject({ front: 'Novo', back: 'Nova', hint: 'dica', origin: 'system' });
-    expect(ok<NoteView>(service.command(admin, 'note.update', { noteId: note.id, front: 'Outro', back: 'Nova' })).hint).toBeNull();
+    ok(service.command(henrique, 'note.update', { noteId: note.id, front: 'Meu', back: 'Minha' }));
+    const session = ok<{ sessionId: string; cards: { front: string; back: string }[] }>(service.command(henrique, 'study.start', { kind: 'review' }));
+    expect(session.cards[0]).toMatchObject({ front: 'Meu', back: 'Minha' });
+    ok(service.command(henrique, 'study.answer', { sessionId: session.sessionId, cardId: note.cards[0].id, answer: 'again' }));
+    expect(JSON.stringify(service.query(henrique, 'studySummary', { sessionId: session.sessionId }))).toContain('Meu');
+    expect(JSON.stringify(service.query(henrique, 'worstCards', {}))).toContain('Meu');
+    const other = ok<{ cards: { front: string }[] }>(service.command(bia, 'study.start', { kind: 'review' }));
+    expect(other.cards[0].front).toBe('O que é ATP?');
+  });
+
+  it('lets a member with both roles edit the system note for everyone only when she asks', () => {
+    const t = topic();
+    const note = ok<NoteView>(service.command(admin, 'note.create', basic(t)));
+    const biaId = ok<{ id: string }>(service.query(bia, 'me', {})).id;
+    ok(service.command(admin, 'member.setRoles', { memberId: biaId, roles: ['admin', 'user'] }));
+    ok(service.command(bia, 'note.update', { noteId: note.id, front: 'Só minha', back: 'x' }));
+    expect(notes(henrique, t)[0].front).toBe('O que é ATP?');
+    ok(service.command(bia, 'note.update', { noteId: note.id, front: 'De todos', back: 'x', system: true }));
+    expect(notes(henrique, t)[0].front).toBe('De todos');
+    expect(notes(bia, t)[0].front).toBe('Só minha');
+
+    expect(ok<NoteView>(service.command(bia, 'note.create', basic(t, 'Pessoal'))).origin).toBe('personal');
+    expect(ok<NoteView>(service.command(bia, 'note.create', { ...basic(t, 'Sistema'), system: true })).origin).toBe('system');
+    expect(ok<NoteView>(service.command(henrique, 'note.create', { ...basic(t, 'Dele'), system: true })).origin).toBe('personal');
+  });
+
+  it("keeps the passages of a system cloze in a user's version", () => {
+    const t = topic();
+    const note = ok<NoteView>(service.command(admin, 'note.create', { topicId: t, kind: 'cloze', front: 'A {{a}} e a {{b}}' }));
+    expect(service.command(henrique, 'note.update', { noteId: note.id, front: 'A {{a}}' })).toEqual({ ok: false, error: 'invalid' });
+    ok(service.command(henrique, 'note.update', { noteId: note.id, front: 'Minha {{a}} e {{b}}' }));
+    expect(notes(henrique, t)[0]).toMatchObject({ front: 'Minha {{a}} e {{b}}', cards: note.cards });
+    expect(notes(bia, t)[0].front).toBe('A {{a}} e a {{b}}');
   });
 
   it('lets the student edit his own note and keeps its kind', () => {

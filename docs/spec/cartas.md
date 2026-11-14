@@ -35,6 +35,16 @@ Matérias, tópicos e cartas: o que existe para estudar e como as cartas são cr
   Por quê: eu adiciono cartas "do sistema"; o que ele faz é dele (ADR-009).
 - Ele pode editar tudo numa carta do sistema: frente, verso e macete, não só suspender e escrever o
   macete. *(1)*
+- A carta do sistema que um usuário edita muda só para ele: os outros continuam vendo a minha
+  versão, e eu também. A versão dele vale na sessão, no Resumo, em Piores cartas e no tópico, e o
+  histórico de estudo da carta continua o mesmo. *(1)*
+  Por quê: ninguém vê nada de ninguém (`spec/acesso-e-membros.md`).
+- Quando eu corrijo uma carta do sistema, a correção vale para todos, menos para quem já tem a
+  própria versão dela. *(1)*
+- Na versão dele de uma lacuna do sistema, os trechos marcados continuam os mesmos (pode mudar o
+  texto, não o número de lacunas). *(1)*
+- Quem tem os dois papéis cria e edita como usuário (cartas pessoais, versões só suas); nas telas
+  do admin, cria e edita as cartas do sistema. *(1)*
 - Eu não posso mudar nem apagar nada do histórico dele. Editar ou apagar uma carta do sistema nunca
   mexe no histórico de estudo dele (respostas e agendamento). *(1)*
 - Na interface dele, as duas aparecem juntas no tópico; só a origem muda. *(1)*

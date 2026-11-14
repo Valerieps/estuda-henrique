@@ -1,12 +1,14 @@
 // Subjects, topics, notes and cards (docs/spec/cartas.md). Subjects, topics and system notes are
 // shared content; a personal note is its owner's alone, and no query or command lets an admin (or
-// anyone else) see or touch it (ADR-009). Deleting a note or dropping a cloze passage only hides
-// it: the study history stays as it was.
+// anyone else) see or touch it (ADR-009). A user's edit of a system note is a version only they
+// see (`note_edits`). Deleting a note or dropping a cloze passage only hides it: the study history
+// stays as it was.
 import type { NoteInput, NoteView, SubjectView, TopicView } from '../../src/application/api-contract';
-import { isAdmin } from '../../src/domain/group/roles';
+import { isAdmin, writesSystemCards } from '../../src/domain/group/roles';
 import { cardIndexes, type NoteKind } from '../../src/domain/study/cloze';
 import { failure, nowIso, type CommandResult, type Context } from './context';
 import type { Member } from './members';
+import { NOTE_EDITS, noteText } from './note-text';
 import { setSuspended } from './study-store';
 
 type Input = Record<string, unknown>;
@@ -113,16 +115,25 @@ function toNoteView(ctx: Context, actor: Member, row: NoteRow): NoteView {
   };
 }
 
+/** A note as the actor sees it: with their own version of a system note's text, if any. */
+const NOTE_COLUMNS = `notes.id, notes.topic_id, notes.owner_id, notes.kind,
+  ${noteText('front')} AS front, ${noteText('back')} AS back, ${noteText('hint')} AS hint`;
+
 export function listNotes(ctx: Context, actor: Member, input: Input): NoteView[] | null {
   if (typeof input.topicId !== 'string') return null;
   return ctx.sql
-    .all<NoteRow>(`SELECT * FROM notes WHERE topic_id = ? AND ${VISIBLE} ORDER BY created_at, rowid`, input.topicId, actor.id)
+    .all<NoteRow>(
+      `SELECT ${NOTE_COLUMNS} FROM notes ${NOTE_EDITS} WHERE notes.topic_id = ? AND ${VISIBLE} ORDER BY notes.created_at, notes.rowid`,
+      actor.id,
+      input.topicId,
+      actor.id,
+    )
     .map((row) => toNoteView(ctx, actor, row));
 }
 
 function findVisibleNote(ctx: Context, actor: Member, id: unknown): NoteRow | null {
   if (typeof id !== 'string') return null;
-  const [row] = ctx.sql.all<NoteRow>(`SELECT * FROM notes WHERE id = ? AND ${VISIBLE}`, id, actor.id);
+  const [row] = ctx.sql.all<NoteRow>(`SELECT ${NOTE_COLUMNS} FROM notes ${NOTE_EDITS} WHERE notes.id = ? AND ${VISIBLE}`, actor.id, id, actor.id);
   return row ?? null;
 }
 
@@ -165,11 +176,10 @@ function validateNote(ctx: Context, input: unknown): ValidNote | 'invalid' | 'no
   return { topicId: note.topicId, kind: note.kind, clean };
 }
 
-function insertNote(ctx: Context, actor: Member, note: ValidNote): NoteRow {
+function insertNote(ctx: Context, actor: Member, note: ValidNote, system: boolean): NoteRow {
   const id = ctx.ids.next();
   const now = nowIso(ctx);
-  // An admin writes the system's cards; everyone else writes their own.
-  const ownerId = isAdmin(actor) ? null : actor.id;
+  const ownerId = system ? null : actor.id;
   ctx.sql.run(
     'INSERT INTO notes (id, topic_id, owner_id, kind, front, back, hint, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
     id,
@@ -191,7 +201,8 @@ function insertNote(ctx: Context, actor: Member, note: ValidNote): NoteRow {
 export function createNote(ctx: Context, actor: Member, input: Input): CommandResult<NoteView> {
   const note = validateNote(ctx, input);
   if (typeof note === 'string') return failure(note);
-  return { ok: true, value: toNoteView(ctx, actor, insertNote(ctx, actor, note)), changed: ['cards'] };
+  const system = writesSystemCards(actor, input.system === true);
+  return { ok: true, value: toNoteView(ctx, actor, insertNote(ctx, actor, note, system)), changed: ['cards'] };
 }
 
 const MAX_BATCH = 500;
@@ -205,7 +216,8 @@ export function createNotes(ctx: Context, actor: Member, input: Input): CommandR
     if (typeof note === 'string') return failure(note);
     valid.push(note);
   }
-  return { ok: true, value: valid.map((n) => toNoteView(ctx, actor, insertNote(ctx, actor, n))), changed: ['cards'] };
+  const system = writesSystemCards(actor, input.system === true);
+  return { ok: true, value: valid.map((n) => toNoteView(ctx, actor, insertNote(ctx, actor, n, system))), changed: ['cards'] };
 }
 
 export function updateNote(ctx: Context, actor: Member, input: Input): CommandResult<NoteView> {
@@ -214,6 +226,24 @@ export function updateNote(ctx: Context, actor: Member, input: Input): CommandRe
   if (note.owner_id !== null && note.owner_id !== actor.id) return failure('not_found');
   const clean = cleanNote(note.kind, input);
   if (!clean) return failure('invalid');
+
+  // A user's edit of a system note is their own version; the note stays as the admin wrote it.
+  if (note.owner_id === null && !writesSystemCards(actor, input.system === true)) {
+    const [system] = ctx.sql.all<{ front: string }>('SELECT front FROM notes WHERE id = ?', note.id);
+    if (note.kind === 'cloze' && !samePassages(system.front, clean.front)) return failure('invalid');
+    ctx.sql.run(
+      `INSERT INTO note_edits (member_id, note_id, front, back, hint, updated_at) VALUES (?, ?, ?, ?, ?, ?)
+       ON CONFLICT (member_id, note_id) DO UPDATE SET front = excluded.front, back = excluded.back, hint = excluded.hint, updated_at = excluded.updated_at`,
+      actor.id,
+      note.id,
+      clean.front,
+      clean.back,
+      clean.hint,
+      nowIso(ctx),
+    );
+    return { ok: true, value: toNoteView(ctx, actor, { ...note, ...clean }), changed: ['cards'] };
+  }
+
   ctx.sql.run('UPDATE notes SET front = ?, back = ?, hint = ?, updated_at = ? WHERE id = ?', clean.front, clean.back, clean.hint, nowIso(ctx), note.id);
 
   // A cloze keeps the card of every passage still there; a new passage gets a card (or brings an
@@ -231,6 +261,13 @@ export function updateNote(ctx: Context, actor: Member, input: Input): CommandRe
     }
   }
   return { ok: true, value: toNoteView(ctx, actor, { ...note, ...clean }), changed: ['cards'] };
+}
+
+/** The cards are shared, so a user's version of a cloze keeps the system note's passages. */
+function samePassages(a: string, b: string): boolean {
+  const x = cardIndexes('cloze', a);
+  const y = cardIndexes('cloze', b);
+  return x.length === y.length && x.every((i) => y.includes(i));
 }
 
 export function deleteNote(ctx: Context, actor: Member, input: Input): CommandResult<null> {

@@ -326,12 +326,19 @@ export interface Commands {
   'topic.rename': { input: { topicId: string; name: string }; output: TopicView };
   /** Admins; `topicIds` is the subject's whole new order. */
   'topic.reorder': { input: { subjectId: string; topicIds: string[] }; output: null };
-  /** An admin writes a system note; anyone else, a personal one. */
-  'note.create': { input: NoteInput; output: NoteView };
-  /** Several notes at once (Colar várias), all or none. */
-  'note.createMany': { input: { notes: NoteInput[] }; output: NoteView[] };
-  /** Front, back and hint; the kind stays. Anyone edits a system note; only the owner, a personal one. */
-  'note.update': { input: { noteId: string; front: string; back?: string; hint?: string | null }; output: NoteView };
+  /**
+   * An admin who is not a user writes a system note; a user, a personal one. A member with both
+   * roles writes a system note only with `system: true` (the admin's screens).
+   */
+  'note.create': { input: NoteInput & { system?: boolean }; output: NoteView };
+  /** Several notes at once (Colar várias), all or none; `system` as in `note.create`. */
+  'note.createMany': { input: { notes: NoteInput[]; system?: boolean }; output: NoteView[] };
+  /**
+   * Front, back and hint; the kind stays. Only the owner edits a personal note. An admin edits a
+   * system note for everyone (with `system: true` when she is also a user); a user's edit of a
+   * system note is a version only they see. A cloze keeps its passages in a user's version.
+   */
+  'note.update': { input: { noteId: string; front: string; back?: string; hint?: string | null; system?: boolean }; output: NoteView };
   /** Admins, system notes only. Hides the note; nobody's study history changes. */
   'note.delete': { input: { noteId: string }; output: null };
   /** Only the reader's own state of the card. */

@@ -7,6 +7,7 @@ import { retrievability, type CardStage, type SchedulingState } from '../../src/
 import { QueryError, type Context } from './context';
 import { thermometer } from './diagnostics';
 import type { Member } from './members';
+import { NOTE_EDITS, noteText } from './note-text';
 import { remainingToday } from './review';
 import { stateFromRow } from './study-store';
 
@@ -84,13 +85,15 @@ export function studySummary(ctx: Context, actor: Member, input: Record<string, 
     `SELECT r.card_id, r.rating, r.reviewed_at, r.study_day, r.previous_state,
             (SELECT MAX(p.study_day) FROM reviews p
               WHERE p.member_id = r.member_id AND p.card_id = r.card_id AND p.session_id != r.session_id AND p.reviewed_at < r.reviewed_at) AS previous_day,
-            notes.topic_id, topics.name AS topic_name, notes.kind AS note_kind, cards.cloze_index, notes.front, notes.back
+            notes.topic_id, topics.name AS topic_name, notes.kind AS note_kind, cards.cloze_index, ${noteText('front')} AS front, ${noteText('back')} AS back
      FROM reviews r
      JOIN cards ON cards.id = r.card_id
      JOIN notes ON notes.id = cards.note_id
+     ${NOTE_EDITS}
      JOIN topics ON topics.id = notes.topic_id
      WHERE r.session_id = ? AND r.member_id = ?
      ORDER BY r.reviewed_at, r.rowid`,
+    actor.id,
     input.sessionId,
     actor.id,
   );
