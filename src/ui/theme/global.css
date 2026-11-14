@@ -629,7 +629,7 @@ input[aria-invalid='true'] {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-
+}
 
 .summary-figure {
   font-family: var(--font-display);
@@ -659,9 +659,10 @@ input[aria-invalid='true'] {
   min-width: 0;
 }
 
+/* Pinned above the fixed tab bar, so the primary button is never behind it. */
 .exam-start {
   position: sticky;
-  bottom: var(--space-4);
+  bottom: calc(var(--size-tabbar) + var(--space-2));
 }
 
 .exam-scope {
