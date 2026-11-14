@@ -615,4 +615,43 @@ input[aria-invalid='true'] {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
+
+/* Prova: topics with a checkbox, mastery bar and card counts */
+
+.exam-topic {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--size-touch);
+  cursor: pointer;
+}
+
+.exam-topic input {
+  flex-shrink: 0;
+  width: var(--space-6);
+  min-height: var(--space-6);
+  height: var(--space-6);
+  accent-color: var(--color-brand);
+}
+
+.exam-topic .grow {
+  min-width: 0;
+}
+
+.exam-start {
+  position: sticky;
+  bottom: var(--space-4);
+}
+
+.exam-scope {
+  border: 0;
+  padding: 0;
+  margin: 0 0 var(--space-4);
+}
+
+.exam-scope label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--size-touch);
 }

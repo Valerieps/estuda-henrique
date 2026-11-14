@@ -11,6 +11,7 @@ import { Invites } from './screens/Invites';
 import { Members } from './screens/Members';
 import { SignIn } from './screens/SignIn';
 import { Settings } from './screens/Settings';
+import { Exam } from './screens/Exam';
 import { Study } from './screens/Study';
 import { Subjects } from './screens/Subjects';
 import { Today } from './screens/Today';
@@ -74,7 +75,7 @@ function memberScreen(path: string, onSignOut: () => void, today: QueryState<Tod
     case '/materias':
       return <Subjects />;
     case '/prova':
-      return <EmptyState {...empty.exam} />;
+      return <Exam />;
     case '/piores':
       return <EmptyState {...empty.worst} />;
     case '/ajustes':

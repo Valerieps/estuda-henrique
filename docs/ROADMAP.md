@@ -14,8 +14,7 @@ O que ainda não está pronto.
 | Colar várias com prévia | 1 | `spec/cartas.md` | |
 | Baralho inicial de Biologia | 1 | `spec/cartas.md` | Tópicos já definidos; falta a ordem por bimestre (Em aberto) |
 | Resumo, Refazer erros, Mais 5?, Adiantar novas, tempo do dia | 1 | `spec/estudo.md` | A sessão (`src/ui/screens/Study.tsx`) acaba hoje numa tela mínima, sem Resumo; Adiantar novas pede abrir uma sessão de Revisão só com as novas de um tópico |
-| Piores cartas e tela Tópico | 1 | `spec/diagnostico.md` | A consulta `worstCards` já devolve os grupos; falta a tela e a busca e os filtros do Tópico |
-| Véspera | 1 | `spec/vespera.md` | |
+| Piores cartas e tela Tópico | 1 | `spec/diagnostico.md` | A consulta `worstCards` já devolve os grupos; falta a tela e a busca e os filtros do Tópico; a tela Tópico também traz o atalho Véspera deste tópico, que chama `openExamWithTopic` (`src/ui/exam-launch.ts`) |
 | Tela Rotina depois do primeiro Resumo, e a chama acender no Resumo | 1 | `spec/meta-e-ofensiva.md` | Hoje, a chama, a folha Ofensiva, o cartão de aviso e os Ajustes (com a rotina) já existem; falta a tela Rotina, que pertence ao fim da sessão (Resumo), e o botão Adiantar mais 10 novas em Hoje ("Pronto por hoje") |
 | Tela inicial do admin (cartas do sistema) | 1 | `spec/meta-e-ofensiva.md` | |
 | Imagem e oclusão de imagem | 2 | `spec/cartas.md` | Oclusão é a prioridade 1 da fase 2 |

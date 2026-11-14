@@ -86,10 +86,30 @@ export const strings = {
 
   // Empty screens of the shell: each later feature replaces its own.
   empty: {
-    exam: { title: 'Prova', text: 'Aqui você monta a Véspera: escolha os tópicos da prova e estude.' },
     worst: { title: 'Piores cartas', text: 'As cartas em que você mais erra aparecem aqui, depois de algumas sessões.' },
     systemCards: { title: 'Cartas do sistema', text: 'As cartas do sistema aparecem aqui.' },
     study: { title: 'Sessão', text: 'Nenhuma carta para estudar agora.' },
+  },
+
+  exam: {
+    title: 'Prova',
+    training: 'Treino: não entra no seu histórico de acerto',
+    loading: 'Carregando…',
+    empty: { title: 'Prova', text: 'Quando houver cartas, você escolhe aqui os tópicos da prova e estuda a Véspera.' },
+    topics: 'Tópicos da prova',
+    mastery: (pct: number) => `Domínio ${pct}%`,
+    noMastery: 'Domínio —',
+    cards: (seen: number, fresh: number) => `${seen === 1 ? '1 vista' : `${seen} vistas`} · ${fresh === 1 ? '1 nova' : `${fresh} novas`}`,
+    total: (seen: number, fresh: number) =>
+      `${seen + fresh === 1 ? '1 carta' : `${seen + fresh} cartas`} (${seen === 1 ? '1 vista' : `${seen} vistas`} e ${fresh === 1 ? '1 nova' : `${fresh} novas`})`,
+    nothingChosen: 'Marque os tópicos da prova.',
+    scopeLabel: 'Quais cartas',
+    scopeAll: 'Todas as cartas',
+    scopeWeakest: 'As 30 de menor domínio',
+    scopeWeakestHint: 'Só entre as já vistas.',
+    start: 'Começar Véspera',
+    nothingToStudy: 'Não há cartas para estudar com essa escolha.',
+    error: 'Não consegui montar a Véspera. Tenta de novo?',
   },
 
   study: {

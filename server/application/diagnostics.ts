@@ -1,7 +1,7 @@
 // The diagnosis queries and the daily snapshots (docs/spec/diagnostico.md). Everything is the
 // reader's own: the cards are the system's plus their personal ones, and the states and answers
 // are filtered by their id (ADR-009). The rules live in src/domain/study/diagnostic.ts.
-import type { Thermometer, ThermometerTopic, TrendPoint, WorstCard, WorstCardsGroup } from '../../src/application/api-contract';
+import type { ExamCards, Thermometer, ThermometerTopic, TrendPoint, WorstCard, WorstCardsGroup } from '../../src/application/api-contract';
 import type { NoteKind } from '../../src/domain/study/cloze';
 import {
   isProblemCard,
@@ -16,6 +16,7 @@ import {
   type AnswerRecord,
   type DiagnosticCard,
 } from '../../src/domain/study/diagnostic';
+import { examSelection } from '../../src/domain/study/exam';
 import { retrievability, type CardStage, type SchedulingState } from '../../src/domain/study/scheduler';
 import { addDays } from '../../src/domain/study/study-day';
 import { QueryError, today, type Context } from './context';
@@ -242,4 +243,13 @@ export function recordDueSnapshots(ctx: Context): void {
     day,
   );
   for (const member of due) recordSnapshot(ctx, member.id);
+}
+
+export function examCards(ctx: Context, actor: Member, input: Record<string, unknown>): ExamCards | QueryError {
+  const { topicIds, scope } = input;
+  if (!Array.isArray(topicIds) || !topicIds.every((id) => typeof id === 'string') || (scope !== 'all' && scope !== 'weakest')) {
+    return new QueryError('invalid');
+  }
+  const picked = examSelection(memberCards(ctx, actor.id), topicIds as string[], scope);
+  return { cardIds: [...picked.cardIds], seen: picked.seen, fresh: picked.fresh };
 }

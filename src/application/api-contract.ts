@@ -163,6 +163,13 @@ export interface WorstCardsGroup {
   readonly cards: readonly WorstCard[];
 }
 
+/** The cards a Véspera takes from the chosen topics. */
+export interface ExamCards {
+  readonly cardIds: string[];
+  readonly seen: number;
+  readonly fresh: number;
+}
+
 export type StudyKind = 'review' | 'cram' | 'retry' | 'selected';
 
 /** A card in a study queue, with what the front and back need and the reader's own FSRS state. */
@@ -202,6 +209,8 @@ export interface Queries {
   today: { input: Record<string, never>; output: TodayView };
   /** The reader's own study settings. */
   settings: { input: Record<string, never>; output: SettingsView };
+  /** The reader's own cards for a Véspera: all of the topics' cards, or the 30 seen ones with the lowest mastery. */
+  examCards: { input: { topicIds: string[]; scope: 'all' | 'weakest' }; output: ExamCards };
   me: { input: Record<string, never>; output: MeView };
   /** Admins only. */
   members: { input: Record<string, never>; output: MemberListItem[] };
