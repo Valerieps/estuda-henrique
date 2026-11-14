@@ -57,7 +57,7 @@ app (celular) ──POST /api/query|command──► Worker ──RPC──► G
 | `sessions` | `token_hash`, `member_id`, `expires_at` | Só o SHA-256 do token; o cron apaga as vencidas |
 | `invites` | `email`, `invited_by`, `state` (`pending`, `accepted`, `revoked`) | Um por e-mail |
 
-Tabelas do estudo (migração 2; a 3 acrescenta `notes.deleted_at` e `cards.retired`; a matéria Biologia já vem criada, com id `biologia`):
+Tabelas do estudo (migração 2; a 3 acrescenta `notes.deleted_at` e `cards.retired`; a 4 troca os snapshots semanais por diários; a matéria Biologia já vem criada, com id `biologia`):
 
 | Tabela | Campos principais | Observação |
 | --- | --- | --- |
@@ -68,12 +68,12 @@ Tabelas do estudo (migração 2; a 3 acrescenta `notes.deleted_at` e `cards.reti
 | `card_states` | `member_id`, `card_id`, estado do FSRS (`stage`, `due`, `stability`, `difficulty`, `scheduled_days`, `learning_steps`, `reps`, `lapses`, `last_review`), `suspended` | Por membro: a mesma carta do sistema tem um estado para cada usuário. Sem linha, a carta é nova (ADR-010) |
 | `reviews` | `id`, `member_id`, `card_id`, `session_id`, `rating` (`again`, `hard`, `good`), `reviewed_at`, `study_day`, `is_training`, `previous_state` (JSON) | Registro de cada resposta; o acerto do histórico ignora `is_training` |
 | `study_sessions` | `id`, `member_id`, `kind` (`review`, `cram`, `retry`, `selected`), `is_training`, `study_day`, `started_at`, `ended_at` | Base do Resumo e da ofensiva; só `review` não é treino |
-| `topic_snapshots` | `member_id`, `topic_id`, `week` (a segunda-feira), `mastery` | Uma por semana, gravada pelo cron; alimenta a minilinha |
+| `topic_snapshots` | `member_id`, `topic_id`, `day`, `mastery` | Uma por dia, gravada pelo cron (`recordDueSnapshots`, em `server/application/diagnostics.ts`) desde a primeira resposta; alimenta a minilinha |
+| `daily_snapshots` | `member_id`, `day`, `long_term_rate` (nulo antes de 20 respostas), `long_term_answers`, `saved_cards` | Memória de longo prazo e cartas guardadas do dia; é o histórico delas |
 | `study_settings` | `member_id`, `new_per_day`, `rest_days`, `routine_when`, `routine_where`, `streak_repair_month` | Ajustes e rotina. Sem linha, valem os padrões (`src/domain/study/settings.ts`) |
 
-- `topic_snapshots` ainda é semanal e só guarda o domínio. O spec pede um snapshot por dia, com o
-  domínio de cada tópico, a memória de longo prazo e as cartas guardadas (`spec/diagnostico.md`); a
-  migração que troca `week` por dia vem com as regras de diagnóstico (`ROADMAP.md`).
+- As regras do diagnóstico (domínio, cobertura, memória de longo prazo, guardadas, ordem de Piores cartas)
+  são puras e ficam em `src/domain/study/diagnostic.ts`; o servidor só as alimenta com cartas e respostas.
 - Toda tabela com `member_id` é privada desse membro: as consultas filtram pelo ator da sessão, e
   nenhuma devolve o estudo de outro membro, nem a um admin (ADR-009).
 - As tabelas por membro só são lidas e gravadas por `server/application/study-store.ts`, cujas
