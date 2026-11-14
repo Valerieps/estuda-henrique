@@ -217,6 +217,12 @@ export const strings = {
     recalled: (n: number) =>
       n === 1 ? 'Você lembrou 1 carta que não via há 7 dias ou mais.' : `Você lembrou ${n} cartas que não via há 7 dias ou mais.`,
     accuracy: 'Acerto da sessão',
+    streakLit: 'Ofensiva acesa hoje',
+    cardsTile: 'Cartas respondidas',
+    timeTile: 'Tempo de estudo',
+    timeToday: (day: string) => `Hoje: ${day}`,
+    recalledTile: 'Lembradas depois de dias sem ver',
+    topicProgress: (name: string) => `Domínio de ${name}`,
     answers: (n: number) => (n === 1 ? '1 resposta' : `${n} respostas`),
     time: (session: string, day: string) => `Sessão: ${session} · Hoje: ${day}`,
     minutes: (n: number) => (n < 1 ? 'menos de 1 min' : `${n} min`),
