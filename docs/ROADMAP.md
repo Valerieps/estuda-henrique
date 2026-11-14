@@ -16,7 +16,7 @@ O que ainda não está pronto.
 | Baralho inicial de Biologia | 1 | `spec/cartas.md` | Tópicos já definidos; falta a ordem por bimestre (Em aberto) |
 | Sessão de Revisão com FSRS, três botões, desfazer | 1 | `spec/estudo.md` | Base pronta: FSRS (ADR-010), `recordAnswer` e `undoLastAnswer`; faltam a fila, os comandos e a tela |
 | Resumo, Refazer erros, Mais 5?, Adiantar novas, tempo do dia | 1 | `spec/estudo.md` | |
-| Hoje, termômetro, memória de longo prazo e cartas guardadas | 1 | `spec/diagnostico.md`, `spec/meta-e-ofensiva.md` | Substitui a tela `Home` de exemplo e `src/domain/greeting.ts` |
+| Hoje, termômetro, memória de longo prazo e cartas guardadas | 1 | `spec/diagnostico.md`, `spec/meta-e-ofensiva.md` | Hoje é hoje uma tela vazia da casca (`src/ui/App.tsx`) |
 | Piores cartas e tela Tópico | 1 | `spec/diagnostico.md` | |
 | Véspera | 1 | `spec/vespera.md` | |
 | Meta diária, ofensiva, rotina, cartão de aviso, Ajustes | 1 | `spec/meta-e-ofensiva.md` | |
@@ -33,8 +33,6 @@ O que ainda não está pronto.
   (`src/domain/study/settings.ts`) e o servidor não limita a faixa.
 - O app grava uma vez por dia o domínio de cada tópico, a memória de longo prazo e as cartas
   guardadas — hoje `topic_snapshots` é semanal e só guarda o domínio (`docs/ARQUITETURA.md`).
-- A tela de membros só aparece para o admin — hoje aparece para todos (`src/ui/App.tsx`), e a
-  consulta de membros não exige admin no servidor.
 
 ## Adiado
 
