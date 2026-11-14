@@ -662,3 +662,36 @@ input[aria-invalid='true'] {
   gap: var(--space-3);
   min-height: var(--size-touch);
 }
+
+/* Piores cartas and Tópico: dense card lines and their actions */
+
+.card-line {
+  font-size: var(--font-size-small);
+}
+
+.card-line-main {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.card-line-main input {
+  flex-shrink: 0;
+  width: var(--space-6);
+  min-height: var(--space-6);
+  height: var(--space-6);
+  accent-color: var(--color-brand);
+}
+
+.card-line-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.group-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}

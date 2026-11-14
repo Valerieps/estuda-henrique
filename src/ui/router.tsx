@@ -23,6 +23,21 @@ export function usePath(): string {
   return path;
 }
 
+/** The query string of the current address, e.g. `?topico=abc`. */
+export function useSearch(): string {
+  const [search, setSearch] = useState(window.location.search);
+  useEffect(() => {
+    const update = () => setSearch(window.location.search);
+    listeners.add(update);
+    window.addEventListener('popstate', update);
+    return () => {
+      listeners.delete(update);
+      window.removeEventListener('popstate', update);
+    };
+  }, []);
+  return search;
+}
+
 export function Link({ to, ...rest }: { to: string } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href' | 'onClick'>) {
   const onClick = (event: MouseEvent<HTMLAnchorElement>) => {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;

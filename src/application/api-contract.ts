@@ -145,6 +145,9 @@ export interface WorstCard {
   readonly origin: 'system' | 'personal';
   readonly kind: NoteKind;
   readonly front: string;
+  /** What Editar needs; empty for a cloze. */
+  readonly back: string;
+  readonly hint: string | null;
   readonly clozeIndex: number;
   /** 0 to 1. */
   readonly mastery: number;
@@ -161,6 +164,23 @@ export interface WorstCardsGroup {
   readonly topicName: string;
   readonly mastery: number | null;
   readonly cards: readonly WorstCard[];
+}
+
+/** A row of the Tópico screen: any card of the topic, new and suspended ones included. */
+export interface TopicCard extends Omit<WorstCard, 'mastery'> {
+  /** 0 to 1, or null while the card is new. */
+  readonly mastery: number | null;
+  readonly suspended: boolean;
+}
+
+/** The Tópico screen: the topic's mastery and coverage, and all of its cards. */
+export interface TopicCardsView {
+  readonly topicId: string;
+  readonly topicName: string;
+  readonly mastery: number | null;
+  readonly seen: number;
+  readonly total: number;
+  readonly cards: readonly TopicCard[];
 }
 
 /** The cards a Véspera takes from the chosen topics. */
@@ -277,6 +297,8 @@ export interface Queries {
   thermometer: { input: Record<string, never>; output: Thermometer };
   /** The reader's own worst cards by topic, weakest topic first; `topicId` keeps one topic's group. */
   worstCards: { input: { topicId?: string }; output: WorstCardsGroup[] };
+  /** The reader's own cards of one topic, for the Tópico screen. */
+  topicCards: { input: { topicId: string }; output: TopicCardsView };
   /** The reader's own Hoje: routine, day's goal and streak. */
   today: { input: Record<string, never>; output: TodayView };
   /** The reader's own study settings. */

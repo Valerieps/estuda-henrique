@@ -83,6 +83,32 @@ export function orderWorstCards<T extends DiagnosticCard>(cards: readonly T[]): 
     });
 }
 
+// ---- Tópico: filters and search ----
+
+export type TopicFilter = 'all' | 'new' | 'suspended' | 'problem';
+
+interface TopicListCard extends DiagnosticCard {
+  readonly text: string;
+}
+
+function plain(text: string): string {
+  return text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+}
+
+/**
+ * The cards of the Tópico list for a filter and a search. New: never studied and not suspended.
+ * Problem: six or more Errei. The search ignores case and accents and looks at the text of the card.
+ */
+export function filterTopicCards<T extends TopicListCard>(cards: readonly T[], filter: TopicFilter, search: string): T[] {
+  const needle = plain(search.trim());
+  return cards.filter((c) => {
+    if (filter === 'new' && !(c.mastery === null && !c.suspended)) return false;
+    if (filter === 'suspended' && !c.suspended) return false;
+    if (filter === 'problem' && !isProblemCard(c.againCount)) return false;
+    return needle === '' || plain(c.text).includes(needle);
+  });
+}
+
 // ---- Long-term memory and saved cards ----
 
 /** One answer, in the order it was given. */

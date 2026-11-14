@@ -12,6 +12,8 @@ import { Members } from './screens/Members';
 import { SignIn } from './screens/SignIn';
 import { Settings } from './screens/Settings';
 import { Exam } from './screens/Exam';
+import { Topic } from './screens/Topic';
+import { Worst } from './screens/Worst';
 import { Study } from './screens/Study';
 import { Subjects } from './screens/Subjects';
 import { Today } from './screens/Today';
@@ -77,10 +79,11 @@ function memberScreen(path: string, onSignOut: () => void, today: QueryState<Tod
     case '/prova':
       return <Exam />;
     case '/piores':
-      return <EmptyState {...empty.worst} />;
+      return <Worst />;
     case '/ajustes':
       return <Settings onSignOut={onSignOut} />;
     default:
+      if (path.startsWith('/topico/')) return <Topic topicId={decodeURIComponent(path.slice('/topico/'.length))} />;
       return <Today today={today} />;
   }
 }

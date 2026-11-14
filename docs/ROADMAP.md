@@ -14,7 +14,6 @@ O que ainda não está pronto.
 | Colar várias com prévia | 1 | `spec/cartas.md` | |
 | Baralho inicial de Biologia | 1 | `spec/cartas.md` | Tópicos já definidos; falta a ordem por bimestre (Em aberto) |
 | Confete no "Pronto por hoje" | 1 | `spec/estudo.md` | O Resumo (`src/ui/screens/StudySummary.tsx`) já faz o resto, mas sem confete (em Hoje também). |
-| Piores cartas e tela Tópico | 1 | `spec/diagnostico.md` | A consulta `worstCards` já devolve os grupos; falta a tela e a busca e os filtros do Tópico; a tela Tópico também traz o atalho Véspera deste tópico, que chama `openExamWithTopic` (`src/ui/exam-launch.ts`) |
 | Tela Rotina depois do primeiro Resumo, e a chama acender no Resumo | 1 | `spec/meta-e-ofensiva.md` | Hoje, a chama, a folha Ofensiva, o cartão de aviso e os Ajustes (com a rotina) já existem; falta a tela Rotina, que pertence ao fim da sessão (Resumo) |
 | Tela inicial do admin (cartas do sistema) | 1 | `spec/meta-e-ofensiva.md` | |
 | Imagem e oclusão de imagem | 2 | `spec/cartas.md` | Oclusão é a prioridade 1 da fase 2 |
@@ -42,6 +41,9 @@ O que ainda não está pronto.
 - [ ] O cartão de aviso perdeu o aviso de backup vencido, porque não há backup (`spec/meta-e-ofensiva.md`).
 - [ ] Estudar <tópico>, em Piores cartas, é treino, como Estudar estas agora, porque a Revisão é
   sempre da matéria inteira (`spec/diagnostico.md`).
+- [ ] Na tela Tópico, o filtro Todas mostra também as cartas suspensas (marcadas); Novas são as
+  nunca estudadas e não suspensas; Problema são as com 6 ou mais Errei; a busca ignora maiúsculas
+  e acentos e olha frente e verso (`spec/diagnostico.md`).
 - [ ] Domínio e cobertura de um tópico não contam as cartas suspensas; o domínio só conta cartas já
   estudadas (`spec/diagnostico.md`).
 - [ ] As cartas guardadas contam cada carta uma vez, em qualquer sessão (Revisão ou treino); a
