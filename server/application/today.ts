@@ -45,6 +45,21 @@ function streakView(ctx: Context, memberId: string): StreakView {
   };
 }
 
+/**
+ * What he already did of today's goal: the cards he answered in a non-training session today, each
+ * counted once. A card seen before today is a review; otherwise it is new.
+ */
+function doneToday(ctx: Context, memberId: string): { reviewsDone: number; newDone: number } {
+  const cards = ctx.sql.all<{ seenBefore: number }>(
+    `SELECT EXISTS (SELECT 1 FROM reviews p WHERE p.member_id = r.member_id AND p.card_id = r.card_id AND p.study_day < r.study_day) AS seenBefore
+     FROM reviews r WHERE r.member_id = ? AND r.study_day = ? AND r.is_training = 0 GROUP BY r.card_id`,
+    memberId,
+    today(ctx),
+  );
+  const reviewsDone = cards.filter((card) => card.seenBefore).length;
+  return { reviewsDone, newDone: cards.length - reviewsDone };
+}
+
 export function todayView(ctx: Context, actor: Member): TodayView {
   const settings = studySettings(ctx, actor.id);
   const queue = dailyQueue(ctx, actor, null);
@@ -60,6 +75,7 @@ export function todayView(ctx: Context, actor: Member): TodayView {
     restToday: settings.restDays.includes(weekday(today(ctx))),
     reviewsLeft: queue.length - newLeft,
     newLeft,
+    ...doneToday(ctx, actor.id),
     hasStudied: finished > 0,
     streak: streakView(ctx, actor.id),
   };

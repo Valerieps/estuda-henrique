@@ -84,6 +84,60 @@ describe('Hoje', () => {
   });
 });
 
+describe('the goal done today', () => {
+  /** Answers `count` cards in one session of `kind`, all "good". */
+  function study(kind: string, count: number) {
+    const session = ok<StudySessionView>(command('henrique', 'study.start', { kind, limit: count }));
+    for (const card of session.cards) command('henrique', 'study.answer', { sessionId: session.sessionId, cardId: card.id, answer: 'good' });
+    command('henrique', 'study.end', { sessionId: session.sessionId });
+    return session.cards.length;
+  }
+
+  it('is zero on an empty day', () => {
+    systemCards(3);
+    expect(todayOf('henrique')).toMatchObject({ reviewsDone: 0, newDone: 0 });
+  });
+
+  it('counts new cards, and total = done + left', () => {
+    systemCards(5);
+    study('review', 2);
+    const view = todayOf('henrique');
+    expect(view).toMatchObject({ newDone: 2, reviewsDone: 0, newLeft: 3 });
+  });
+
+  it('counts a card seen on a previous day as a review, once per card', () => {
+    systemCards(3);
+    study('review', 3);
+    clock.set('2026-11-14T15:00:00Z');
+    // Learning steps may bring cards back today; the first answer decides, and each card counts once.
+    const answered = study('review', 3);
+    expect(answered).toBeGreaterThan(0);
+    const view = todayOf('henrique');
+    expect(view.newDone).toBe(0);
+    expect(view.reviewsDone).toBeLessThanOrEqual(3);
+    expect(view.reviewsDone).toBe(answered);
+  });
+
+  it('does not count training', () => {
+    const ids = systemCards(4);
+    for (const kind of ['cram', 'retry', 'selected']) {
+      const session = ok<StudySessionView>(command('henrique', 'study.start', { kind, cardIds: ids.slice(0, 2) }));
+      for (const card of session.cards) command('henrique', 'study.answer', { sessionId: session.sessionId, cardId: card.id, answer: 'good' });
+      command('henrique', 'study.end', { sessionId: session.sessionId });
+    }
+    expect(todayOf('henrique')).toMatchObject({ reviewsDone: 0, newDone: 0 });
+  });
+
+  it('starts over at midnight in Brasília', () => {
+    systemCards(4);
+    clock.set('2026-11-14T02:30:00Z'); // 23:30 on the 13th in Brasília
+    study('review', 2);
+    expect(todayOf('henrique').newDone).toBe(2);
+    clock.set('2026-11-14T03:30:00Z'); // 00:30 on the 14th
+    expect(todayOf('henrique').newDone).toBe(0);
+  });
+});
+
 describe('the streak', () => {
   it('counts a day he opened Hoje with nothing to study, but not one with cards left', () => {
     systemCards(2);

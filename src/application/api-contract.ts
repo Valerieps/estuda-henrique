@@ -125,6 +125,9 @@ export interface TodayView {
   /** What is left of the day's goal: reviews (learning and due) and new cards up to the limit. */
   readonly reviewsLeft: number;
   readonly newLeft: number;
+  /** What he already did today (Brasília day, training excluded): total = done + left. */
+  readonly reviewsDone: number;
+  readonly newDone: number;
   /** He finished at least one session in his life: the install notice waits for it. */
   readonly hasStudied: boolean;
   readonly streak: StreakView;
