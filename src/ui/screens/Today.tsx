@@ -82,6 +82,7 @@ function Goal({ view, hasCards }: { view: TodayView; hasCards: boolean }) {
           <>
             <h2>{s.done}</h2>
             <p>{s.doneText}</p>
+            <AheadNew />
             <ButtonLink
               variant="secondary"
               href="/piores"
@@ -107,6 +108,30 @@ function Goal({ view, hasCards }: { view: TodayView; hasCards: boolean }) {
         {s.five}
       </Button>
     </div>
+  );
+}
+
+/** Adiantar mais 10 novas: a normal review session with new cards of one topic (docs/spec/estudo.md). */
+function AheadNew() {
+  const { data } = useQuery('studyOutlook', {}, ['study', 'cards']);
+  const [chosen, setChosen] = useState<string | null>(null);
+  const topicId = chosen ?? data?.suggestedTopicId ?? null;
+  if (!data || data.aheadTopics.length === 0 || topicId === null) return null;
+  const a = strings.summary;
+  return (
+    <>
+      <label className="field">
+        <span className="field-label">{a.aheadTopic}</span>
+        <select value={topicId} onChange={(event) => setChosen(event.target.value)}>
+          {data.aheadTopics.map((t) => (
+            <option key={t.topicId} value={t.topicId}>
+              {a.aheadTopicOption(t.name, t.seen, t.total)}
+            </option>
+          ))}
+        </select>
+      </label>
+      <Button onClick={() => startStudy({ kind: 'review', aheadTopicId: topicId })}>{a.ahead}</Button>
+    </>
   );
 }
 

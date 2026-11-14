@@ -195,8 +195,80 @@ export interface StudySessionView {
   readonly cards: readonly StudyCard[];
 }
 
+/** A card the reader got wrong in a session, as the Resumo lists it. */
+export interface SummaryCard {
+  readonly cardId: string;
+  readonly topicName: string;
+  readonly kind: NoteKind;
+  readonly clozeIndex: number;
+  readonly front: string;
+  readonly back: string;
+}
+
+/** A topic whose mastery moved during the session; `before` is null when it was not studied yet. */
+export interface SummaryTopic {
+  readonly topicId: string;
+  readonly name: string;
+  readonly before: number | null;
+  readonly after: number;
+}
+
+/** The Resumo of one study session (docs/spec/estudo.md). */
+export interface StudySummary {
+  readonly kind: StudyKind;
+  /** Training: the accuracy does not count toward the history. */
+  readonly training: boolean;
+  /** Every answer given, repeats included. */
+  readonly answers: number;
+  /** Answers per button. */
+  readonly counts: { readonly again: number; readonly hard: number; readonly good: number };
+  /** The share right among each card's first answer, 0 to 1; null when nothing was answered. */
+  readonly accuracy: number | null;
+  /** Seconds from the start to the last answer of the session, and of the whole day. */
+  readonly sessionSeconds: number;
+  readonly daySeconds: number;
+  /** True once, in the session where the day's time crossed 1 hour. */
+  readonly hourReached: boolean;
+  /** Cards seen for the first time in this session. */
+  readonly newSeen: number;
+  /** Cards answered right after 7 or more days without being seen. */
+  readonly recalled: number;
+  readonly topics: readonly SummaryTopic[];
+  /** The cards whose first answer was Errei, in the order they came. */
+  readonly wrong: readonly SummaryCard[];
+  /** The cards whose first answer was Errei or Acertei com esforço: what Refazer erros studies. */
+  readonly retryCardIds: readonly string[];
+  /** Cards still left in today's queue (Mais 5?). */
+  readonly remainingToday: number;
+  /** Long-term memory, shown when the day is done. */
+  readonly longTermRate: number | null;
+}
+
+/** A topic Adiantar novas can pull new cards from. */
+export interface AheadTopic {
+  readonly topicId: string;
+  readonly name: string;
+  readonly seen: number;
+  readonly total: number;
+  readonly newLeft: number;
+}
+
+/** What is left to study today, and where Adiantar novas could pull from. */
+export interface StudyOutlook {
+  /** Cards still in today's queue. */
+  readonly remainingToday: number;
+  /** Topics with new cards left, in the order of the subject. */
+  readonly aheadTopics: readonly AheadTopic[];
+  /** The topic with the fewest cards seen, or null when no topic has new cards left. */
+  readonly suggestedTopicId: string | null;
+}
+
 /** Reads: `POST /api/query/<name>`. They never change anything. */
 export interface Queries {
+  /** The reader's own Resumo of one of their sessions; not_found when the session is not theirs. */
+  studySummary: { input: { sessionId: string }; output: StudySummary };
+  /** What is left today and the topics Adiantar novas offers. */
+  studyOutlook: { input: Record<string, never>; output: StudyOutlook };
   /** Subjects with their topics in order. */
   subjects: { input: Record<string, never>; output: SubjectView[] };
   /** The notes of a topic the reader may see: the system's and their own. */
@@ -245,9 +317,10 @@ export interface Commands {
   /**
    * Opens a study session. `review` builds the day's queue (learning, due, then new) and takes an
    * optional `limit` (Só 5 cartas); the other kinds are training and take `cardIds`. Null when
-   * there is nothing to study.
+   * there is nothing to study. `aheadTopicId` (review only) is Adiantar novas: up to 10 new cards of
+   * that topic, past the daily limit.
    */
-  'study.start': { input: { kind: StudyKind; limit?: number; cardIds?: string[] }; output: StudySessionView | null };
+  'study.start': { input: { kind: StudyKind; limit?: number; aheadTopicId?: string; cardIds?: string[] }; output: StudySessionView | null };
   /** Records an answer; the output is the card's new state. */
   'study.answer': { input: { sessionId: string; cardId: string; answer: Answer }; output: { state: SchedulingState } };
   /** Undoes the session's last answer; the output is the card with its state before it. */

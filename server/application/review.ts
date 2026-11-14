@@ -1,7 +1,7 @@
 // The study session (docs/spec/estudo.md): which cards enter the day's queue, and answering,
 // undoing and ending. Everything reads and writes the actor's own state (ADR-009); a card is
 // eligible only when the actor may see it and has not suspended it.
-import type { StudyCard, StudyKind, StudySessionView } from '../../src/application/api-contract';
+import type { AheadTopic, StudyCard, StudyKind, StudyOutlook, StudySessionView } from '../../src/application/api-contract';
 import type { NoteKind } from '../../src/domain/study/cloze';
 import { isAnswer, newCardState, type SchedulingState } from '../../src/domain/study/scheduler';
 import { endOfStudyDay } from '../../src/domain/study/study-day';
@@ -98,6 +98,34 @@ export function dailyQueue(ctx: Context, actor: Member, limit: number | null): S
   return limit === null ? queue : queue.slice(0, limit);
 }
 
+/** Adiantar novas: how many new cards one tap brings. */
+const AHEAD_NEW = 10;
+
+/** Adiantar novas: the first new cards of a topic, past the daily limit. */
+function aheadQueue(ctx: Context, actor: Member, topicId: string): StudyCard[] {
+  return eligibleCards(ctx, actor)
+    .filter((c) => c.topicId === topicId && c.state.stage === 'new')
+    .slice(0, AHEAD_NEW);
+}
+
+/** Cards still left in today's queue: what Mais 5? offers. */
+export function remainingToday(ctx: Context, actor: Member): number {
+  return dailyQueue(ctx, actor, null).length;
+}
+
+/** What is left today, and the topics with new cards left (the one with the fewest seen first). */
+export function studyOutlook(ctx: Context, actor: Member): StudyOutlook {
+  const byTopic = new Map<string, AheadTopic>();
+  for (const card of eligibleCards(ctx, actor)) {
+    const entry = byTopic.get(card.topicId) ?? { topicId: card.topicId, name: card.topicName, seen: 0, total: 0, newLeft: 0 };
+    const fresh = card.state.stage === 'new';
+    byTopic.set(card.topicId, { ...entry, total: entry.total + 1, seen: entry.seen + (fresh ? 0 : 1), newLeft: entry.newLeft + (fresh ? 1 : 0) });
+  }
+  const aheadTopics = [...byTopic.values()].filter((t) => t.newLeft > 0);
+  const suggested = aheadTopics.reduce<AheadTopic | null>((best, t) => (best === null || t.seen < best.seen ? t : best), null);
+  return { remainingToday: remainingToday(ctx, actor), aheadTopics, suggestedTopicId: suggested?.topicId ?? null };
+}
+
 /** Training: exactly the cards asked for, in that order, when the actor may study them. */
 function trainingQueue(ctx: Context, actor: Member, cardIds: readonly string[]): StudyCard[] {
   const eligible = new Map(eligibleCards(ctx, actor).map((c) => [c.id, c]));
@@ -111,7 +139,13 @@ export function startStudy(ctx: Context, actor: Member, input: Input): CommandRe
   if (kind === 'review') {
     const limit = input.limit;
     if (limit !== undefined && (typeof limit !== 'number' || !Number.isInteger(limit) || limit < 1 || limit > MAX_LIMIT)) return failure('invalid');
-    cards = dailyQueue(ctx, actor, limit === undefined ? null : (limit as number));
+    const ahead = input.aheadTopicId;
+    if (ahead !== undefined) {
+      if (typeof ahead !== 'string' || limit !== undefined) return failure('invalid');
+      cards = aheadQueue(ctx, actor, ahead);
+    } else {
+      cards = dailyQueue(ctx, actor, limit === undefined ? null : (limit as number));
+    }
   } else {
     const ids = input.cardIds;
     if (!Array.isArray(ids) || ids.length === 0 || ids.length > MAX_TRAINING_CARDS || !ids.every((id) => typeof id === 'string')) return failure('invalid');
