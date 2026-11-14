@@ -39,18 +39,58 @@ export const strings = {
     close: 'Fechar',
     newCard: 'Nova carta',
     pasteMany: 'Colar várias',
+    back: 'Voltar',
+  },
+
+  card: {
+    title: 'Nova carta',
+    topic: 'Tópico',
+    kind: 'Tipo',
+    basic: 'Básica',
+    cloze: 'Lacuna',
+    front: 'Frente (pergunta)',
+    clozeFront: 'Frase com {{lacunas}}',
+    clozeHelp: 'Marque cada trecho escondido entre {{ e }}. Cada trecho vira uma carta.',
+    clozeCount: (n: number) => (n === 1 ? 'Essa frase cria 1 carta.' : `Essa frase cria ${n} cartas.`),
+    back: 'Verso (resposta)',
+    hint: 'Macete (opcional)',
+    save: 'Salvar carta',
+    saved: (topic: string) => `Carta criada em ${topic}.`,
+    needsClozeGap: 'Marque pelo menos um trecho entre {{ e }}.',
+    noTopics: 'Ainda não há tópicos para guardar cartas.',
+  },
+
+  paste: {
+    title: 'Colar várias',
+    topic: 'Tópico',
+    text: 'Cartas, uma por linha',
+    help: 'Pergunta ; Resposta ; Macete (opcional). Ou uma frase com {{lacunas}}.',
+    save: (n: number) => (n === 1 ? 'Criar 1 carta' : `Criar ${n} cartas`),
+    saved: (n: number, topic: string) => (n === 1 ? `1 carta criada em ${topic}.` : `${n} cartas criadas em ${topic}.`),
+    recognized: (lines: number, cards: number) =>
+      `${lines === 1 ? '1 linha reconhecida' : `${lines} linhas reconhecidas`}, ${cards === 1 ? '1 carta' : `${cards} cartas`}.`,
+    unrecognizedTitle: (n: number) => (n === 1 ? '1 linha não reconhecida' : `${n} linhas não reconhecidas`),
+    unrecognizedHelp: 'Corrija aqui ou apague a linha. Sem "Pergunta ; Resposta" ou {{lacuna}}, ela não vira carta.',
+    notRecognized: 'Não reconhecida.',
+    fixLine: (n: number) => `Corrigir a linha ${n}`,
+    nothing: 'Cole as cartas acima para ver a prévia.',
+  },
+
+  subjects: {
+    title: 'Matérias',
+    topicsOf: (subject: string) => `Tópicos de ${subject}`,
+    noTopics: 'Sem tópicos ainda.',
+    empty: 'Ainda não há matérias.',
+    loading: 'Carregando...',
   },
 
   // Empty screens of the shell: each later feature replaces its own.
   empty: {
     today: { title: 'Hoje', text: 'Quando houver cartas para estudar, elas aparecem aqui.' },
-    subjects: { title: 'Matérias', text: 'Suas matérias e tópicos aparecem aqui.' },
     exam: { title: 'Prova', text: 'Aqui você monta a Véspera: escolha os tópicos da prova e estude.' },
     worst: { title: 'Piores cartas', text: 'As cartas em que você mais erra aparecem aqui, depois de algumas sessões.' },
     systemCards: { title: 'Cartas do sistema', text: 'As cartas do sistema aparecem aqui.' },
     settings: { title: 'Ajustes', text: 'Os ajustes de estudo aparecem aqui.' },
-    newCard: { title: 'Nova carta', text: 'O formulário de carta nova chega em breve.' },
-    pasteMany: { title: 'Colar várias', text: 'Colar várias cartas de uma vez chega em breve.' },
     study: { title: 'Sessão', text: 'Nenhuma carta para estudar agora.' },
   },
 
