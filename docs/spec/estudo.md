@@ -30,7 +30,7 @@ A sessão de estudo de todo dia: que cartas entram, em que ordem, e como ele res
 
 - A frente mostra a barra de progresso (quantas cartas faltam), o tópico e a pergunta. Ele vira a
   carta tocando nela ou em Mostrar resposta. Não há gestos de deslizar. *(1)*
-- A carta vira em 3D, em cerca de 200 ms. O verso mostra frente, verso e macete, e embaixo, na zona
+- A carta vira em 3D, em cerca de 200 ms. O cartão tem a altura do conteúdo. O verso mostra a pergunta, um divisor, a resposta (em tamanho igual ou menor que o da pergunta) e o macete, e embaixo, na zona
   do polegar, os três botões. *(1)*
 - Virar a carta e registrar a resposta levam menos de 150 ms. *(1)*
 
@@ -46,8 +46,8 @@ A sessão de estudo de todo dia: que cartas entram, em que ordem, e como ele res
 - Não existe botão "Fácil". *(1)*
   Por quê: ele costuma ser usado quando a resposta só estava certa, e isso infla os intervalos.
 - Cada botão dá uma vibração curta. Errei desliza a carta para trás com "volta já já", sem vermelho
-  e sem som. O verso não comemora Acertei nem pune Errei. *(1)*
-- No topo do verso: Desfazer (desfaz a última resposta da sessão) e um menu com Editar carta e
+  e sem som. Acertei e Acertei com esforço dão um pulso na cor de sucesso. O verso não comemora Acertei nem pune Errei. *(1)*
+- No topo do verso: Desfazer (desfaz a última resposta da sessão; só aparece quando há o que desfazer) e um menu com Editar carta e
   Suspender. Editar salva e volta para o mesmo verso; Suspender passa para a próxima carta. *(1)*
 - Uma carta que vira guardada ganha uma pequena animação no verso. *(2)*
 
