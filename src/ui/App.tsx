@@ -9,6 +9,7 @@ import { navigate, usePath } from './router';
 import { Invites } from './screens/Invites';
 import { Members } from './screens/Members';
 import { SignIn } from './screens/SignIn';
+import { Exam } from './screens/Exam';
 import { Study } from './screens/Study';
 import { Subjects } from './screens/Subjects';
 import { AdminShell, MemberShell } from './Shell';
@@ -71,7 +72,7 @@ function memberScreen(path: string, onSignOut: () => void) {
     case '/materias':
       return <Subjects />;
     case '/prova':
-      return <EmptyState {...empty.exam} />;
+      return <Exam />;
     case '/piores':
       return <EmptyState {...empty.worst} />;
     case '/ajustes':
