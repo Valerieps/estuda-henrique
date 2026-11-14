@@ -68,7 +68,7 @@ export function Worst() {
                 {group.topicName}
               </Link>
             </h2>
-            <StateBadge state={topicState(group.mastery, group.mastery === null ? 0 : 1)} />
+            <StateBadge state={topicState(group.mastery, group.seen, group.total)} />
             <Button variant="secondary" onClick={() => startStudy({ kind: 'selected', cardIds: group.cards.map((c) => c.cardId) })}>
               {s.studyTopic(group.topicName)}
             </Button>

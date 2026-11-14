@@ -62,7 +62,7 @@ export function Subjects() {
       const stats = byTopic.get(topic.id);
       const seen = stats?.seen ?? 0;
       const mastery = stats?.mastery ?? null;
-      return { topic, stats, seen, mastery, state: topicState(mastery, seen) };
+      return { topic, stats, seen, mastery, state: topicState(mastery, seen, stats?.total ?? 0) };
     }),
   }));
   const counts = countByState(withStats.flatMap((g) => g.topics));

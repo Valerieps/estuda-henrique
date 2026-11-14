@@ -54,7 +54,7 @@ export function Topic({ topicId }: { topicId: string }) {
   }
 
   const topic = view.data;
-  const state = topicState(topic.mastery, topic.seen);
+  const state = topicState(topic.mastery, topic.seen, topic.total);
   const worstPath = `/piores?topico=${encodeURIComponent(topic.topicId)}`;
   const shown = filterTopicCards(
     topic.cards.map((c) => ({ ...c, text: `${cardFront(c)} ${c.kind === 'basic' ? c.back : ''}` })),

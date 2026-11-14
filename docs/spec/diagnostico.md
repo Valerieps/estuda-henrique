@@ -39,6 +39,10 @@ Onde ele está fraco: o termômetro em Hoje e a lista de Piores cartas.
   prazo e as cartas guardadas. *(1)*
   Por quê: sem isso, não há histórico para mostrar depois.
 - Abaixo de 60% de domínio, o tópico aparece como Fraco, em destaque. *(1)*
+- O tópico fica Dominado com 90% de domínio ou mais e pelo menos 80% das cartas dele já vistas;
+  com domínio alto e cobertura menor, ele fica Em andamento. *(1)*
+  Por quê: o domínio é a média só das cartas vistas; 3 cartas certas de 11 não são um tópico
+  dominado.
 - Ao voltar de uma sessão, as barras dos tópicos estudados animam do valor antigo para o novo. *(1)*
 - No celular dele, o tópico mais fraco aparece sem rolar a tela. *(1)*
 - Tocar num tópico abre Piores cartas filtrada por esse tópico. *(1)*

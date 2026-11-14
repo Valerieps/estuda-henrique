@@ -331,7 +331,7 @@ export const strings = {
     state: { new: 'Novo', weak: 'Fraco', progress: 'Em andamento', mastered: 'Dominado' },
     masteryHelpLabel: 'O que é domínio?',
     masteryHelp:
-      'Domínio é a chance de você lembrar hoje as cartas que já viu do tópico. Sobe quando você acerta e cai sozinho com o tempo. Abaixo de 60% o tópico fica Fraco; a partir de 90%, Dominado. Cartas que você ainda não viu não entram na conta: elas aparecem em "3 de 11 vistas".',
+      'Domínio é a chance de você lembrar hoje as cartas que já viu do tópico. Sobe quando você acerta e cai sozinho com o tempo. Abaixo de 60% o tópico fica Fraco; com 90% ou mais e pelo menos 80% das cartas vistas, Dominado. Cartas que você ainda não viu não entram na conta: elas aparecem em "3 de 11 vistas".',
   },
 
   streak: {
