@@ -57,14 +57,14 @@ app (celular) ──POST /api/query|command──► Worker ──RPC──► G
 | `sessions` | `token_hash`, `member_id`, `expires_at` | Só o SHA-256 do token; o cron apaga as vencidas |
 | `invites` | `email`, `invited_by`, `state` (`pending`, `accepted`, `revoked`) | Um por e-mail |
 
-Tabelas do estudo (migração 2; a matéria Biologia já vem criada, com id `biologia`):
+Tabelas do estudo (migração 2; a 3 acrescenta `notes.deleted_at` e `cards.retired`; a matéria Biologia já vem criada, com id `biologia`):
 
 | Tabela | Campos principais | Observação |
 | --- | --- | --- |
 | `subjects` | `id`, `name`, `position`, `archived` | Só Biologia na fase 1 |
 | `topics` | `id`, `subject_id`, `name`, `position` | Ordem do planejamento da escola |
-| `notes` | `id`, `topic_id`, `owner_id` (nulo = do sistema), `kind` (`basic`, `cloze`), `front`, `back`, `hint` | A nota é o que se escreve; uma lacuna gera várias cartas (`src/domain/study/cloze.ts`) |
-| `cards` | `id`, `note_id`, `cloze_index` | Uma por nota básica (`cloze_index` 0), uma por trecho de lacuna (de 1 em diante) |
+| `notes` | `id`, `topic_id`, `owner_id` (nulo = do sistema), `kind` (`basic`, `cloze`), `front`, `back`, `hint`, `deleted_at` | A nota é o que se escreve; apagar só esconde (`deleted_at`), nunca mexe no histórico; uma lacuna gera várias cartas (`src/domain/study/cloze.ts`) |
+| `cards` | `id`, `note_id`, `cloze_index`, `retired` | Uma por nota básica (`cloze_index` 0), uma por trecho de lacuna (de 1 em diante); o trecho que sai da frase aposenta a carta (`retired`), não a apaga |
 | `card_states` | `member_id`, `card_id`, estado do FSRS (`stage`, `due`, `stability`, `difficulty`, `scheduled_days`, `learning_steps`, `reps`, `lapses`, `last_review`), `suspended` | Por membro: a mesma carta do sistema tem um estado para cada usuário. Sem linha, a carta é nova (ADR-010) |
 | `reviews` | `id`, `member_id`, `card_id`, `session_id`, `rating` (`again`, `hard`, `good`), `reviewed_at`, `study_day`, `is_training`, `previous_state` (JSON) | Registro de cada resposta; o acerto do histórico ignora `is_training` |
 | `study_sessions` | `id`, `member_id`, `kind` (`review`, `cram`, `retry`, `selected`), `is_training`, `study_day`, `started_at`, `ended_at` | Base do Resumo e da ofensiva; só `review` não é treino |

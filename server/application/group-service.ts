@@ -2,6 +2,7 @@
 // so a command runs alone and inside one transaction (ADR-004).
 import type { ApiResult, CommandName, Commands, QueryName, Queries, Topic } from '../../src/application/api-contract';
 import { failure, QueryError, type CommandResult, type Context } from './context';
+import { createNote, createNotes, createTopic, deleteNote, listNotes, listSubjects, renameTopic, reorderTopics, suspendCard, updateNote } from './cards';
 import { createInvite, listInvites, revokeInvite } from './invites';
 import {
   listMembers,
@@ -28,6 +29,8 @@ const QUERIES: { [N in QueryName]: Handler<Queries[N]['output'] | QueryError | n
   me: (_ctx, actor) => me(actor),
   members: (ctx, actor) => listMembers(ctx, actor),
   invites: (ctx, actor) => listInvites(ctx, actor),
+  subjects: (ctx) => listSubjects(ctx),
+  notes: (ctx, actor, input) => listNotes(ctx, actor, input),
 };
 
 /** Every command the API runs; each checks the actor's role itself. */
@@ -37,6 +40,14 @@ const COMMANDS: { [N in CommandName]: Handler<CommandResult<Commands[N]['output'
   'member.setRoles': setRoles,
   'member.remove': removeMember,
   'member.rename': rename,
+  'topic.create': createTopic,
+  'topic.rename': renameTopic,
+  'topic.reorder': reorderTopics,
+  'note.create': createNote,
+  'note.createMany': createNotes,
+  'note.update': updateNote,
+  'note.delete': deleteNote,
+  'card.suspend': suspendCard,
 };
 
 export class GroupService {
