@@ -103,6 +103,19 @@ a {
   list-style: none;
 }
 
+/* Visible to screen readers only */
+
+.sr-only {
+  position: absolute;
+  width: var(--border-width);
+  height: var(--border-width);
+  margin: calc(-1 * var(--border-width));
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* Text */
 
 .muted {
@@ -128,6 +141,7 @@ a {
 }
 
 .card.row {
+  overflow-wrap: anywhere;
   margin-bottom: var(--space-2);
 }
 
@@ -667,6 +681,18 @@ input[aria-invalid='true'] {
 
 .card-line {
   font-size: var(--font-size-small);
+  overflow-wrap: anywhere;
+}
+
+/* The checkbox of a card line: the whole square is the touch target. */
+.check-target {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: var(--size-touch);
+  min-height: var(--size-touch);
+  margin: calc(-1 * var(--space-2)) 0 0 calc(-1 * var(--space-3));
 }
 
 .card-line-main {
@@ -692,6 +718,7 @@ input[aria-invalid='true'] {
 
 .group-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-3);
 }

@@ -31,10 +31,13 @@ export function CardLine({ card, selected, onSelect, onChanged }: CardLineProps)
   const { backend } = useServices();
   const [editing, setEditing] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [busy, setBusy] = useState(false);
 
   async function toggleSuspended() {
     setFailed(false);
+    setBusy(true);
     const result = await backend.command('card.suspend', { cardId: card.cardId, suspended: !card.suspended });
+    setBusy(false);
     if (!result.ok) return setFailed(true);
     onChanged();
   }
@@ -44,7 +47,11 @@ export function CardLine({ card, selected, onSelect, onChanged }: CardLineProps)
   return (
     <li className="card card-line">
       <div className="card-line-main">
-        {onSelect && <input type="checkbox" checked={selected === true} onChange={onSelect} aria-label={`${s.select}: ${text}`} />}
+        {onSelect && (
+          <label className="check-target">
+            <input type="checkbox" checked={selected === true} onChange={onSelect} aria-label={`${s.select}: ${text}`} />
+          </label>
+        )}
         <div className="grow stack">
           {card.problem && (
             <span className="small strong" role="note">
@@ -63,7 +70,7 @@ export function CardLine({ card, selected, onSelect, onChanged }: CardLineProps)
         <Button variant="secondary" onClick={() => setEditing(true)}>
           {s.edit}
         </Button>
-        <Button variant="secondary" onClick={() => void toggleSuspended()}>
+        <Button variant="secondary" disabled={busy} onClick={() => void toggleSuspended()}>
           {card.suspended ? s.unsuspend : s.suspend}
         </Button>
       </div>

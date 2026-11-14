@@ -88,7 +88,11 @@ export function Study() {
 
   return (
     <Layer>
-      {phase.name === 'loading' && <p className="muted">{s.loading}</p>}
+      {phase.name === 'loading' && (
+        <p className="muted" role="status">
+          {s.loading}
+        </p>
+      )}
       {phase.name === 'error' && (
         <EmptyState title={strings.empty.study.title} text={s.startFailed}>
           <Button variant="secondary" onClick={leave}>
@@ -291,6 +295,7 @@ function Session({ session, onFinish, onLeave }: { session: StudySessionView; on
   return (
     <Layer header={header}>
       <div className="study">
+        <h1 className="sr-only">{s.title}</h1>
         {session.training && <Notice>{s.training}</Notice>}
         {error && <Notice tone="error">{error}</Notice>}
         <div className="card-tools" data-hidden={!flipped}>
