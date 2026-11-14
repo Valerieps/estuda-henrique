@@ -1,0 +1,1683 @@
+{
+  "versao": 3,
+  "geradoEm": "2026-11-13",
+  "materia": "Biologia",
+  "objetivo": "Diagnóstico inicial: poucas cartas por subtema, cobrindo todo o conteúdo do PAS (2ª fase) e da escola, para identificar pontos fracos pela taxa de acerto por subtema.",
+  "legendaFonte": {
+    "PAS": "Conteúdo do PAS 2ª fase",
+    "escola": "Conteúdo da escola",
+    "provas-PAS": "Tema que caiu nas provas do PAS 2 (editais 2024 e 2025)"
+  },
+  "decks": [
+    {
+      "id": "classificacao",
+      "nome": "Classificação e Filogenia",
+      "descricao": "Categorias taxonômicas, nomenclatura, cladogramas, domínios e reinos.",
+      "cartas": [
+        {
+          "id": "cla-01",
+          "subtema": "Categorias taxonômicas",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Qual a ordem das categorias taxonômicas, da mais ampla para a mais restrita?",
+          "verso": "Domínio → Reino → Filo → Classe → Ordem → Família → Gênero → Espécie."
+        },
+        {
+          "id": "cla-02",
+          "subtema": "Nomenclatura binomial",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "Quais são as regras para escrever um nome científico, como o do ser humano?",
+          "verso": "Homo sapiens: duas palavras em latim, em itálico (ou sublinhadas à mão). A 1ª é o gênero, com inicial maiúscula; a 2ª é o epíteto específico, toda em minúscula."
+        },
+        {
+          "id": "cla-03",
+          "subtema": "Categorias taxonômicas",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Canis lupus (lobo) e Canis latrans (coiote) pertencem à mesma espécie? O que eles têm em comum na classificação?",
+          "verso": "Não, são espécies diferentes. Como têm o mesmo gênero (Canis), também compartilham família, ordem, classe, filo e reino."
+        },
+        {
+          "id": "cla-04",
+          "subtema": "Conceito de espécie",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Qual é o conceito biológico de espécie?",
+          "verso": "Grupo de populações que podem se cruzar na natureza e gerar descendentes férteis, e que estão isoladas reprodutivamente de outros grupos (ex.: o burro, filho de égua com jumento, é estéril)."
+        },
+        {
+          "id": "cla-05",
+          "subtema": "Cladogramas",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Em um cladograma, o que representa um nó (ponto de ramificação)?",
+          "verso": "O ancestral comum de todos os grupos que saem daquele ponto."
+        },
+        {
+          "id": "cla-06",
+          "subtema": "Cladogramas",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Como saber, num cladograma, quais grupos são mais aparentados?",
+          "verso": "São os que compartilham o ancestral comum mais recente (o nó mais próximo deles), e não os que aparecem lado a lado no desenho."
+        },
+        {
+          "id": "cla-07",
+          "subtema": "Cladogramas",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "O que é um grupo monofilético?",
+          "verso": "Um grupo formado por um ancestral comum e TODOS os seus descendentes. É o único tipo de grupo aceito na sistemática filogenética (cladística)."
+        },
+        {
+          "id": "cla-08",
+          "subtema": "Domínios e reinos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Quais são os três domínios e quem pertence a cada um?",
+          "verso": "Bacteria (bactérias), Archaea (arqueas) e Eukarya (protistas, fungos, plantas e animais)."
+        },
+        {
+          "id": "cla-09",
+          "subtema": "Domínios e reinos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Quais são os cinco reinos de Whittaker e que critérios os separam?",
+          "verso": "Monera, Protista (Protoctista), Fungi, Plantae e Animalia. Critérios: tipo de célula (procarionte ou eucarionte), número de células (uni ou pluricelular) e tipo de nutrição (autótrofa, absorção ou ingestão)."
+        },
+        {
+          "id": "cla-10",
+          "subtema": "Categorias taxonômicas",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "Certo ou errado: na nomenclatura de uma espécie, o primeiro nome indica a classe e o segundo, o gênero.",
+          "verso": "Errado. O primeiro nome é o gênero (inicial maiúscula) e o segundo é o epíteto específico (minúsculo). Os dois juntos formam o nome da espécie.",
+          "referencia": [
+            "PAS 2025, item 50 (E)"
+          ]
+        },
+        {
+          "id": "cla-11",
+          "subtema": "Categorias taxonômicas",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "A que reino, filo e classe pertence uma arara?",
+          "verso": "Reino Animalia, filo Chordata, classe Aves.",
+          "referencia": [
+            "PAS 2025, item 47 (C)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "virus",
+      "nome": "Vírus e Viroses",
+      "descricao": "Estrutura viral, ciclos reprodutivos e principais viroses humanas.",
+      "cartas": [
+        {
+          "id": "vir-01",
+          "subtema": "Estrutura viral",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Qual é a estrutura básica de um vírus?",
+          "verso": "Material genético (DNA ou RNA, nunca os dois) envolto por uma cápsula de proteína (capsídeo). Alguns vírus têm também um envelope lipídico por fora (ex.: HIV, vírus da gripe)."
+        },
+        {
+          "id": "vir-02",
+          "subtema": "Estrutura viral",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Por que os vírus são chamados de parasitas intracelulares obrigatórios?",
+          "verso": "Porque não têm metabolismo próprio nem ribossomos. Só conseguem se reproduzir dentro de uma célula, usando a maquinaria dela."
+        },
+        {
+          "id": "vir-03",
+          "subtema": "Ciclos lítico e lisogênico",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Qual a diferença entre o ciclo lítico e o lisogênico?",
+          "verso": "Lítico: o vírus se multiplica e rompe (lisa) a célula, liberando novos vírus. Lisogênico: o DNA viral se integra ao DNA da célula (prófago) e é copiado junto com ela, sem destruí-la; mais tarde pode entrar no ciclo lítico."
+        },
+        {
+          "id": "vir-04",
+          "subtema": "Viroses",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "HIV: que tipo de vírus é, que enzima especial ele usa e qual célula ataca?",
+          "verso": "É um retrovírus (material genético de RNA). Usa a transcriptase reversa para fazer DNA a partir do seu RNA. Ataca os linfócitos T CD4 (T auxiliares), enfraquecendo o sistema imune (aids)."
+        },
+        {
+          "id": "vir-05",
+          "subtema": "Viroses",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Dengue, zika, chikungunya e febre amarela urbana: como são transmitidas e como prevenir?",
+          "verso": "Pela picada da fêmea do mosquito Aedes aegypti (arboviroses). Prevenção: eliminar criadouros de água parada; para a febre amarela existe vacina. (A febre amarela silvestre é transmitida pelos mosquitos Haemagogus e Sabethes.)"
+        },
+        {
+          "id": "vir-06",
+          "subtema": "Viroses",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Hepatite A e hepatite B: como cada uma é transmitida?",
+          "verso": "Hepatite A: via fecal-oral (água e alimentos contaminados). Hepatite B: sangue, relação sexual e de mãe para filho. As duas têm vacina."
+        },
+        {
+          "id": "vir-07",
+          "subtema": "Viroses",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "Gripe: o agente é vírus ou bactéria? Por que antibiótico não trata gripe?",
+          "verso": "É um vírus (Influenza; H1N1 é um subtipo desse vírus, não uma bactéria). Antibióticos atacam estruturas exclusivas de bactérias (parede de peptidoglicano, ribossomos bacterianos), que vírus não têm. Prevenção: vacina anual.",
+          "referencia": [
+            "PAS 2024, item 20 (gripe causada por bactéria H1N1: errado)"
+          ]
+        },
+        {
+          "id": "vir-08",
+          "subtema": "Viroses",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "Varíola e sarampo: qual o tipo de agente, como se transmitem e como se previnem?",
+          "verso": "Os dois são causados por vírus e transmitidos por via respiratória (gotículas e secreções). A varíola foi erradicada do mundo (1980) graças à vacinação em massa e à vigilância. O sarampo é prevenido pela vacina tríplice viral. As duas doenças, junto com a gripe, devastaram populações indígenas no Brasil colonial.",
+          "referencia": [
+            "PAS 2024, item 20 (A: varíola, vírus erradicado por vacinação)",
+            "PAS 2025, item 40 (D: vírus)"
+          ]
+        },
+        {
+          "id": "vir-09",
+          "subtema": "Viroses",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "Certo ou errado: a febre amarela é causada por um platelminto e transmitida por um percevejo.",
+          "verso": "Errado. A febre amarela é causada por um vírus e transmitida por mosquitos (Aedes aegypti na forma urbana; Haemagogus e Sabethes na silvestre). Percevejo hematófago é o barbeiro, vetor da doença de Chagas (protozoário).",
+          "referencia": [
+            "PAS 2024, item 20 (febre amarela por platelminto e percevejo: errado)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "monera",
+      "nome": "Monera e Bacterioses",
+      "descricao": "Bactérias e arqueas, reprodução e principais bacterioses.",
+      "cartas": [
+        {
+          "id": "mon-01",
+          "subtema": "Célula bacteriana",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Quais são as principais características de uma célula bacteriana?",
+          "verso": "Procarionte: sem núcleo organizado (DNA no nucleoide), sem organelas membranosas, ribossomos pequenos, parede celular de peptidoglicano e, muitas vezes, plasmídeos."
+        },
+        {
+          "id": "mon-02",
+          "subtema": "Bactérias x arqueas",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "O que diferencia as arqueas das bactérias?",
+          "verso": "As duas são procariontes, mas as arqueas não têm peptidoglicano na parede, têm lipídios de membrana diferentes e muitas vivem em ambientes extremos (muito quentes, salgados ou ácidos). Em vários aspectos moleculares são mais parecidas com os eucariontes."
+        },
+        {
+          "id": "mon-03",
+          "subtema": "Reprodução bacteriana",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Como as bactérias se reproduzem e como ganham variabilidade genética?",
+          "verso": "Reproduzem-se de forma assexuada por divisão binária. Ganham variabilidade por mutações e por recombinação: transformação (captam DNA do meio), transdução (DNA levado por vírus) e conjugação (troca de DNA por uma ponte, o pilus)."
+        },
+        {
+          "id": "mon-04",
+          "subtema": "Bacterioses",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Tuberculose: agente, transmissão e prevenção.",
+          "verso": "Mycobacterium tuberculosis (bacilo de Koch). Transmitida pelo ar (gotículas de tosse e fala). Prevenção: vacina BCG; o tratamento com antibióticos é longo (cerca de 6 meses)."
+        },
+        {
+          "id": "mon-05",
+          "subtema": "Bacterioses",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Hanseníase: agente, transmissão e sintoma característico.",
+          "verso": "Mycobacterium leprae (bacilo de Hansen). Transmitida pelas vias aéreas, em contato próximo e prolongado. Causa manchas na pele com perda de sensibilidade. Tem cura, com tratamento gratuito no SUS."
+        },
+        {
+          "id": "mon-06",
+          "subtema": "Bacterioses",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Cólera: agente, transmissão e principal risco.",
+          "verso": "Vibrio cholerae. Transmitida por água e alimentos contaminados por fezes. Causa diarreia intensa com risco de desidratação grave. Prevenção: saneamento básico e água tratada; tratamento: reidratação."
+        },
+        {
+          "id": "mon-07",
+          "subtema": "Bacterioses",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Leptospirose: agente e como a pessoa se contamina.",
+          "verso": "Bactéria Leptospira. A bactéria está na urina de ratos e entra pela pele ou mucosas, principalmente no contato com água de enchentes e esgoto."
+        },
+        {
+          "id": "mon-08",
+          "subtema": "Bacterioses",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Tétano: agente, como se adquire e como prevenir.",
+          "verso": "Clostridium tetani. Esporos presentes no solo e em objetos entram por ferimentos; a toxina causa contrações musculares fortes. Prevenção: vacina antitetânica (com reforços); em ferimentos de risco sem vacina em dia, usa-se o soro."
+        },
+        {
+          "id": "mon-09",
+          "subtema": "Bacterioses",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "Salmonelose: agente e transmissão. Faz sentido falar em cistos da salmonela?",
+          "verso": "Agente: bactéria Salmonella. Transmissão por alimentos e água contaminados, principalmente ovos crus ou malcozidos, frango e laticínios. Não existem cistos de salmonela: cistos são formas de resistência de protozoários (ameba, giárdia).",
+          "referencia": [
+            "PAS 2025, item 61 (E)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "protoctista",
+      "nome": "Protoctista e Protozooses",
+      "descricao": "Grupos de protozoários, protozooses de importância no Brasil e algas.",
+      "cartas": [
+        {
+          "id": "pro-01",
+          "subtema": "Grupos de protozoários",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Como os protozoários são classificados pela forma de locomoção? Dê um exemplo de cada grupo.",
+          "verso": "Rizópodes: pseudópodes (ameba). Flagelados: flagelos (Trypanosoma, Giardia, Leishmania). Ciliados: cílios (paramécio). Esporozoários: sem estrutura de locomoção (Plasmodium, Toxoplasma)."
+        },
+        {
+          "id": "pro-02",
+          "subtema": "Grupos de protozoários",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Qual a função do vacúolo contrátil nos protozoários de água doce?",
+          "verso": "Eliminar o excesso de água que entra na célula por osmose, já que o meio é hipotônico. Sem ele, a célula estouraria."
+        },
+        {
+          "id": "pro-03",
+          "subtema": "Protozooses",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Doença de Chagas: agente, vetor e forma de transmissão.",
+          "verso": "Trypanosoma cruzi. Vetor: barbeiro (triatomíneo). O barbeiro pica e defeca; o parasita, que está nas fezes, entra pelo ferimento ao coçar. Também há transmissão oral (açaí ou caldo de cana contaminados) e por transfusão. Afeta coração e tubo digestório."
+        },
+        {
+          "id": "pro-04",
+          "subtema": "Protozooses",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Malária: agente, vetor e sintoma característico.",
+          "verso": "Plasmodium (esporozoário). Vetor: fêmea do mosquito Anopheles. Febres em ciclos, que coincidem com o rompimento das hemácias. Concentrada na região amazônica."
+        },
+        {
+          "id": "pro-05",
+          "subtema": "Protozooses",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Leishmaniose: agente, vetor e formas da doença.",
+          "verso": "Leishmania. Vetor: mosquito-palha (flebotomíneo). Forma tegumentar (feridas na pele e mucosas) e forma visceral ou calazar (fígado e baço); o cão é um importante reservatório na visceral."
+        },
+        {
+          "id": "pro-06",
+          "subtema": "Protozooses",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Amebíase e giardíase: agentes, transmissão e prevenção.",
+          "verso": "Entamoeba histolytica e Giardia lamblia. Ingestão de cistos em água ou alimentos contaminados por fezes. Prevenção: saneamento, água tratada ou fervida, lavar bem alimentos e mãos."
+        },
+        {
+          "id": "pro-07",
+          "subtema": "Protozooses",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Toxoplasmose: agente, hospedeiro definitivo, transmissão e grupo de maior risco.",
+          "verso": "Toxoplasma gondii; o gato é o hospedeiro definitivo. Transmissão: ingestão de oocistos (fezes de gato, verduras mal lavadas) ou de carne crua ou mal passada com cistos. Maior risco: gestantes, pois o parasita pode passar para o feto."
+        },
+        {
+          "id": "pro-08",
+          "subtema": "Algas",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "Qual a importância ecológica das algas?",
+          "verso": "São produtoras na base das cadeias alimentares aquáticas e, junto com as cianobactérias (que são bactérias, do reino Monera), formam o fitoplâncton, que produz grande parte do oxigênio do planeta. Mudanças no fitoplâncton servem para avaliar a qualidade da água. A proliferação excessiva de algumas algas (maré vermelha) pode liberar toxinas.",
+          "referencia": [
+            "PAS 2024, item 85 (C)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fungi",
+      "nome": "Fungi",
+      "descricao": "Estrutura, nutrição, reprodução, importância e micoses.",
+      "cartas": [
+        {
+          "id": "fun-01",
+          "subtema": "Estrutura dos fungos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "O que são hifas e micélio?",
+          "verso": "Hifas são os filamentos que formam o corpo da maioria dos fungos; o micélio é o conjunto de hifas. As leveduras são exceção: são unicelulares."
+        },
+        {
+          "id": "fun-02",
+          "subtema": "Estrutura dos fungos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Por que os fungos não são classificados como plantas?",
+          "verso": "São heterótrofos (sem clorofila), têm parede celular de quitina e armazenam glicogênio, e não amido. Nesses pontos se parecem mais com os animais."
+        },
+        {
+          "id": "fun-03",
+          "subtema": "Nutrição",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Como os fungos se alimentam?",
+          "verso": "Por absorção: liberam enzimas digestivas no meio, digerem o alimento fora do corpo e absorvem os nutrientes. Podem ser decompositores, parasitas ou viver em mutualismo."
+        },
+        {
+          "id": "fun-04",
+          "subtema": "Importância econômica",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Qual o papel das leveduras na fabricação de pão e bebidas alcoólicas?",
+          "verso": "A levedura Saccharomyces cerevisiae faz fermentação alcoólica: glicose → etanol + CO₂. No pão, o CO₂ faz a massa crescer; nas bebidas, aproveita-se o etanol."
+        },
+        {
+          "id": "fun-05",
+          "subtema": "Importância econômica",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Qual antibiótico é produzido por um fungo e qual é esse fungo?",
+          "verso": "A penicilina, produzida pelo fungo Penicillium (descoberta de Alexander Fleming)."
+        },
+        {
+          "id": "fun-06",
+          "subtema": "Associações",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "O que são liquens e micorrizas?",
+          "verso": "Liquens: associação de fungo com alga ou cianobactéria. Micorrizas: associação de fungo com raízes de plantas (o fungo amplia a absorção de água e sais; a planta fornece açúcares). As duas são mutualismo."
+        },
+        {
+          "id": "fun-07",
+          "subtema": "Micoses",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Cite micoses humanas e um fator que favorece seu aparecimento.",
+          "verso": "Pé de atleta (frieira), candidíase (Candida albicans), pano branco (pitiríase versicolor), micose de unha. São favorecidas por calor e umidade."
+        }
+      ]
+    },
+    {
+      "id": "botanica-grupos",
+      "nome": "Grupos Vegetais e Angiospermas",
+      "descricao": "Comparativo de briófitas, pteridófitas, gimnospermas e angiospermas; ciclo de vida, flor, fruto e semente.",
+      "cartas": [
+        {
+          "id": "bot-01",
+          "subtema": "Ciclo de vida vegetal",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Como funciona a alternância de gerações (ciclo haplodiplobionte) das plantas?",
+          "verso": "O gametófito (n) produz gametas por mitose. Os gametas se unem e formam o zigoto (2n), que dá origem ao esporófito (2n). O esporófito produz esporos (n) por meiose, e cada esporo origina um novo gametófito."
+        },
+        {
+          "id": "bot-02",
+          "subtema": "Comparativo de grupos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Briófitas (musgos): principais características.",
+          "verso": "Avasculares (sem xilema e floema), por isso são pequenas e vivem em locais úmidos. O gametófito é a fase duradoura. Dependem de água para a fecundação (anterozoide nada até a oosfera)."
+        },
+        {
+          "id": "bot-03",
+          "subtema": "Comparativo de grupos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Pteridófitas (samambaias): principais características.",
+          "verso": "Primeiras plantas vasculares, mas sem sementes. O esporófito é a fase duradoura. Ainda dependem de água para a fecundação. Os esporos ficam em soros, na face de baixo das folhas."
+        },
+        {
+          "id": "bot-04",
+          "subtema": "Comparativo de grupos",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "Gimnospermas (pinheiros, araucária): principais características.",
+          "verso": "Têm sementes, mas NÃO têm flores nem frutos (sementes nuas). As estruturas reprodutivas são estróbilos (pinhas). O pólen vai pelo vento do estróbilo masculino até o feminino, e o tubo polínico torna a fecundação independente da água. O pinhão da araucária é uma semente, não um fruto.",
+          "referencia": [
+            "PAS 2025, item 42 (C)"
+          ]
+        },
+        {
+          "id": "bot-05",
+          "subtema": "Comparativo de grupos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Qual novidade evolutiva surgiu em cada grupo: pteridófitas, gimnospermas e angiospermas?",
+          "verso": "Pteridófitas: vasos condutores. Gimnospermas: sementes e grão de pólen/tubo polínico. Angiospermas: flores e frutos."
+        },
+        {
+          "id": "bot-06",
+          "subtema": "Angiospermas",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Quais são as partes de uma flor completa e a função de cada uma?",
+          "verso": "Cálice (sépalas) e corola (pétalas) protegem e atraem polinizadores. Androceu (estames: antera + filete) é a parte masculina e produz o pólen. Gineceu (carpelos: estigma, estilete e ovário com óvulos) é a parte feminina."
+        },
+        {
+          "id": "bot-07",
+          "subtema": "Angiospermas",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Como é a dupla fecundação das angiospermas?",
+          "verso": "Um núcleo espermático fecunda a oosfera e forma o zigoto (2n), que vira o embrião. O outro se une aos dois núcleos polares e forma o endosperma (3n), tecido de reserva da semente."
+        },
+        {
+          "id": "bot-08",
+          "subtema": "Angiospermas",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Depois da fecundação, que parte da flor vira o fruto e qual vira a semente?",
+          "verso": "O ovário se desenvolve no fruto; o óvulo fecundado vira a semente."
+        },
+        {
+          "id": "bot-09",
+          "subtema": "Angiospermas",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "Monocotiledôneas x eudicotiledôneas: diferenças principais.",
+          "verso": "Mono (milho, grama): 1 cotilédone, nervuras paralelas, raiz fasciculada (cabeleira), feixes vasculares espalhados no caule, flores com partes em múltiplos de 3. Eudicot (feijão, rosa): 2 cotilédones, nervuras em rede, raiz pivotante, feixes em anel, flores em múltiplos de 4 ou 5. Atenção: as duas são angiospermas, então ambas têm flores e frutos.",
+          "referencia": [
+            "PAS 2025, item 43 (E)"
+          ]
+        },
+        {
+          "id": "bot-10",
+          "subtema": "Angiospermas",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "O que é um pseudofruto? Dê exemplos e diga de que parte da flor vem a parte carnosa.",
+          "verso": "É uma estrutura carnosa que não vem do ovário. Caju: a parte suculenta é o pedúnculo floral desenvolvido; o fruto verdadeiro é a castanha, que contém a semente. Morango e maçã: a parte carnosa vem do receptáculo floral (no morango, os frutos verdadeiros são os pontinhos).",
+          "referencia": [
+            "PAS 2025, item 41 (E: a polpa do caju não é receptáculo, é pedúnculo)"
+          ]
+        },
+        {
+          "id": "bot-11",
+          "subtema": "Comparativo de grupos",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "Certo ou errado: o pólen dos pinheiros é levado pelo vento da flor de uma árvore para a flor de outra.",
+          "verso": "Errado. Pinheiros são gimnospermas e não têm flores: o pólen é levado pelo vento dos estróbilos masculinos aos femininos. A semente do pinheiro tem uma asa e também é dispersa pelo vento.",
+          "referencia": [
+            "PAS 2024, item 77 (E)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "histologia-vegetal",
+      "nome": "Histologia Vegetal",
+      "descricao": "Meristemas, revestimento, preenchimento, sustentação e condução; raiz, caule e folha.",
+      "cartas": [
+        {
+          "id": "hve-01",
+          "subtema": "Meristemas",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Meristemas primários x secundários: onde ficam e que crescimento promovem?",
+          "verso": "Primários (apicais, nas pontas de caule e raiz): crescimento em comprimento. Secundários (câmbio vascular e felogênio): crescimento em espessura."
+        },
+        {
+          "id": "hve-02",
+          "subtema": "Revestimento",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Epiderme vegetal: onde está e quais estruturas pode ter?",
+          "verso": "Reveste órgãos jovens. Pode ter cutícula (camada de cera que reduz a perda de água), estômatos (trocas gasosas) e tricomas (pelos)."
+        },
+        {
+          "id": "hve-03",
+          "subtema": "Revestimento",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "O que é o súber (cortiça) e de onde vem?",
+          "verso": "Tecido de revestimento de caules e raízes com crescimento secundário. Formado por células mortas impregnadas de suberina (impermeável). É produzido pelo felogênio."
+        },
+        {
+          "id": "hve-04",
+          "subtema": "Preenchimento e reserva",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Quais os tipos de parênquima e suas funções?",
+          "verso": "Clorofiliano (fotossíntese; paliçádico e lacunoso nas folhas), de reserva (amilífero guarda amido, aquífero guarda água), aerífero ou aerênquima (guarda ar, ajuda a flutuar)."
+        },
+        {
+          "id": "hve-05",
+          "subtema": "Sustentação",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Colênquima x esclerênquima.",
+          "verso": "Colênquima: células vivas, parede de celulose espessada, sustentação flexível em órgãos jovens. Esclerênquima: células mortas com parede de lignina, sustentação rígida (fibras e esclereídes)."
+        },
+        {
+          "id": "hve-06",
+          "subtema": "Condução",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Xilema x floema: células, seiva e sentido do transporte.",
+          "verso": "Xilema: células mortas e lignificadas (traqueídes e elementos de vaso); leva seiva bruta (água e sais) da raiz às folhas. Floema: células vivas (tubo crivado + células companheiras); leva seiva elaborada (açúcares) das folhas para o resto da planta."
+        },
+        {
+          "id": "hve-07",
+          "subtema": "Raiz, caule e folha",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Quais são as regiões de uma raiz, da ponta para cima?",
+          "verso": "Coifa (protege a ponta), zona meristemática (divisão), zona de alongamento, zona pilífera (pelos absorventes, onde ocorre a maior absorção) e zona de ramificação (raízes secundárias)."
+        },
+        {
+          "id": "hve-08",
+          "subtema": "Raiz, caule e folha",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "Dê exemplos dos principais tipos de caule.",
+          "verso": "Colmo, com nós e entrenós bem marcados (cana-de-açúcar, bambu). Estipe, sem ramificações e com folhas só no topo (palmeiras). Tronco, lenhoso e ramificado (árvores). Tubérculo, subterrâneo de reserva (batata-inglesa). Rizoma, subterrâneo horizontal (bananeira, gengibre). Bulbo, com folhas modificadas de reserva (cebola, alho).",
+          "referencia": [
+            "PAS 2025, item 64 (C)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fisiologia-vegetal",
+      "nome": "Fisiologia Vegetal",
+      "descricao": "Transporte de seiva, estômatos, hormônios vegetais, fotoperiodismo e movimentos.",
+      "cartas": [
+        {
+          "id": "fve-01",
+          "subtema": "Transporte de seiva",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Como a seiva bruta sobe até as folhas (teoria de Dixon ou coesão-tensão)?",
+          "verso": "A transpiração nas folhas perde água e cria uma tensão que puxa a coluna de água no xilema. Isso funciona porque as moléculas de água ficam unidas entre si (coesão) e às paredes dos vasos (adesão)."
+        },
+        {
+          "id": "fve-02",
+          "subtema": "Transporte de seiva",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Como a seiva elaborada se desloca (hipótese de Münch)?",
+          "verso": "Por fluxo de pressão: o açúcar entra no floema na fonte (folha), atrai água por osmose, a pressão aumenta e empurra a seiva até os drenos (raízes, frutos, sementes), onde o açúcar é consumido ou armazenado."
+        },
+        {
+          "id": "fve-03",
+          "subtema": "Transporte de seiva",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "O que acontece se retirarmos um anel da casca do tronco (anel de Malpighi)? Por quê?",
+          "verso": "A planta acaba morrendo. A casca contém o floema; sem ele, a seiva elaborada não chega às raízes, que morrem por falta de açúcar e deixam de absorver água."
+        },
+        {
+          "id": "fve-04",
+          "subtema": "Estômatos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Como os estômatos abrem e o que faz com que fechem?",
+          "verso": "Abrem quando entra K⁺ nas células-guarda; a água entra por osmose, elas ficam túrgidas e o ostíolo abre (estimulado por luz e CO₂ baixo). Fecham com falta de água: o ácido abscísico provoca saída de K⁺ e de água, e as células ficam flácidas."
+        },
+        {
+          "id": "fve-05",
+          "subtema": "Hormônios vegetais",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Auxina: onde é produzida e quais seus efeitos? Explique o fototropismo do caule.",
+          "verso": "Produzida principalmente no ápice do caule. Promove alongamento celular, dominância apical, enraizamento e formação de frutos. No fototropismo, a auxina se acumula no lado sombreado; esse lado cresce mais e o caule se curva para a luz."
+        },
+        {
+          "id": "fve-06",
+          "subtema": "Hormônios vegetais",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Giberelinas: principais efeitos.",
+          "verso": "Alongamento do caule, germinação de sementes (quebra da dormência), floração e formação de frutos sem semente (uva sem semente)."
+        },
+        {
+          "id": "fve-07",
+          "subtema": "Hormônios vegetais",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Citocininas: principais efeitos.",
+          "verso": "Estimulam a divisão celular e retardam o envelhecimento das folhas. Atuam junto com a auxina: a proporção entre as duas define se o tecido forma raízes ou brotos."
+        },
+        {
+          "id": "fve-08",
+          "subtema": "Hormônios vegetais",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Etileno: o que tem de diferente e quais seus efeitos?",
+          "verso": "É um hormônio gasoso. Promove o amadurecimento de frutos e a queda (abscisão) de folhas e frutos. Por isso uma fruta madura no saco acelera o amadurecimento das outras."
+        },
+        {
+          "id": "fve-09",
+          "subtema": "Hormônios vegetais",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Ácido abscísico (ABA): principais efeitos.",
+          "verso": "Hormônio do estresse: fecha os estômatos em falta de água e mantém a dormência de sementes e gemas."
+        },
+        {
+          "id": "fve-10",
+          "subtema": "Movimentos vegetais",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Qual a diferença entre tropismo e nastismo? Dê exemplos.",
+          "verso": "Tropismo: crescimento orientado pela direção do estímulo (fototropismo, gravitropismo, tigmotropismo das gavinhas). Nastismo: movimento que não depende da direção do estímulo, geralmente por variação de turgor (folhas da sensitiva fechando ao toque)."
+        },
+        {
+          "id": "fve-11",
+          "subtema": "Fotoperiodismo",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "O que diferencia plantas de dia curto e de dia longo?",
+          "verso": "Depende da duração da noite contínua. Plantas de dia curto florescem quando a noite é MAIOR que um período crítico; as de dia longo, quando é MENOR. O pigmento que percebe a luz é o fitocromo."
+        }
+      ]
+    },
+    {
+      "id": "embriologia",
+      "nome": "Embriologia e Planos Corporais",
+      "descricao": "Fases do desenvolvimento, folhetos, celoma, simetria e destino do blastóporo.",
+      "cartas": [
+        {
+          "id": "emb-01",
+          "subtema": "Fases do desenvolvimento",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Quais as fases do desenvolvimento embrionário e o que acontece em cada uma?",
+          "verso": "Segmentação: divisões do zigoto (mórula → blástula). Gastrulação: formação dos folhetos germinativos, do arquêntero (intestino primitivo) e do blastóporo. Organogênese: formação dos órgãos, começando pelo tubo neural e notocorda (nêurula)."
+        },
+        {
+          "id": "emb-02",
+          "subtema": "Folhetos germinativos",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "O que origina cada folheto germinativo?",
+          "verso": "Ectoderme: epiderme e sistema nervoso. Mesoderme: músculos, ossos, sangue, coração e vasos, rins e gônadas. Endoderme: revestimento interno do tubo digestório e respiratório, fígado e pâncreas."
+        },
+        {
+          "id": "emb-03",
+          "subtema": "Blastóporo",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Protostômios x deuterostômios: o que muda e quais grupos estão em cada?",
+          "verso": "Protostômios: o blastóporo vira a boca (platelmintos, nematelmintos, moluscos, anelídeos, artrópodes). Deuterostômios: o blastóporo vira o ânus (equinodermos e cordados)."
+        },
+        {
+          "id": "emb-04",
+          "subtema": "Celoma",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Acelomados, pseudocelomados e celomados: exemplos de cada.",
+          "verso": "Acelomados: platelmintos. Pseudocelomados: nematelmintos. Celomados: moluscos, anelídeos, artrópodes, equinodermos e cordados. (Celoma = cavidade totalmente revestida por mesoderme.)"
+        },
+        {
+          "id": "emb-05",
+          "subtema": "Simetria",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Que tipo de simetria têm poríferos, cnidários, equinodermos adultos e os demais animais?",
+          "verso": "Poríferos: geralmente sem simetria. Cnidários: radial. Equinodermos adultos: radial pentâmera (a larva é bilateral). Demais grupos: bilateral, associada à cefalização (cabeça com órgãos dos sentidos)."
+        }
+      ]
+    },
+    {
+      "id": "invertebrados",
+      "nome": "Invertebrados",
+      "descricao": "Características e fisiologia comparada dos filos, com ênfase em Platelmintos, Nematelmintos, Moluscos e Artrópodes.",
+      "cartas": [
+        {
+          "id": "inv-01",
+          "subtema": "Poríferos e cnidários",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Poríferos (esponjas): principais características.",
+          "verso": "Sem tecidos verdadeiros, filtradores e sésseis. A água entra pelos poros, os coanócitos capturam o alimento e a água sai pelo ósculo."
+        },
+        {
+          "id": "inv-02",
+          "subtema": "Poríferos e cnidários",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Cnidários (água-viva, coral, anêmona): principais características.",
+          "verso": "Diblásticos, simetria radial, cnidócitos com cnidas urticantes, cavidade gastrovascular com uma só abertura (boca sem ânus). Formas de pólipo e medusa."
+        },
+        {
+          "id": "inv-03",
+          "subtema": "Platelmintos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Platelmintos: principais características.",
+          "verso": "Corpo achatado, triblásticos acelomados, simetria bilateral. Sistema digestório incompleto (só boca) ou ausente nas tênias. Sem sistema respiratório e circulatório; excreção por células-flama (protonefrídios). Ex.: planária, esquistossomo, tênia."
+        },
+        {
+          "id": "inv-04",
+          "subtema": "Nematelmintos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Nematelmintos: principais características e a novidade evolutiva do grupo.",
+          "verso": "Corpo cilíndrico, pseudocelomados, sexos separados (machos geralmente menores). Novidade: sistema digestório completo, com boca e ânus. Ex.: lombriga, ancilóstomo, oxiúro."
+        },
+        {
+          "id": "inv-05",
+          "subtema": "Moluscos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Moluscos: plano corporal e principais classes.",
+          "verso": "Corpo mole com pé, massa visceral e manto (que secreta a concha). Rádula para raspar alimento (ausente nos bivalves). Classes: gastrópodes (caramujo, lesma), bivalves (mexilhão, ostra) e cefalópodes (polvo, lula). Circulação aberta, exceto nos cefalópodes (fechada)."
+        },
+        {
+          "id": "inv-06",
+          "subtema": "Anelídeos",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Anelídeos: principais características.",
+          "verso": "Corpo dividido em anéis (metameria), celomados, circulação fechada, excreção por metanefrídios. Ex.: minhoca (oligoqueta, importante para o solo), poliquetas (marinhos) e sanguessuga (hirudíneo)."
+        },
+        {
+          "id": "inv-07",
+          "subtema": "Artrópodes",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Quais características todos os artrópodes compartilham?",
+          "verso": "Exoesqueleto de quitina (cresce por mudas ou ecdises), apêndices articulados, corpo segmentado e circulação aberta."
+        },
+        {
+          "id": "inv-08",
+          "subtema": "Artrópodes",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Insetos x aracnídeos x crustáceos: divisão do corpo, patas, antenas e respiração.",
+          "verso": "Insetos: cabeça, tórax e abdome; 3 pares de patas; 1 par de antenas; traqueias. Aracnídeos: cefalotórax e abdome; 4 pares de patas; sem antenas (têm quelíceras); pulmões foliáceos e/ou traqueias. Crustáceos: geralmente cefalotórax e abdome; 2 pares de antenas; brânquias."
+        },
+        {
+          "id": "inv-09",
+          "subtema": "Artrópodes",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Quilópodes x diplópodes: como diferenciar?",
+          "verso": "Quilópodes (lacraia, centopeia): 1 par de patas por segmento, forcípulas com veneno, carnívoros e rápidos. Diplópodes (piolho-de-cobra): 2 pares de patas por segmento, sem veneno inoculado, comem matéria vegetal e são lentos."
+        },
+        {
+          "id": "inv-10",
+          "subtema": "Artrópodes",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Quais os tipos de desenvolvimento dos insetos?",
+          "verso": "Ametábolos: sem metamorfose (traça). Hemimetábolos: metamorfose incompleta, ovo → ninfa → adulto (gafanhoto, barbeiro). Holometábolos: metamorfose completa, ovo → larva → pupa → adulto (borboleta, mosquito, mosca)."
+        },
+        {
+          "id": "inv-11",
+          "subtema": "Artrópodes",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Como os insetos excretam e qual a vantagem?",
+          "verso": "Pelos túbulos de Malpighi, eliminando ácido úrico, que é pouco tóxico e sai quase sem água. Isso economiza água no ambiente terrestre."
+        },
+        {
+          "id": "inv-12",
+          "subtema": "Equinodermos",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Equinodermos (estrela-do-mar, ouriço): principais características.",
+          "verso": "Exclusivamente marinhos, endoesqueleto calcário com espinhos, sistema ambulacrário (hidrovascular) com pés ambulacrários, deuterostômios. Larva bilateral e adulto com simetria radial pentâmera."
+        }
+      ]
+    },
+    {
+      "id": "verminoses",
+      "nome": "Verminoses",
+      "descricao": "Agentes, ciclos, vetores e profilaxia das doenças causadas por helmintos.",
+      "cartas": [
+        {
+          "id": "ver-01",
+          "subtema": "Esquistossomose",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Esquistossomose: agente, hospedeiro intermediário, forma de contágio e prevenção.",
+          "verso": "Schistosoma mansoni (platelminto). Hospedeiro intermediário: caramujo Biomphalaria. As cercárias penetram pela pele em água doce contaminada. Causa a barriga-d'água. Prevenção: saneamento, evitar banho em lagoas suspeitas e controlar os caramujos."
+        },
+        {
+          "id": "ver-02",
+          "subtema": "Teníase e cisticercose",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Teníase x cisticercose: como cada uma é adquirida?",
+          "verso": "Teníase: comer carne de porco ou boi crua ou mal cozida com cisticercos → tênia adulta no intestino. Cisticercose: ingerir OVOS de Taenia solium (água ou verduras contaminadas com fezes humanas) → larvas (cisticercos) em músculos e cérebro. Na cisticercose, o ser humano age como hospedeiro intermediário."
+        },
+        {
+          "id": "ver-03",
+          "subtema": "Ascaridíase",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Ascaridíase: agente, contágio e particularidade do ciclo.",
+          "verso": "Ascaris lumbricoides (lombriga). Contágio pela ingestão de ovos em água, alimentos ou mãos sujas. As larvas passam pelos pulmões (ciclo pulmonar) antes de voltar ao intestino, onde viram adultos."
+        },
+        {
+          "id": "ver-04",
+          "subtema": "Ancilostomíase",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Ancilostomíase (amarelão): agentes, contágio, sintoma e prevenção.",
+          "verso": "Ancylostoma duodenale e Necator americanus. As larvas penetram pela pele, geralmente dos pés descalços em solo contaminado. Os vermes sugam sangue no intestino e causam anemia. Prevenção: usar calçados e saneamento básico."
+        },
+        {
+          "id": "ver-05",
+          "subtema": "Filariose",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Filariose: agente, vetor e consequência.",
+          "verso": "Wuchereria bancrofti. Vetor: mosquito Culex (pernilongo). Os vermes obstruem os vasos linfáticos, causando inchaço intenso (elefantíase)."
+        },
+        {
+          "id": "ver-06",
+          "subtema": "Oxiurose",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Oxiurose: agente, sintoma típico e por que reinfecta fácil.",
+          "verso": "Enterobius vermicularis. Coceira anal à noite, porque as fêmeas põem ovos na região perianal. A pessoa coça, leva os ovos às mãos e à boca (autoinfestação); roupas de cama também espalham. Comum em crianças."
+        },
+        {
+          "id": "ver-07",
+          "subtema": "Profilaxia geral",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "Em verminoses e protozooses, o que a pessoa ingere ou o que entra pela pele? Diferencie cisto, ovo e larva.",
+          "verso": "Cistos: protozoários (ameba, giárdia), em água e alimentos crus mal lavados. Ovos: vermes como lombriga, oxiúro e Taenia solium (cisticercose). Larvas que penetram pela pele: ancilóstomo (solo) e cercária do esquistossomo (água doce). Lavar frutas e verduras (por exemplo, com solução de hipoclorito), tratar a água e ter saneamento previnem várias delas.",
+          "referencia": [
+            "PAS 2025, texto dos itens 60–62 (higienização de frutas e verduras)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cordados",
+      "nome": "Cordados e Vertebrados",
+      "descricao": "Características dos cordados e fisiologia comparada de peixes, anfíbios, répteis, aves e mamíferos.",
+      "cartas": [
+        {
+          "id": "cor-01",
+          "subtema": "Características dos cordados",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Quais as 4 características exclusivas dos cordados?",
+          "verso": "Notocorda, tubo nervoso dorsal, fendas faringianas e cauda pós-anal. Todas aparecem ao menos na fase embrionária."
+        },
+        {
+          "id": "cor-02",
+          "subtema": "Peixes",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "Peixes cartilaginosos x ósseos: diferenças.",
+          "verso": "Cartilaginosos (tubarão, raia, arraia de rio): esqueleto de cartilagem, fendas branquiais expostas, sem bexiga natatória, fecundação interna. Ósseos (maioria): esqueleto ósseo, opérculo cobrindo as brânquias, geralmente com bexiga natatória, e quase sempre fecundação externa.",
+          "referencia": [
+            "PAS 2024, item 86 (C)"
+          ]
+        },
+        {
+          "id": "cor-03",
+          "subtema": "Anfíbios",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Por que se diz que os anfíbios ainda dependem da água?",
+          "verso": "Ovos sem casca que ressecam fora da água, fecundação geralmente externa, larva aquática (girino, com brânquias) e pele fina e úmida usada na respiração cutânea."
+        },
+        {
+          "id": "cor-04",
+          "subtema": "Répteis",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Que adaptações permitiram aos répteis viver totalmente em terra?",
+          "verso": "Ovo amniótico com casca (anexos: âmnio, córion, alantoide e saco vitelínico), pele seca com escamas de queratina, fecundação interna e excreção de ácido úrico (economiza água)."
+        },
+        {
+          "id": "cor-05",
+          "subtema": "Aves",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Quais adaptações das aves estão ligadas ao voo?",
+          "verso": "Penas, ossos pneumáticos (leves), sacos aéreos (respiração muito eficiente), músculos peitorais grandes presos à quilha, ausência de dentes e de bexiga urinária. São endotérmicas."
+        },
+        {
+          "id": "cor-06",
+          "subtema": "Mamíferos",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "Quais características são exclusivas dos mamíferos e quais seus três grupos?",
+          "verso": "Glândulas mamárias, pelos, diafragma e hemácias sem núcleo. Grupos: monotremados (põem ovos, ex.: ornitorrinco), marsupiais e placentários. Nos marsupiais (gambá/saruê, canguru), NÃO há ovo na bolsa: o embrião se desenvolve pouco no útero, nasce muito pequeno e completa o desenvolvimento na bolsa, preso a uma mama.",
+          "referencia": [
+            "PAS 2024, item 78 (E)"
+          ]
+        },
+        {
+          "id": "cor-07",
+          "subtema": "Fisiologia comparada",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Compare o coração e a circulação de peixes, anfíbios, répteis, aves e mamíferos.",
+          "verso": "Peixes: 2 cavidades, circulação simples e completa. Anfíbios: 3 cavidades, dupla e incompleta (mistura no ventrículo). Répteis (não crocodilianos): 3 cavidades com septo parcial, dupla e incompleta. Aves e mamíferos: 4 cavidades, dupla e completa (sem mistura), o que permite a endotermia."
+        },
+        {
+          "id": "cor-08",
+          "subtema": "Fisiologia comparada",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Amônia, ureia e ácido úrico: qual grupo excreta cada um e por quê?",
+          "verso": "Amônia (muito tóxica, precisa de muita água): peixes ósseos e girinos. Ureia (intermediária): mamíferos, anfíbios adultos e peixes cartilaginosos. Ácido úrico (pouco tóxico, quase sem água; adequado a ovos com casca): aves, répteis e insetos."
+        },
+        {
+          "id": "cor-09",
+          "subtema": "Fisiologia comparada",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Compare a respiração de peixes, anfíbios, répteis, aves e mamíferos.",
+          "verso": "Peixes e girinos: brânquias. Anfíbios adultos: pulmões simples + pele. Répteis: pulmões. Aves: pulmões com sacos aéreos (fluxo contínuo de ar). Mamíferos: pulmões com alvéolos e ventilação pelo diafragma."
+        },
+        {
+          "id": "cor-10",
+          "subtema": "Aves",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "Como é o sistema digestório das aves e como ele difere do dos mamíferos?",
+          "verso": "Bico sem dentes → papo (dilatação do esôfago que armazena e umedece o alimento) → proventrículo (estômago químico) → moela (estômago muscular que tritura) → intestino → cloaca, que também recebe urina e gametas. Mamíferos placentários não têm papo nem moela e não têm cloaca (o ânus é separado). Cuidado: os monotremados (ornitorrinco), que também são mamíferos, têm cloaca. Por isso um item que dizia \"diferentemente dos mamíferos, as aves têm cloaca\" foi anulado.",
+          "referencia": [
+            "PAS 2024, item 76 (X: anulado)"
+          ]
+        },
+        {
+          "id": "cor-11",
+          "subtema": "Peixes",
+          "fonte": [
+            "PAS",
+            "escola",
+            "provas-PAS"
+          ],
+          "frente": "Certo ou errado: a reprodução dos peixes ósseos é assexuada, já que macho e fêmea liberam gametas na água sem contato físico.",
+          "verso": "Errado. A reprodução é sexuada (há união de gametas). Liberar gametas na água sem cópula é fecundação externa, e não reprodução assexuada. Os ovos originam larvas e alevinos.",
+          "referencia": [
+            "PAS 2024, item 87 (E)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "histologia-animal",
+      "nome": "Histologia Animal",
+      "descricao": "Tecidos epitelial, conjuntivos, muscular e nervoso.",
+      "cartas": [
+        {
+          "id": "han-01",
+          "subtema": "Epitelial",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Quais são as características do tecido epitelial?",
+          "verso": "Células bem juntas, com pouquíssima substância entre elas e sem vasos sanguíneos (nutrição por difusão a partir do conjuntivo abaixo). Funções: revestimento (ex.: epiderme) e secreção (glândulas)."
+        },
+        {
+          "id": "han-02",
+          "subtema": "Epitelial",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Glândulas exócrinas x endócrinas x mistas: diferença e exemplos.",
+          "verso": "Exócrinas: lançam a secreção por ductos para fora ou em cavidades (sudoríparas, salivares). Endócrinas: lançam hormônios no sangue (tireoide, hipófise). Mistas: fazem as duas coisas (pâncreas)."
+        },
+        {
+          "id": "han-03",
+          "subtema": "Conjuntivos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "O que todos os tecidos conjuntivos têm em comum? Cite os tipos.",
+          "verso": "Células separadas por muita matriz extracelular (fibras + substância fundamental) e origem na mesoderme. Tipos: propriamente dito (frouxo e denso), adiposo, cartilaginoso, ósseo e sanguíneo."
+        },
+        {
+          "id": "han-04",
+          "subtema": "Conjuntivos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Conjuntivo propriamente dito e adiposo: células e funções.",
+          "verso": "Propriamente dito: fibroblastos produzem fibras de colágeno e elásticas; o frouxo preenche e une, o denso forma tendões e ligamentos. Adiposo: adipócitos armazenam gordura (reserva de energia, isolamento térmico e amortecimento)."
+        },
+        {
+          "id": "han-05",
+          "subtema": "Conjuntivos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Por que uma lesão na cartilagem demora tanto a cicatrizar?",
+          "verso": "Porque a cartilagem não tem vasos sanguíneos: os condrócitos são nutridos por difusão. Ela é firme e flexível e está na orelha, nariz, traqueia e articulações."
+        },
+        {
+          "id": "han-06",
+          "subtema": "Conjuntivos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Tecido ósseo: composição da matriz e papel de cada célula.",
+          "verso": "Matriz de colágeno + sais de cálcio (fosfato de cálcio). Osteoblastos formam a matriz, osteócitos a mantêm, osteoclastos a reabsorvem. A medula óssea vermelha produz as células do sangue."
+        },
+        {
+          "id": "han-07",
+          "subtema": "Conjuntivos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Quais são os componentes do sangue e a função de cada um?",
+          "verso": "Plasma (água, proteínas, nutrientes), hemácias (transportam O₂ com hemoglobina), leucócitos (defesa) e plaquetas (coagulação)."
+        },
+        {
+          "id": "han-08",
+          "subtema": "Muscular",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Compare os três tipos de tecido muscular.",
+          "verso": "Estriado esquelético: voluntário, células longas e multinucleadas, contração rápida. Estriado cardíaco: involuntário, 1–2 núcleos centrais, discos intercalares. Liso: involuntário, células fusiformes com 1 núcleo, sem estrias, nas vísceras e vasos."
+        },
+        {
+          "id": "han-09",
+          "subtema": "Nervoso",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Quais as partes do neurônio e a função da bainha de mielina?",
+          "verso": "Dendritos (recebem estímulos), corpo celular e axônio (conduz o impulso até a sinapse, onde liberam-se neurotransmissores). A bainha de mielina isola o axônio e torna a condução muito mais rápida (saltatória). As células da glia dão suporte aos neurônios."
+        }
+      ]
+    },
+    {
+      "id": "fisiologia-humana",
+      "nome": "Fisiologia Humana",
+      "descricao": "Sistemas digestório, respiratório, circulatório, excretor, nervoso, endócrino e imunológico.",
+      "cartas": [
+        {
+          "id": "fhu-01",
+          "subtema": "Digestório",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Onde começa a digestão química de carboidratos, proteínas e lipídios, e onde os nutrientes são absorvidos?",
+          "verso": "Carboidratos: na boca (amilase salivar). Proteínas: no estômago (pepsina, em meio ácido). Lipídios: no duodeno (lipase pancreática, após a bile emulsificar a gordura). A absorção ocorre principalmente no intestino delgado, nas vilosidades."
+        },
+        {
+          "id": "fhu-02",
+          "subtema": "Digestório",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Onde a bile é produzida, onde é armazenada e qual sua função?",
+          "verso": "Produzida no fígado, armazenada na vesícula biliar. Emulsifica as gorduras (quebra em gotinhas), facilitando a ação das lipases. A bile não é uma enzima."
+        },
+        {
+          "id": "fhu-03",
+          "subtema": "Respiratório",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Onde ocorre a hematose e o que controla o ritmo respiratório?",
+          "verso": "A hematose (troca de gases por difusão) ocorre nos alvéolos pulmonares. O bulbo controla o ritmo: quando o CO₂ no sangue aumenta, o pH cai e o bulbo acelera a respiração."
+        },
+        {
+          "id": "fhu-04",
+          "subtema": "Circulatório",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Descreva a pequena e a grande circulação.",
+          "verso": "Pequena (pulmonar): ventrículo direito → artéria pulmonar (sangue venoso) → pulmões → veias pulmonares (sangue arterial) → átrio esquerdo. Grande (sistêmica): ventrículo esquerdo → aorta → corpo → veias cavas → átrio direito."
+        },
+        {
+          "id": "fhu-05",
+          "subtema": "Excretor",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Quais são as etapas de formação da urina no néfron? Qual o papel do ADH?",
+          "verso": "Filtração (do glomérulo para a cápsula de Bowman), reabsorção (nos túbulos voltam glicose, água e sais) e secreção. O ADH (hormônio antidiurético) aumenta a reabsorção de água, deixando a urina mais concentrada."
+        },
+        {
+          "id": "fhu-06",
+          "subtema": "Nervoso",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Sistema nervoso simpático x parassimpático.",
+          "verso": "Simpático: luta ou fuga — acelera o coração, dilata pupilas e brônquios, inibe a digestão (noradrenalina). Parassimpático: repouso e digestão — efeitos opostos (acetilcolina)."
+        },
+        {
+          "id": "fhu-07",
+          "subtema": "Endócrino",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Insulina x glucagon: quem produz e o que fazem com a glicemia?",
+          "verso": "Os dois são produzidos pelo pâncreas (ilhotas pancreáticas). Insulina baixa a glicemia (células captam glicose; fígado guarda como glicogênio). Glucagon eleva a glicemia (fígado quebra glicogênio)."
+        },
+        {
+          "id": "fhu-08",
+          "subtema": "Imunológico",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Vacina x soro: diferenças.",
+          "verso": "Vacina: contém antígenos; o corpo produz os próprios anticorpos (imunidade ativa), gera memória, é preventiva e demora a agir. Soro: contém anticorpos prontos (imunidade passiva), age na hora, dura pouco e é usado como tratamento (ex.: picada de cobra)."
+        },
+        {
+          "id": "fhu-09",
+          "subtema": "Imunológico",
+          "fonte": [
+            "PAS"
+          ],
+          "frente": "Qual o papel dos linfócitos B, T auxiliares e T citotóxicos?",
+          "verso": "B: viram plasmócitos e produzem anticorpos. T auxiliares (CD4): coordenam a resposta imune (são o alvo do HIV). T citotóxicos (CD8): destroem células infectadas ou tumorais."
+        },
+        {
+          "id": "fhu-10",
+          "subtema": "Imunológico",
+          "fonte": [
+            "PAS",
+            "provas-PAS"
+          ],
+          "frente": "Como se testa se uma vacina funciona? Para que serve o placebo?",
+          "verso": "Os voluntários são divididos ao acaso em dois grupos: um recebe a vacina, o outro recebe placebo (substância sem efeito), de preferência sem que ninguém saiba quem tomou o quê (duplo-cego). Comparando quantos adoecem em cada grupo, mede-se a eficácia. O grupo placebo é o grupo controle.",
+          "referencia": [
+            "PAS 2024, itens 102–105 (contexto de teste de vacina)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reproducao-humana",
+      "nome": "Reprodução Humana",
+      "descricao": "Sistemas genitais, gametogênese, regulação hormonal, métodos contraceptivos e ISTs.",
+      "cartas": [
+        {
+          "id": "rep-01",
+          "subtema": "Sistemas genitais",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Qual o caminho dos espermatozoides no sistema genital masculino e quem produz o sêmen?",
+          "verso": "Testículos (túbulos seminíferos) → epidídimo (amadurecimento e armazenamento) → ducto deferente → uretra. As vesículas seminais e a próstata produzem o líquido seminal."
+        },
+        {
+          "id": "rep-02",
+          "subtema": "Sistemas genitais",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Por que os testículos ficam fora da cavidade abdominal, no escroto?",
+          "verso": "Porque a produção de espermatozoides precisa de uma temperatura cerca de 2 °C abaixo da temperatura do corpo."
+        },
+        {
+          "id": "rep-03",
+          "subtema": "Sistemas genitais",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "No sistema genital feminino, onde ocorrem a ovulação, a fecundação e a nidação?",
+          "verso": "Ovulação: no ovário. Fecundação: na tuba uterina. Nidação (implantação do embrião): no endométrio, que reveste o útero."
+        },
+        {
+          "id": "rep-04",
+          "subtema": "Gametogênese",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Quais são as fases da gametogênese?",
+          "verso": "Multiplicação (mitoses das células germinativas), crescimento, maturação (meiose) e, no homem, diferenciação (espermiogênese: a espermátide vira espermatozoide)."
+        },
+        {
+          "id": "rep-05",
+          "subtema": "Gametogênese",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Espermatogênese x ovogênese: principais diferenças.",
+          "verso": "Espermatogênese: começa na puberdade, é contínua e cada espermatócito I gera 4 espermatozoides. Ovogênese: começa ainda na vida fetal e para na prófase I; cada ovócito I gera só 1 gameta funcional + corpúsculos polares; a meiose II só termina se houver fecundação."
+        },
+        {
+          "id": "rep-06",
+          "subtema": "Regulação hormonal",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "No homem, qual a função do FSH e do LH?",
+          "verso": "FSH estimula a espermatogênese (atua nas células de Sertoli). LH estimula as células de Leydig a produzir testosterona."
+        },
+        {
+          "id": "rep-07",
+          "subtema": "Regulação hormonal",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Explique o ciclo menstrual em termos hormonais.",
+          "verso": "Fase folicular: o FSH faz o folículo crescer, e ele produz estrógeno, que engrossa o endométrio. Pico de LH → ovulação (por volta do 14º dia num ciclo de 28). Fase lútea: o corpo lúteo produz progesterona, que mantém o endométrio. Sem gravidez, o corpo lúteo regride, a progesterona cai e ocorre a menstruação."
+        },
+        {
+          "id": "rep-08",
+          "subtema": "Regulação hormonal",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "O que é o hCG e por que ele é importante?",
+          "verso": "Hormônio produzido pelo embrião (e depois pela placenta). Mantém o corpo lúteo no início da gravidez, garantindo a produção de progesterona. É o hormônio detectado nos testes de gravidez."
+        },
+        {
+          "id": "rep-09",
+          "subtema": "Métodos contraceptivos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Como a pílula anticoncepcional evita a gravidez?",
+          "verso": "Contém estrógeno e progesterona sintéticos que, por retroalimentação negativa, inibem a liberação de FSH e LH pela hipófise. Sem o pico de LH, não há ovulação."
+        },
+        {
+          "id": "rep-10",
+          "subtema": "Métodos contraceptivos",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Qual método contraceptivo também protege contra ISTs? Onde atuam a vasectomia e a laqueadura?",
+          "verso": "Só a camisinha (masculina ou feminina) protege contra ISTs. Vasectomia: corte dos ductos deferentes. Laqueadura: corte ou ligadura das tubas uterinas. Ambos são métodos cirúrgicos considerados definitivos."
+        },
+        {
+          "id": "rep-11",
+          "subtema": "ISTs",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Classifique estas ISTs em bacterianas ou virais: sífilis, gonorreia, clamídia, HIV, HPV, herpes genital, hepatite B.",
+          "verso": "Bacterianas (tratáveis com antibiótico): sífilis, gonorreia e clamídia. Virais: HIV, HPV, herpes genital e hepatite B (HPV e hepatite B têm vacina)."
+        },
+        {
+          "id": "rep-12",
+          "subtema": "ISTs",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "Sífilis: agente, formas de transmissão, sinal inicial e tratamento.",
+          "verso": "Treponema pallidum. Transmissão sexual e da mãe para o bebê (sífilis congênita — por isso o teste no pré-natal). Sinal inicial: ferida indolor (cancro duro). Tratamento: penicilina."
+        },
+        {
+          "id": "rep-13",
+          "subtema": "ISTs",
+          "fonte": [
+            "PAS",
+            "escola"
+          ],
+          "frente": "HPV: o que causa e como prevenir?",
+          "verso": "Causa verrugas genitais e é a principal causa do câncer do colo do útero (também de outros cânceres). Prevenção: vacina (oferecida pelo SUS a adolescentes), camisinha e exame preventivo (Papanicolau)."
+        }
+      ]
+    },
+    {
+      "id": "ecologia-contexto",
+      "nome": "Ecologia em Contexto (Cerrado e Águas)",
+      "descricao": "Não está na lista de conteúdos, mas aparece nas provas do PAS 2 dentro de textos sobre o cerrado, a Amazônia e os rios.",
+      "cartas": [
+        {
+          "id": "eco-01",
+          "subtema": "Cerrado",
+          "fonte": [
+            "provas-PAS"
+          ],
+          "frente": "Por que o cerrado é chamado de berço das águas ou caixa-d'água do Brasil? O que o desmatamento causa?",
+          "verso": "Nele estão as nascentes de grandes bacias hidrográficas brasileiras. As plantas, com raízes profundas, ajudam a água da chuva a infiltrar e abastecer os lençóis freáticos. O desmatamento reduz essa infiltração e prejudica nascentes e rios.",
+          "referencia": [
+            "PAS 2024, item 74 (C)"
+          ]
+        },
+        {
+          "id": "eco-02",
+          "subtema": "Cerrado",
+          "fonte": [
+            "provas-PAS"
+          ],
+          "frente": "O cerrado tem adaptações ao fogo. Então as queimadas são sempre inofensivas?",
+          "verso": "Não. Muitas plantas do cerrado têm casca grossa (súber), caules subterrâneos e brotam após o fogo, mas queimadas frequentes, extensas ou fora de época (muitas vezes criminosas) destroem a biodiversidade, empobrecem o solo e abrem espaço para espécies invasoras.",
+          "referencia": [
+            "PAS 2024, item 73 (C)"
+          ]
+        },
+        {
+          "id": "eco-03",
+          "subtema": "Espécies exóticas",
+          "fonte": [
+            "provas-PAS"
+          ],
+          "frente": "O que é uma espécie exótica invasora? Por que os pinheiros prejudicam o cerrado?",
+          "verso": "É uma espécie trazida de outra região que se espalha e compete com as nativas. As folhas dos pinheiros se decompõem muito devagar e formam uma camada espessa no solo, o que impede as plantas nativas de crescerem. Sem plantas nativas, os animais nativos também somem."
+        },
+        {
+          "id": "eco-04",
+          "subtema": "Poluição das águas",
+          "fonte": [
+            "provas-PAS"
+          ],
+          "frente": "O que é bioacumulação (ou biomagnificação) e por que o mercúrio do garimpo é tão perigoso?",
+          "verso": "O mercúrio não é eliminado pelo corpo e se acumula nos tecidos. A cada nível da cadeia alimentar a concentração aumenta: os peixes carnívoros grandes e as pessoas que os comem (como ribeirinhos e indígenas) recebem as maiores doses, com danos ao sistema nervoso. Poluentes como mercúrio e excesso de fertilizantes prejudicam a reprodução dos peixes (menos ovos e alevinos), e não o contrário.",
+          "referencia": [
+            "PAS 2024, item 84 (E)"
+          ]
+        },
+        {
+          "id": "eco-05",
+          "subtema": "Poluição das águas",
+          "fonte": [
+            "provas-PAS"
+          ],
+          "frente": "O que é eutrofização?",
+          "verso": "Excesso de nutrientes (esgoto, fertilizantes) na água → explosão de algas e cianobactérias → elas morrem e são decompostas por bactérias aeróbias → o oxigênio da água cai → peixes morrem."
+        },
+        {
+          "id": "eco-06",
+          "subtema": "Bioindicadores",
+          "fonte": [
+            "provas-PAS"
+          ],
+          "frente": "O que é um bioindicador? Dê exemplos em ambientes aquáticos.",
+          "verso": "É um organismo cuja presença, ausência ou saúde indica a qualidade do ambiente. Exemplos: composição do fitoplâncton, sucesso reprodutivo dos peixes, presença de certos insetos aquáticos e liquens (para o ar).",
+          "referencia": [
+            "PAS 2024, itens 85 (C) e 87 (E)"
+          ]
+        },
+        {
+          "id": "eco-07",
+          "subtema": "Relações ecológicas",
+          "fonte": [
+            "provas-PAS"
+          ],
+          "frente": "Se a poluição reduz a população de peixes que comem larvas de insetos em um rio, o que deve acontecer?",
+          "verso": "A população de insetos tende a aumentar, porque perdeu um predador, gerando desequilíbrio. As populações de uma cadeia alimentar se regulam mutuamente.",
+          "referencia": [
+            "PAS 2024, item 79 (C)"
+          ]
+        },
+        {
+          "id": "eco-08",
+          "subtema": "Cerrado",
+          "fonte": [
+            "provas-PAS"
+          ],
+          "frente": "Certo ou errado: como as florestas têm mais espécies, a conservação delas deve ter prioridade sobre a do cerrado.",
+          "verso": "Errado. O cerrado é um hotspot de biodiversidade: tem muitas espécies endêmicas (só existem lá) e já perdeu boa parte da vegetação original. Ainda se descobrem espécies novas nele. Também é fundamental para as águas do país, então merece a mesma prioridade.",
+          "referencia": [
+            "PAS 2025, item 48 (E)"
+          ]
+        },
+        {
+          "id": "eco-09",
+          "subtema": "Agropecuária e ambiente",
+          "fonte": [
+            "provas-PAS"
+          ],
+          "frente": "Certo ou errado: a baixa densidade de bois por hectare no Brasil (cerca de 1 cabeça/ha) é positiva para o ambiente.",
+          "verso": "Errado. Baixa densidade significa pecuária extensiva: para o mesmo número de animais, ocupa-se muito mais terra, o que pressiona o desmatamento do cerrado e da Amazônia. Aumentar a produtividade na área já aberta poupa vegetação nativa.",
+          "referencia": [
+            "PAS 2024, item 97 (E)"
+          ]
+        }
+      ]
+    }
+  ],
+  "observacao": "Cartas que começam com \"Certo ou errado:\" imitam o formato de item do PAS (Cebraspe), em que uma afirmação parece certa mas tem um erro escondido.",
+  "legendaReferencia": "Itens das provas do PAS 2 (gabarito oficial definitivo) que a carta cobre. C = certo, E = errado, letra = opção correta, X = anulado."
+}

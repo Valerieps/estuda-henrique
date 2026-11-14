@@ -7,10 +7,6 @@ Matérias, tópicos e cartas: o que existe para estudar e como as cartas são cr
 - **Não entra aqui:** como as cartas são estudadas (`spec/estudo.md`) e o domínio de cada carta
   (`spec/diagnostico.md`).
 
-## Em aberto
-
-- [ ] Quem escreve o baralho inicial: eu, pelas telas do admin, ou um arquivo colado de uma vez?
-
 ## Matérias e tópicos
 
 - O app vem com uma matéria, Biologia. A estrutura aceita outras, mas só a fase 3 traz mais
@@ -42,8 +38,13 @@ Matérias, tópicos e cartas: o que existe para estudar e como as cartas são cr
 - Eu não posso mudar nem apagar nada do histórico dele. Editar ou apagar uma carta do sistema nunca
   mexe no histórico de estudo dele (respostas e agendamento). *(1)*
 - Na interface dele, as duas aparecem juntas no tópico; só a origem muda. *(1)*
-- O baralho inicial são de 80 a 150 cartas do sistema, cobrindo os tópicos da lista da escola,
-  revisadas por mim antes de entrar no app. *(1)*
+- O baralho inicial são cartas do sistema que eu mesma escrevi e revisei, num arquivo só
+  (`server/seed/biologia-decks.json`), e que entram no app de uma vez, antes do primeiro acesso do
+  Henrique: ele já encontra cartas nos tópicos. O texto das cartas é o do arquivo; depois, eu as
+  corrijo pelo app. *(1)*
+  Por quê: não escrevi o baralho carta a carta pelas telas do admin.
+- As cartas do arquivo que não têm tópico na lista da escola (Embriologia e planos corporais,
+  Fisiologia humana e Ecologia em contexto) ficam de fora do app por enquanto. *(1)*
 
 ## Tipos de carta
 
