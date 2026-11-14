@@ -178,6 +178,16 @@ export const MIGRATIONS: readonly (readonly string[])[] = [
       PRIMARY KEY (member_id, note_id)
     )`,
   ],
+  // 9: a user deleting a system card hides it for themselves only (docs/spec/cartas.md); the note
+  // and everyone else's deck stay as they were, and so does the member's study history.
+  [
+    `CREATE TABLE note_hidden (
+      member_id TEXT NOT NULL REFERENCES members(id),
+      note_id TEXT NOT NULL REFERENCES notes(id),
+      hidden_at TEXT NOT NULL,
+      PRIMARY KEY (member_id, note_id)
+    )`,
+  ],
 ];
 
 export function migrate(sql: Sql): void {

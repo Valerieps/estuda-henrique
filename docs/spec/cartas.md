@@ -52,6 +52,12 @@ Matérias, tópicos e cartas: o que existe para estudar e como as cartas são cr
   do admin, cria e edita as cartas do sistema. *(1)*
 - Eu não posso mudar nem apagar nada do histórico dele. Editar ou apagar uma carta do sistema nunca
   mexe no histórico de estudo dele (respostas e agendamento). *(1)*
+- Ele pode excluir qualquer carta, do sistema ou pessoal, pelo botão Excluir da carta (com
+  confirmação). Excluir uma carta do sistema a esconde só para ele: os outros usuários, eu, e quem
+  entrar depois, com o baralho inicial completo, continuam vendo a carta. Excluir uma carta
+  pessoal a apaga de vez. O histórico de estudo não muda. *(1)*
+  Por quê: ninguém vê nada de ninguém, e o baralho inicial é igual para todos.
+- Quando eu excluo uma carta do sistema pelas telas do admin, ela some para todos. *(1)*
 - Na interface dele, as duas aparecem juntas no tópico; só a origem muda. *(1)*
 - O baralho inicial são cartas do sistema que eu mesma escrevi e revisei, num arquivo só
   (`server/seed/biologia-decks.json`), e que entram no app de uma vez, antes do primeiro acesso do

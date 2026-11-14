@@ -8,7 +8,7 @@ import { isAdmin, writesSystemCards } from '../../src/domain/group/roles';
 import { cardIndexes, type NoteKind } from '../../src/domain/study/cloze';
 import { failure, nowIso, type CommandResult, type Context } from './context';
 import type { Member } from './members';
-import { NOTE_EDITS, noteText } from './note-text';
+import { NOTE_EDITS, NOT_HIDDEN, noteText } from './note-text';
 import { setSuspended } from './study-store';
 
 type Input = Record<string, unknown>;
@@ -93,7 +93,7 @@ export function reorderTopics(ctx: Context, actor: Member, input: Input): Comman
 // ---- Notes and cards ----
 
 /** The notes an actor may see: the system's and their own, never another member's. */
-const VISIBLE = 'notes.deleted_at IS NULL AND (notes.owner_id IS NULL OR notes.owner_id = ?)';
+const VISIBLE = `notes.deleted_at IS NULL AND (notes.owner_id IS NULL OR notes.owner_id = ?) AND ${NOT_HIDDEN}`;
 
 function toNoteView(ctx: Context, actor: Member, row: NoteRow): NoteView {
   const cards = ctx.sql.all<{ id: string; cloze_index: number; suspended: number | null }>(
@@ -127,13 +127,14 @@ export function listNotes(ctx: Context, actor: Member, input: Input): NoteView[]
       actor.id,
       input.topicId,
       actor.id,
+      actor.id,
     )
     .map((row) => toNoteView(ctx, actor, row));
 }
 
 function findVisibleNote(ctx: Context, actor: Member, id: unknown): NoteRow | null {
   if (typeof id !== 'string') return null;
-  const [row] = ctx.sql.all<NoteRow>(`SELECT ${NOTE_COLUMNS} FROM notes ${NOTE_EDITS} WHERE notes.id = ? AND ${VISIBLE}`, actor.id, id, actor.id);
+  const [row] = ctx.sql.all<NoteRow>(`SELECT ${NOTE_COLUMNS} FROM notes ${NOTE_EDITS} WHERE notes.id = ? AND ${VISIBLE}`, actor.id, id, actor.id, actor.id);
   return row ?? null;
 }
 
@@ -270,11 +271,23 @@ function samePassages(a: string, b: string): boolean {
   return x.length === y.length && x.every((i) => y.includes(i));
 }
 
+/**
+ * Each member deletes cards for themselves: their own note is hidden for good; a system note is
+ * hidden only from them (`note_hidden`), so nobody else, and no one who joins later, loses it. An
+ * admin on the admin screens (`system: true`, or an admin who is not a user) deletes the system
+ * note for everyone. Nothing here touches the study history.
+ */
 export function deleteNote(ctx: Context, actor: Member, input: Input): CommandResult<null> {
-  if (!isAdmin(actor)) return failure('forbidden');
   const note = findVisibleNote(ctx, actor, input.noteId);
-  if (!note || note.owner_id !== null) return failure('not_found');
-  ctx.sql.run('UPDATE notes SET deleted_at = ? WHERE id = ?', nowIso(ctx), note.id);
+  if (!note) return failure('not_found');
+  if (note.owner_id !== null) {
+    if (note.owner_id !== actor.id) return failure('not_found');
+    ctx.sql.run('UPDATE notes SET deleted_at = ? WHERE id = ?', nowIso(ctx), note.id);
+  } else if (isAdmin(actor) && writesSystemCards(actor, input.system === true)) {
+    ctx.sql.run('UPDATE notes SET deleted_at = ? WHERE id = ?', nowIso(ctx), note.id);
+  } else {
+    ctx.sql.run('INSERT OR IGNORE INTO note_hidden (member_id, note_id, hidden_at) VALUES (?, ?, ?)', actor.id, note.id, nowIso(ctx));
+  }
   return { ok: true, value: null, changed: ['cards', 'study'] };
 }
 
@@ -283,6 +296,7 @@ export function suspendCard(ctx: Context, actor: Member, input: Input): CommandR
   const [card] = ctx.sql.all<{ id: string }>(
     `SELECT cards.id FROM cards JOIN notes ON notes.id = cards.note_id WHERE cards.id = ? AND cards.retired = 0 AND ${VISIBLE}`,
     input.cardId,
+    actor.id,
     actor.id,
   );
   if (!card) return failure('not_found');

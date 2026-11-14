@@ -345,8 +345,12 @@ export interface Commands {
    * system note is a version only they see. A cloze keeps its passages in a user's version.
    */
   'note.update': { input: { noteId: string; front: string; back?: string; hint?: string | null; system?: boolean }; output: NoteView };
-  /** Admins, system notes only. Hides the note; nobody's study history changes. */
-  'note.delete': { input: { noteId: string }; output: null };
+  /**
+   * Deletes a card for the reader: their personal note, or a system note hidden from them alone.
+   * An admin deletes a system note for everyone with `system: true` (or when she is not a user).
+   * Nobody's study history changes.
+   */
+  'note.delete': { input: { noteId: string; system?: boolean }; output: null };
   /** Only the reader's own state of the card. */
   'card.suspend': { input: { cardId: string; suspended: boolean }; output: null };
   /**

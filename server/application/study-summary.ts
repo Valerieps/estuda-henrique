@@ -7,7 +7,7 @@ import { retrievability, type CardStage, type SchedulingState } from '../../src/
 import { QueryError, type Context } from './context';
 import { thermometer } from './diagnostics';
 import type { Member } from './members';
-import { NOTE_EDITS, noteText } from './note-text';
+import { NOTE_EDITS, NOT_HIDDEN, noteText } from './note-text';
 import { remainingToday } from './review';
 import { stateFromRow } from './study-store';
 
@@ -158,8 +158,9 @@ function movedTopics(ctx: Context, memberId: string, first: readonly ReviewRow[]
      FROM cards
      JOIN notes ON notes.id = cards.note_id
      LEFT JOIN card_states cs ON cs.card_id = cards.id AND cs.member_id = ?
-     WHERE cards.retired = 0 AND notes.deleted_at IS NULL AND (notes.owner_id IS NULL OR notes.owner_id = ?)
+     WHERE cards.retired = 0 AND notes.deleted_at IS NULL AND (notes.owner_id IS NULL OR notes.owner_id = ?) AND ${NOT_HIDDEN}
        AND notes.topic_id IN (${touched.map(() => '?').join(', ')})`,
+    memberId,
     memberId,
     memberId,
     ...touched,

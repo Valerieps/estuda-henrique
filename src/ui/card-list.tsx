@@ -32,6 +32,7 @@ interface CardLineProps {
 export function CardLine({ card, selected, onSelect, onChanged }: CardLineProps) {
   const { backend } = useServices();
   const [editing, setEditing] = useState(false);
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
   const [failed, setFailed] = useState(false);
   const [busy, setBusy] = useState(false);
 
@@ -41,6 +42,16 @@ export function CardLine({ card, selected, onSelect, onChanged }: CardLineProps)
     const result = await backend.command('card.suspend', { cardId: card.cardId, suspended: !card.suspended });
     setBusy(false);
     if (!result.ok) return setFailed(true);
+    onChanged();
+  }
+
+  async function deleteCard() {
+    setFailed(false);
+    setBusy(true);
+    const result = await backend.command('note.delete', { noteId: card.noteId });
+    setBusy(false);
+    if (!result.ok) return setFailed(true);
+    setConfirmingDelete(false);
     onChanged();
   }
 
@@ -76,7 +87,22 @@ export function CardLine({ card, selected, onSelect, onChanged }: CardLineProps)
         <Button variant="secondary" disabled={busy} onClick={() => void toggleSuspended()}>
           {card.suspended ? s.unsuspend : s.suspend}
         </Button>
+        <Button variant="secondary" disabled={busy} onClick={() => setConfirmingDelete(true)}>
+          {s.delete}
+        </Button>
       </div>
+      {confirmingDelete && (
+        <Sheet title={s.deleteTitle} onClose={() => setConfirmingDelete(false)}>
+          <p>{card.origin === 'system' ? s.deleteSystemBody : s.deletePersonalBody}</p>
+          {failed && <Notice tone="error">{s.actionFailed}</Notice>}
+          <Button disabled={busy} onClick={() => void deleteCard()}>
+            {s.deleteConfirm}
+          </Button>
+          <Button variant="secondary" onClick={() => setConfirmingDelete(false)}>
+            {s.deleteCancel}
+          </Button>
+        </Sheet>
+      )}
       {editing && (
         <EditNote
           card={card}

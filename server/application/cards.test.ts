@@ -243,7 +243,6 @@ describe('editing and deleting', () => {
       card,
     );
 
-    expect(service.command(henrique, 'note.delete', { noteId: note.id })).toEqual({ ok: false, error: 'forbidden' });
     expect(service.command(admin, 'note.delete', { noteId: 'nope' })).toEqual({ ok: false, error: 'not_found' });
     ok(service.command(admin, 'note.delete', { noteId: note.id }));
 
@@ -251,5 +250,37 @@ describe('editing and deleting', () => {
     expect(service.command(henrique, 'note.update', { noteId: note.id, front: 'x', back: 'y' })).toEqual({ ok: false, error: 'not_found' });
     expect(service['ctx'].sql.all('SELECT card_id FROM reviews')).toEqual([{ card_id: card }]);
     expect(service['ctx'].sql.all('SELECT id FROM cards WHERE id = ?', card)).toHaveLength(1);
+  });
+
+  it('lets a user delete a system card for themselves only, history kept', () => {
+    const t = topic();
+    const note = ok<NoteView>(service.command(admin, 'note.create', basic(t)));
+    ok(service.command(henrique, 'note.delete', { noteId: note.id }));
+
+    expect(notes(henrique, t)).toEqual([]);
+    expect(notes(bia, t)).toHaveLength(1);
+    expect(notes(admin, t)).toHaveLength(1);
+    expect(service.command(henrique, 'card.suspend', { cardId: note.cards[0].id, suspended: true })).toEqual({ ok: false, error: 'not_found' });
+    expect(service['ctx'].sql.all('SELECT id FROM cards WHERE id = ?', note.cards[0].id)).toHaveLength(1);
+
+    // Someone who joins later still gets the card.
+    const carla = join('carla@example.com', 'h-carla');
+    expect(notes(carla, t)).toHaveLength(1);
+  });
+
+  it('lets a user delete their own card, and nobody else\'s', () => {
+    const t = topic();
+    const mine = ok<NoteView>(service.command(henrique, 'note.create', basic(t)));
+    expect(service.command(bia, 'note.delete', { noteId: mine.id })).toEqual({ ok: false, error: 'not_found' });
+    ok(service.command(henrique, 'note.delete', { noteId: mine.id }));
+    expect(notes(henrique, t)).toEqual([]);
+  });
+
+  it('keeps a deleted system card out of the study queue', () => {
+    const t = topic();
+    const note = ok<NoteView>(service.command(admin, 'note.create', basic(t)));
+    ok(service.command(henrique, 'note.delete', { noteId: note.id }));
+    expect(service.command(henrique, 'study.start', { kind: 'review' })).toMatchObject({ ok: true, value: null });
+    expect(service.command(bia, 'study.start', { kind: 'review' })).toMatchObject({ ok: true, value: { cards: [{ id: note.cards[0].id }] } });
   });
 });
