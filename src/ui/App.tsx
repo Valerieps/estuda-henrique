@@ -12,6 +12,8 @@ import { Members } from './screens/Members';
 import { SignIn } from './screens/SignIn';
 import { Settings } from './screens/Settings';
 import { Exam } from './screens/Exam';
+import { Topic } from './screens/Topic';
+import { Worst } from './screens/Worst';
 import { Study } from './screens/Study';
 import { Subjects } from './screens/Subjects';
 import { Today } from './screens/Today';
@@ -83,10 +85,11 @@ function memberScreen(me: MeView, path: string, onSignOut: () => void, today: Qu
     case '/prova':
       return <Exam />;
     case '/piores':
-      return <EmptyState {...empty.worst} />;
+      return <Worst />;
     case '/ajustes':
       return <Settings admin={admin} onSignOut={onSignOut} />;
     default:
+      if (path.startsWith('/topico/')) return <Topic topicId={decodeURIComponent(path.slice('/topico/'.length))} />;
       return <Today today={today} />;
   }
 }

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  filterTopicCards,
   isProblemCard,
   isWeak,
   longTermMemory,
@@ -138,5 +139,37 @@ describe('saved cards', () => {
       { cardId: 'd', day: '2026-11-01', gapDays: 30, correct: true, training: true },
     ];
     expect(savedCards(events)).toBe(2);
+  });
+});
+
+describe('Tópico filters and search', () => {
+  const card = (cardId: string, text: string, mastery: number | null, extra: { suspended?: boolean; againCount?: number } = {}) => ({
+    cardId,
+    topicId: 't',
+    mastery,
+    suspended: extra.suspended ?? false,
+    againCount: extra.againCount ?? 0,
+    text,
+  });
+  const cards = [
+    card('a', 'Mitocôndria produz ATP', 0.9),
+    card('b', 'Ribossomo', null),
+    card('c', 'Núcleo', null, { suspended: true }),
+    card('d', 'Lisossomo', 0.4, { againCount: 6 }),
+  ];
+  const ids = (list: readonly { cardId: string }[]) => list.map((c) => c.cardId);
+
+  it('filters all, new (not suspended), suspended and problem', () => {
+    expect(ids(filterTopicCards(cards, 'all', ''))).toEqual(['a', 'b', 'c', 'd']);
+    expect(ids(filterTopicCards(cards, 'new', ''))).toEqual(['b']);
+    expect(ids(filterTopicCards(cards, 'suspended', ''))).toEqual(['c']);
+    expect(ids(filterTopicCards(cards, 'problem', ''))).toEqual(['d']);
+  });
+
+  it('searches ignoring case and accents, and combines with a filter', () => {
+    expect(ids(filterTopicCards(cards, 'all', 'mitocondria'))).toEqual(['a']);
+    expect(ids(filterTopicCards(cards, 'all', '  NUCLEO '))).toEqual(['c']);
+    expect(ids(filterTopicCards(cards, 'new', 'somo'))).toEqual(['b']);
+    expect(filterTopicCards(cards, 'problem', 'ribossomo')).toEqual([]);
   });
 });

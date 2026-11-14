@@ -13,7 +13,6 @@ O que ainda não está pronto.
 | --- | --- | --- | --- |
 | Colar várias com prévia | 1 | `spec/cartas.md` | |
 | Confete no "Pronto por hoje" | 1 | `spec/estudo.md` | O Resumo (`src/ui/screens/StudySummary.tsx`) já faz o resto, mas sem confete (em Hoje também). |
-| Piores cartas e tela Tópico | 1 | `spec/diagnostico.md` | A consulta `worstCards` já devolve os grupos; falta a tela e a busca e os filtros do Tópico; a tela Tópico também traz o atalho Véspera deste tópico, que chama `openExamWithTopic` (`src/ui/exam-launch.ts`) |
 | Tela Rotina depois do primeiro Resumo, e a chama acender no Resumo | 1 | `spec/meta-e-ofensiva.md` | Hoje, a chama, a folha Ofensiva, o cartão de aviso e os Ajustes (com a rotina) já existem; falta a tela Rotina, que pertence ao fim da sessão (Resumo) |
 | Tela inicial do admin (cartas do sistema) | 1 | `spec/meta-e-ofensiva.md` | |
 | Imagem e oclusão de imagem | 2 | `spec/cartas.md` | Oclusão é a prioridade 1 da fase 2 |
@@ -39,3 +38,7 @@ O que ainda não está pronto.
   (`spec/acesso-e-membros.md`, `spec/cartas.md`).
 - [ ] A versão de um usuário de uma lacuna do sistema mantém os mesmos trechos; quando eu mudo os
   trechos da minha, a versão dele não acompanha (`spec/cartas.md`).
+- [ ] Na tela Tópico, o filtro Todas mostra também as cartas suspensas (marcadas); Novas são as
+  nunca estudadas e não suspensas; Problema são as com 6 ou mais Errei; a busca ignora maiúsculas
+  e acentos e olha frente e verso (`spec/diagnostico.md`).
+

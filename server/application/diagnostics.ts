@@ -1,7 +1,7 @@
 // The diagnosis queries and the daily snapshots (docs/spec/diagnostico.md). Everything is the
 // reader's own: the cards are the system's plus their personal ones, and the states and answers
 // are filtered by their id (ADR-009). The rules live in src/domain/study/diagnostic.ts.
-import type { ExamCards, Thermometer, ThermometerTopic, TrendPoint, WorstCard, WorstCardsGroup } from '../../src/application/api-contract';
+import type { ExamCards, Thermometer, ThermometerTopic, TopicCard, TopicCardsView, TrendPoint, WorstCard, WorstCardsGroup } from '../../src/application/api-contract';
 import type { NoteKind } from '../../src/domain/study/cloze';
 import {
   isProblemCard,
@@ -34,6 +34,8 @@ interface CardRow {
   owner_id: string | null;
   kind: NoteKind;
   front: string;
+  back: string;
+  hint: string | null;
   stage: CardStage | null;
   due: string | null;
   stability: number | null;
@@ -51,6 +53,8 @@ interface MemberCard extends DiagnosticCard {
   readonly origin: 'system' | 'personal';
   readonly kind: NoteKind;
   readonly front: string;
+  readonly back: string;
+  readonly hint: string | null;
   readonly clozeIndex: number;
 }
 
@@ -68,7 +72,8 @@ function memberCards(ctx: Context, memberId: string): MemberCard[] {
       .map((r) => [r.card_id, r.n]),
   );
   const rows = ctx.sql.all<CardRow>(
-    `SELECT cards.id AS card_id, cards.cloze_index, notes.id AS note_id, notes.topic_id, notes.owner_id, notes.kind, ${noteText('front')} AS front,
+    `SELECT cards.id AS card_id, cards.cloze_index, notes.id AS note_id, notes.topic_id, notes.owner_id, notes.kind,
+            ${noteText('front')} AS front, ${noteText('back')} AS back, ${noteText('hint')} AS hint,
             cs.stage, cs.due, cs.stability, cs.difficulty, cs.scheduled_days, cs.learning_steps, cs.reps, cs.lapses, cs.last_review, cs.suspended
      FROM cards
      JOIN notes ON notes.id = cards.note_id
@@ -93,6 +98,8 @@ function memberCards(ctx: Context, memberId: string): MemberCard[] {
       origin: row.owner_id === null ? 'system' : 'personal',
       kind: row.kind,
       front: row.front,
+      back: row.back,
+      hint: row.hint,
       clozeIndex: row.cloze_index,
     };
   });
@@ -188,6 +195,8 @@ export function worstCards(ctx: Context, actor: Member, input: Record<string, un
           origin: c.origin,
           kind: c.kind,
           front: c.front,
+          back: c.back,
+          hint: c.hint,
           clozeIndex: c.clozeIndex,
           mastery: c.mastery as number,
           againCount: c.againCount,
@@ -199,6 +208,36 @@ export function worstCards(ctx: Context, actor: Member, input: Record<string, un
     .filter((g) => g.cards.length > 0);
   if (input.topicId !== undefined && groups.length === 0 && !topics(ctx).some((t) => t.id === input.topicId)) return new QueryError('not_found');
   return rankTopics(groups);
+}
+
+export function topicCards(ctx: Context, actor: Member, input: Record<string, unknown>): TopicCardsView | QueryError {
+  if (typeof input.topicId !== 'string') return new QueryError('invalid');
+  const topic = topics(ctx).find((t) => t.id === input.topicId);
+  if (!topic) return new QueryError('not_found');
+  const lastSeen = new Map(
+    ctx.sql
+      .all<{ card_id: string; day: string }>('SELECT card_id, MAX(study_day) AS day FROM reviews WHERE member_id = ? GROUP BY card_id', actor.id)
+      .map((r) => [r.card_id, r.day]),
+  );
+  const own = memberCards(ctx, actor.id).filter((c) => c.topicId === topic.id);
+  const cards = own.map(
+    (c): TopicCard => ({
+      cardId: c.cardId,
+      noteId: c.noteId,
+      origin: c.origin,
+      kind: c.kind,
+      front: c.front,
+      back: c.back,
+      hint: c.hint,
+      clozeIndex: c.clozeIndex,
+      mastery: c.mastery,
+      againCount: c.againCount,
+      problem: isProblemCard(c.againCount),
+      suspended: c.suspended,
+      lastSeenDay: lastSeen.get(c.cardId) ?? null,
+    }),
+  );
+  return { topicId: topic.id, topicName: topic.name, mastery: topicMastery(own), ...topicCoverage(own), cards };
 }
 
 // ---- Daily snapshots ----

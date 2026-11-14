@@ -2,6 +2,7 @@ import { strings } from '../../domain/strings';
 import { Button } from '../components/Button';
 import { EmptyState } from '../components/EmptyState';
 import { Notice } from '../components/Notice';
+import { Link } from '../router';
 import { useQuery } from '../use-query';
 
 /**
@@ -39,7 +40,7 @@ export function Subjects() {
           <ul className="list">
             {subject.topics.map((topic) => (
               <li key={topic.id} className="card">
-                {topic.name}
+                <Link to={`/topico/${encodeURIComponent(topic.id)}`}>{topic.name}</Link>
               </li>
             ))}
           </ul>
