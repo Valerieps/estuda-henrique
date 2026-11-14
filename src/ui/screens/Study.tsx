@@ -11,7 +11,8 @@ import { EmptyState } from '../components/EmptyState';
 import { Notice } from '../components/Notice';
 import { Sheet } from '../components/Sheet';
 import { navigate } from '../router';
-import { clearStudyRequest, currentStudyRequest } from '../study-launch';
+import { clearStudyRequest, currentStudyRequest, type StudyRequest } from '../study-launch';
+import { StudySummary } from './StudySummary';
 
 const s = strings.study;
 /** The short buzz on each answer button, in ms. */
@@ -33,7 +34,7 @@ function whenLabel(ms: number): string {
   return s.returnsIn(text);
 }
 
-type Phase = { name: 'loading' } | { name: 'empty' } | { name: 'error' } | { name: 'running'; session: StudySessionView } | { name: 'done'; answered: number };
+type Phase = { name: 'loading' } | { name: 'empty' } | { name: 'error' } | { name: 'running'; session: StudySessionView } | { name: 'summary'; sessionId: string; partial: boolean };
 
 /**
  * The session layer: full screen, over the app, without its bars (docs/spec/estudo.md). It opens
@@ -44,16 +45,25 @@ export function Study() {
   const [phase, setPhase] = useState<Phase>({ name: 'loading' });
   const started = useRef(false);
 
-  useEffect(() => {
-    if (started.current) return;
-    started.current = true;
-    const request = currentStudyRequest();
+  function begin(request: StudyRequest) {
+    setPhase({ name: 'loading' });
     void backend
-      .command('study.start', { kind: request.kind, limit: request.limit, cardIds: request.cardIds ? [...request.cardIds] : undefined })
+      .command('study.start', {
+        kind: request.kind,
+        limit: request.limit,
+        aheadTopicId: request.aheadTopicId,
+        cardIds: request.cardIds ? [...request.cardIds] : undefined,
+      })
       .then((result) => {
         if (!result.ok) setPhase({ name: 'error' });
         else setPhase(result.value ? { name: 'running', session: result.value } : { name: 'empty' });
       });
+  }
+
+  useEffect(() => {
+    if (started.current) return;
+    started.current = true;
+    begin(currentStudyRequest());
   }, [backend]);
 
   function leave() {
@@ -62,7 +72,18 @@ export function Study() {
   }
 
   if (phase.name === 'running') {
-    return <Session session={phase.session} onFinish={(answered) => setPhase({ name: 'done', answered })} onLeave={leave} />;
+    return (
+      <Session
+        key={phase.session.sessionId}
+        session={phase.session}
+        onFinish={(partial) => setPhase({ name: 'summary', sessionId: phase.session.sessionId, partial })}
+        onLeave={leave}
+      />
+    );
+  }
+
+  if (phase.name === 'summary') {
+    return <StudySummary key={phase.sessionId} sessionId={phase.sessionId} partial={phase.partial} onStart={begin} onLeave={leave} />;
   }
 
   return (
@@ -80,11 +101,6 @@ export function Study() {
           <Button variant="secondary" onClick={leave}>
             {s.back}
           </Button>
-        </EmptyState>
-      )}
-      {phase.name === 'done' && (
-        <EmptyState title={s.doneTitle} text={s.doneText(phase.answered)}>
-          <Button onClick={leave}>{s.back}</Button>
         </EmptyState>
       )}
     </Layer>
@@ -141,7 +157,7 @@ function Answered({ card }: { card: StudyCard }) {
   );
 }
 
-function Session({ session, onFinish, onLeave }: { session: StudySessionView; onFinish: (answered: number) => void; onLeave: () => void }) {
+function Session({ session, onFinish, onLeave }: { session: StudySessionView; onFinish: (partial: boolean) => void; onLeave: () => void }) {
   const { backend } = useServices();
   const [queue, setQueue] = useState<readonly StudyCard[]>(session.cards);
   // The queue before each answer, newest last: Desfazer goes back to the last one.
@@ -162,10 +178,10 @@ function Session({ session, onFinish, onLeave }: { session: StudySessionView; on
 
   const delays = card ? returnDelays(card.state, new Date()) : null;
 
-  async function finish(answered: number) {
+  async function finish() {
     await backend.command('study.end', { sessionId: session.sessionId });
     clearStudyRequest();
-    onFinish(answered);
+    onFinish(false);
   }
 
   async function answer(rating: Answer) {
@@ -189,7 +205,7 @@ function Session({ session, onFinish, onLeave }: { session: StudySessionView; on
       setBusy(false);
       return;
     }
-    if (next.length === 0) await finish(history.length + 1);
+    if (next.length === 0) await finish();
     setBusy(false);
   }
 
@@ -225,12 +241,15 @@ function Session({ session, onFinish, onLeave }: { session: StudySessionView; on
     setQueue(next);
     setHistory((h) => h.map((q) => q.filter((c) => c.id !== card.id)));
     setFlipped(false);
-    if (next.length === 0) await finish(history.length);
+    if (next.length === 0) await finish();
   }
 
   async function exit() {
     await backend.command('study.end', { sessionId: session.sessionId });
-    onLeave();
+    clearStudyRequest();
+    // With answers given, he goes to the partial Resumo; with none there is nothing to sum up.
+    if (history.length === 0) onLeave();
+    else onFinish(true);
   }
 
   const header = (
@@ -330,7 +349,7 @@ function Session({ session, onFinish, onLeave }: { session: StudySessionView; on
             setQueue(next);
             setHistory((h) => h.map((q) => q.filter(keeps).map(patch)));
             setPanel('none');
-            if (next.length === 0) void finish(history.length);
+            if (next.length === 0) void finish();
           }}
         />
       )}

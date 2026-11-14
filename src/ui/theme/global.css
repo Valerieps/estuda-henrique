@@ -506,6 +506,12 @@ input[aria-invalid='true'] {
   resize: vertical;
 }
 
+.summary-figure {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-display);
+  font-size: var(--font-size-heading);
+}
+
 /* Prova: topics with a checkbox, mastery bar and card counts */
 
 .exam-topic {
