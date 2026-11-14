@@ -3,7 +3,7 @@ import deck from '../seed/biologia-decks.json';
 import { fixedClock, memorySql, sequentialIds } from '../testing/node-sql';
 import type { NoteView, SubjectView } from '../../src/application/api-contract';
 import { GroupService } from './group-service';
-import { INITIAL_TOPICS, leftOut, topicFor } from './initial-deck';
+import { ADDED_TOPICS, INITIAL_TOPICS, addedDeckStatements, leftOut, topicFor } from './initial-deck';
 
 const total = deck.decks.reduce((n, d) => n + d.cartas.length, 0);
 
@@ -12,6 +12,12 @@ describe('the initial Biologia deck', () => {
     const decks = new Set(leftOut().map((l) => l.deck));
     expect([...decks].sort()).toEqual(['ecologia-contexto', 'embriologia', 'fisiologia-humana']);
     expect(leftOut().reduce((n, l) => n + l.cards, 0)).toBe(24);
+  });
+
+  it('adds a topic for each left-out deck, with all 24 cards, in migration 7', () => {
+    const statements = addedDeckStatements();
+    expect(statements.filter((s) => s.startsWith('INSERT INTO topics'))).toHaveLength(ADDED_TOPICS.length);
+    expect(statements.filter((s) => s.startsWith('INSERT INTO cards'))).toHaveLength(24);
   });
 
   it('sends every other card to a topic that exists', () => {
@@ -34,7 +40,7 @@ describe('the initial Biologia deck', () => {
     const subjects = service.query('h-hen', 'subjects', {});
     if (!subjects.ok) throw new Error('subjects failed');
     const topics = (subjects.value as SubjectView[])[0].topics;
-    expect(topics.map((t) => t.name)).toEqual(INITIAL_TOPICS);
+    expect(topics.map((t) => t.name)).toEqual([...INITIAL_TOPICS, ...ADDED_TOPICS]);
 
     let cards = 0;
     for (const topic of topics) {
@@ -47,6 +53,6 @@ describe('the initial Biologia deck', () => {
         cards += note.cards.length;
       }
     }
-    expect(cards).toBe(total - 24);
+    expect(cards).toBe(total);
   });
 });

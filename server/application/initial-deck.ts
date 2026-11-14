@@ -1,7 +1,8 @@
 // The initial Biologia deck (docs/spec/cartas.md): the owner's own file, `server/seed/biologia-decks.json`,
 // loaded as system cards by a migration, so the student finds cards on his first access. The card
 // texts are copied as they are; this file only says which topic of the school's list each card
-// goes to. A deck or subtheme with no topic in that list is left out, never invented.
+// goes to. Migration 6 loads the cards the school's list has a topic for; migration 7 adds the
+// topics for the decks that list lacks (Embriologia, Fisiologia humana, Ecologia) and their cards.
 import deck from '../seed/biologia-decks.json';
 
 interface DeckCard {
@@ -38,6 +39,19 @@ export const INITIAL_TOPICS: readonly string[] = [
   'Métodos contraceptivos',
   "IST's",
 ];
+
+/** Topics added by migration 7, after the school's list, for the decks it has no topic for. */
+export const ADDED_TOPICS: readonly string[] = [
+  'Embriologia e planos corporais',
+  'Fisiologia humana',
+  'Ecologia em contexto (Cerrado e águas)',
+];
+
+const ADDED_BY_DECK: Readonly<Record<string, string>> = {
+  embriologia: 'Embriologia e planos corporais',
+  'fisiologia-humana': 'Fisiologia humana',
+  'ecologia-contexto': 'Ecologia em contexto (Cerrado e águas)',
+};
 
 const ZOOLOGICAL_EMPHASIS = 'Platelmintos, Nematelmintos, Moluscos, Artrópodes e Cordados';
 
@@ -76,7 +90,7 @@ const BY_DECK: Readonly<Record<string, string>> = {
   'histologia-animal': 'Histologia animal',
 };
 
-/** The topic a card goes to, or null when the school's list has none for it. */
+/** The topic (of migration 6) a card goes to, or null when the school's list has none for it. */
 export function topicFor(deckId: string, subtheme: string): string | null {
   // Reprodução humana is the only deck split by subtheme alone; the others fall back to the deck.
   return BY_SUBTHEME[subtheme] ?? BY_DECK[deckId] ?? null;
@@ -102,24 +116,38 @@ export function leftOut(file: DeckFile = deck as DeckFile): LeftOut[] {
 
 const quote = (text: string): string => `'${text.replace(/'/g, "''")}'`;
 const AT = quote('2026-11-13T00:00:00.000Z');
-const topicId = (index: number): string => `seed-topic-${index + 1}`;
+const ALL_TOPICS: readonly string[] = [...INITIAL_TOPICS, ...ADDED_TOPICS];
+const topicId = (name: string): string => `seed-topic-${ALL_TOPICS.indexOf(name) + 1}`;
 
-/** The statements of the migration: the topics, then one system note and one card per deck card. */
-export function initialDeckStatements(file: DeckFile = deck as DeckFile): string[] {
-  const statements = INITIAL_TOPICS.map(
-    (name, index) =>
-      `INSERT INTO topics (id, subject_id, name, position, created_at) VALUES (${quote(topicId(index))}, 'biologia', ${quote(name)}, ${index}, ${AT})`,
-  );
+function topicStatement(name: string): string {
+  return `INSERT INTO topics (id, subject_id, name, position, created_at) VALUES (${quote(topicId(name))}, 'biologia', ${quote(name)}, ${ALL_TOPICS.indexOf(name)}, ${AT})`;
+}
+
+function cardStatements(file: DeckFile, topicOf: (deckId: string, subtheme: string) => string | null): string[] {
+  const statements: string[] = [];
   for (const d of file.decks) {
     for (const card of d.cartas) {
-      const topic = topicFor(d.id, card.subtema);
+      const topic = topicOf(d.id, card.subtema);
       if (topic === null) continue;
       const note = quote(`seed-${card.id}`);
       statements.push(
-        `INSERT INTO notes (id, topic_id, owner_id, kind, front, back, hint, created_at, updated_at) VALUES (${note}, ${quote(topicId(INITIAL_TOPICS.indexOf(topic)))}, NULL, 'basic', ${quote(card.frente)}, ${quote(card.verso)}, NULL, ${AT}, ${AT})`,
+        `INSERT INTO notes (id, topic_id, owner_id, kind, front, back, hint, created_at, updated_at) VALUES (${note}, ${quote(topicId(topic))}, NULL, 'basic', ${quote(card.frente)}, ${quote(card.verso)}, NULL, ${AT}, ${AT})`,
         `INSERT INTO cards (id, note_id, cloze_index) VALUES (${quote(`seed-${card.id}-0`)}, ${note}, 0)`,
       );
     }
   }
   return statements;
+}
+
+/** Migration 6: the topics, then one system note and one card per deck card that has a topic. */
+export function initialDeckStatements(file: DeckFile = deck as DeckFile): string[] {
+  return [...INITIAL_TOPICS.map(topicStatement), ...cardStatements(file, topicFor)];
+}
+
+/** Migration 7: the added topics and the cards migration 6 left out. */
+export function addedDeckStatements(file: DeckFile = deck as DeckFile): string[] {
+  return [
+    ...ADDED_TOPICS.map(topicStatement),
+    ...cardStatements(file, (deckId, subtheme) => (topicFor(deckId, subtheme) === null ? (ADDED_BY_DECK[deckId] ?? null) : null)),
+  ];
 }
