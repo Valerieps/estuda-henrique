@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import type { WorstCardsGroup } from '../../src/application/api-contract';
-import { fixedClock, memorySql, sequentialIds } from '../testing/node-sql';
+import { fixedClock, emptyDeckSql, sequentialIds } from '../testing/node-sql';
 import type { Context } from './context';
 import { QueryError } from './context';
 import { examCards, recordDueSnapshots, recordSnapshot, thermometer, topicCards, worstCards } from './diagnostics';
@@ -41,7 +41,7 @@ function answer(memberId: string, iso: string, cardIds: string[], rating: 'again
 
 beforeEach(() => {
   clock = fixedClock('2026-10-01T15:00:00Z');
-  ctx = { sql: memorySql(), clock, ids: sequentialIds() };
+  ctx = { sql: emptyDeckSql(), clock, ids: sequentialIds() };
   migrate(ctx.sql);
   for (const id of ['henrique', 'outro']) {
     ctx.sql.run("INSERT INTO members (id, email, name, joined_at) VALUES (?, ?, ?, '2026-10-01')", id, `${id}@example.com`, id);
