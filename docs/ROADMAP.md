@@ -32,25 +32,4 @@ O que ainda não está pronto.
 
 ## Revisar as lacunas que o agente decidiu
 
-- [ ] O admin não estuda: a tela inicial dele é a das cartas do sistema, não Hoje
-  (`spec/meta-e-ofensiva.md`).
-- [ ] Colar várias cria cartas pessoais para o usuário e cartas do sistema para o admin
-  (`spec/cartas.md`).
-- [ ] Suspender uma carta do sistema vale só para o usuário que suspendeu (`spec/cartas.md`).
 - [ ] O admin cria, renomeia e reordena os tópicos; o usuário não (`spec/cartas.md`).
-- [ ] O cartão de aviso perdeu o aviso de backup vencido, porque não há backup (`spec/meta-e-ofensiva.md`).
-- [ ] Estudar <tópico>, em Piores cartas, é treino, como Estudar estas agora, porque a Revisão é
-  sempre da matéria inteira (`spec/diagnostico.md`).
-- [ ] Domínio e cobertura de um tópico não contam as cartas suspensas; o domínio só conta cartas já
-  estudadas (`spec/diagnostico.md`).
-- [ ] As cartas guardadas contam cada carta uma vez, em qualquer sessão (Revisão ou treino); a
-  memória de longo prazo só conta Revisão. O "tempo sem ver" é em dias de estudo, desde a resposta
-  anterior à carta em qualquer sessão (`spec/diagnostico.md`).
-- [ ] Piores cartas lista só cartas já estudadas e não suspensas; tópicos sem domínio ainda ficam
-  por último no termômetro (`spec/diagnostico.md`).
-- [ ] Um dia conta para a ofensiva quando ele termina uma sessão com ao menos uma resposta; abrir
-  Hoje sem nada para estudar também conta (`spec/meta-e-ofensiva.md`).
-- [ ] Consertar ofensiva só aparece quando se perdeu um único dia de estudo logo depois de uma
-  sequência (folgas não contam como perdidas) e não houve conserto no mês (`spec/meta-e-ofensiva.md`).
-- [ ] "Pronto por hoje" aparece sempre que a fila do dia está vazia, mesmo antes de ele estudar,
-  como no primeiro dia sem cartas novas (`spec/meta-e-ofensiva.md`).
