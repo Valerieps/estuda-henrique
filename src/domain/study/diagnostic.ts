@@ -29,7 +29,7 @@ export interface DiagnosticCard {
 }
 
 /** Studied and not suspended: the cards the mastery of a topic is made of. */
-function counted(cards: readonly DiagnosticCard[]): DiagnosticCard[] {
+function counted<T extends DiagnosticCard>(cards: readonly T[]): T[] {
   return cards.filter((c) => !c.suspended);
 }
 

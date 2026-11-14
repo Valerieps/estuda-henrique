@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
+import type { WorstCardsGroup } from '../../src/application/api-contract';
 import { fixedClock, memorySql, sequentialIds } from '../testing/node-sql';
 import type { Context } from './context';
 import { QueryError } from './context';
@@ -148,9 +149,9 @@ describe('worstCards', () => {
     const cito = addCards('citologia', 2);
     addCards('genetica', 1);
     answer('henrique', '2026-10-01T15:00:00Z', [cito[0]], 'good');
-    const result = worstCards(ctx, henrique, { topicId: 'citologia' }) as ReturnType<typeof thermometer>['topics'];
+    const result = worstCards(ctx, henrique, { topicId: 'citologia' }) as WorstCardsGroup[];
     expect(result).toHaveLength(1);
-    expect((result as unknown as { cards: unknown[] }[])[0].cards).toHaveLength(1);
+    expect(result[0].cards).toHaveLength(1);
     expect(worstCards(ctx, henrique, { topicId: 'genetica' })).toEqual([]);
     expect(worstCards(ctx, henrique, { topicId: 'nada' })).toEqual(new QueryError('not_found'));
     expect(worstCards(ctx, henrique, { topicId: 3 })).toEqual(new QueryError('invalid'));
