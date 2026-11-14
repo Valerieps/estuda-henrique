@@ -155,6 +155,8 @@ export const strings = {
       `${seen + fresh === 1 ? '1 carta' : `${seen + fresh} cartas`} (${seen === 1 ? '1 vista' : `${seen} vistas`} e ${fresh === 1 ? '1 nova' : `${fresh} novas`})`,
     nothingChosen: 'Marque os tópicos da prova.',
     scopeLabel: 'Quais cartas',
+    selected: 'Selecionado',
+    pickOne: 'Marque ao menos um tópico',
     scopeAll: 'Todas as cartas',
     scopeWeakest: 'As 30 de menor domínio',
     scopeWeakestHint: 'Só entre as já vistas.',
