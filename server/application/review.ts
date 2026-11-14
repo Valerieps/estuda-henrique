@@ -7,7 +7,7 @@ import { isAnswer, newCardState, type SchedulingState } from '../../src/domain/s
 import { endOfStudyDay } from '../../src/domain/study/study-day';
 import { failure, today, type CommandResult, type Context } from './context';
 import type { Member } from './members';
-import { NOTE_EDITS, noteText } from './note-text';
+import { NOTE_EDITS, NOT_HIDDEN, noteText } from './note-text';
 import { endStudySession, recordAnswer, startStudySession, stateFromRow, studySettings, undoLastAnswer, type CardStateRow } from './study-store';
 
 type Input = Record<string, unknown>;
@@ -49,9 +49,10 @@ function eligibleCards(ctx: Context, actor: Member): StudyCard[] {
        LEFT JOIN card_states cs ON cs.card_id = cards.id AND cs.member_id = ?
        ${NOTE_EDITS}
        WHERE cards.retired = 0 AND notes.deleted_at IS NULL AND subjects.archived = 0
-         AND (notes.owner_id IS NULL OR notes.owner_id = ?)
+         AND (notes.owner_id IS NULL OR notes.owner_id = ?) AND ${NOT_HIDDEN}
          AND COALESCE(cs.suspended, 0) = 0
        ORDER BY topics.position, topics.created_at, notes.created_at, notes.rowid, cards.cloze_index`,
+      actor.id,
       actor.id,
       actor.id,
       actor.id,
@@ -165,8 +166,9 @@ function studiableCard(ctx: Context, actor: Member, cardId: unknown): cardId is 
   if (typeof cardId !== 'string') return false;
   const [row] = ctx.sql.all<{ id: string }>(
     `SELECT cards.id FROM cards JOIN notes ON notes.id = cards.note_id
-     WHERE cards.id = ? AND cards.retired = 0 AND notes.deleted_at IS NULL AND (notes.owner_id IS NULL OR notes.owner_id = ?)`,
+     WHERE cards.id = ? AND cards.retired = 0 AND notes.deleted_at IS NULL AND (notes.owner_id IS NULL OR notes.owner_id = ?) AND ${NOT_HIDDEN}`,
     cardId,
+    actor.id,
     actor.id,
   );
   return row !== undefined;

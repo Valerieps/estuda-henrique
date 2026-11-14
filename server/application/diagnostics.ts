@@ -21,7 +21,7 @@ import { retrievability, type CardStage, type SchedulingState } from '../../src/
 import { addDays } from '../../src/domain/study/study-day';
 import { QueryError, today, type Context } from './context';
 import type { Member } from './members';
-import { NOTE_EDITS, noteText } from './note-text';
+import { NOTE_EDITS, NOT_HIDDEN, noteText } from './note-text';
 
 /** The minilinha shows the last 4 weeks. */
 const TREND_DAYS = 28;
@@ -79,8 +79,9 @@ function memberCards(ctx: Context, memberId: string): MemberCard[] {
      JOIN notes ON notes.id = cards.note_id
      LEFT JOIN card_states cs ON cs.card_id = cards.id AND cs.member_id = ?
      ${NOTE_EDITS}
-     WHERE cards.retired = 0 AND notes.deleted_at IS NULL AND (notes.owner_id IS NULL OR notes.owner_id = ?)
+     WHERE cards.retired = 0 AND notes.deleted_at IS NULL AND (notes.owner_id IS NULL OR notes.owner_id = ?) AND ${NOT_HIDDEN}
      ORDER BY notes.created_at, notes.rowid, cards.cloze_index`,
+    memberId,
     memberId,
     memberId,
     memberId,
