@@ -46,23 +46,27 @@ export function Settings({ admin = false, onSignOut }: { admin?: boolean; onSign
   }
   const data = settings.data;
   return (
-    <section className="stack">
+    <section className="stack settings">
       <h1>{s.title}</h1>
       {message && <Notice tone={message.tone}>{message.text}</Notice>}
-      <NewPerDay busy={busy} current={data.newPerDay} save={(n) => save({ newPerDay: n }, `${s.saved} ${s.newPerDayWarning}`)} />
+      <NewPerDay busy={busy} current={data.newPerDay} save={(n) => save({ newPerDay: n }, s.saved)} />
       <RestDays busy={busy} current={data.restDays} save={(days) => save({ restDays: days }, s.saved)} />
       <Routine busy={busy} when={data.routineWhen} where={data.routineWhere} save={(change) => save(change, s.saved)} />
       {admin && (
         <>
-          <h2>{s.admin}</h2>
-          <p className="row">
-            <Link to="/membros">{strings.nav.members}</Link>
-            <Link to="/convites">{strings.nav.invites}</Link>
-          </p>
+          <div className="settings-group stack">
+            <h2>{s.admin}</h2>
+            <p className="row">
+              <Link to="/membros">{strings.nav.members}</Link>
+              <Link to="/convites">{strings.nav.invites}</Link>
+            </p>
+          </div>
         </>
       )}
-      <h2>{s.about}</h2>
-      <p className="muted small">{s.aboutText}</p>
+      <div className="settings-group stack">
+        <h2>{s.about}</h2>
+        <p className="muted small">{s.aboutText}</p>
+      </div>
       <Button variant="secondary" onClick={onSignOut}>
         {strings.nav.signOut}
       </Button>
@@ -77,7 +81,7 @@ function NewPerDay({ busy, current, save }: { busy: boolean; current: number; sa
   const valid = text.trim() !== '' && Number.isInteger(value) && value >= MIN_NEW_PER_DAY && value <= MAX_NEW_PER_DAY;
   return (
     <form
-      className="stack"
+      className="settings-group stack"
       onSubmit={(event) => {
         event.preventDefault();
         if (valid && value !== current) void save(value);
@@ -93,6 +97,7 @@ function NewPerDay({ busy, current, save }: { busy: boolean; current: number; sa
         onChange={(event) => setText(event.target.value)}
         error={valid ? null : s.newPerDayInvalid}
       />
+      <p className="muted small">{s.newPerDayWarning}</p>
       <Button type="submit" variant="secondary" disabled={busy || !valid || value === current}>
         {s.save}
       </Button>
@@ -102,7 +107,7 @@ function NewPerDay({ busy, current, save }: { busy: boolean; current: number; sa
 
 function RestDays({ busy, current, save }: { busy: boolean; current: readonly number[]; save: (days: number[]) => Promise<boolean> }) {
   return (
-    <div className="stack">
+    <div className="settings-group stack">
       <h2>{s.restDays}</h2>
       <div className="day-toggles">
         {s.weekdays.map((name, day) => {
@@ -126,7 +131,7 @@ function Routine({ busy, when, where, save }: { busy: boolean; when: string | nu
   useEffect(() => setWhere(where ?? ''), [where]);
   return (
     <form
-      className="stack"
+      className="settings-group stack"
       onSubmit={(event) => {
         event.preventDefault();
         void save({ routineWhen: whenText.trim() || null, routineWhere: whereText.trim() || null });

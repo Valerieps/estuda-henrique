@@ -50,9 +50,9 @@ export function Invites() {
   }
 
   return (
-    <section>
+    <section className="stack">
       <h1>{strings.invites.title}</h1>
-      <form className="row end" onSubmit={submit}>
+      <form className="card row end" onSubmit={submit}>
         <Field
           className="grow"
           label={strings.invites.emailLabel}

@@ -93,6 +93,7 @@ export function MemberShell({ children }: { children: (today: QueryState<TodayVi
         <div className="bar-inner">
           <TabLinks tabs={MEMBER_LEFT} path={path} />
           <Button
+            variant="secondary"
             className="create"
             aria-label={strings.nav.create}
             onClick={() => {

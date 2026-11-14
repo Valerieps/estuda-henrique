@@ -3,6 +3,7 @@ import type { ApiError } from '../../application/api-contract';
 import { strings } from '../../domain/strings';
 import { useServices } from '../backend-context';
 import { Button, ButtonLink } from '../components/Button';
+import { Hero } from '../components/Hero';
 import { Field } from '../components/Field';
 import { Notice } from '../components/Notice';
 import { navigate } from '../router';
@@ -58,6 +59,8 @@ function DevSignIn() {
   );
 }
 
+const brand = strings.appName.split(' ');
+
 export function SignIn() {
   const { backend } = useServices();
   const [error] = useState(() => ERRORS[new URLSearchParams(window.location.search).get('erro') ?? ''] ?? null);
@@ -68,11 +71,14 @@ export function SignIn() {
   }, []);
 
   return (
-    <main className="app stack">
-      <h1>{strings.appName}</h1>
-      <p>{strings.signIn.tagline}</p>
+    <main className="app stack welcome">
+      <Hero>
+        <h1>{brand[0]} <em>{brand.slice(1).join(' ')}</em></h1>
+        <p>{strings.signIn.tagline}</p>
+      </Hero>
       {error && <Notice tone="error">{error}</Notice>}
       <ButtonLink href={backend.signInUrl}>{strings.signIn.button}</ButtonLink>
+      <p className="muted small">{strings.signIn.inviteOnly}</p>
       {LOCAL_HOSTS.includes(window.location.hostname) && <DevSignIn />}
     </main>
   );
