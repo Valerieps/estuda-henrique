@@ -1,0 +1,868 @@
+{
+  "descricao": "Revisão 1 do baralho inicial pelas regras de docs/spec/boas-cartas.md. Cada item substitui uma carta de biologia-decks.json: as cartas novas entram no mesmo tópico e a antiga fica suspensa para todos. Uma carta básica tem frente, verso e, se precisar, macete; uma lacuna tem só o texto com {{trechos}}. Um item sem cartas só suspende a antiga (ela repetia outra).",
+  "revisoes": [
+    { "substitui": "cla-01", "cartas": [
+      { "lacuna": "Categorias taxonômicas, da mais ampla para a mais restrita: {{Domínio}} → {{Reino}} → {{Filo}} → {{Classe}} → {{Ordem}} → {{Família}} → {{Gênero}} → {{Espécie}}." }
+    ] },
+    { "substitui": "cla-02", "cartas": [
+      { "frente": "No nome científico Homo sapiens, que categoria a primeira palavra indica?", "verso": "O gênero." },
+      { "frente": "No nome científico Homo sapiens, como se chama a segunda palavra?", "verso": "Epíteto específico." },
+      { "frente": "Num nome científico, qual das duas palavras começa com letra maiúscula?", "verso": "Só a primeira (o gênero)." },
+      { "frente": "Como se destaca um nome científico num texto impresso?", "verso": "Em itálico.", "macete": "Escrito à mão, sublinhado." },
+      { "frente": "Em que língua se escreve o nome científico?", "verso": "Latim (ou palavra latinizada)." }
+    ] },
+    { "substitui": "cla-03", "cartas": [
+      { "frente": "Canis lupus (lobo) e Canis latrans (coiote) são da mesma espécie?", "verso": "Não.", "macete": "Mesma espécie exige o nome inteiro igual: gênero e epíteto." },
+      { "frente": "Qual é a categoria mais restrita que o lobo (Canis lupus) e o coiote (Canis latrans) compartilham?", "verso": "O gênero (Canis).", "macete": "Quem tem o mesmo gênero tem também a mesma família, ordem, classe, filo e reino." }
+    ] },
+    { "substitui": "cla-04", "cartas": [
+      { "frente": "Pelo conceito biológico, o que faz dois grupos serem da mesma espécie?", "verso": "Cruzam na natureza e geram descendentes férteis." },
+      { "frente": "Égua e jumento cruzam e têm filhote. Por que são de espécies diferentes?", "verso": "O filhote (burro ou mula) é estéril." }
+    ] },
+    { "substitui": "cla-08", "cartas": [
+      { "lacuna": "Os três domínios dos seres vivos: {{Bacteria}}, {{Archaea}} e {{Eukarya}}." },
+      { "frente": "Protistas, fungos, plantas e animais pertencem a qual domínio?", "verso": "Eukarya." }
+    ] },
+    { "substitui": "cla-09", "cartas": [
+      { "lacuna": "Os cinco reinos de Whittaker: {{Monera}}, {{Protista}}, {{Fungi}}, {{Plantae}} e {{Animalia}}." },
+      { "frente": "Pelos critérios de Whittaker, o que separa Monera dos outros quatro reinos?", "verso": "O tipo de célula: procarionte." },
+      { "frente": "Pelos critérios de Whittaker, qual é o tipo de nutrição de Fungi?", "verso": "Absorção." },
+      { "frente": "Pelos critérios de Whittaker, qual é o tipo de nutrição de Animalia?", "verso": "Ingestão." }
+    ] },
+    { "substitui": "cla-10", "cartas": [] },
+    { "substitui": "cla-11", "cartas": [
+      { "frente": "A que classe pertence a arara?", "verso": "Aves." },
+      { "frente": "A que filo pertence a arara?", "verso": "Chordata (cordados)." }
+    ] },
+
+    { "substitui": "vir-01", "cartas": [
+      { "frente": "Que tipo de material genético um vírus tem?", "verso": "DNA ou RNA, nunca os dois." },
+      { "frente": "Como se chama a cápsula de proteína que envolve o material genético do vírus?", "verso": "Capsídeo." },
+      { "frente": "Que estrutura alguns vírus, como o HIV e o da gripe, têm por fora do capsídeo?", "verso": "Envelope lipídico." }
+    ] },
+    { "substitui": "vir-02", "cartas": [
+      { "frente": "Por que os vírus só se reproduzem dentro de uma célula?", "verso": "Não têm metabolismo próprio nem ribossomos." },
+      { "frente": "Como se chama o parasita que só se reproduz dentro de uma célula?", "verso": "Parasita intracelular obrigatório." }
+    ] },
+    { "substitui": "vir-03", "cartas": [
+      { "frente": "No ciclo lítico, o que acontece com a célula infectada?", "verso": "Rompe (lisa) e libera novos vírus." },
+      { "frente": "No ciclo lisogênico, o que o DNA viral faz?", "verso": "Integra-se ao DNA da célula e é copiado junto com ela, sem destruí-la." },
+      { "frente": "Como se chama o DNA viral integrado ao DNA da bactéria?", "verso": "Prófago." }
+    ] },
+    { "substitui": "vir-04", "cartas": [
+      { "frente": "Qual é o material genético do HIV?", "verso": "RNA." },
+      { "frente": "Que enzima o HIV usa para fazer DNA a partir do seu RNA?", "verso": "Transcriptase reversa." },
+      { "frente": "Como se chama o vírus de RNA que usa transcriptase reversa?", "verso": "Retrovírus." },
+      { "frente": "Que células de defesa o HIV ataca?", "verso": "Linfócitos T CD4 (T auxiliares)." }
+    ] },
+    { "substitui": "vir-05", "cartas": [
+      { "frente": "Que mosquito transmite dengue, zika, chikungunya e febre amarela urbana?", "verso": "Aedes aegypti (a fêmea)." },
+      { "frente": "Qual é a principal prevenção contra dengue, zika e chikungunya?", "verso": "Eliminar criadouros de água parada." },
+      { "frente": "Que mosquitos transmitem a febre amarela silvestre?", "verso": "Haemagogus e Sabethes." },
+      { "frente": "Como se chamam as viroses transmitidas por mosquitos, como a dengue?", "verso": "Arboviroses." }
+    ] },
+    { "substitui": "vir-06", "cartas": [
+      { "frente": "Como se transmite a hepatite A?", "verso": "Via fecal-oral: água e alimentos contaminados." },
+      { "frente": "Como se transmite a hepatite B?", "verso": "Sangue, relação sexual e de mãe para filho." },
+      { "frente": "Hepatite A e hepatite B têm vacina?", "verso": "Sim, as duas." }
+    ] },
+    { "substitui": "vir-07", "cartas": [
+      { "frente": "A gripe é causada por vírus ou por bactéria?", "verso": "Vírus (Influenza)." },
+      { "frente": "O que é o H1N1?", "verso": "Um subtipo do vírus Influenza, da gripe." },
+      { "frente": "Por que antibiótico não trata gripe?", "verso": "Antibióticos atacam estruturas de bactérias, que os vírus não têm.", "macete": "Ex.: parede de peptidoglicano e ribossomos bacterianos." },
+      { "frente": "Com que frequência se toma a vacina da gripe?", "verso": "Todo ano." }
+    ] },
+    { "substitui": "vir-08", "cartas": [
+      { "frente": "Varíola e sarampo são causados por que tipo de agente?", "verso": "Vírus." },
+      { "frente": "Como se transmitem a varíola e o sarampo?", "verso": "Via respiratória (gotículas e secreções)." },
+      { "frente": "Como a varíola foi erradicada do mundo?", "verso": "Com vacinação em massa e vigilância.", "macete": "Erradicada em 1980." },
+      { "frente": "Que vacina previne o sarampo?", "verso": "Tríplice viral." },
+      { "frente": "Que duas viroses, junto com a gripe, devastaram populações indígenas no Brasil colonial?", "verso": "Varíola e sarampo." }
+    ] },
+    { "substitui": "vir-09", "cartas": [
+      { "frente": "Qual é o agente da febre amarela?", "verso": "Um vírus." }
+    ] },
+
+    { "substitui": "mon-01", "cartas": [
+      { "frente": "Por que a bactéria é um procarionte?", "verso": "Não tem núcleo organizado." },
+      { "frente": "Como se chama a região onde fica o DNA da bactéria?", "verso": "Nucleoide." },
+      { "frente": "De que é feita a parede celular das bactérias?", "verso": "Peptidoglicano." },
+      { "frente": "Como se chamam as pequenas moléculas circulares de DNA extra de muitas bactérias?", "verso": "Plasmídeos." },
+      { "frente": "Que organela as bactérias têm, mesmo sem organelas membranosas?", "verso": "Ribossomos." }
+    ] },
+    { "substitui": "mon-02", "cartas": [
+      { "frente": "Que componente da parede das bactérias falta nas arqueas?", "verso": "Peptidoglicano." },
+      { "frente": "Em que tipo de ambiente vivem muitas arqueas?", "verso": "Extremos: muito quentes, salgados ou ácidos." },
+      { "frente": "Em vários aspectos moleculares, as arqueas se parecem mais com as bactérias ou com os eucariontes?", "verso": "Com os eucariontes." }
+    ] },
+    { "substitui": "mon-03", "cartas": [
+      { "frente": "Como as bactérias se reproduzem?", "verso": "Por divisão binária (assexuada)." },
+      { "frente": "Como se chama a recombinação em que a bactéria capta DNA solto no meio?", "verso": "Transformação." },
+      { "frente": "Como se chama a recombinação em que um vírus leva DNA de uma bactéria para outra?", "verso": "Transdução." },
+      { "frente": "Como se chama a recombinação em que duas bactérias trocam DNA por uma ponte (pilus)?", "verso": "Conjugação." }
+    ] },
+    { "substitui": "mon-04", "cartas": [
+      { "frente": "Qual é o agente da tuberculose?", "verso": "Mycobacterium tuberculosis (bacilo de Koch)." },
+      { "frente": "Como se transmite a tuberculose?", "verso": "Pelo ar (gotículas de tosse e fala)." },
+      { "frente": "Que vacina previne a tuberculose?", "verso": "BCG." },
+      { "frente": "Quanto tempo dura, em média, o tratamento da tuberculose?", "verso": "Cerca de 6 meses." }
+    ] },
+    { "substitui": "mon-05", "cartas": [
+      { "frente": "Qual é o agente da hanseníase?", "verso": "Mycobacterium leprae (bacilo de Hansen)." },
+      { "frente": "Como se transmite a hanseníase?", "verso": "Pelas vias aéreas, em contato próximo e prolongado." },
+      { "frente": "Qual é o sintoma característico da hanseníase?", "verso": "Manchas na pele com perda de sensibilidade." },
+      { "frente": "A hanseníase tem cura?", "verso": "Sim, com tratamento gratuito no SUS." }
+    ] },
+    { "substitui": "mon-06", "cartas": [
+      { "frente": "Qual é o agente da cólera?", "verso": "Vibrio cholerae." },
+      { "frente": "Como se transmite a cólera?", "verso": "Por água e alimentos contaminados por fezes." },
+      { "frente": "Qual é o principal risco da cólera?", "verso": "Desidratação grave, pela diarreia intensa." },
+      { "frente": "Qual é o tratamento da cólera?", "verso": "Reidratação." },
+      { "frente": "Como se previne a cólera?", "verso": "Saneamento básico e água tratada." }
+    ] },
+    { "substitui": "mon-07", "cartas": [
+      { "frente": "Qual é o agente da leptospirose?", "verso": "A bactéria Leptospira." },
+      { "frente": "Em que a bactéria da leptospirose é eliminada no ambiente?", "verso": "Na urina de ratos." },
+      { "frente": "Por onde a Leptospira entra no corpo?", "verso": "Pela pele ou mucosas, no contato com água de enchente ou esgoto." }
+    ] },
+    { "substitui": "mon-08", "cartas": [
+      { "frente": "Qual é o agente do tétano?", "verso": "Clostridium tetani." },
+      { "frente": "Como se adquire o tétano?", "verso": "Esporos do solo ou de objetos entram por ferimentos." },
+      { "frente": "O que a toxina do tétano causa?", "verso": "Contrações musculares fortes." },
+      { "frente": "Como se previne o tétano?", "verso": "Vacina antitetânica, com reforços." },
+      { "frente": "Num ferimento de risco, sem a vacina em dia, o que se usa contra o tétano?", "verso": "Soro antitetânico." }
+    ] },
+    { "substitui": "mon-09", "cartas": [
+      { "frente": "Qual é o agente da salmonelose?", "verso": "A bactéria Salmonella." },
+      { "frente": "Qual alimento mais transmite a salmonelose?", "verso": "Ovo cru ou malcozido.", "macete": "Também frango, laticínios e água contaminados." },
+      { "frente": "Existem cistos de salmonela?", "verso": "Não: cistos são formas de resistência de protozoários (ameba, giárdia)." }
+    ] },
+
+    { "substitui": "pro-01", "cartas": [
+      { "frente": "Que estrutura de locomoção tem a ameba?", "verso": "Pseudópodes." },
+      { "frente": "Que estrutura de locomoção têm o Trypanosoma e a Giardia?", "verso": "Flagelos." },
+      { "frente": "Que estrutura de locomoção tem o paramécio?", "verso": "Cílios." },
+      { "frente": "Que grupo de protozoários não tem estrutura de locomoção, como o Plasmodium?", "verso": "Esporozoários." }
+    ] },
+    { "substitui": "pro-03", "cartas": [
+      { "frente": "Qual é o agente da doença de Chagas?", "verso": "Trypanosoma cruzi." },
+      { "frente": "Qual é o vetor da doença de Chagas?", "verso": "O barbeiro (triatomíneo)." },
+      { "frente": "Depois da picada do barbeiro, como o Trypanosoma cruzi entra no corpo?", "verso": "Pelas fezes do barbeiro, levadas ao ferimento ao coçar." },
+      { "frente": "Além da picada, por que via alimentar se pega a doença de Chagas?", "verso": "Oral: açaí ou caldo de cana contaminados." },
+      { "frente": "Que órgãos a doença de Chagas afeta?", "verso": "Coração e tubo digestório." }
+    ] },
+    { "substitui": "pro-04", "cartas": [
+      { "frente": "Qual é o agente da malária?", "verso": "Plasmodium." },
+      { "frente": "Qual é o vetor da malária?", "verso": "A fêmea do mosquito Anopheles." },
+      { "frente": "Qual é o sintoma característico da malária?", "verso": "Febres em ciclos.", "macete": "Cada febre coincide com o rompimento das hemácias." },
+      { "frente": "Em que região do Brasil a malária se concentra?", "verso": "Na Amazônia." }
+    ] },
+    { "substitui": "pro-05", "cartas": [
+      { "frente": "Qual é o agente da leishmaniose?", "verso": "Leishmania." },
+      { "frente": "Qual é o vetor da leishmaniose?", "verso": "O mosquito-palha (flebotomíneo)." },
+      { "frente": "Que forma da leishmaniose causa feridas na pele e nas mucosas?", "verso": "Tegumentar." },
+      { "frente": "Que forma da leishmaniose atinge fígado e baço?", "verso": "Visceral (calazar)." },
+      { "frente": "Que animal doméstico é um importante reservatório da leishmaniose visceral?", "verso": "O cão." }
+    ] },
+    { "substitui": "pro-06", "cartas": [
+      { "frente": "Que protozoário causa a amebíase?", "verso": "Entamoeba histolytica." },
+      { "frente": "Que protozoário causa a giardíase?", "verso": "Giardia lamblia." },
+      { "frente": "Como se pegam a amebíase e a giardíase?", "verso": "Ingerindo cistos em água ou alimentos contaminados por fezes." },
+      { "frente": "Como se previnem a amebíase e a giardíase?", "verso": "Saneamento, água tratada ou fervida e lavar bem alimentos e mãos." }
+    ] },
+    { "substitui": "pro-07", "cartas": [
+      { "frente": "Qual é o agente da toxoplasmose?", "verso": "Toxoplasma gondii." },
+      { "frente": "Qual é o hospedeiro definitivo do Toxoplasma?", "verso": "O gato." },
+      { "frente": "Que forma do Toxoplasma uma pessoa ingere ao comer carne crua ou mal passada?", "verso": "Cistos." },
+      { "frente": "Que forma do Toxoplasma sai nas fezes do gato e contamina verduras?", "verso": "Oocistos." },
+      { "frente": "Por que as gestantes são o grupo de maior risco na toxoplasmose?", "verso": "O parasita pode passar para o feto." }
+    ] },
+    { "substitui": "pro-08", "cartas": [
+      { "frente": "Que papel as algas têm nas cadeias alimentares aquáticas?", "verso": "Produtoras, na base da cadeia." },
+      { "frente": "Algas e cianobactérias juntas formam o quê?", "verso": "O fitoplâncton." },
+      { "frente": "Qual é a importância do fitoplâncton para a atmosfera?", "verso": "Produz grande parte do oxigênio do planeta." },
+      { "frente": "Cianobactérias são algas?", "verso": "Não: são bactérias (reino Monera)." },
+      { "frente": "O que é a maré vermelha?", "verso": "A proliferação excessiva de algumas algas, que pode liberar toxinas." }
+    ] },
+
+    { "substitui": "fun-01", "cartas": [
+      { "frente": "Como se chamam os filamentos que formam o corpo da maioria dos fungos?", "verso": "Hifas." },
+      { "frente": "Como se chama o conjunto de hifas de um fungo?", "verso": "Micélio." },
+      { "frente": "Que fungos são unicelulares, sem hifas?", "verso": "As leveduras." }
+    ] },
+    { "substitui": "fun-02", "cartas": [
+      { "frente": "De que é feita a parede celular dos fungos?", "verso": "Quitina." },
+      { "frente": "Que substância de reserva os fungos armazenam?", "verso": "Glicogênio (não amido)." },
+      { "frente": "Os fungos são autótrofos ou heterótrofos?", "verso": "Heterótrofos." }
+    ] },
+    { "substitui": "fun-03", "cartas": [
+      { "frente": "Como os fungos se alimentam?", "verso": "Por absorção.", "macete": "Liberam enzimas, digerem o alimento fora do corpo e absorvem os nutrientes." },
+      { "lacuna": "Quanto ao modo de vida, os fungos podem ser {{decompositores}}, {{parasitas}} ou viver em {{mutualismo}}." }
+    ] },
+    { "substitui": "fun-04", "cartas": [
+      { "frente": "Que fungo é a levedura do pão e da cerveja?", "verso": "Saccharomyces cerevisiae." },
+      { "frente": "Que processo a levedura faz no pão e nas bebidas?", "verso": "Fermentação alcoólica." },
+      { "lacuna": "Na fermentação alcoólica: glicose → {{etanol}} + {{CO₂}}." },
+      { "frente": "No pão, que produto da fermentação faz a massa crescer?", "verso": "O CO₂." }
+    ] },
+    { "substitui": "fun-06", "cartas": [
+      { "frente": "O que é um líquen?", "verso": "A associação de um fungo com uma alga ou cianobactéria." },
+      { "frente": "O que é uma micorriza?", "verso": "A associação de um fungo com as raízes de uma planta." },
+      { "frente": "Na micorriza, o que o fungo dá à planta?", "verso": "Mais absorção de água e sais.", "macete": "A planta dá açúcares ao fungo." },
+      { "frente": "Que tipo de relação ecológica são os liquens e as micorrizas?", "verso": "Mutualismo." }
+    ] },
+    { "substitui": "fun-07", "cartas": [
+      { "frente": "Que fungo causa a candidíase?", "verso": "Candida albicans." },
+      { "frente": "Como se chama a micose dos pés, também conhecida como frieira?", "verso": "Pé de atleta." },
+      { "frente": "Como se chama a micose que causa manchas claras na pele, o pano branco?", "verso": "Pitiríase versicolor." },
+      { "frente": "Que condições favorecem as micoses?", "verso": "Calor e umidade." }
+    ] },
+
+    { "substitui": "bot-01", "cartas": [
+      { "lacuna": "Alternância de gerações: o {{gametófito}} (n) produz gametas por {{mitose}}; os gametas formam o {{zigoto}} (2n), que origina o {{esporófito}} (2n); este produz {{esporos}} (n) por {{meiose}}." },
+      { "frente": "Como se chama o ciclo de vida das plantas, com alternância de gerações?", "verso": "Haplodiplobionte." }
+    ] },
+    { "substitui": "bot-02", "cartas": [
+      { "frente": "Por que os musgos são pequenos e vivem em lugares úmidos?", "verso": "São avasculares: não têm xilema nem floema." },
+      { "frente": "Nas briófitas, qual é a fase duradoura do ciclo?", "verso": "O gametófito." },
+      { "frente": "Por que as briófitas dependem de água para a fecundação?", "verso": "O anterozoide nada até a oosfera." }
+    ] },
+    { "substitui": "bot-03", "cartas": [
+      { "frente": "As pteridófitas têm sementes?", "verso": "Não." },
+      { "frente": "Nas pteridófitas, qual é a fase duradoura do ciclo?", "verso": "O esporófito." },
+      { "frente": "Onde ficam os esporos das samambaias?", "verso": "Em soros, na face de baixo das folhas." },
+      { "frente": "As pteridófitas dependem de água para a fecundação?", "verso": "Sim." }
+    ] },
+    { "substitui": "bot-04", "cartas": [
+      { "frente": "O que as gimnospermas não têm, que as angiospermas têm?", "verso": "Flores e frutos." },
+      { "frente": "Por que se diz que as gimnospermas têm sementes nuas?", "verso": "Nenhum fruto envolve a semente." },
+      { "frente": "Como se chamam as estruturas reprodutivas dos pinheiros?", "verso": "Estróbilos (pinhas)." },
+      { "frente": "Nas gimnospermas, o que torna a fecundação independente da água?", "verso": "O tubo polínico." },
+      { "frente": "Como o pólen das gimnospermas chega ao estróbilo feminino?", "verso": "Pelo vento." },
+      { "frente": "O pinhão da araucária é fruto ou semente?", "verso": "Semente." }
+    ] },
+    { "substitui": "bot-05", "cartas": [
+      { "frente": "Que novidade evolutiva surgiu nas pteridófitas?", "verso": "Vasos condutores." },
+      { "frente": "Que novidade evolutiva surgiu nas gimnospermas?", "verso": "Sementes (e grão de pólen com tubo polínico)." },
+      { "frente": "Que novidade evolutiva surgiu nas angiospermas?", "verso": "Flores e frutos." }
+    ] },
+    { "substitui": "bot-06", "cartas": [
+      { "frente": "Qual é a parte masculina da flor?", "verso": "Androceu (os estames)." },
+      { "frente": "Qual é a parte feminina da flor?", "verso": "Gineceu (os carpelos)." },
+      { "frente": "Que parte do estame produz o pólen?", "verso": "A antera." },
+      { "lacuna": "O carpelo tem {{estigma}}, {{estilete}} e {{ovário}}, onde ficam os óvulos." },
+      { "frente": "Como se chama o conjunto das pétalas?", "verso": "Corola." },
+      { "frente": "Como se chama o conjunto das sépalas?", "verso": "Cálice." },
+      { "frente": "Qual é a principal função da corola?", "verso": "Atrair polinizadores." }
+    ] },
+    { "substitui": "bot-07", "cartas": [
+      { "frente": "Na dupla fecundação, o que se forma da união de um núcleo espermático com a oosfera?", "verso": "O zigoto (2n), que vira o embrião." },
+      { "frente": "Na dupla fecundação, o que se forma da união do outro núcleo espermático com os dois núcleos polares?", "verso": "O endosperma (3n)." },
+      { "frente": "Qual é a função do endosperma?", "verso": "Reserva de nutrientes da semente." }
+    ] },
+    { "substitui": "bot-09", "cartas": [
+      { "frente": "Que tipo de nervura têm as folhas das monocotiledôneas?", "verso": "Paralelas." },
+      { "frente": "Que tipo de nervura têm as folhas das eudicotiledôneas?", "verso": "Em rede (reticuladas)." },
+      { "frente": "Que tipo de raiz têm as monocotiledôneas?", "verso": "Fasciculada (em cabeleira)." },
+      { "frente": "Que tipo de raiz têm as eudicotiledôneas?", "verso": "Pivotante." },
+      { "frente": "Como ficam os feixes vasculares no caule das monocotiledôneas?", "verso": "Espalhados." },
+      { "frente": "Como ficam os feixes vasculares no caule das eudicotiledôneas?", "verso": "Em anel." },
+      { "frente": "As partes da flor de uma monocotiledônea vêm em múltiplos de quanto?", "verso": "De 3." },
+      { "frente": "As partes da flor de uma eudicotiledônea vêm em múltiplos de quanto?", "verso": "De 4 ou 5." },
+      { "frente": "Milho e grama são monocotiledôneas ou eudicotiledôneas?", "verso": "Monocotiledôneas." },
+      { "frente": "Feijão e rosa são monocotiledôneas ou eudicotiledôneas?", "verso": "Eudicotiledôneas." }
+    ] },
+    { "substitui": "bot-10", "cartas": [
+      { "frente": "O que é um pseudofruto?", "verso": "Uma parte carnosa que não vem do ovário." },
+      { "frente": "No caju, de que parte da flor vem a parte suculenta?", "verso": "Do pedúnculo floral." },
+      { "frente": "No caju, qual é o fruto verdadeiro?", "verso": "A castanha." },
+      { "frente": "No morango e na maçã, de que parte da flor vem a parte carnosa?", "verso": "Do receptáculo floral." },
+      { "frente": "No morango, quais são os frutos verdadeiros?", "verso": "Os pontinhos da superfície." }
+    ] },
+    { "substitui": "bot-11", "cartas": [
+      { "frente": "Como a semente do pinheiro é dispersa?", "verso": "Pelo vento: ela tem uma asa." }
+    ] },
+
+    { "substitui": "hve-01", "cartas": [
+      { "frente": "Que meristemas fazem a planta crescer em comprimento?", "verso": "Os primários (apicais)." },
+      { "frente": "Onde ficam os meristemas primários?", "verso": "Nas pontas do caule e da raiz." },
+      { "frente": "Que meristemas fazem a planta crescer em espessura?", "verso": "Os secundários." },
+      { "lacuna": "Os meristemas secundários são o {{câmbio vascular}} e o {{felogênio}}." }
+    ] },
+    { "substitui": "hve-02", "cartas": [
+      { "frente": "Que tecido reveste os órgãos jovens das plantas?", "verso": "A epiderme." },
+      { "frente": "Qual é a função da cutícula da epiderme vegetal?", "verso": "Reduzir a perda de água." },
+      { "frente": "Que estruturas da epiderme fazem as trocas gasosas?", "verso": "Os estômatos." },
+      { "frente": "Como se chamam os pelos da epiderme vegetal?", "verso": "Tricomas." }
+    ] },
+    { "substitui": "hve-03", "cartas": [
+      { "frente": "Que tecido reveste caules e raízes com crescimento secundário?", "verso": "O súber (cortiça)." },
+      { "frente": "Que substância impermeabiliza as células do súber?", "verso": "Suberina." },
+      { "frente": "As células do súber são vivas ou mortas?", "verso": "Mortas." },
+      { "frente": "Que meristema produz o súber?", "verso": "O felogênio." }
+    ] },
+    { "substitui": "hve-04", "cartas": [
+      { "frente": "Que parênquima faz fotossíntese?", "verso": "O clorofiliano." },
+      { "lacuna": "Na folha, o parênquima clorofiliano pode ser {{paliçádico}} ou {{lacunoso}}." },
+      { "frente": "Que parênquima guarda amido?", "verso": "O amilífero." },
+      { "frente": "Que parênquima guarda água?", "verso": "O aquífero." },
+      { "frente": "Que parênquima guarda ar e ajuda plantas aquáticas a flutuar?", "verso": "O aerífero (aerênquima)." }
+    ] },
+    { "substitui": "hve-05", "cartas": [
+      { "frente": "Que tecido dá sustentação flexível a órgãos jovens?", "verso": "O colênquima." },
+      { "frente": "Que tecido dá sustentação rígida à planta?", "verso": "O esclerênquima." },
+      { "frente": "As células do colênquima são vivas ou mortas?", "verso": "Vivas." },
+      { "frente": "As células do esclerênquima são vivas ou mortas?", "verso": "Mortas." },
+      { "frente": "Que substância reforça a parede das células do esclerênquima?", "verso": "Lignina." },
+      { "frente": "Que substância espessa a parede das células do colênquima?", "verso": "Celulose." }
+    ] },
+    { "substitui": "hve-06", "cartas": [
+      { "frente": "Que seiva o xilema transporta?", "verso": "Seiva bruta (água e sais)." },
+      { "frente": "Que seiva o floema transporta?", "verso": "Seiva elaborada (açúcares)." },
+      { "frente": "Em que sentido o xilema leva a seiva?", "verso": "Da raiz para as folhas." },
+      { "frente": "Em que sentido o floema leva a seiva?", "verso": "Das folhas para o resto da planta." },
+      { "frente": "As células condutoras do xilema são vivas ou mortas?", "verso": "Mortas (lignificadas)." },
+      { "frente": "As células condutoras do floema são vivas ou mortas?", "verso": "Vivas." },
+      { "frente": "Quais são as células condutoras do xilema?", "verso": "Traqueídes e elementos de vaso." },
+      { "frente": "Quais são as células do floema?", "verso": "Tubo crivado e células companheiras." }
+    ] },
+    { "substitui": "hve-07", "cartas": [
+      { "lacuna": "Regiões da raiz, da ponta para cima: {{coifa}} → zona {{meristemática}} → zona de {{alongamento}} → zona {{pilífera}} → zona de {{ramificação}}." },
+      { "frente": "Qual é a função da coifa?", "verso": "Proteger a ponta da raiz." },
+      { "frente": "Em que zona da raiz ocorre a maior absorção de água?", "verso": "Na zona pilífera (pelos absorventes)." }
+    ] },
+    { "substitui": "hve-08", "cartas": [
+      { "frente": "Que tipo de caule têm a cana-de-açúcar e o bambu, com nós e entrenós bem marcados?", "verso": "Colmo." },
+      { "frente": "Que tipo de caule têm as palmeiras?", "verso": "Estipe." },
+      { "frente": "Que tipo de caule, lenhoso e ramificado, têm as árvores?", "verso": "Tronco." },
+      { "frente": "Que tipo de caule é a batata-inglesa?", "verso": "Tubérculo." },
+      { "frente": "Que tipo de caule têm a bananeira e o gengibre?", "verso": "Rizoma." },
+      { "frente": "Que tipo de caule têm a cebola e o alho?", "verso": "Bulbo." }
+    ] },
+
+    { "substitui": "fve-01", "cartas": [
+      { "frente": "O que cria a tensão que puxa a seiva bruta pelo xilema?", "verso": "A transpiração nas folhas." },
+      { "frente": "Como se chama a união das moléculas de água entre si?", "verso": "Coesão." },
+      { "frente": "Como se chama a união das moléculas de água às paredes dos vasos?", "verso": "Adesão." },
+      { "frente": "Que teoria explica a subida da seiva bruta?", "verso": "Coesão-tensão (de Dixon)." }
+    ] },
+    { "substitui": "fve-02", "cartas": [
+      { "frente": "Que hipótese explica o transporte da seiva elaborada?", "verso": "Fluxo de pressão (de Münch)." },
+      { "frente": "Na hipótese de Münch, por que a água entra no floema da folha?", "verso": "O açúcar que entrou atrai água por osmose." },
+      { "frente": "Para onde a seiva elaborada é empurrada?", "verso": "Para os drenos: raízes, frutos e sementes." }
+    ] },
+    { "substitui": "fve-03", "cartas": [
+      { "frente": "Ao tirar um anel da casca do tronco (anel de Malpighi), que tecido condutor é removido?", "verso": "O floema." },
+      { "frente": "Por que a planta morre depois do anel de Malpighi?", "verso": "As raízes ficam sem açúcar, morrem e param de absorver água." }
+    ] },
+    { "substitui": "fve-04", "cartas": [
+      { "frente": "Que íon, ao entrar nas células-guarda, faz o estômato abrir?", "verso": "K⁺ (potássio)." },
+      { "frente": "Por que as células-guarda ficam túrgidas quando o K⁺ entra?", "verso": "A água entra atrás dele, por osmose." },
+      { "frente": "Que condições estimulam a abertura dos estômatos?", "verso": "Luz e CO₂ baixo." },
+      { "frente": "Que hormônio fecha os estômatos na falta de água?", "verso": "Ácido abscísico (ABA)." }
+    ] },
+    { "substitui": "fve-05", "cartas": [
+      { "frente": "Onde a auxina é produzida principalmente?", "verso": "No ápice do caule." },
+      { "frente": "Qual é o principal efeito da auxina nas células?", "verso": "Alongamento celular." },
+      { "frente": "No fototropismo, para que lado do caule a auxina vai?", "verso": "Para o lado sombreado." },
+      { "frente": "Por que o caule se curva em direção à luz?", "verso": "O lado sombreado, com mais auxina, cresce mais." },
+      { "frente": "Que hormônio vegetal causa a dominância apical?", "verso": "Auxina." }
+    ] },
+    { "substitui": "fve-06", "cartas": [
+      { "frente": "Que hormônio quebra a dormência e faz a semente germinar?", "verso": "Giberelina." },
+      { "frente": "Que hormônio é usado para produzir uva sem semente?", "verso": "Giberelina." }
+    ] },
+    { "substitui": "fve-07", "cartas": [
+      { "frente": "Que hormônio vegetal estimula a divisão celular?", "verso": "Citocinina." },
+      { "frente": "Que hormônio vegetal retarda o envelhecimento das folhas?", "verso": "Citocinina." },
+      { "frente": "Num tecido em cultura, o que define se ele forma raízes ou brotos?", "verso": "A proporção entre auxina e citocinina." }
+    ] },
+    { "substitui": "fve-08", "cartas": [
+      { "frente": "Qual hormônio vegetal é um gás?", "verso": "Etileno." },
+      { "frente": "Que hormônio faz os frutos amadurecerem?", "verso": "Etileno." },
+      { "frente": "Por que uma fruta madura num saco acelera o amadurecimento das outras?", "verso": "Ela libera etileno." },
+      { "frente": "Que hormônio provoca a queda (abscisão) de folhas e frutos?", "verso": "Etileno." }
+    ] },
+    { "substitui": "fve-09", "cartas": [
+      { "frente": "Que hormônio mantém a dormência de sementes e gemas?", "verso": "Ácido abscísico (ABA)." }
+    ] },
+    { "substitui": "fve-10", "cartas": [
+      { "frente": "O que é tropismo?", "verso": "Crescimento orientado pela direção do estímulo." },
+      { "frente": "O que é nastismo?", "verso": "Movimento que não depende da direção do estímulo." },
+      { "frente": "A folha da sensitiva fechando ao toque é tropismo ou nastismo?", "verso": "Nastismo." },
+      { "frente": "Como se chama o movimento da gavinha que se enrola num suporte?", "verso": "Tigmotropismo." },
+      { "frente": "Como se chama o crescimento orientado pela gravidade?", "verso": "Gravitropismo." }
+    ] },
+    { "substitui": "fve-11", "cartas": [
+      { "frente": "No fotoperiodismo, o que a planta mede para florescer?", "verso": "A duração da noite contínua." },
+      { "frente": "Uma planta de dia curto floresce quando a noite é maior ou menor que o período crítico?", "verso": "Maior." },
+      { "frente": "Uma planta de dia longo floresce quando a noite é maior ou menor que o período crítico?", "verso": "Menor." },
+      { "frente": "Que pigmento percebe a luz no fotoperiodismo?", "verso": "Fitocromo." }
+    ] },
+
+    { "substitui": "emb-01", "cartas": [
+      { "lacuna": "Fases do desenvolvimento embrionário: {{segmentação}} → {{gastrulação}} → {{organogênese}}." },
+      { "frente": "Em que fase do desenvolvimento o zigoto se divide até formar mórula e blástula?", "verso": "Segmentação." },
+      { "frente": "Em que fase do desenvolvimento se formam os folhetos germinativos?", "verso": "Gastrulação." },
+      { "frente": "Como se chama o intestino primitivo formado na gastrulação?", "verso": "Arquêntero." },
+      { "frente": "Que estruturas se formam primeiro na organogênese?", "verso": "Tubo neural e notocorda (nêurula)." }
+    ] },
+    { "substitui": "emb-02", "cartas": [
+      { "frente": "Que folheto germinativo origina a epiderme e o sistema nervoso?", "verso": "Ectoderme." },
+      { "frente": "Que folheto germinativo origina músculos, ossos e sangue?", "verso": "Mesoderme." },
+      { "frente": "Que folheto germinativo origina o revestimento interno do tubo digestório e respiratório?", "verso": "Endoderme." },
+      { "frente": "De que folheto vêm o coração, os rins e as gônadas?", "verso": "Mesoderme." },
+      { "frente": "De que folheto vêm o fígado e o pâncreas?", "verso": "Endoderme." }
+    ] },
+    { "substitui": "emb-03", "cartas": [
+      { "frente": "Nos protostômios, o blastóporo vira o quê?", "verso": "A boca." },
+      { "frente": "Nos deuterostômios, o blastóporo vira o quê?", "verso": "O ânus." },
+      { "frente": "Quais grupos animais são deuterostômios?", "verso": "Equinodermos e cordados." },
+      { "frente": "Moluscos, anelídeos e artrópodes são protostômios ou deuterostômios?", "verso": "Protostômios." }
+    ] },
+    { "substitui": "emb-04", "cartas": [
+      { "frente": "O que é celoma?", "verso": "Cavidade do corpo totalmente revestida por mesoderme." },
+      { "frente": "Os platelmintos são acelomados, pseudocelomados ou celomados?", "verso": "Acelomados." },
+      { "frente": "Os nematelmintos são acelomados, pseudocelomados ou celomados?", "verso": "Pseudocelomados." },
+      { "frente": "Moluscos, anelídeos e artrópodes têm celoma verdadeiro?", "verso": "Sim, são celomados." }
+    ] },
+    { "substitui": "emb-05", "cartas": [
+      { "frente": "Que simetria têm os poríferos?", "verso": "Geralmente nenhuma." },
+      { "frente": "Que simetria têm os cnidários?", "verso": "Radial." },
+      { "frente": "Que simetria tem o equinodermo adulto?", "verso": "Radial pentâmera." },
+      { "frente": "Que simetria tem a larva do equinodermo?", "verso": "Bilateral." },
+      { "frente": "A simetria bilateral está associada a quê?", "verso": "À cefalização (cabeça com órgãos dos sentidos)." }
+    ] },
+
+    { "substitui": "inv-01", "cartas": [
+      { "frente": "Os poríferos têm tecidos verdadeiros?", "verso": "Não." },
+      { "frente": "Que células das esponjas capturam o alimento?", "verso": "Coanócitos." },
+      { "frente": "Por onde a água sai da esponja?", "verso": "Pelo ósculo." },
+      { "frente": "Como as esponjas se alimentam?", "verso": "Filtrando a água." }
+    ] },
+    { "substitui": "inv-02", "cartas": [
+      { "frente": "Que células urticantes são exclusivas dos cnidários?", "verso": "Cnidócitos." },
+      { "frente": "Quantas aberturas tem a cavidade gastrovascular dos cnidários?", "verso": "Uma: boca, sem ânus." },
+      { "lacuna": "As duas formas corporais dos cnidários são {{pólipo}} e {{medusa}}." },
+      { "frente": "Os cnidários são diblásticos ou triblásticos?", "verso": "Diblásticos." }
+    ] },
+    { "substitui": "inv-03", "cartas": [
+      { "frente": "Que forma de corpo têm os platelmintos?", "verso": "Achatada." },
+      { "frente": "Por que estruturas os platelmintos excretam?", "verso": "Células-flama (protonefrídios)." },
+      { "frente": "Como é o sistema digestório dos platelmintos?", "verso": "Incompleto (só boca).", "macete": "Nas tênias, ausente." },
+      { "frente": "Os platelmintos têm sistema circulatório?", "verso": "Não (nem respiratório)." }
+    ] },
+    { "substitui": "inv-04", "cartas": [
+      { "frente": "Que forma de corpo têm os nematelmintos?", "verso": "Cilíndrica." },
+      { "frente": "Que novidade evolutiva surgiu nos nematelmintos?", "verso": "Sistema digestório completo (boca e ânus)." },
+      { "frente": "Os nematelmintos têm sexos separados?", "verso": "Sim.", "macete": "Os machos geralmente são menores." }
+    ] },
+    { "substitui": "inv-05", "cartas": [
+      { "lacuna": "O corpo do molusco tem {{pé}}, {{massa visceral}} e {{manto}}." },
+      { "frente": "Que parte do molusco secreta a concha?", "verso": "O manto." },
+      { "frente": "Para que serve a rádula dos moluscos?", "verso": "Raspar o alimento." },
+      { "frente": "Que classe de moluscos não tem rádula?", "verso": "Bivalves." },
+      { "frente": "A que classe de moluscos pertencem o polvo e a lula?", "verso": "Cefalópodes." },
+      { "frente": "A que classe de moluscos pertencem o caramujo e a lesma?", "verso": "Gastrópodes." },
+      { "frente": "A que classe de moluscos pertencem o mexilhão e a ostra?", "verso": "Bivalves." },
+      { "frente": "Que moluscos têm circulação fechada?", "verso": "Os cefalópodes." }
+    ] },
+    { "substitui": "inv-06", "cartas": [
+      { "frente": "Como se chama a divisão do corpo dos anelídeos em anéis?", "verso": "Metameria." },
+      { "frente": "Por que estruturas os anelídeos excretam?", "verso": "Metanefrídios." },
+      { "frente": "A circulação dos anelídeos é aberta ou fechada?", "verso": "Fechada." },
+      { "frente": "A que grupo de anelídeos pertence a minhoca?", "verso": "Oligoquetas." },
+      { "frente": "A que grupo de anelídeos pertence a sanguessuga?", "verso": "Hirudíneos." }
+    ] },
+    { "substitui": "inv-07", "cartas": [
+      { "frente": "De que é feito o exoesqueleto dos artrópodes?", "verso": "Quitina." },
+      { "frente": "Como os artrópodes crescem, se o exoesqueleto é rígido?", "verso": "Por mudas (ecdises)." },
+      { "frente": "A circulação dos artrópodes é aberta ou fechada?", "verso": "Aberta." },
+      { "frente": "Que característica dá nome aos artrópodes?", "verso": "Apêndices (patas) articulados." }
+    ] },
+    { "substitui": "inv-08", "cartas": [
+      { "frente": "Em quantas partes se divide o corpo de um inseto?", "verso": "Três: cabeça, tórax e abdome." },
+      { "frente": "Em quantas partes se divide o corpo de um aracnídeo?", "verso": "Duas: cefalotórax e abdome." },
+      { "frente": "Quantos pares de patas têm os insetos?", "verso": "3." },
+      { "frente": "Quantos pares de patas têm os aracnídeos?", "verso": "4." },
+      { "frente": "Quantos pares de antenas têm os insetos?", "verso": "1." },
+      { "frente": "Quantos pares de antenas têm os crustáceos?", "verso": "2." },
+      { "frente": "Os aracnídeos têm antenas?", "verso": "Não.", "macete": "Têm quelíceras." },
+      { "frente": "Como os insetos respiram?", "verso": "Por traqueias." },
+      { "frente": "Como os crustáceos respiram?", "verso": "Por brânquias." },
+      { "frente": "Como os aracnídeos respiram?", "verso": "Por pulmões foliáceos e/ou traqueias." }
+    ] },
+    { "substitui": "inv-09", "cartas": [
+      { "frente": "Quantos pares de patas por segmento têm os quilópodes?", "verso": "1." },
+      { "frente": "Quantos pares de patas por segmento têm os diplópodes?", "verso": "2." },
+      { "frente": "A lacraia é quilópode ou diplópode?", "verso": "Quilópode." },
+      { "frente": "O piolho-de-cobra é quilópode ou diplópode?", "verso": "Diplópode." },
+      { "frente": "Quilópodes ou diplópodes: qual tem forcípulas com veneno?", "verso": "Quilópodes." }
+    ] },
+    { "substitui": "inv-10", "cartas": [
+      { "frente": "Como se chama o inseto sem metamorfose, como a traça?", "verso": "Ametábolo." },
+      { "frente": "Qual é a sequência da metamorfose incompleta?", "verso": "Ovo → ninfa → adulto." },
+      { "frente": "Qual é a sequência da metamorfose completa?", "verso": "Ovo → larva → pupa → adulto." },
+      { "frente": "O gafanhoto e o barbeiro têm metamorfose completa ou incompleta?", "verso": "Incompleta (hemimetábolos)." },
+      { "frente": "A borboleta e a mosca têm metamorfose completa ou incompleta?", "verso": "Completa (holometábolos)." }
+    ] },
+    { "substitui": "inv-11", "cartas": [
+      { "frente": "Que estruturas fazem a excreção nos insetos?", "verso": "Túbulos de Malpighi." },
+      { "frente": "Que excreta nitrogenada os insetos eliminam?", "verso": "Ácido úrico." },
+      { "frente": "Por que excretar ácido úrico é uma vantagem em terra?", "verso": "Sai quase sem água, o que economiza água." }
+    ] },
+    { "substitui": "inv-12", "cartas": [
+      { "frente": "Que tipo de esqueleto têm os equinodermos?", "verso": "Endoesqueleto calcário." },
+      { "frente": "Que sistema movimenta os pés ambulacrários dos equinodermos?", "verso": "Sistema ambulacrário (hidrovascular)." },
+      { "frente": "Em que ambiente vivem os equinodermos?", "verso": "Só no mar." }
+    ] },
+
+    { "substitui": "ver-01", "cartas": [
+      { "frente": "Qual é o agente da esquistossomose?", "verso": "Schistosoma mansoni." },
+      { "frente": "Qual é o hospedeiro intermediário da esquistossomose?", "verso": "O caramujo Biomphalaria." },
+      { "frente": "Que forma do Schistosoma penetra pela pele?", "verso": "A cercária." },
+      { "frente": "Onde se pega a esquistossomose?", "verso": "Em água doce contaminada." },
+      { "frente": "Qual é o nome popular da esquistossomose, pelo seu sintoma?", "verso": "Barriga-d'água." }
+    ] },
+    { "substitui": "ver-02", "cartas": [
+      { "frente": "Como se pega a teníase?", "verso": "Comendo carne de porco ou de boi crua ou mal cozida, com cisticercos." },
+      { "frente": "Como se pega a cisticercose?", "verso": "Ingerindo ovos de Taenia solium." },
+      { "frente": "Na cisticercose, onde se alojam as larvas?", "verso": "Nos músculos e no cérebro." },
+      { "frente": "Na cisticercose, o ser humano é que tipo de hospedeiro?", "verso": "Intermediário." },
+      { "frente": "Qual tênia causa a cisticercose humana: a do porco ou a do boi?", "verso": "A do porco (Taenia solium)." }
+    ] },
+    { "substitui": "ver-03", "cartas": [
+      { "frente": "Qual é o agente da ascaridíase?", "verso": "Ascaris lumbricoides (lombriga)." },
+      { "frente": "Como se pega a ascaridíase?", "verso": "Ingerindo ovos em água, alimentos ou mãos sujas." },
+      { "frente": "Por que órgão as larvas da lombriga passam antes de voltar ao intestino?", "verso": "Pelos pulmões." }
+    ] },
+    { "substitui": "ver-04", "cartas": [
+      { "frente": "Que vermes causam o amarelão (ancilostomíase)?", "verso": "Ancylostoma duodenale e Necator americanus." },
+      { "frente": "Como se pega o amarelão?", "verso": "As larvas penetram pela pele dos pés descalços, em solo contaminado." },
+      { "frente": "Por que o amarelão causa anemia?", "verso": "Os vermes sugam sangue no intestino." },
+      { "frente": "Qual é a principal prevenção do amarelão?", "verso": "Usar calçados." }
+    ] },
+    { "substitui": "ver-05", "cartas": [
+      { "frente": "Qual é o agente da filariose?", "verso": "Wuchereria bancrofti." },
+      { "frente": "Qual é o vetor da filariose?", "verso": "O mosquito Culex (pernilongo)." },
+      { "frente": "Por que a filariose causa elefantíase?", "verso": "Os vermes obstruem os vasos linfáticos." }
+    ] },
+    { "substitui": "ver-06", "cartas": [
+      { "frente": "Qual é o agente da oxiurose?", "verso": "Enterobius vermicularis." },
+      { "frente": "Qual é o sintoma típico da oxiurose?", "verso": "Coceira anal à noite.", "macete": "As fêmeas põem os ovos ao redor do ânus." },
+      { "frente": "Por que a oxiurose reinfecta com facilidade?", "verso": "A pessoa coça e leva os ovos à boca (autoinfestação)." }
+    ] },
+    { "substitui": "ver-07", "cartas": [
+      { "frente": "Ingerir cistos em água ou alimentos transmite que tipo de parasita?", "verso": "Protozoários (ameba, giárdia)." },
+      { "frente": "Na lombriga, no oxiúro e na cisticercose, que forma do parasita a pessoa ingere?", "verso": "Ovos." },
+      { "frente": "Que dois vermes entram no corpo como larvas pela pele?", "verso": "Ancilóstomo (no solo) e esquistossomo (na água doce)." }
+    ] },
+
+    { "substitui": "cor-01", "cartas": [
+      { "lacuna": "As quatro características exclusivas dos cordados: {{notocorda}}, {{tubo nervoso dorsal}}, {{fendas faringianas}} e {{cauda pós-anal}}." },
+      { "frente": "As quatro características dos cordados precisam aparecer no adulto?", "verso": "Não: basta aparecerem no embrião." }
+    ] },
+    { "substitui": "cor-02", "cartas": [
+      { "frente": "De que é o esqueleto do tubarão e da raia?", "verso": "Cartilagem." },
+      { "frente": "Que estrutura cobre as brânquias dos peixes ósseos?", "verso": "O opérculo." },
+      { "frente": "Que órgão de flutuação a maioria dos peixes ósseos tem, e os cartilaginosos não?", "verso": "Bexiga natatória." },
+      { "frente": "A fecundação dos peixes cartilaginosos é interna ou externa?", "verso": "Interna." },
+      { "frente": "A fecundação dos peixes ósseos é interna ou externa?", "verso": "Quase sempre externa." }
+    ] },
+    { "substitui": "cor-03", "cartas": [
+      { "frente": "Por que os ovos dos anfíbios precisam ficar na água?", "verso": "Não têm casca e ressecam fora dela." },
+      { "frente": "Como se chama a larva aquática dos anfíbios?", "verso": "Girino." },
+      { "frente": "Que tipo de respiração a pele fina e úmida dá aos anfíbios?", "verso": "Respiração cutânea." },
+      { "frente": "A fecundação dos anfíbios é geralmente interna ou externa?", "verso": "Externa." }
+    ] },
+    { "substitui": "cor-04", "cartas": [
+      { "frente": "Que novidade permitiu aos répteis se reproduzirem longe da água?", "verso": "O ovo amniótico, com casca." },
+      { "lacuna": "Os anexos do ovo amniótico são {{âmnio}}, {{córion}}, {{alantoide}} e {{saco vitelínico}}." },
+      { "frente": "De que são feitas as escamas dos répteis?", "verso": "Queratina." },
+      { "frente": "A fecundação dos répteis é interna ou externa?", "verso": "Interna." }
+    ] },
+    { "substitui": "cor-05", "cartas": [
+      { "frente": "Por que os ossos das aves são leves?", "verso": "São pneumáticos (ocos, com ar)." },
+      { "frente": "Que estruturas tornam a respiração das aves muito eficiente?", "verso": "Os sacos aéreos.", "macete": "Dão um fluxo contínuo de ar nos pulmões." },
+      { "frente": "Onde se prendem os grandes músculos do voo das aves?", "verso": "Na quilha (osso do peito)." },
+      { "frente": "Que órgão urinário as aves não têm, o que reduz o peso?", "verso": "A bexiga urinária." },
+      { "frente": "As aves são endotérmicas ou ectotérmicas?", "verso": "Endotérmicas." }
+    ] },
+    { "substitui": "cor-06", "cartas": [
+      { "frente": "Que músculo, exclusivo dos mamíferos, separa o tórax do abdome?", "verso": "O diafragma." },
+      { "frente": "As hemácias dos mamíferos têm núcleo?", "verso": "Não." },
+      { "lacuna": "Os três grupos de mamíferos são {{monotremados}}, {{marsupiais}} e {{placentários}}." },
+      { "frente": "Que mamíferos põem ovos?", "verso": "Os monotremados (ex.: ornitorrinco)." },
+      { "frente": "Nos marsupiais, há um ovo na bolsa?", "verso": "Não: o filhote nasce muito pequeno e termina de se desenvolver na bolsa, preso a uma mama." },
+      { "frente": "O gambá (saruê) é que tipo de mamífero?", "verso": "Marsupial." }
+    ] },
+    { "substitui": "cor-07", "cartas": [
+      { "frente": "Quantas cavidades tem o coração dos peixes?", "verso": "2." },
+      { "frente": "Quantas cavidades tem o coração dos anfíbios?", "verso": "3." },
+      { "frente": "Quantas cavidades tem o coração da maioria dos répteis?", "verso": "3, com septo parcial no ventrículo.", "macete": "Os crocodilianos têm 4." },
+      { "frente": "Quantas cavidades tem o coração das aves e dos mamíferos?", "verso": "4." },
+      { "frente": "Que tipo de circulação têm os peixes?", "verso": "Simples e completa." },
+      { "frente": "Nos anfíbios, onde o sangue arterial e o venoso se misturam?", "verso": "No ventrículo." },
+      { "frente": "Que tipo de circulação têm aves e mamíferos?", "verso": "Dupla e completa (sem mistura)." },
+      { "frente": "Que vantagem a circulação sem mistura dá às aves e aos mamíferos?", "verso": "Permite a endotermia." }
+    ] },
+    { "substitui": "cor-08", "cartas": [
+      { "frente": "Que excreta nitrogenada é a mais tóxica e precisa de mais água para sair?", "verso": "Amônia." },
+      { "frente": "Que animais excretam amônia?", "verso": "Peixes ósseos e girinos." },
+      { "frente": "Que excreta nitrogenada os mamíferos eliminam?", "verso": "Ureia." },
+      { "frente": "Que animais excretam ácido úrico?", "verso": "Aves, répteis e insetos." },
+      { "frente": "Por que o ácido úrico combina com ovos com casca?", "verso": "É pouco tóxico e fica guardado no ovo quase sem água." }
+    ] },
+    { "substitui": "cor-09", "cartas": [
+      { "frente": "Como respiram os peixes e os girinos?", "verso": "Por brânquias." },
+      { "frente": "Como respiram os anfíbios adultos?", "verso": "Por pulmões simples e pela pele." },
+      { "frente": "Nos pulmões dos mamíferos, onde ocorrem as trocas gasosas?", "verso": "Nos alvéolos." }
+    ] },
+    { "substitui": "cor-10", "cartas": [
+      { "frente": "Qual é a função do papo das aves?", "verso": "Armazenar e umedecer o alimento." },
+      { "frente": "Como se chama o estômago químico das aves?", "verso": "Proventrículo." },
+      { "frente": "Qual é a função da moela das aves?", "verso": "Triturar o alimento (estômago muscular)." },
+      { "frente": "O que chega à cloaca das aves?", "verso": "Fezes, urina e gametas." },
+      { "frente": "Que mamíferos têm cloaca?", "verso": "Os monotremados (ex.: ornitorrinco)." }
+    ] },
+    { "substitui": "cor-11", "cartas": [
+      { "frente": "A reprodução dos peixes ósseos é sexuada ou assexuada?", "verso": "Sexuada: há união de gametas." },
+      { "frente": "Como se chama a fecundação em que os gametas se encontram na água, sem cópula?", "verso": "Externa." }
+    ] },
+
+    { "substitui": "han-01", "cartas": [
+      { "frente": "Como ficam as células do tecido epitelial?", "verso": "Bem juntas, com pouquíssima substância entre elas." },
+      { "frente": "O tecido epitelial tem vasos sanguíneos?", "verso": "Não: é nutrido por difusão a partir do conjuntivo abaixo." },
+      { "lacuna": "As duas funções do tecido epitelial são {{revestimento}} e {{secreção}}." }
+    ] },
+    { "substitui": "han-02", "cartas": [
+      { "frente": "Para onde as glândulas exócrinas lançam a secreção?", "verso": "Por ductos, para fora do corpo ou para cavidades." },
+      { "frente": "Para onde as glândulas endócrinas lançam a secreção?", "verso": "No sangue." },
+      { "frente": "Que glândula é mista (exócrina e endócrina)?", "verso": "O pâncreas." },
+      { "frente": "As glândulas salivares e sudoríparas são exócrinas ou endócrinas?", "verso": "Exócrinas." },
+      { "frente": "A tireoide e a hipófise são glândulas exócrinas ou endócrinas?", "verso": "Endócrinas." }
+    ] },
+    { "substitui": "han-03", "cartas": [
+      { "frente": "O que todos os tecidos conjuntivos têm em comum?", "verso": "Células separadas por muita matriz extracelular." },
+      { "frente": "De que folheto germinativo vêm os tecidos conjuntivos?", "verso": "Mesoderme." },
+      { "lacuna": "Os tecidos conjuntivos: {{propriamente dito}}, {{adiposo}}, {{cartilaginoso}}, {{ósseo}} e {{sanguíneo}}." }
+    ] },
+    { "substitui": "han-04", "cartas": [
+      { "frente": "Que célula produz as fibras do conjuntivo propriamente dito?", "verso": "O fibroblasto." },
+      { "frente": "Que tipo de conjuntivo forma tendões e ligamentos?", "verso": "O denso." },
+      { "frente": "Que célula armazena gordura?", "verso": "O adipócito." },
+      { "lacuna": "O tecido adiposo serve de {{reserva de energia}}, {{isolante térmico}} e {{amortecedor}}." }
+    ] },
+    { "substitui": "han-05", "cartas": [
+      { "frente": "Por que uma lesão na cartilagem demora tanto a cicatrizar?", "verso": "A cartilagem não tem vasos sanguíneos." },
+      { "frente": "Como se chamam as células da cartilagem?", "verso": "Condrócitos." }
+    ] },
+    { "substitui": "han-06", "cartas": [
+      { "frente": "De que é feita a matriz do osso?", "verso": "Colágeno e sais de cálcio (fosfato de cálcio)." },
+      { "frente": "Que célula óssea forma a matriz?", "verso": "Osteoblasto." },
+      { "frente": "Que célula óssea mantém a matriz?", "verso": "Osteócito." },
+      { "frente": "Que célula óssea reabsorve a matriz?", "verso": "Osteoclasto." },
+      { "frente": "Onde são produzidas as células do sangue?", "verso": "Na medula óssea vermelha." }
+    ] },
+    { "substitui": "han-07", "cartas": [
+      { "frente": "Como se chama a parte líquida do sangue?", "verso": "Plasma." },
+      { "frente": "Que componente do sangue transporta O₂?", "verso": "As hemácias (com hemoglobina)." },
+      { "frente": "Que componente do sangue faz a defesa do corpo?", "verso": "Os leucócitos." },
+      { "frente": "Que componente do sangue atua na coagulação?", "verso": "As plaquetas." }
+    ] },
+    { "substitui": "han-08", "cartas": [
+      { "frente": "Que tecido muscular é voluntário?", "verso": "O estriado esquelético." },
+      { "frente": "Como são as células do músculo estriado esquelético?", "verso": "Longas e multinucleadas." },
+      { "frente": "Que tecido muscular tem discos intercalares?", "verso": "O estriado cardíaco." },
+      { "frente": "Que tecido muscular não tem estrias?", "verso": "O liso." },
+      { "frente": "Onde fica o músculo liso?", "verso": "Nas vísceras e nos vasos." }
+    ] },
+    { "substitui": "han-09", "cartas": [
+      { "frente": "Que parte do neurônio recebe os estímulos?", "verso": "Os dendritos." },
+      { "frente": "Que parte do neurônio conduz o impulso até a sinapse?", "verso": "O axônio." },
+      { "frente": "O que o neurônio libera na sinapse?", "verso": "Neurotransmissores." },
+      { "frente": "O que a bainha de mielina faz com o impulso nervoso?", "verso": "Torna a condução muito mais rápida (saltatória)." },
+      { "frente": "Que células dão suporte aos neurônios?", "verso": "As células da glia." }
+    ] },
+
+    { "substitui": "fhu-01", "cartas": [
+      { "frente": "Onde começa a digestão química dos carboidratos?", "verso": "Na boca (amilase salivar)." },
+      { "frente": "Onde começa a digestão química das proteínas?", "verso": "No estômago (pepsina)." },
+      { "frente": "Em que meio a pepsina age?", "verso": "Ácido." },
+      { "frente": "Onde começa a digestão química dos lipídios?", "verso": "No duodeno (lipase pancreática)." },
+      { "frente": "Onde ocorre a maior parte da absorção dos nutrientes?", "verso": "No intestino delgado (vilosidades)." }
+    ] },
+    { "substitui": "fhu-02", "cartas": [
+      { "frente": "Onde a bile é produzida?", "verso": "No fígado." },
+      { "frente": "Onde a bile é armazenada?", "verso": "Na vesícula biliar." },
+      { "frente": "Qual é a função da bile?", "verso": "Emulsificar as gorduras (quebrar em gotinhas)." },
+      { "frente": "A bile é uma enzima?", "verso": "Não." }
+    ] },
+    { "substitui": "fhu-03", "cartas": [
+      { "frente": "O que é hematose?", "verso": "A troca de gases por difusão no pulmão." },
+      { "frente": "Onde ocorre a hematose?", "verso": "Nos alvéolos pulmonares." },
+      { "frente": "Que parte do encéfalo controla o ritmo respiratório?", "verso": "O bulbo." },
+      { "frente": "O que acontece com a respiração quando o CO₂ no sangue aumenta?", "verso": "Acelera.", "macete": "O CO₂ baixa o pH do sangue, e o bulbo reage." }
+    ] },
+    { "substitui": "fhu-04", "cartas": [
+      { "lacuna": "Pequena circulação: ventrículo {{direito}} → artéria {{pulmonar}} → pulmões → veias {{pulmonares}} → átrio {{esquerdo}}." },
+      { "lacuna": "Grande circulação: ventrículo {{esquerdo}} → {{aorta}} → corpo → veias {{cavas}} → átrio {{direito}}." },
+      { "frente": "Que tipo de sangue a artéria pulmonar leva?", "verso": "Venoso." },
+      { "frente": "Que tipo de sangue as veias pulmonares levam?", "verso": "Arterial." }
+    ] },
+    { "substitui": "fhu-05", "cartas": [
+      { "lacuna": "Formação da urina no néfron: {{filtração}} → {{reabsorção}} → {{secreção}}." },
+      { "frente": "No néfron, onde ocorre a filtração?", "verso": "Do glomérulo para a cápsula de Bowman." },
+      { "frente": "O que volta ao sangue na reabsorção?", "verso": "Glicose, água e sais." },
+      { "frente": "O que o ADH (hormônio antidiurético) faz?", "verso": "Aumenta a reabsorção de água: a urina fica mais concentrada." }
+    ] },
+    { "substitui": "fhu-06", "cartas": [
+      { "frente": "Que divisão do sistema nervoso prepara o corpo para luta ou fuga?", "verso": "Simpático." },
+      { "frente": "Que divisão do sistema nervoso age no repouso e na digestão?", "verso": "Parassimpático." },
+      { "frente": "O que o simpático faz com o coração?", "verso": "Acelera." },
+      { "frente": "O que o simpático faz com as pupilas?", "verso": "Dilata." },
+      { "frente": "Qual é o neurotransmissor do simpático?", "verso": "Noradrenalina." },
+      { "frente": "Qual é o neurotransmissor do parassimpático?", "verso": "Acetilcolina." }
+    ] },
+    { "substitui": "fhu-07", "cartas": [
+      { "frente": "Que órgão produz a insulina e o glucagon?", "verso": "O pâncreas (ilhotas pancreáticas)." },
+      { "frente": "O que a insulina faz com a glicemia?", "verso": "Baixa." },
+      { "frente": "O que o glucagon faz com a glicemia?", "verso": "Eleva." },
+      { "frente": "Como a insulina baixa a glicemia?", "verso": "Faz as células captarem glicose.", "macete": "E o fígado guarda o excesso como glicogênio." },
+      { "frente": "Como o glucagon eleva a glicemia?", "verso": "Faz o fígado quebrar glicogênio em glicose." }
+    ] },
+    { "substitui": "fhu-08", "cartas": [
+      { "frente": "O que a vacina contém?", "verso": "Antígenos." },
+      { "frente": "O que o soro contém?", "verso": "Anticorpos prontos." },
+      { "frente": "A vacina dá imunidade ativa ou passiva?", "verso": "Ativa." },
+      { "frente": "O soro dá imunidade ativa ou passiva?", "verso": "Passiva." },
+      { "frente": "Vacina ou soro: qual gera memória imunológica?", "verso": "A vacina." },
+      { "frente": "Numa picada de cobra, usa-se vacina ou soro?", "verso": "Soro: age na hora." }
+    ] },
+    { "substitui": "fhu-09", "cartas": [
+      { "frente": "Em que células os linfócitos B se transformam para produzir anticorpos?", "verso": "Plasmócitos." },
+      { "frente": "Que linfócito coordena a resposta imune e é o alvo do HIV?", "verso": "O T auxiliar (CD4)." },
+      { "frente": "Que linfócito destrói células infectadas ou tumorais?", "verso": "O T citotóxico (CD8)." }
+    ] },
+    { "substitui": "fhu-10", "cartas": [
+      { "frente": "O que é placebo?", "verso": "Uma substância sem efeito." },
+      { "frente": "Num teste de vacina, para que serve o grupo que recebe placebo?", "verso": "É o grupo controle, para comparar." },
+      { "frente": "Num teste de vacina, como os voluntários são divididos entre os grupos?", "verso": "Ao acaso (aleatoriamente)." },
+      { "frente": "O que é um estudo duplo-cego?", "verso": "Nem os voluntários nem os pesquisadores sabem quem tomou o quê." },
+      { "frente": "Como se mede a eficácia de uma vacina num teste?", "verso": "Comparando quantos adoecem no grupo vacinado e no grupo placebo." }
+    ] },
+
+    { "substitui": "rep-01", "cartas": [
+      { "lacuna": "Caminho dos espermatozoides: {{testículos}} → {{epidídimo}} → {{ducto deferente}} → {{uretra}}." },
+      { "frente": "Em que estruturas do testículo os espermatozoides são produzidos?", "verso": "Nos túbulos seminíferos." },
+      { "frente": "Onde os espermatozoides amadurecem e ficam armazenados?", "verso": "No epidídimo." },
+      { "frente": "Que glândulas produzem o líquido seminal?", "verso": "Vesículas seminais e próstata." }
+    ] },
+    { "substitui": "rep-03", "cartas": [
+      { "frente": "Onde ocorre a ovulação?", "verso": "No ovário." },
+      { "frente": "Onde ocorre a fecundação?", "verso": "Na tuba uterina." },
+      { "frente": "O que é a nidação?", "verso": "A implantação do embrião no útero." },
+      { "frente": "Em que camada do útero ocorre a nidação?", "verso": "No endométrio." }
+    ] },
+    { "substitui": "rep-04", "cartas": [
+      { "lacuna": "Fases da gametogênese: {{multiplicação}} → {{crescimento}} → {{maturação}} → {{diferenciação}} (só no homem)." },
+      { "frente": "Em que fase da gametogênese ocorre a meiose?", "verso": "Maturação." },
+      { "frente": "Como se chama a etapa em que a espermátide vira espermatozoide?", "verso": "Espermiogênese." }
+    ] },
+    { "substitui": "rep-05", "cartas": [
+      { "frente": "Quando começa a espermatogênese?", "verso": "Na puberdade." },
+      { "frente": "Quando começa a ovogênese?", "verso": "Ainda na vida fetal." },
+      { "frente": "Quantos espermatozoides cada espermatócito I gera?", "verso": "4." },
+      { "frente": "Quantos gametas funcionais cada ovócito I gera?", "verso": "1.", "macete": "Os outros núcleos viram corpúsculos polares." },
+      { "frente": "Em que fase a ovogênese fica parada até a puberdade?", "verso": "Na prófase I." },
+      { "frente": "Quando termina a meiose II do ovócito?", "verso": "Só se houver fecundação." }
+    ] },
+    { "substitui": "rep-06", "cartas": [
+      { "frente": "No homem, o que o FSH estimula?", "verso": "A espermatogênese (nas células de Sertoli)." },
+      { "frente": "No homem, o que o LH estimula?", "verso": "A produção de testosterona (nas células de Leydig)." }
+    ] },
+    { "substitui": "rep-07", "cartas": [
+      { "frente": "No ciclo menstrual, que hormônio faz o folículo crescer?", "verso": "FSH." },
+      { "frente": "Que hormônio o folículo produz, que engrossa o endométrio?", "verso": "Estrógeno." },
+      { "frente": "O que provoca a ovulação?", "verso": "O pico de LH." },
+      { "frente": "Num ciclo de 28 dias, por volta de que dia ocorre a ovulação?", "verso": "No 14º dia." },
+      { "frente": "Na fase lútea, que estrutura produz progesterona?", "verso": "O corpo lúteo." },
+      { "frente": "Qual é a função da progesterona no ciclo menstrual?", "verso": "Manter o endométrio." },
+      { "frente": "Sem gravidez, por que ocorre a menstruação?", "verso": "O corpo lúteo regride e a progesterona cai." }
+    ] },
+    { "substitui": "rep-08", "cartas": [
+      { "frente": "Quem produz o hCG?", "verso": "O embrião (depois, a placenta)." },
+      { "frente": "Qual é a função do hCG no início da gravidez?", "verso": "Manter o corpo lúteo produzindo progesterona." },
+      { "frente": "Que hormônio o teste de gravidez detecta?", "verso": "hCG." }
+    ] },
+    { "substitui": "rep-09", "cartas": [
+      { "frente": "Que hormônios a pílula anticoncepcional contém?", "verso": "Estrógeno e progesterona sintéticos." },
+      { "frente": "Que hormônios da hipófise a pílula inibe?", "verso": "FSH e LH." },
+      { "frente": "Por que mecanismo a pílula inibe a hipófise?", "verso": "Retroalimentação negativa." },
+      { "frente": "Por que a pílula impede a ovulação?", "verso": "Sem o pico de LH, não há ovulação." }
+    ] },
+    { "substitui": "rep-10", "cartas": [
+      { "frente": "Que método contraceptivo também protege contra ISTs?", "verso": "A camisinha (masculina ou feminina)." },
+      { "frente": "Que estrutura a vasectomia corta?", "verso": "Os ductos deferentes." },
+      { "frente": "Que estrutura a laqueadura corta ou liga?", "verso": "As tubas uterinas." }
+    ] },
+    { "substitui": "rep-11", "cartas": [
+      { "frente": "A sífilis é causada por bactéria ou vírus?", "verso": "Bactéria." },
+      { "frente": "A gonorreia é causada por bactéria ou vírus?", "verso": "Bactéria." },
+      { "frente": "A clamídia é causada por bactéria ou vírus?", "verso": "Bactéria." },
+      { "frente": "O HPV é bactéria ou vírus?", "verso": "Vírus." },
+      { "frente": "O herpes genital é causado por bactéria ou vírus?", "verso": "Vírus." },
+      { "frente": "Que ISTs virais têm vacina?", "verso": "HPV e hepatite B." }
+    ] },
+    { "substitui": "rep-12", "cartas": [
+      { "frente": "Qual é o agente da sífilis?", "verso": "Treponema pallidum." },
+      { "frente": "Qual é o sinal inicial da sífilis?", "verso": "Uma ferida indolor (cancro duro)." },
+      { "frente": "Qual é o tratamento da sífilis?", "verso": "Penicilina." },
+      { "frente": "Por que o pré-natal testa a sífilis?", "verso": "Ela passa da mãe para o bebê (sífilis congênita)." }
+    ] },
+    { "substitui": "rep-13", "cartas": [
+      { "frente": "Qual é a principal causa do câncer do colo do útero?", "verso": "O HPV." },
+      { "frente": "Que lesão o HPV causa nos genitais?", "verso": "Verrugas genitais." },
+      { "frente": "Que exame detecta cedo as alterações do HPV no colo do útero?", "verso": "Papanicolau (preventivo)." },
+      { "frente": "Que prevenção do HPV o SUS oferece aos adolescentes?", "verso": "A vacina." }
+    ] },
+
+    { "substitui": "eco-01", "cartas": [
+      { "frente": "Por que o cerrado é chamado de berço das águas?", "verso": "Nele estão as nascentes de grandes bacias brasileiras." },
+      { "frente": "Como as plantas do cerrado ajudam a abastecer os lençóis freáticos?", "verso": "As raízes profundas ajudam a água da chuva a infiltrar." },
+      { "frente": "O que o desmatamento do cerrado causa nas águas?", "verso": "Reduz a infiltração e prejudica nascentes e rios." }
+    ] },
+    { "substitui": "eco-02", "cartas": [
+      { "frente": "Que tecido grosso protege o tronco das árvores do cerrado do fogo?", "verso": "O súber (casca grossa)." },
+      { "frente": "As queimadas são sempre inofensivas para o cerrado?", "verso": "Não: frequentes, extensas ou fora de época, destroem a biodiversidade e empobrecem o solo." }
+    ] },
+    { "substitui": "eco-03", "cartas": [
+      { "frente": "O que é uma espécie exótica invasora?", "verso": "Uma espécie de outra região que se espalha e compete com as nativas." },
+      { "frente": "Por que os pinheiros prejudicam o cerrado?", "verso": "As folhas formam uma camada espessa no solo, que impede as nativas de crescer.", "macete": "Elas se decompõem muito devagar." }
+    ] },
+    { "substitui": "eco-04", "cartas": [
+      { "frente": "O que é biomagnificação?", "verso": "O aumento da concentração de um poluente a cada nível da cadeia alimentar." },
+      { "frente": "Por que o mercúrio se acumula nos seres vivos?", "verso": "O corpo não consegue eliminá-lo." },
+      { "frente": "Numa cadeia alimentar, quem recebe as maiores doses de mercúrio?", "verso": "O topo: peixes carnívoros grandes e as pessoas que os comem." },
+      { "frente": "Que sistema do corpo o mercúrio danifica?", "verso": "O sistema nervoso." },
+      { "frente": "Poluentes como o mercúrio aumentam ou reduzem a reprodução dos peixes?", "verso": "Reduzem (menos ovos e alevinos)." }
+    ] },
+    { "substitui": "eco-05", "cartas": [
+      { "lacuna": "Eutrofização: excesso de {{nutrientes}} na água → explosão de {{algas}} → decomposição por bactérias {{aeróbias}} → queda do {{oxigênio}} → morte dos peixes." },
+      { "frente": "De onde vêm os nutrientes em excesso que causam a eutrofização?", "verso": "Esgoto e fertilizantes." }
+    ] },
+    { "substitui": "eco-06", "cartas": [
+      { "frente": "O que é um bioindicador?", "verso": "Um organismo cuja presença, ausência ou saúde indica a qualidade do ambiente." },
+      { "frente": "Que organismos são bioindicadores da qualidade do ar?", "verso": "Os liquens." }
+    ] },
+    { "substitui": "eco-08", "cartas": [
+      { "frente": "O que é uma espécie endêmica?", "verso": "Uma espécie que só existe naquele lugar." },
+      { "frente": "Por que o cerrado é um hotspot de biodiversidade?", "verso": "Tem muitas espécies endêmicas e já perdeu boa parte da vegetação original." }
+    ] },
+    { "substitui": "eco-09", "cartas": [
+      { "frente": "O que é pecuária extensiva?", "verso": "Poucos animais por área, ocupando muita terra." },
+      { "frente": "Por que a pecuária extensiva pressiona o desmatamento?", "verso": "Precisa de mais terra para o mesmo número de animais." },
+      { "frente": "Como produzir mais carne sem desmatar?", "verso": "Aumentando a produtividade na área já aberta." }
+    ] }
+  ]
+}

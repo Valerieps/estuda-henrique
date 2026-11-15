@@ -4,6 +4,7 @@ import { normalizeEmail } from '../../src/domain/group/email';
 import { normalizeName } from '../../src/domain/group/profile';
 import { isAdmin, keepsAnAdmin, normalizeRoles, type Role } from '../../src/domain/group/roles';
 import { failure, nowIso, type CommandResult, type Context } from './context';
+import { suspendSupersededCards } from './seed-revision';
 
 export const SESSION_DAYS = 180;
 
@@ -112,6 +113,7 @@ export function signIn(ctx: Context, profile: GoogleProfile, sessionHash: string
           JSON.stringify(roles),
           at,
         );
+        suspendSupersededCards(ctx, memberId);
       }
       if (invite) ctx.sql.run("UPDATE invites SET state = 'accepted', accepted_at = ? WHERE email = ?", at, email);
     }

@@ -50,7 +50,7 @@ describe('the initial Biologia deck', () => {
       expect(list.length).toBeGreaterThan(0);
       for (const note of list) {
         expect(note.origin).toBe('system');
-        cards += note.cards.length;
+        if (note.id.startsWith('seed-')) cards += note.cards.length;
       }
     }
     expect(cards).toBe(total);

@@ -4,8 +4,8 @@ Matérias, tópicos e cartas: o que existe para estudar e como as cartas são cr
 
 - **Entra aqui:** matérias, tópicos, cartas do sistema e pessoais, tipos de carta, macete,
   formatação, suspender, criar em lote.
-- **Não entra aqui:** como as cartas são estudadas (`spec/estudo.md`) e o domínio de cada carta
-  (`spec/diagnostico.md`).
+- **Não entra aqui:** como as cartas são estudadas (`spec/estudo.md`), o domínio de cada carta
+  (`spec/diagnostico.md`) e como escrever uma boa carta (`spec/boas-cartas.md`).
 
 ## Matérias e tópicos
 
@@ -63,6 +63,8 @@ Matérias, tópicos e cartas: o que existe para estudar e como as cartas são cr
   (`server/seed/biologia-decks.json`), e que entram no app de uma vez, antes do primeiro acesso do
   Henrique: ele já encontra cartas nos tópicos. O texto das cartas é o do arquivo; depois, eu as
   corrijo pelo app. *(1)*
+- As cartas do baralho inicial que não seguiam `spec/boas-cartas.md` foram reescritas como cartas
+  novas (`server/seed/biologia-revisao-1.json`), e as antigas ficam suspensas para todos. *(1)*
   Por quê: não escrevi o baralho carta a carta pelas telas do admin.
 - As cartas do arquivo que não têm tópico na lista da escola ganham tópicos próprios, depois dos da
   lista: Embriologia e planos corporais, Fisiologia humana e Ecologia em contexto (Cerrado e

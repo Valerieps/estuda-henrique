@@ -1,6 +1,7 @@
 // The group's database (docs/ARQUITETURA.md). Migrations run in order, once each, when the
 // Durable Object starts. Never edit a migration that has shipped: add the next one.
 import { addedDeckStatements, initialDeckStatements } from './initial-deck';
+import { revisionOneStatements } from './seed-revision';
 import type { Sql } from './ports';
 
 export const MIGRATIONS: readonly (readonly string[])[] = [
@@ -188,6 +189,10 @@ export const MIGRATIONS: readonly (readonly string[])[] = [
       PRIMARY KEY (member_id, note_id)
     )`,
   ],
+  // 10: the initial deck's cards rewritten by docs/spec/boas-cartas.md: new system notes in the same
+  // topics, and each replaced card suspended for every member; `superseded_cards` keeps the list so
+  // a member who joins later starts with them suspended too.
+  revisionOneStatements(),
 ];
 
 export function migrate(sql: Sql): void {
