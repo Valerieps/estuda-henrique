@@ -15,6 +15,8 @@ export interface StudySettings {
   readonly restDays: readonly number[];
   readonly routineWhen: string | null;
   readonly routineWhere: string | null;
+  /** The Rotina screen was answered or skipped: it never comes back. */
+  readonly routineAsked: boolean;
   /** The month ('YYYY-MM') the member last repaired the streak, or null. */
   readonly streakRepairMonth: string | null;
 }
@@ -24,6 +26,7 @@ export const DEFAULT_STUDY_SETTINGS: StudySettings = {
   restDays: [],
   routineWhen: null,
   routineWhere: null,
+  routineAsked: false,
   streakRepairMonth: null,
 };
 

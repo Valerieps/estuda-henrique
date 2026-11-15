@@ -102,9 +102,31 @@ export const strings = {
     noMatch: 'Nenhum tópico neste estado. Toque em Todos para ver os outros.',
   },
 
+  // The admin's home: the system cards.
+  adminCards: {
+    title: 'Cartas do sistema',
+    loading: 'Carregando…',
+    noTopics: 'Ainda não há tópicos. Crie um tópico para começar a escrever cartas.',
+    topic: 'Tópico',
+    empty: 'Nenhuma carta neste tópico ainda.',
+    count: (n: number) => (n === 1 ? '1 carta' : `${n} cartas`),
+    edit: 'Editar',
+    delete: 'Excluir',
+    deleteTitle: 'Excluir esta carta?',
+    deleteBody: 'A carta some para todos. O histórico de estudo de quem já a estudou não muda.',
+    deleteConfirm: 'Excluir carta',
+    cancel: 'Cancelar',
+    front: 'Frente',
+    clozeFront: 'Frase (marque as lacunas com {{ }})',
+    back: 'Verso',
+    hint: 'Macete (opcional)',
+    save: 'Salvar',
+    saving: 'Salvando…',
+    failed: 'Não deu certo. Tenta de novo?',
+  },
+
   // Empty screens of the shell: each later feature replaces its own.
   empty: {
-    systemCards: { title: 'Cartas do sistema', text: 'As cartas do sistema aparecem aqui.' },
     study: { title: 'Sessão', text: 'Nenhuma carta para estudar agora.' },
   },
 
@@ -266,6 +288,16 @@ export const strings = {
     back: 'Voltar',
     startFailed: 'Não consegui montar a sessão. Tenta de novo?',
     nothingToStart: 'Não há cartas para essa sessão agora.',
+  },
+
+  routineAsk: {
+    title: 'Sua rotina',
+    intro: 'Combinar quando e onde você vai estudar ajuda a criar o hábito. Você pode mudar isso depois nos Ajustes.',
+    whenSuggestions: ['de manhã', 'à tarde', 'à noite'],
+    whereSuggestions: ['em casa', 'no ônibus da escola', 'na escola'],
+    save: 'Salvar rotina',
+    skip: 'Pular',
+    failed: 'Não deu para salvar. Tenta de novo?',
   },
 
   invites: {

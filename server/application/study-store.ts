@@ -156,6 +156,7 @@ interface SettingsRow {
   rest_days: string;
   routine_when: string | null;
   routine_where: string | null;
+  routine_asked: number;
   streak_repair_month: string | null;
 }
 
@@ -168,22 +169,24 @@ export function studySettings(ctx: Context, memberId: string): StudySettings {
     restDays: normalizeRestDays(JSON.parse(row.rest_days) as unknown[]),
     routineWhen: row.routine_when,
     routineWhere: row.routine_where,
+    routineAsked: row.routine_asked === 1,
     streakRepairMonth: row.streak_repair_month,
   };
 }
 
 export function saveStudySettings(ctx: Context, memberId: string, settings: StudySettings): void {
   ctx.sql.run(
-    `INSERT INTO study_settings (member_id, new_per_day, rest_days, routine_when, routine_where, streak_repair_month)
-     VALUES (?, ?, ?, ?, ?, ?)
+    `INSERT INTO study_settings (member_id, new_per_day, rest_days, routine_when, routine_where, routine_asked, streak_repair_month)
+     VALUES (?, ?, ?, ?, ?, ?, ?)
      ON CONFLICT (member_id) DO UPDATE SET
        new_per_day = excluded.new_per_day, rest_days = excluded.rest_days, routine_when = excluded.routine_when,
-       routine_where = excluded.routine_where, streak_repair_month = excluded.streak_repair_month`,
+       routine_where = excluded.routine_where, routine_asked = excluded.routine_asked, streak_repair_month = excluded.streak_repair_month`,
     memberId,
     settings.newPerDay,
     JSON.stringify(normalizeRestDays(settings.restDays)),
     settings.routineWhen,
     settings.routineWhere,
+    settings.routineAsked ? 1 : 0,
     settings.streakRepairMonth,
   );
 }

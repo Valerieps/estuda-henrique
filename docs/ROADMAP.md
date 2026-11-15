@@ -14,8 +14,6 @@ A fase 2 é construída pelas sessões de [PLANO-FASE-2.md](PLANO-FASE-2.md).
 | Feature | Fase | Spec | Observação |
 | --- | --- | --- | --- |
 | Colar várias com prévia | 1 | `spec/cartas.md` | |
-| Tela Rotina depois do primeiro Resumo | 1 | `spec/meta-e-ofensiva.md` | Hoje, a chama, a folha Ofensiva, o cartão de aviso e os Ajustes (com a rotina) já existem; falta a tela Rotina, que pertence ao fim da sessão (Resumo, onde a chama já acende) |
-| Tela inicial do admin (cartas do sistema) | 1 | `spec/meta-e-ofensiva.md` | |
 | Imagem e oclusão de imagem | 2 | `spec/cartas.md` | Oclusão é a prioridade 1 da fase 2 |
 | Data e nota da prova | 2 | `spec/vespera.md` | |
 | Previsão por tópico | 2 | `spec/diagnostico.md` | Prioridade 1 da fase 2, ao lado da oclusão |

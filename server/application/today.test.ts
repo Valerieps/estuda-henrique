@@ -173,7 +173,7 @@ describe('the streak', () => {
 
 describe('Ajustes', () => {
   it('starts with the defaults', () => {
-    expect(ok<SettingsView>(service.query('h-henrique', 'settings', {}))).toEqual({ newPerDay: 20, restDays: [], routineWhen: null, routineWhere: null });
+    expect(ok<SettingsView>(service.query('h-henrique', 'settings', {}))).toEqual({ newPerDay: 20, restDays: [], routineWhen: null, routineWhere: null, routineAsked: false });
   });
 
   it('changes only what is given and trims the routine', () => {
@@ -184,9 +184,19 @@ describe('Ajustes', () => {
       restDays: [0, 6],
       routineWhen: 'de manhã',
       routineWhere: 'no ônibus da escola',
+      routineAsked: true,
     });
     ok(command('henrique', 'settings.update', { routineWhen: '' }));
     expect(ok<SettingsView>(service.query('h-henrique', 'settings', {})).routineWhen).toBeNull();
+  });
+
+  it('remembers that the Rotina screen was skipped, and only accepts true', () => {
+    expect(command('henrique', 'settings.update', { routineAsked: false })).toEqual({ ok: false, error: 'invalid' });
+    ok(command('henrique', 'settings.update', { routineAsked: true }));
+    const view = ok<SettingsView>(service.query('h-henrique', 'settings', {}));
+    expect(view.routineAsked).toBe(true);
+    expect(view.routineWhen).toBeNull();
+    expect(ok<SettingsView>(service.query('h-bia', 'settings', {})).routineAsked).toBe(false);
   });
 
   it('keeps the new-card limit between 5 and 50', () => {
