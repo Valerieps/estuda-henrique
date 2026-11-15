@@ -1,7 +1,7 @@
 // The diagnosis queries and the daily snapshots (docs/spec/diagnostico.md). Everything is the
 // reader's own: the cards are the system's plus their personal ones, and the states and answers
 // are filtered by their id (ADR-009). The rules live in src/domain/study/diagnostic.ts.
-import type { ExamCards, Thermometer, ThermometerTopic, TopicCard, TopicCardsView, TopicForecastView, TrendPoint, WorstCard, WorstCardsGroup } from '../../src/application/api-contract';
+import type { ExamCards, Thermometer, ThermometerTopic, TopicCard, TopicCardsView, TopicForecastView, TopicHistoryView, TrendPoint, WorstCard, WorstCardsGroup } from '../../src/application/api-contract';
 import type { NoteKind } from '../../src/domain/study/cloze';
 import {
   isProblemCard,
@@ -265,6 +265,22 @@ export function topicForecast(ctx: Context, actor: Member, input: Record<string,
     topicId,
   );
   return { topicId, forecast: forecastTopic(states, today(ctx)), studyDays: studyDays[0]?.n ?? 0 };
+}
+
+export function topicHistory(ctx: Context, actor: Member, input: Record<string, unknown>): TopicHistoryView | QueryError {
+  if (typeof input.topicId !== 'string') return new QueryError('invalid');
+  const topicId = input.topicId;
+  if (!topics(ctx).some((t) => t.id === topicId)) return new QueryError('not_found');
+  const points = ctx.sql
+    .all<{ day: string; mastery: number }>(
+      'SELECT day, mastery FROM topic_snapshots WHERE member_id = ? AND topic_id = ? ORDER BY day',
+      actor.id,
+      topicId,
+    )
+    .map((r) => ({ day: r.day, mastery: r.mastery }));
+  const ids = new Set(memberCards(ctx, actor.id).filter((c) => c.topicId === topicId).map((c) => c.cardId));
+  const saved = savedCards(recallEvents(answerHistory(ctx, actor.id)).filter((e) => ids.has(e.cardId)));
+  return { topicId, points, savedCards: saved, markers: [] };
 }
 
 // ---- Daily snapshots ----

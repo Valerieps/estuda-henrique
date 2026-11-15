@@ -3,7 +3,7 @@ import type { WorstCardsGroup } from '../../src/application/api-contract';
 import { fixedClock, emptyDeckSql, sequentialIds } from '../testing/node-sql';
 import type { Context } from './context';
 import { QueryError } from './context';
-import { examCards, recordDueSnapshots, recordSnapshot, thermometer, topicCards, topicForecast, worstCards } from './diagnostics';
+import { examCards, recordDueSnapshots, recordSnapshot, thermometer, topicCards, topicForecast, topicHistory, worstCards } from './diagnostics';
 import type { Member } from './members';
 import { migrate } from './schema';
 import { recordAnswer, setSuspended, startStudySession, type StudySessionKind } from './study-store';
@@ -264,5 +264,39 @@ describe('topicForecast', () => {
     setSuspended(ctx, 'henrique', ids[0], true);
     clock.set('2026-11-13T15:00:00Z');
     expect((topicForecast(ctx, henrique, { topicId: 'citologia' }) as { forecast: unknown }).forecast).toBeNull();
+  });
+});
+
+describe('topicHistory', () => {
+  it('rejects a bad or unknown topic and is empty before any snapshot', () => {
+    addCards('citologia', 1);
+    expect(topicHistory(ctx, henrique, {})).toEqual(new QueryError('invalid'));
+    expect(topicHistory(ctx, henrique, { topicId: 'nada' })).toEqual(new QueryError('not_found'));
+    expect(topicHistory(ctx, henrique, { topicId: 'citologia' })).toEqual({ topicId: 'citologia', points: [], savedCards: 0, markers: [] });
+  });
+
+  it("returns the reader's own snapshots of the topic, oldest first, with days left out", () => {
+    const ids = addCards('citologia', 1);
+    addCards('genetica', 1);
+    answer('henrique', '2026-10-01T15:00:00Z', ids, 'good');
+    recordSnapshot(ctx, 'henrique');
+    answer('henrique', '2026-10-05T15:00:00Z', ids, 'good');
+    recordSnapshot(ctx, 'henrique');
+    answer('outro', '2026-10-05T15:00:00Z', ids, 'again');
+    recordSnapshot(ctx, 'outro');
+    const view = topicHistory(ctx, henrique, { topicId: 'citologia' }) as Exclude<ReturnType<typeof topicHistory>, QueryError>;
+    expect(view.points.map((p) => p.day)).toEqual(['2026-10-01', '2026-10-05']);
+    expect(view.markers).toEqual([]);
+  });
+
+  it('counts only the cards of this topic he got right after 21 days or more', () => {
+    const cito = addCards('citologia', 2);
+    const gen = addCards('genetica', 1);
+    answer('henrique', '2026-09-01T15:00:00Z', [...cito, ...gen], 'good');
+    answer('henrique', '2026-10-01T15:00:00Z', [cito[0], gen[0]], 'good');
+    answer('henrique', '2026-10-02T15:00:00Z', [cito[1]], 'again');
+    expect((topicHistory(ctx, henrique, { topicId: 'citologia' }) as { savedCards: number }).savedCards).toBe(1);
+    expect((topicHistory(ctx, henrique, { topicId: 'genetica' }) as { savedCards: number }).savedCards).toBe(1);
+    expect((topicHistory(ctx, outro, { topicId: 'citologia' }) as { savedCards: number }).savedCards).toBe(0);
   });
 });

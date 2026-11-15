@@ -6,6 +6,7 @@ import { Button } from './Button';
 import { Chip } from './Chip';
 import { Hero } from './Hero';
 import { Icon } from './Icon';
+import { LineChart } from './LineChart';
 import { ProgressBar } from './ProgressBar';
 import { StateBadge } from './StateBadge';
 import { Tile } from './Tile';
@@ -91,6 +92,32 @@ describe('Button', () => {
 describe('Icon', () => {
   it.each(['flame', 'crown', 'alert', 'sparkle', 'check', 'target'] as const)('draws %s', (name) => {
     expect(html(<Icon name={name} />)).toMatch(/<(path|circle)/);
+  });
+});
+
+describe('LineChart', () => {
+  const points = [
+    { day: '2026-11-01', value: 0.4 },
+    { day: '2026-11-05', value: 0.7 },
+  ];
+
+  it('is an image with a label, the axis, the first and last day, and one dot per point', () => {
+    const out = html(<LineChart points={points} label="Domínio de Citologia" />);
+    expect(out).toContain('role="img"');
+    expect(out).toContain('aria-label="Domínio de Citologia. De 01/11 a 05/11; o último valor é 70%."');
+    expect(out).toContain('100%');
+    expect(out).toContain('0%');
+    expect(out).toContain('>01/11<');
+    expect(out).toContain('>05/11<');
+    expect(out.match(/<circle/g)).toHaveLength(2);
+    expect(out).not.toContain('line-chart-marker');
+  });
+
+  it('draws a marker with its label, and nothing for an empty series', () => {
+    const out = html(<LineChart points={points} markers={[{ day: '2026-11-08', label: 'Prova' }]} label="x" />);
+    expect(out).toContain('line-chart-marker');
+    expect(out).toContain('>Prova<');
+    expect(html(<LineChart points={[]} label="x" />)).toBe('');
   });
 });
 

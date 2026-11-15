@@ -190,6 +190,23 @@ export interface TopicForecastView {
   readonly studyDays: number;
 }
 
+/** A marker on the topic's chart (an exam date): drawn as a vertical line with its label. */
+export interface ChartMarker {
+  readonly day: string;
+  readonly label: string;
+}
+
+/** The topic's mastery over time, for the Tópico screen's chart (ADR-013). */
+export interface TopicHistoryView {
+  readonly topicId: string;
+  /** One point per day with a snapshot, oldest first; days without one are simply absent. */
+  readonly points: readonly TrendPoint[];
+  /** The topic's cards he got right after 21 days or more without seeing them. */
+  readonly savedCards: number;
+  /** Exam dates to draw on the line; empty until the exam dates exist. */
+  readonly markers: readonly ChartMarker[];
+}
+
 /** The Tópico screen: the topic's mastery and coverage, and all of its cards. */
 export interface TopicCardsView {
   readonly topicId: string;
@@ -318,6 +335,8 @@ export interface Queries {
   topicCards: { input: { topicId: string }; output: TopicCardsView };
   /** The reader's own forecast for one topic, if they only do the reviews that fall due. */
   topicForecast: { input: { topicId: string }; output: TopicForecastView };
+  /** The reader's own mastery history of one topic, for the chart. */
+  topicHistory: { input: { topicId: string }; output: TopicHistoryView };
   /** The reader's own Hoje: routine, day's goal and streak. */
   today: { input: Record<string, never>; output: TodayView };
   /** The reader's own study settings. */

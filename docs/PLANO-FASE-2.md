@@ -32,7 +32,6 @@ distribui o trabalho e confere os merges.
 | ID | Sessão | Modelo | Compartilhados | Depende de |
 | --- | --- | --- | --- | --- |
 | D0 | Incorporar as respostas da dona ao spec | Sonnet | não | respostas no chat |
-| A3 | Gráfico em SVG e histórico do tópico | Sonnet | sim | — |
 | A4 | Cartão de aviso como regra pura e Compartilhar | Sonnet | sim | — |
 | B1 | Notas com imagem e oclusão: dados e domínio | Opus | sim | A1, D0 (cartas.md) |
 | B2 | Oclusão e imagem: telas | Opus | não | B1 |
@@ -81,22 +80,6 @@ question. "ok" means the question's own proposal. Remove an "Em aberto" heading 
 wrote the tags rule, the ROADMAP row loses "Tags ainda sem regra escrita". No code.
 Answers:
 <paste the owner's answers here>
-```
-
-### A3
-
-```text
-Build the chart and the topic history (ADR-013; spec: docs/spec/diagnostico.md, "Tópico").
-- src/ui/components/chart-scale.ts (pure, tested): map a series of { day, value } and markers
-  { day, label } to SVG coordinates in a viewBox; gaps (days without a snapshot) are not drawn as
-  zero.
-- src/ui/components/LineChart.tsx: line, optional markers (vertical line + label), y axis 0–100%,
-  first and last day labels, role="img" with an aria-label; tokens only (add chart tokens to
-  tokens.css and the contrast pairs to tokens.test.ts). Render test in components.test.tsx.
-- A query topicHistory({ topicId }) → { points: { day, mastery }[] from topic_snapshots, savedCards
-  (the topic's cards he got right after 21+ days, via the existing savedCards rule), markers: [] }.
-  markers stays empty: B3 fills it with exam dates.
-- No screen change yet.
 ```
 
 ### A4
