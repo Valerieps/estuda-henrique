@@ -12,7 +12,6 @@ O que ainda não está pronto.
 | Feature | Fase | Spec | Observação |
 | --- | --- | --- | --- |
 | Colar várias com prévia | 1 | `spec/cartas.md` | |
-| Tela inicial do admin (cartas do sistema) | 1 | `spec/meta-e-ofensiva.md` | |
 | Imagem e oclusão de imagem | 2 | `spec/cartas.md` | Oclusão é a prioridade 1 da fase 2 |
 | Data e nota da prova | 2 | `spec/vespera.md` | |
 | Previsão por tópico | 2 | `spec/diagnostico.md` | Prioridade 1 da fase 2, ao lado da oclusão |
