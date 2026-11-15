@@ -21,7 +21,7 @@ The owner edits docs between messages: re-read a doc before editing it and prese
 | Critiquing the UI, or changing the visual identity | The `ui-review` or `visual-identity` skill in `.claude/skills/` |
 | Implementing or changing a feature | Its file in `docs/spec/` (the table in `docs/SPEC.md` says which); its rows in `docs/ROADMAP.md`; the ADRs found by grepping `docs/adr/` |
 | Changing the data model, events or migrations | `docs/ARQUITETURA.md` and the ADRs it cites |
-| Writing, pasting or reviewing cards (system or seed) | `docs/spec/boas-cartas.md`: every card follows it |
+| Writing, pasting or reviewing cards (system or seed) | `docs/spec/boas-cartas.md`: every card follows it; `docs/PAS.md` for what the exam covers and how it asks |
 | Answering a product question or deciding a rule | The relevant file in `docs/spec/` and its "Em aberto"; `docs/GLOSSARIO.md` for the terms |
 | Working on an issue | `gh issue view <n>` and the `docs/spec/` files it cites |
 | Reviewing or reorganizing the docs | All of them |
@@ -61,6 +61,7 @@ wins: fix the other doc in the same change.
 | Feature requests not yet decided | GitHub issues, `t:enhancement` + a size label | When decided: rule to `docs/spec/`, row to `docs/ROADMAP.md`, issue closed |
 | Bugs, technical debt, known limitations, checks only the owner can do | GitHub issues, `t:bug` or `t:debito-tecnico` + a priority (`p:`) + a size (`s:`) | Close the issue when resolved; open one when you knowingly leave something behind |
 | Open questions on an issue | A comment on the issue + `q:perguntas em aberto`; ready to build: `q:SEM perguntas em aberto` | Swap the label once answered |
+| What the PAS covers and how it asks (the exam the cards prepare for) | `docs/PAS.md` | A summary of the official matrix; the matrix PDF wins |
 | Screen drafts and briefs | `docs/rascunhos/` | `docs/rascunhos/README.md` gives each draft's status; the spec wins. Delete a draft once its screen is built |
 
 Exception for visual-only tweaks (colors, spacing, icons, sizes, layout) that change no behavior:

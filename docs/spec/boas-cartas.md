@@ -45,6 +45,12 @@ crio, inclusive as que crio com o Claude: ele segue estas regras sem eu pedir.
   verso diz qual é o certo em uma frase. Melhor ainda: perguntar direto o fato que a afirmação
   erra. *(1)*
 
+- **Conteúdo e contexto do PAS.** Uma carta do sistema cobre um item da matriz do PAS 2 e, quando
+  dá, põe o fato numa situação curta como as da prova (um bioma, uma doença, um problema de saúde
+  pública), perguntando o detalhe que a banca costuma trocar. O que a matriz cobra e como a prova
+  cobra estão em [PAS.md](../PAS.md). *(1)*
+  Por quê: o PAS não cobra decoreba; cobra o conceito aplicado a um texto sobre um problema real.
+
 ## Checagem antes de salvar
 
 Cada carta passa nas três perguntas; se não passa, eu quebro ou reformulo. *(1)*
