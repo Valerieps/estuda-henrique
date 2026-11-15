@@ -3,7 +3,7 @@ import type { WorstCardsGroup } from '../../src/application/api-contract';
 import { fixedClock, emptyDeckSql, sequentialIds } from '../testing/node-sql';
 import type { Context } from './context';
 import { QueryError } from './context';
-import { examCards, recordDueSnapshots, recordSnapshot, thermometer, topicCards, worstCards } from './diagnostics';
+import { examCards, recordDueSnapshots, recordSnapshot, thermometer, topicCards, topicForecast, worstCards } from './diagnostics';
 import type { Member } from './members';
 import { migrate } from './schema';
 import { recordAnswer, setSuspended, startStudySession, type StudySessionKind } from './study-store';
@@ -234,5 +234,35 @@ describe('examCards', () => {
   it('refuses input that is not a list of topics and a scope', () => {
     expect(examCards(ctx, henrique, { topicIds: 'citologia', scope: 'all' })).toBeInstanceOf(QueryError);
     expect(examCards(ctx, henrique, { topicIds: [], scope: 'x' })).toBeInstanceOf(QueryError);
+  });
+});
+
+describe('topicForecast', () => {
+  it('is null with no studied card, and rejects a bad or unknown topic', () => {
+    addCards('citologia', 2);
+    clock.set('2026-11-13T15:00:00Z');
+    expect(topicForecast(ctx, henrique, { topicId: 'citologia' })).toEqual({ topicId: 'citologia', forecast: null, studyDays: 0 });
+    expect(topicForecast(ctx, henrique, {})).toEqual(new QueryError('invalid'));
+    expect(topicForecast(ctx, henrique, { topicId: 'nada' })).toEqual(new QueryError('not_found'));
+  });
+
+  it("forecasts from the reader's own cards and counts distinct study days", () => {
+    const ids = addCards('citologia', 2);
+    answer('henrique', '2026-11-10T15:00:00Z', ids, 'good');
+    answer('henrique', '2026-11-11T15:00:00Z', [ids[0]], 'good');
+    clock.set('2026-11-13T15:00:00Z');
+    const view = topicForecast(ctx, henrique, { topicId: 'citologia' }) as Exclude<ReturnType<typeof topicForecast>, QueryError>;
+    expect(view.studyDays).toBe(2);
+    expect(view.forecast?.dailyMastery).toHaveLength(7);
+    expect(view.forecast!.lowest).toBeGreaterThan(0);
+    expect(topicForecast(ctx, outro, { topicId: 'citologia' })).toEqual({ topicId: 'citologia', forecast: null, studyDays: 0 });
+  });
+
+  it('leaves suspended cards out', () => {
+    const ids = addCards('citologia', 1);
+    answer('henrique', '2026-11-10T15:00:00Z', ids, 'good');
+    setSuspended(ctx, 'henrique', ids[0], true);
+    clock.set('2026-11-13T15:00:00Z');
+    expect((topicForecast(ctx, henrique, { topicId: 'citologia' }) as { forecast: unknown }).forecast).toBeNull();
   });
 });

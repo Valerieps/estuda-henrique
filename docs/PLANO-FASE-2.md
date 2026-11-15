@@ -32,7 +32,6 @@ distribui o trabalho e confere os merges.
 | ID | Sessão | Modelo | Compartilhados | Depende de |
 | --- | --- | --- | --- | --- |
 | D0 | Incorporar as respostas da dona ao spec | Sonnet | não | respostas no chat |
-| A2 | Previsão por tópico: domínio e consulta | Sonnet | sim | — |
 | A3 | Gráfico em SVG e histórico do tópico | Sonnet | sim | — |
 | A4 | Cartão de aviso como regra pura e Compartilhar | Sonnet | sim | — |
 | B1 | Notas com imagem e oclusão: dados e domínio | Opus | sim | A1, D0 (cartas.md) |
@@ -82,20 +81,6 @@ question. "ok" means the question's own proposal. Remove an "Em aberto" heading 
 wrote the tags rule, the ROADMAP row loses "Tags ainda sem regra escrita". No code.
 Answers:
 <paste the owner's answers here>
-```
-
-### A2
-
-```text
-Build the topic forecast of ADR-014 (read it and ADR-010; spec: docs/spec/diagnostico.md,
-section "Tópico"). No UI.
-- src/domain/study/forecast.ts: forecastTopic(cards, today, days = 7) → { dailyMastery: number[],
-  lowest: number } using ts-fsrs as src/domain/study/scheduler.ts does; cards due in the window are
-  advanced with Rating.Good on their due day; new cards are ignored. Thorough tests (no studied
-  card → null; a card due tomorrow recovers; an overdue topic drops).
-- A query topicForecast({ topicId }) in api-contract.ts, served from diagnostics.ts with the
-  reader's own card_states, Topic 'study'. Also return how many distinct study days the topic
-  has, so the screen can apply the spec's minimum.
 ```
 
 ### A3
