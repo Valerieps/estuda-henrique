@@ -82,7 +82,7 @@ export function todayView(ctx: Context, actor: Member): TodayView {
 }
 
 function view(settings: StudySettings): SettingsView {
-  return { newPerDay: settings.newPerDay, restDays: settings.restDays, routineWhen: settings.routineWhen, routineWhere: settings.routineWhere };
+  return { newPerDay: settings.newPerDay, restDays: settings.restDays, routineWhen: settings.routineWhen, routineWhere: settings.routineWhere, routineAsked: settings.routineAsked };
 }
 
 export function settingsView(ctx: Context, actor: Member): SettingsView {
@@ -116,6 +116,12 @@ export function updateSettings(ctx: Context, actor: Member, input: Input): Comma
     if (text === undefined) return failure('invalid');
     next[key] = text;
   }
+  if (input.routineAsked !== undefined) {
+    if (input.routineAsked !== true) return failure('invalid');
+    next.routineAsked = true;
+  }
+  // Filling the routine in Ajustes also answers the Rotina screen.
+  if (next.routineWhen !== null || next.routineWhere !== null) next.routineAsked = true;
   saveStudySettings(ctx, actor.id, next);
   return { ok: true, value: view(next), changed: ['settings', 'study'] };
 }

@@ -15,6 +15,7 @@ import { ProgressBar } from '../components/ProgressBar';
 import { Sheet } from '../components/Sheet';
 import { navigate } from '../router';
 import { clearStudyRequest, currentStudyRequest, type StudyRequest } from '../study-launch';
+import { RoutineAsk } from './RoutineAsk';
 import { StudySummary } from './StudySummary';
 import './Study.css';
 
@@ -38,7 +39,7 @@ function whenLabel(ms: number): string {
   return s.returnsIn(text);
 }
 
-type Phase = { name: 'loading' } | { name: 'empty' } | { name: 'error' } | { name: 'running'; session: StudySessionView } | { name: 'summary'; sessionId: string; partial: boolean };
+type Phase = { name: 'loading' } | { name: 'empty' } | { name: 'error' } | { name: 'running'; session: StudySessionView } | { name: 'summary'; sessionId: string; partial: boolean } | { name: 'routine' };
 
 /**
  * The session layer: full screen, over the app, without its bars (docs/spec/estudo.md). It opens
@@ -75,6 +76,15 @@ export function Study() {
     navigate('/');
   }
 
+  /** Leaving a Resumo with answers: the first time, the Rotina screen comes before Hoje. */
+  async function finish() {
+    const result = await backend.query('settings', {});
+    if (result.ok && !result.value.routineAsked) setPhase({ name: 'routine' });
+    else leave();
+  }
+
+  if (phase.name === 'routine') return <RoutineAsk onDone={leave} />;
+
   if (phase.name === 'running') {
     return (
       <Session
@@ -87,7 +97,7 @@ export function Study() {
   }
 
   if (phase.name === 'summary') {
-    return <StudySummary key={phase.sessionId} sessionId={phase.sessionId} partial={phase.partial} onStart={begin} onLeave={leave} />;
+    return <StudySummary key={phase.sessionId} sessionId={phase.sessionId} partial={phase.partial} onStart={begin} onLeave={leave} onFinish={finish} />;
   }
 
   return (

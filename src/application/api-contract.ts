@@ -139,6 +139,8 @@ export interface SettingsView {
   readonly restDays: readonly number[];
   readonly routineWhen: string | null;
   readonly routineWhere: string | null;
+  /** The Rotina screen after the first Resumo was answered or skipped. */
+  readonly routineAsked: boolean;
 }
 
 /** A row of Piores cartas. Cloze cards show `front` with the passage `clozeIndex` hidden. */

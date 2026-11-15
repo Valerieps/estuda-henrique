@@ -196,6 +196,12 @@ export const MIGRATIONS: readonly (readonly string[])[] = [
   // 11: revision 2 (server/seed/biologia-revisao-2.json): system notes deleted or rewritten in place,
   // for every member, by the PAS 2 matrix (docs/PAS.md) and docs/spec/boas-cartas.md.
   revisionTwoStatements(),
+  // 12: the Rotina screen after his first Resumo is asked once (docs/spec/meta-e-ofensiva.md); a
+  // member who already filled the routine in Ajustes was asked, in effect.
+  [
+    `ALTER TABLE study_settings ADD COLUMN routine_asked INTEGER NOT NULL DEFAULT 0`,
+    `UPDATE study_settings SET routine_asked = 1 WHERE routine_when IS NOT NULL OR routine_where IS NOT NULL`,
+  ],
 ];
 
 export function migrate(sql: Sql): void {
