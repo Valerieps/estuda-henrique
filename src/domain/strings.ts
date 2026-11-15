@@ -366,6 +366,11 @@ export const strings = {
     open: (name: string) => `Piores cartas de ${name}`,
   },
 
+  // The LineChart's text for screen readers.
+  chart: {
+    summary: (from: string, to: string, last: number) => `De ${from} a ${to}; o último valor é ${last}%.`,
+  },
+
   // Shared pieces of src/ui/components/ (progress bar, state badge).
   components: {
     progress: (done: number, total: number) => `${done} de ${total}`,

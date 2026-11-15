@@ -1,0 +1,34 @@
+.line-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.line-chart-grid {
+  stroke: var(--color-border);
+  stroke-width: var(--border-width);
+}
+
+.line-chart-marker {
+  stroke: var(--color-text-muted);
+  stroke-width: var(--border-width);
+  stroke-dasharray: var(--chart-dash);
+}
+
+.line-chart-line {
+  fill: none;
+  stroke: var(--color-brand);
+  stroke-width: var(--chart-line-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.line-chart-dot {
+  fill: var(--color-brand);
+}
+
+.line-chart-label {
+  fill: var(--color-text-muted);
+  font-size: var(--font-size-caption);
+  font-family: inherit;
+}

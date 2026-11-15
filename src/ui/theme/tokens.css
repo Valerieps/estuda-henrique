@@ -132,6 +132,9 @@
   /* The termômetro's minilinha (last 4 weeks). */
   --size-spark-width: 64px;
   --size-spark-height: 24px;
+  /* LineChart: the line's thickness and the dash of its vertical markers. */
+  --chart-line-width: 2.5px;
+  --chart-dash: 4 3;
   /* The study card: its smallest height, and how far the flip is seen from. */
   --size-card-min: 240px;
   --flip-perspective: 1000px;
