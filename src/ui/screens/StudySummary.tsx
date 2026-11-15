@@ -46,11 +46,14 @@ export function StudySummary({
   partial,
   onStart,
   onLeave,
+  onFinish,
 }: {
   sessionId: string;
   partial: boolean;
   onStart: (request: StudyRequest) => void;
   onLeave: () => void;
+  /** Leaving after a session with answers (the Rotina screen may come first). */
+  onFinish: () => void;
 }) {
   const { data, error } = useQuery('studySummary', { sessionId }, ['study']);
 
@@ -95,7 +98,7 @@ export function StudySummary({
             <Numbers summary={data} />
             <Moved summary={data} />
             <Wrong cards={data.wrong} />
-            <Next summary={data} onStart={onStart} onLeave={onLeave} />
+            <Next summary={data} onStart={onStart} onLeave={onFinish} />
           </>
         )}
       </div>

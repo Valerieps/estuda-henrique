@@ -290,6 +290,16 @@ export const strings = {
     nothingToStart: 'Não há cartas para essa sessão agora.',
   },
 
+  routineAsk: {
+    title: 'Sua rotina',
+    intro: 'Combinar quando e onde você vai estudar ajuda a criar o hábito. Você pode mudar isso depois nos Ajustes.',
+    whenSuggestions: ['de manhã', 'à tarde', 'à noite'],
+    whereSuggestions: ['em casa', 'no ônibus da escola', 'na escola'],
+    save: 'Salvar rotina',
+    skip: 'Pular',
+    failed: 'Não deu para salvar. Tenta de novo?',
+  },
+
   invites: {
     title: 'Convites',
     loading: 'Carregando…',
