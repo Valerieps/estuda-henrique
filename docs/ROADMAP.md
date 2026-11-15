@@ -9,6 +9,8 @@ O que ainda não está pronto.
 
 ## Falta construir
 
+A fase 2 é construída pelas sessões de [PLANO-FASE-2.md](PLANO-FASE-2.md).
+
 | Feature | Fase | Spec | Observação |
 | --- | --- | --- | --- |
 | Colar várias com prévia | 1 | `spec/cartas.md` | |

@@ -5,6 +5,12 @@ O estudo intensivo perto da prova, na aba Prova.
 - **Entra aqui:** montar e fazer uma sessão de Véspera, e as datas de prova.
 - **Não entra aqui:** a sessão de todo dia (`spec/estudo.md`).
 
+## Em aberto
+
+- [ ] Quem cadastra as datas de prova: eu (admin) ou ele? Proposta: ele, porque a nota é dado de estudo dele e eu não vejo (ADR-009).
+- [ ] A nota da prova é em que escala? Proposta: livre, de 0 a 10 com uma casa decimal; o PAS dá nota em outra escala, então o campo aceita também "sem nota".
+- [ ] "Nos dias anteriores" são quantos dias, e o que é priorizar? Proposta: nos 14 dias antes da prova, as cartas vencidas dos tópicos dela vêm primeiro na Revisão, e as novas do dia saem primeiro desses tópicos.
+
 ## A prova
 
 - A prova-alvo dele é o PAS (Programa de Avaliação Seriada). A Véspera é feita para os dias antes

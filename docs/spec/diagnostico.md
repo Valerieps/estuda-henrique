@@ -7,6 +7,12 @@ Onde ele está fraco: o termômetro em Hoje e a lista de Piores cartas.
 - **Não entra aqui:** a sessão em si (`spec/estudo.md`) e o resto da tela Hoje
   (`spec/meta-e-ofensiva.md`).
 
+## Em aberto
+
+- [ ] Previsão: "alguns dias de dados" são quantos? Proposta: aparece com 5 dias de estudo do tópico; antes, a linha diz "A previsão aparece depois de 5 dias estudando este tópico".
+- [ ] Previsão: o corte é sempre 80%, ou o do estado do tópico (Dominado em 90%)? Proposta: diz o nível mínimo dos 7 dias, arredondado para baixo de 5 em 5 ("fica acima de 75%"); se cair abaixo de 50%, diz "cai abaixo de 50% se você só revisar".
+- [ ] Gráfico de evolução: período? Proposta: desde a primeira resposta do tópico, um ponto por dia, com as provas como marcas verticais e a nota ao lado.
+
 ## Cálculos
 
 - **Domínio de uma carta:** a chance estimada de ele lembrar hoje (a *retrievability* do FSRS), em

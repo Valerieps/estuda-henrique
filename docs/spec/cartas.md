@@ -7,6 +7,14 @@ Matérias, tópicos e cartas: o que existe para estudar e como as cartas são cr
 - **Não entra aqui:** como as cartas são estudadas (`spec/estudo.md`), o domínio de cada carta
   (`spec/diagnostico.md`) e como escrever uma boa carta (`spec/boas-cartas.md`).
 
+## Em aberto
+
+- [ ] Imagem: quem põe imagem em quê? Proposta: eu, nas cartas do sistema; ele, nas pessoais; uma imagem por lado (frente e/ou verso), além do texto.
+- [ ] Oclusão: ao estudar, a carta cobre só a área perguntada (as outras ficam à mostra) ou cobre todas e destaca a perguntada? Proposta: cobre todas, a perguntada em destaque.
+- [ ] Oclusão: as áreas são retângulos (desenhados com o dedo) ou também formas livres? Proposta: só retângulos, com um rótulo opcional por área que aparece no verso.
+- [ ] A versão dele de uma carta do sistema com imagem (ou oclusão) pode trocar a imagem ou as áreas? Proposta: não; ele edita só o texto e o macete, como na lacuna.
+- [ ] Tags: para que servem? Proposta: eu marco cartas do sistema com tags do PAS (ex.: "PAS 2", "Etapa 2023") e ele filtra por tag na tela Tópico e ao montar a Véspera; ele não cria tags. Se não for isso, diga o uso que você imagina.
+
 ## Matérias e tópicos
 
 - O app vem com uma matéria, Biologia. A estrutura aceita outras, mas só a fase 3 traz mais

@@ -62,6 +62,7 @@ wins: fix the other doc in the same change.
 | Bugs, technical debt, known limitations, checks only the owner can do | GitHub issues, `t:bug` or `t:debito-tecnico` + a priority (`p:`) + a size (`s:`) | Close the issue when resolved; open one when you knowingly leave something behind |
 | Open questions on an issue | A comment on the issue + `q:perguntas em aberto`; ready to build: `q:SEM perguntas em aberto` | Swap the label once answered |
 | What the PAS covers and how it asks (the exam the cards prepare for) | `docs/PAS.md` | A summary of the official matrix; the matrix PDF wins |
+| The session plan of a phase (order, model, prompt of each session) | `docs/PLANO-FASE-<n>.md` | Each session removes its own row when it merges; deleted when the phase is built |
 | Screen drafts and briefs | `docs/rascunhos/` | `docs/rascunhos/README.md` gives each draft's status; the spec wins. Delete a draft once its screen is built |
 
 Exception for visual-only tweaks (colors, spacing, icons, sizes, layout) that change no behavior:

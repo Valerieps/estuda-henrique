@@ -6,6 +6,12 @@ A tela Hoje e o que faz ele voltar todo dia: a meta, a ofensiva, a rotina e o ca
   e os ajustes.
 - **Não entra aqui:** o termômetro (`spec/diagnostico.md`) e a sessão (`spec/estudo.md`).
 
+## Em aberto
+
+- [ ] Recomeço ("semana ou bimestre novo"): o que o app faz? Proposta: depois de 4 ou mais dias sem estudar, o cartão de aviso oferece Recomeçar; recomeçar espalha as revisões atrasadas pelos próximos 7 dias (em vez de despejar todas hoje) e não mexe no histórico nem na ofensiva. No início de um bimestre (datas que eu cadastro?), o mesmo cartão aparece mesmo sem a pausa.
+- [ ] Resumo semanal: quando aparece e o que tem? Proposta: no domingo e na segunda, no cartão de aviso; mostra dias estudados, cartas respondidas, guardadas novas na semana, memória de longo prazo e o tópico que mais subiu.
+- [ ] Compartilhar o resumo semanal: como texto (WhatsApp) ou como imagem? Proposta: texto pelo compartilhamento do Android, sem link para o app.
+
 ## Hoje
 
 - O app abre em Hoje, de cima para baixo: a rotina dele numa linha (ex.: "no ônibus da escola"); o
