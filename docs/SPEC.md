@@ -45,6 +45,7 @@ anterior; uma conversa com ele depois de 2 semanas.
 | --- | --- |
 | [spec/acesso-e-membros.md](spec/acesso-e-membros.md) | Login com Google, convites, papéis (admin e usuário) e membros |
 | [spec/cartas.md](spec/cartas.md) | Matérias, tópicos, cartas do sistema e pessoais, tipos, criar em lote, suspender |
+| [spec/boas-cartas.md](spec/boas-cartas.md) | Como escrever uma boa carta e como revisar uma carta do sistema que não segue as regras |
 | [spec/estudo.md](spec/estudo.md) | A sessão de Revisão, FSRS, os três botões, Resumo, Refazer erros, treino |
 | [spec/diagnostico.md](spec/diagnostico.md) | Domínio, cobertura, termômetro, Piores cartas, tela Tópico |
 | [spec/vespera.md](spec/vespera.md) | A aba Prova e a sessão de Véspera; datas de prova |
