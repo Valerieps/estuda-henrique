@@ -21,3 +21,15 @@ export interface LiveUpdates {
   start(): void;
   stop(): void;
 }
+
+export interface UploadedImage {
+  readonly id: string;
+  readonly width: number;
+  readonly height: number;
+}
+
+/** Shrinks a photo on the device and stores it on the server (ADR-012). */
+export interface ImageUploader {
+  /** `system`: an admin saving an image for every member; the server checks the role. */
+  upload(file: Blob, options?: { system?: boolean }): Promise<ApiResult<UploadedImage>>;
+}

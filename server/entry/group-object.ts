@@ -4,6 +4,7 @@
 import { DurableObject } from 'cloudflare:workers';
 import type { LiveMessage, Topic } from '../../src/application/api-contract';
 import { GroupService } from '../application/group-service';
+import type { ImageUpload } from '../application/images';
 import type { GoogleProfile, SignInResult } from '../application/members';
 import { durableObjectSql } from '../infrastructure/durable-object-sql';
 import type { Env } from './env';
@@ -37,6 +38,14 @@ export class Group extends DurableObject<Env> {
     // A removed member's open apps lose the live connection now; their sessions are already gone.
     if (result.ok) for (const memberId of result.disconnect ?? []) this.disconnect(memberId);
     return result;
+  }
+
+  saveImage(sessionHash: string, upload: ImageUpload) {
+    return this.service.saveImage(sessionHash, upload);
+  }
+
+  readImage(sessionHash: string, id: string) {
+    return this.service.readImage(sessionHash, id);
   }
 
   tick(): void {
