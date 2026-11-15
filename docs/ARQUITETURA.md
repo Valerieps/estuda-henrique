@@ -74,6 +74,7 @@ Tabelas do estudo (migração 2; a 3 acrescenta `notes.deleted_at` e `cards.reti
 | `topic_snapshots` | `member_id`, `topic_id`, `day`, `mastery` | Uma por dia, gravada pelo cron (`recordDueSnapshots`, em `server/application/diagnostics.ts`) desde a primeira resposta; alimenta a minilinha |
 | `daily_snapshots` | `member_id`, `day`, `long_term_rate` (nulo antes de 20 respostas), `long_term_answers`, `saved_cards` | Memória de longo prazo e cartas guardadas do dia; é o histórico delas |
 | `study_settings` | `member_id`, `new_per_day`, `rest_days`, `routine_when`, `routine_where`, `streak_repair_month` | Ajustes e rotina. Sem linha, valem os padrões (`src/domain/study/settings.ts`) |
+| `images` | `id`, `owner_id` (nulo = do sistema), `mime`, `width`, `height`, `bytes`, `data` (BLOB), `created_at` | Fotos das cartas (ADR-012; migração 13). Pessoal: só o dono lê, nem a admin; do sistema: todo membro ativo. `POST /api/images` e `GET /api/images/<id>` no Worker; `server/application/images.ts` |
 
 - As regras do diagnóstico (domínio, cobertura, memória de longo prazo, guardadas, ordem de Piores cartas)
   são puras e ficam em `src/domain/study/diagnostic.ts`; o servidor só as alimenta com cartas e respostas.

@@ -1,6 +1,7 @@
 // The single entry to the group's data. The Durable Object calls it; every method is synchronous,
 // so a command runs alone and inside one transaction (ADR-004).
 import type { ApiResult, CommandName, Commands, QueryName, Queries, Topic } from '../../src/application/api-contract';
+import { readImage, saveImage, type ImageUpload, type SaveImageResult, type StoredImage } from './images';
 import { isUser } from '../../src/domain/group/roles';
 import { failure, QueryError, type CommandResult, type Context } from './context';
 import { createNote, createNotes, createTopic, deleteNote, listNotes, listSubjects, renameTopic, reorderTopics, suspendCard, updateNote } from './cards';
@@ -107,6 +108,18 @@ export class GroupService {
 
   memberForSession(sessionHash: string): Member | null {
     return memberForSession(this.ctx, sessionHash);
+  }
+
+  /** Stores an uploaded image for the session's member (ADR-012). */
+  saveImage(sessionHash: string, upload: ImageUpload): SaveImageResult | { ok: false; error: 'unauthenticated' } {
+    const actor = this.memberForSession(sessionHash);
+    return actor ? saveImage(this.ctx, actor, upload) : { ok: false, error: 'unauthenticated' };
+  }
+
+  /** The image bytes when the session's member may see them; 'unauthenticated' or null otherwise. */
+  readImage(sessionHash: string, id: string): StoredImage | null | 'unauthenticated' {
+    const actor = this.memberForSession(sessionHash);
+    return actor ? readImage(this.ctx, actor, id) : 'unauthenticated';
   }
 
   query(sessionHash: string, name: string, input: unknown): ApiResult<unknown> {

@@ -1,6 +1,7 @@
 // The Worker: serves the app's files, the API under /api, the live connection and the cron
 // (ADR-004). Everything about the group is delegated to the Group Durable Object.
 import type { ApiError, ApiResult } from '../../src/application/api-contract';
+import { IMAGE_MIMES, MAX_IMAGE_BYTES } from '../application/images';
 import { SESSION_DAYS, type GoogleProfile } from '../application/members';
 import { clearCookie, LOGIN_COOKIE, readCookie, SESSION_COOKIE, setCookie } from '../infrastructure/cookies';
 import { randomToken, sha256 } from '../infrastructure/crypto';
@@ -101,20 +102,61 @@ async function callback(request: Request, env: Env, url: URL): Promise<Response>
   return redirect('/', [clearCookie(LOGIN_COOKIE), cookie]);
 }
 
+const IMAGE_ID = /^\/api\/images\/([A-Za-z0-9-]{1,64})$/;
+
+/** The one API call whose body is not JSON: the raw bytes of a photo (ADR-012). */
+async function uploadImage(request: Request, env: Env, hash: string): Promise<Response> {
+  const mime = request.headers.get('Content-Type') ?? '';
+  if (!(IMAGE_MIMES as readonly string[]).includes(mime)) return json({ error: 'invalid' }, 400);
+  const declared = Number(request.headers.get('Content-Length'));
+  if (!Number.isFinite(declared) || declared < 1 || declared > MAX_IMAGE_BYTES) return json({ error: 'invalid' }, 400);
+  const data = new Uint8Array(await request.arrayBuffer());
+  // The header can lie; the bytes actually read are checked again.
+  if (data.byteLength < 1 || data.byteLength > MAX_IMAGE_BYTES) return json({ error: 'invalid' }, 400);
+  const result = await group(env).saveImage(hash, {
+    mime,
+    width: Number(request.headers.get('X-Image-Width')),
+    height: Number(request.headers.get('X-Image-Height')),
+    data,
+    system: request.headers.get('X-Image-System') === '1',
+  });
+  return result.ok ? json({ id: result.id }) : json({ error: result.error }, STATUS[result.error]);
+}
+
+async function serveImage(env: Env, hash: string, id: string): Promise<Response> {
+  const image = await group(env).readImage(hash, id);
+  if (image === 'unauthenticated') return json({ error: 'unauthenticated' }, 401);
+  if (!image) return json({ error: 'not_found' }, 404);
+  return new Response(image.data, {
+    headers: {
+      ...SECURITY_HEADERS,
+      'Cache-Control': 'private, max-age=31536000, immutable',
+      'Content-Type': image.mime,
+    },
+  });
+}
+
 async function api(request: Request, env: Env, url: URL): Promise<Response> {
   const path = url.pathname;
 
   if (path === '/api/auth/login' && request.method === 'GET') return login(env, url);
   if (path === '/api/auth/callback' && request.method === 'GET') return callback(request, env, url);
 
-  if (!sameOrigin(request, url)) return json({ error: 'forbidden' }, 403);
   const hash = await sessionHash(request);
+
+  // An <img> tag sends no Origin on a same-origin GET; the session cookie (SameSite) is the check.
+  const image = IMAGE_ID.exec(path);
+  if (image && request.method === 'GET') return hash ? serveImage(env, hash, image[1]) : json({ error: 'unauthenticated' }, 401);
+
+  if (!sameOrigin(request, url)) return json({ error: 'forbidden' }, 403);
 
   if (path === '/api/live' && request.headers.get('Upgrade') === 'websocket') {
     if (!hash) return json({ error: 'unauthenticated' }, 401);
     const headers = new Headers({ Upgrade: 'websocket', [SESSION_HASH_HEADER]: hash });
     return group(env).fetch(new Request(url.toString(), { headers }));
   }
+
+  if (path === '/api/images' && request.method === 'POST') return hash ? uploadImage(request, env, hash) : json({ error: 'unauthenticated' }, 401);
 
   if (request.method !== 'POST' || request.headers.get('Content-Type') !== 'application/json') {
     return json({ error: 'not_found' }, 404);

@@ -84,6 +84,19 @@ describe('security rules', () => {
     expect(CONTENT_SECURITY_POLICY).toContain("object-src 'none'");
   });
 
+  it('the image upload route checks the Origin, the session and the size cap (ADR-012)', () => {
+    const worker = read(join(SERVER_ROOT, 'entry', 'worker.ts'));
+    const upload = worker.slice(worker.indexOf('async function uploadImage'), worker.indexOf('async function serveImage'));
+    expect(upload).toContain('MAX_IMAGE_BYTES');
+    expect(upload).toContain('Content-Length');
+    expect(upload).toContain('byteLength');
+    // The upload is dispatched after the Origin check and the session hash; only GET reads come before.
+    const api = worker.slice(worker.indexOf('async function api('));
+    expect(api.indexOf('sameOrigin(request, url)')).toBeLessThan(api.indexOf("path === '/api/images'"));
+    expect(api).toMatch(/path === '\/api\/images' && request\.method === 'POST'\) return hash \?/);
+    expect(api).toMatch(/image && request\.method === 'GET'\) return hash \?/);
+  });
+
   it('the test sign-in is never turned on in the deployed configuration (ADR-007)', () => {
     expect(read(join(__dirname, '..', 'wrangler.jsonc'))).not.toContain('DEV_SIGN_IN');
   });

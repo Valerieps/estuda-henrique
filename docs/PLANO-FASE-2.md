@@ -32,7 +32,6 @@ distribui o trabalho e confere os merges.
 | ID | Sessão | Modelo | Compartilhados | Depende de |
 | --- | --- | --- | --- | --- |
 | D0 | Incorporar as respostas da dona ao spec | Sonnet | não | respostas no chat |
-| A1 | Armazenamento e rotas de imagem | Sonnet | sim | — |
 | A2 | Previsão por tópico: domínio e consulta | Sonnet | sim | — |
 | A3 | Gráfico em SVG e histórico do tópico | Sonnet | sim | — |
 | A4 | Cartão de aviso como regra pura e Compartilhar | Sonnet | sim | — |
@@ -83,24 +82,6 @@ question. "ok" means the question's own proposal. Remove an "Em aberto" heading 
 wrote the tags rule, the ROADMAP row loses "Tags ainda sem regra escrita". No code.
 Answers:
 <paste the owner's answers here>
-```
-
-### A1
-
-```text
-Build the image store of ADR-012 (read it, and docs/SEGURANCA.md). No UI screen yet.
-- Migration: table images (id, owner_id null = system, mime, width, height, bytes, data BLOB,
-  created_at).
-- server/application/images.ts: saveImage (actor must be active; owner = actor, or null when an
-  admin saves a system image, chosen by a `system` flag the server checks against the role),
-  readImage (system image: any active member; personal: owner only). Tests on node:sqlite.
-- server/entry/worker.ts: POST /api/images (raw body, Origin checked like commands, session,
-  mime allowlist image/webp, image/jpeg, image/png, max 1 MB checked on Content-Length and on the
-  read bytes, returns { id } as JSON) and GET /api/images/<id> (session, the headers of ADR-012).
-  Route it to the Group object the same way the API calls are routed.
-- src/infrastructure/image-upload.ts: shrink with a canvas to 1600 px longest side, WebP (JPEG
-  fallback), then POST; expose it through a port in src/application/ports.ts.
-- src/security.test.ts: assert the upload route checks Origin and the size cap.
 ```
 
 ### A2

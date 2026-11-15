@@ -1,7 +1,7 @@
 // Ports the server's use cases depend on. The Durable Object implements them in production;
 // tests use node:sqlite (server/testing/). Nothing here imports Cloudflare types.
 
-export type SqlValue = string | number | null;
+export type SqlValue = string | number | null | Uint8Array;
 
 /** Synchronous SQLite, as the Durable Object's storage provides it. */
 export interface Sql {

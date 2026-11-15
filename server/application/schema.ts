@@ -202,6 +202,19 @@ export const MIGRATIONS: readonly (readonly string[])[] = [
     `ALTER TABLE study_settings ADD COLUMN routine_asked INTEGER NOT NULL DEFAULT 0`,
     `UPDATE study_settings SET routine_asked = 1 WHERE routine_when IS NOT NULL OR routine_where IS NOT NULL`,
   ],
+  // 13: card images (ADR-012); owner_id null = a system image, every active member may read it.
+  [
+    `CREATE TABLE images (
+      id TEXT PRIMARY KEY,
+      owner_id TEXT REFERENCES members(id),
+      mime TEXT NOT NULL,
+      width INTEGER NOT NULL,
+      height INTEGER NOT NULL,
+      bytes INTEGER NOT NULL,
+      data BLOB NOT NULL,
+      created_at TEXT NOT NULL
+    )`,
+  ],
 ];
 
 export function migrate(sql: Sql): void {
