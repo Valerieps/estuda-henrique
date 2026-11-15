@@ -181,6 +181,15 @@ export interface TopicCard extends Omit<WorstCard, 'mastery'> {
   readonly suspended: boolean;
 }
 
+/** The topic's FSRS forecast (ADR-014); `forecast` is null while no card of the topic was studied. */
+export interface TopicForecastView {
+  readonly topicId: string;
+  /** Mastery on each of the next 7 days, starting tomorrow, and the lowest of them (0 to 1). */
+  readonly forecast: { readonly dailyMastery: readonly number[]; readonly lowest: number } | null;
+  /** How many distinct study days the reader answered cards of this topic: the screen applies the spec's minimum. */
+  readonly studyDays: number;
+}
+
 /** The Tópico screen: the topic's mastery and coverage, and all of its cards. */
 export interface TopicCardsView {
   readonly topicId: string;
@@ -307,6 +316,8 @@ export interface Queries {
   worstCards: { input: { topicId?: string }; output: WorstCardsGroup[] };
   /** The reader's own cards of one topic, for the Tópico screen. */
   topicCards: { input: { topicId: string }; output: TopicCardsView };
+  /** The reader's own forecast for one topic, if they only do the reviews that fall due. */
+  topicForecast: { input: { topicId: string }; output: TopicForecastView };
   /** The reader's own Hoje: routine, day's goal and streak. */
   today: { input: Record<string, never>; output: TodayView };
   /** The reader's own study settings. */

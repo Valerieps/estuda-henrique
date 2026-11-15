@@ -1,7 +1,7 @@
 // The diagnosis queries and the daily snapshots (docs/spec/diagnostico.md). Everything is the
 // reader's own: the cards are the system's plus their personal ones, and the states and answers
 // are filtered by their id (ADR-009). The rules live in src/domain/study/diagnostic.ts.
-import type { ExamCards, Thermometer, ThermometerTopic, TopicCard, TopicCardsView, TrendPoint, WorstCard, WorstCardsGroup } from '../../src/application/api-contract';
+import type { ExamCards, Thermometer, ThermometerTopic, TopicCard, TopicCardsView, TopicForecastView, TrendPoint, WorstCard, WorstCardsGroup } from '../../src/application/api-contract';
 import type { NoteKind } from '../../src/domain/study/cloze';
 import {
   isProblemCard,
@@ -16,6 +16,7 @@ import {
   type AnswerRecord,
   type DiagnosticCard,
 } from '../../src/domain/study/diagnostic';
+import { forecastTopic } from '../../src/domain/study/forecast';
 import { examSelection } from '../../src/domain/study/exam';
 import { retrievability, type CardStage, type SchedulingState } from '../../src/domain/study/scheduler';
 import { addDays } from '../../src/domain/study/study-day';
@@ -241,6 +242,29 @@ export function topicCards(ctx: Context, actor: Member, input: Record<string, un
     }),
   );
   return { topicId: topic.id, topicName: topic.name, mastery: topicMastery(own), ...topicCoverage(own), cards };
+}
+
+export function topicForecast(ctx: Context, actor: Member, input: Record<string, unknown>): TopicForecastView | QueryError {
+  if (typeof input.topicId !== 'string') return new QueryError('invalid');
+  const topicId = input.topicId;
+  if (!topics(ctx).some((t) => t.id === topicId)) return new QueryError('not_found');
+  const ids = new Set(memberCards(ctx, actor.id).filter((c) => c.topicId === topicId && !c.suspended && c.mastery !== null).map((c) => c.cardId));
+  const states = ctx.sql
+    .all<CardRow>(
+      `SELECT cs.card_id, cs.stage, cs.due, cs.stability, cs.difficulty, cs.scheduled_days, cs.learning_steps, cs.reps, cs.lapses, cs.last_review
+       FROM card_states cs WHERE cs.member_id = ?`,
+      actor.id,
+    )
+    .filter((r) => ids.has(r.card_id))
+    .map(stateOf);
+  const studyDays = ctx.sql.all<{ n: number }>(
+    `SELECT COUNT(DISTINCT reviews.study_day) AS n FROM reviews
+     JOIN cards ON cards.id = reviews.card_id JOIN notes ON notes.id = cards.note_id
+     WHERE reviews.member_id = ? AND notes.topic_id = ?`,
+    actor.id,
+    topicId,
+  );
+  return { topicId, forecast: forecastTopic(states, today(ctx)), studyDays: studyDays[0]?.n ?? 0 };
 }
 
 // ---- Daily snapshots ----

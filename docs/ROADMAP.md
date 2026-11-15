@@ -16,7 +16,7 @@ A fase 2 é construída pelas sessões de [PLANO-FASE-2.md](PLANO-FASE-2.md).
 | Colar várias com prévia | 1 | `spec/cartas.md` | |
 | Imagem e oclusão de imagem | 2 | `spec/cartas.md` | Oclusão é a prioridade 1 da fase 2 |
 | Data e nota da prova | 2 | `spec/vespera.md` | |
-| Previsão por tópico | 2 | `spec/diagnostico.md` | Prioridade 1 da fase 2, ao lado da oclusão |
+| Previsão por tópico (a tela; a consulta `topicForecast` já existe) | 2 | `spec/diagnostico.md` | Sessão B4 |
 | Gráfico de evolução, guardadas por tópico, momentos de virada, resumo semanal, recomeço, tags | 2 | `spec/diagnostico.md`, `spec/estudo.md`, `spec/meta-e-ofensiva.md` | Tags ainda sem regra escrita |
 | Outras matérias e lembrete diário | 3 | `spec/cartas.md`, `spec/meta-e-ofensiva.md` | O lembrete precisa de notificações push: origem nova e ADR |
 
