@@ -5,6 +5,7 @@ import { intervalParts } from '../../domain/study/interval-label';
 import { afterAnswer, returnDelays } from '../../domain/study/review-queue';
 import type { Answer } from '../../domain/study/scheduler';
 import { strings } from '../../domain/strings';
+import { retryUnavailable } from '../../application/retry';
 import { useServices } from '../backend-context';
 import { Button } from '../components/Button';
 import { Chip } from '../components/Chip';
@@ -206,7 +207,8 @@ function Session({ session, onFinish, onLeave }: { session: StudySessionView; on
     setFlipped(false);
     setSoon(rating === 'again');
     setFeedback(rating === 'again' ? 'slide' : 'pulse');
-    const result = await backend.command('study.answer', { sessionId: session.sessionId, cardId: card.id, answer: rating });
+    // A dropped connection must not send him back to the previous card: try again first.
+    const result = await retryUnavailable(() => backend.command('study.answer', { sessionId: session.sessionId, cardId: card.id, answer: rating }));
     if (!result.ok) {
       setQueue(before);
       setHistory((h) => h.slice(0, -1));
