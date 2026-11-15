@@ -12,6 +12,7 @@ import { Notice } from '../components/Notice';
 import { ProgressBar } from '../components/ProgressBar';
 import { StateBadge } from '../components/StateBadge';
 import { Tile } from '../components/Tile';
+import { pickWarning } from '../../domain/study/warning-card';
 import { useInstall } from '../install-prompt';
 import { navigate } from '../router';
 import { startStudy } from '../study-launch';
@@ -191,10 +192,11 @@ function AheadNew() {
   );
 }
 
-/** One warning at a time, in this order: a streak he can fix, then installing the app. */
+/** One warning at a time, picked by the domain rule (pickWarning). */
 function WarningCard({ view, onReload }: { view: TodayView; onReload: () => void }) {
   const { canInstall, install } = useInstall();
-  if (view.streak.canRepair) {
+  const warning = pickWarning({ canRepairStreak: view.streak.canRepair, hasStudied: view.hasStudied, canInstall });
+  if (warning?.kind === 'streak-repair') {
     return (
       <div className="card stack">
         <p>{strings.streak.repairText}</p>
@@ -202,7 +204,7 @@ function WarningCard({ view, onReload }: { view: TodayView; onReload: () => void
       </div>
     );
   }
-  if (view.hasStudied && canInstall) {
+  if (warning?.kind === 'install') {
     return (
       <div className="card stack">
         <p>{strings.notice.install}</p>

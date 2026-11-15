@@ -32,7 +32,6 @@ distribui o trabalho e confere os merges.
 | ID | Sessão | Modelo | Compartilhados | Depende de |
 | --- | --- | --- | --- | --- |
 | D0 | Incorporar as respostas da dona ao spec | Sonnet | não | respostas no chat |
-| A4 | Cartão de aviso como regra pura e Compartilhar | Sonnet | sim | — |
 | B1 | Notas com imagem e oclusão: dados e domínio | Opus | sim | A1, D0 (cartas.md) |
 | B2 | Oclusão e imagem: telas | Opus | não | B1 |
 | B3 | Datas e nota da prova | Sonnet | sim | A3, A4, D0 (vespera.md) |
@@ -80,20 +79,6 @@ question. "ok" means the question's own proposal. Remove an "Em aberto" heading 
 wrote the tags rule, the ROADMAP row loses "Tags ainda sem regra escrita". No code.
 Answers:
 <paste the owner's answers here>
-```
-
-### A4
-
-```text
-Make the warning card (docs/spec/meta-e-ofensiva.md, "Cartão de aviso") a pure rule, ready for the
-phase 2 warnings, and add sharing.
-- src/domain/study/warning-card.ts: pickWarning(state) returns the one warning to show, by the
-  spec's order, as a discriminated union. Today it has 'streak-repair' and 'install'; add the kinds
-  'exam-result', 'restart' and 'weekly-summary' with the state fields they will need as optional
-  inputs that are never set yet, so B3, B6 and B7 only fill them. Tests for the order.
-- Today.tsx's WarningCard renders from pickWarning; behavior unchanged.
-- src/infrastructure/share.ts behind a port: navigator.share({ text }) when present, else copy to
-  the clipboard and return 'copied' so the UI can say so. Test with both paths stubbed.
 ```
 
 ### B1
