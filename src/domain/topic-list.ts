@@ -13,7 +13,8 @@ interface ArrangeableTopic {
 
 /**
  * Filters and orders a subject's topics for the Matérias grid (docs/spec/cartas.md). `weakest`
- * puts the lowest mastery first and new topics (no mastery yet) last; ties keep the course order.
+ * sorts by state (weak, in progress, new, mastered), then lowest mastery first; ties keep the
+ * course order.
  */
 export function arrangeTopics<T extends ArrangeableTopic>(
   topics: readonly T[],
@@ -22,12 +23,11 @@ export function arrangeTopics<T extends ArrangeableTopic>(
 ): T[] {
   const shown = filter === 'all' ? [...topics] : topics.filter((t) => t.state === filter);
   if (order === 'course') return shown;
-  return shown.sort((a, b) => rank(a) - rank(b));
+  return shown.sort((a, b) => STATE_RANK[a.state] - STATE_RANK[b.state] || (a.mastery ?? 0) - (b.mastery ?? 0));
 }
 
-function rank(topic: ArrangeableTopic): number {
-  return topic.mastery === null || topic.state === 'new' ? Number.POSITIVE_INFINITY : topic.mastery;
-}
+/** Worst first; a new topic has nothing to compare, so it sits after the ones with progress. */
+const STATE_RANK: Record<TopicState, number> = { weak: 0, progress: 1, new: 2, mastered: 3 };
 
 /** How many topics are in each state, for the counts on the filter chips. */
 export function countByState(topics: readonly ArrangeableTopic[]): Record<TopicState, number> {

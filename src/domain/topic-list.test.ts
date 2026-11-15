@@ -14,8 +14,17 @@ describe('arrangeTopics', () => {
     expect(arrangeTopics(topics, 'all', 'course').map((t) => t.id)).toEqual(['a', 'b', 'c', 'd', 'e']);
   });
 
-  it('puts the weakest first, new topics last, ties in course order', () => {
-    expect(arrangeTopics(topics, 'all', 'weakest').map((t) => t.id)).toEqual(['c', 'e', 'd', 'a', 'b']);
+  it('puts the weakest first, then progress, new and mastered, ties in course order', () => {
+    expect(arrangeTopics(topics, 'all', 'weakest').map((t) => t.id)).toEqual(['c', 'e', 'd', 'b', 'a']);
+  });
+
+  it('reorders even when most topics are new', () => {
+    const mostlyNew = [
+      { id: 'x', state: 'new', mastery: null },
+      { id: 'y', state: 'new', mastery: null },
+      { id: 'z', state: 'weak', mastery: 0.3 },
+    ] as const;
+    expect(arrangeTopics(mostlyNew, 'all', 'weakest').map((t) => t.id)).toEqual(['z', 'x', 'y']);
   });
 
   it('shows only the topics in the chosen state', () => {

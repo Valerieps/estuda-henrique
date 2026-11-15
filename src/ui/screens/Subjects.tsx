@@ -73,12 +73,9 @@ export function Subjects() {
       <h1>{single ? s.topicsOf(subjects.data[0].name) : s.title}</h1>
       <MasteryHelp />
       {total > 1 && (
-        <div className="chips" role="group" aria-label={s.filters}>
-          <Chip icon="worst" pressed={order === 'weakest'} onClick={() => setOrder(order === 'weakest' ? 'course' : 'weakest')}>
-            {s.weakestFirst}
-          </Chip>
+        <div className="stack">
           {states.length > 1 && (
-            <>
+            <div className="chips" role="group" aria-label={s.filterGroup}>
               <Chip pressed={filter === 'all'} onClick={() => setFilter('all')}>
                 {s.filterAll(total)}
               </Chip>
@@ -87,8 +84,16 @@ export function Subjects() {
                   {s.filterState[state](counts[state])}
                 </Chip>
               ))}
-            </>
+            </div>
           )}
+          <div className="chips" role="group" aria-label={s.orderGroup}>
+            <Chip pressed={order === 'course'} onClick={() => setOrder('course')}>
+              {s.courseOrder}
+            </Chip>
+            <Chip icon="worst" pressed={order === 'weakest'} onClick={() => setOrder('weakest')}>
+              {s.weakestFirst}
+            </Chip>
+          </div>
         </div>
       )}
       {withStats.map(({ subject, topics }) => {
