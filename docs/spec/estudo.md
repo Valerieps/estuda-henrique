@@ -7,6 +7,11 @@ A sessão de estudo de todo dia: que cartas entram, em que ordem, e como ele res
 - **Não entra aqui:** a Véspera (`spec/vespera.md`), o termômetro e Piores cartas
   (`spec/diagnostico.md`), a meta e a ofensiva (`spec/meta-e-ofensiva.md`).
 
+## Em aberto
+
+- [ ] Momento de virada: o que conta? Proposta: uma carta com 3 ou mais Errei no histórico que, nesta sessão, recebeu Acertei na primeira resposta; o Resumo lista até 3, com a frase "Você errava esta e agora acertou".
+- [ ] A animação de carta guardada: alguma frase junto? Proposta: só o ícone de cadeado com um brilho curto e a palavra "Guardada" no verso; sem som; desligada para quem pediu menos movimento.
+
 ## Começar
 
 - Em Hoje, Estudar começa a sessão em um toque. Ao lado, Só 5 cartas começa uma sessão de 5. *(1)*
