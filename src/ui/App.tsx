@@ -4,7 +4,6 @@ import { canManageGroup, isUser } from '../domain/group/roles';
 import { strings } from '../domain/strings';
 import { useLiveStatus, useServices } from './backend-context';
 import { Button } from './components/Button';
-import { EmptyState } from './components/EmptyState';
 import { Notice } from './components/Notice';
 import { navigate, usePath } from './router';
 import { Invites } from './screens/Invites';
@@ -16,6 +15,7 @@ import { Topic } from './screens/Topic';
 import { Worst } from './screens/Worst';
 import { Study } from './screens/Study';
 import { Subjects } from './screens/Subjects';
+import { SystemCards } from './screens/SystemCards';
 import { Today } from './screens/Today';
 import { AdminShell, MemberShell } from './Shell';
 import { useQuery, type QueryState } from './use-query';
@@ -63,8 +63,6 @@ function OfflineNotice() {
   return <Notice>{strings.offline}</Notice>;
 }
 
-const empty = strings.empty;
-
 /**
  * The user's screens. Each empty state is replaced by its feature (docs/ROADMAP.md). A user who is
  * also admin reaches Members and Invites from Ajustes.
@@ -99,7 +97,7 @@ function AdminApp({ me, onSignOut }: { me: MeView; onSignOut: () => void }) {
   const path = usePath();
   return (
     <AdminShell onSignOut={onSignOut}>
-      {path === '/membros' ? <Members me={me} /> : path === '/convites' ? <Invites /> : <EmptyState {...empty.systemCards} />}
+      {path === '/membros' ? <Members me={me} /> : path === '/convites' ? <Invites /> : <SystemCards />}
     </AdminShell>
   );
 }
