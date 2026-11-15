@@ -3,6 +3,7 @@
 // system notes in the same topic, and the old card is suspended for every member, present and
 // future (`superseded_cards`, read when a member joins). The old note stays, with its history.
 import revision from '../seed/biologia-revisao-1.json';
+import revisionTwo from '../seed/biologia-revisao-2.json';
 import { cardIndexes, type NoteKind } from '../../src/domain/study/cloze';
 import { nowIso, type Context } from './context';
 
@@ -93,4 +94,40 @@ export function suspendSupersededCards(ctx: Context, memberId: string): void {
     memberId,
     nowIso(ctx),
   );
+}
+
+interface NoteEdit {
+  readonly nota: string;
+  readonly frente: string;
+  readonly verso: string;
+  readonly macete?: string;
+}
+
+export interface EditFile {
+  readonly apagar: readonly { readonly nota: string; readonly motivo: string }[];
+  readonly editar: readonly NoteEdit[];
+}
+
+/**
+ * A revision that changes system notes in place, for every member (docs/spec/boas-cartas.md):
+ * a note in `apagar` is deleted, a basic note in `editar` gets new text and keeps its card and
+ * study history. A note the admin already deleted is left as it is.
+ */
+export function editStatements(file: EditFile, at: string): string[] {
+  const when = quote(at);
+  return [
+    ...file.apagar.map(
+      (d) => `UPDATE notes SET deleted_at = ${when} WHERE id = ${quote(d.nota)} AND owner_id IS NULL AND deleted_at IS NULL`,
+    ),
+    ...file.editar.map(
+      (e) =>
+        `UPDATE notes SET front = ${quote(e.frente)}, back = ${quote(e.verso)}, hint = ${quote(e.macete ?? null)}, updated_at = ${when}
+           WHERE id = ${quote(e.nota)} AND owner_id IS NULL AND kind = 'basic' AND deleted_at IS NULL`,
+    ),
+  ];
+}
+
+/** Migration 11: revision 2, the system cards reviewed against the PAS 2 matrix (docs/PAS.md). */
+export function revisionTwoStatements(file: EditFile = revisionTwo as EditFile): string[] {
+  return editStatements(file, '2026-11-15T12:00:00.000Z');
 }

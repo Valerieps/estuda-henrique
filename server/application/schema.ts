@@ -1,7 +1,7 @@
 // The group's database (docs/ARQUITETURA.md). Migrations run in order, once each, when the
 // Durable Object starts. Never edit a migration that has shipped: add the next one.
 import { addedDeckStatements, initialDeckStatements } from './initial-deck';
-import { revisionOneStatements } from './seed-revision';
+import { revisionOneStatements, revisionTwoStatements } from './seed-revision';
 import type { Sql } from './ports';
 
 export const MIGRATIONS: readonly (readonly string[])[] = [
@@ -193,6 +193,9 @@ export const MIGRATIONS: readonly (readonly string[])[] = [
   // topics, and each replaced card suspended for every member; `superseded_cards` keeps the list so
   // a member who joins later starts with them suspended too.
   revisionOneStatements(),
+  // 11: revision 2 (server/seed/biologia-revisao-2.json): system notes deleted or rewritten in place,
+  // for every member, by the PAS 2 matrix (docs/PAS.md) and docs/spec/boas-cartas.md.
+  revisionTwoStatements(),
 ];
 
 export function migrate(sql: Sql): void {

@@ -61,11 +61,12 @@ Cada carta passa nas três perguntas; se não passa, eu quebro ou reformulo. *(1
 
 ## Revisar uma carta do sistema
 
-- Uma carta do sistema que não segue estas regras é reescrita como uma ou mais cartas novas, no
-  mesmo tópico, e a antiga fica suspensa para todos os usuários, inclusive os que entrarem
-  depois. *(1)*
-  Por quê: editar a antiga no lugar mudaria o fato que o histórico de estudo dela mede; a
-  suspensa continua no tópico (filtro Suspensas), com o histórico, e cada um pode reativá-la.
+- Uma carta do sistema que cobra decoreba ou assunto burocrático (nome de vacina, regra de escrita
+  do nome científico, nome de subgrupo sem conceito) é apagada para todos os usuários. *(1)*
+- Uma carta do sistema cujo conteúdo não está na matriz do PAS 2 ([PAS.md](../PAS.md)) e não é
+  base de um item dela é apagada para todos os usuários. *(1)*
+  Por quê: o tempo de estudo dele vai para o que a prova cobra.
+- Uma carta do sistema que está na matriz mas não segue estas regras é editada no lugar, para
+  todos os usuários, sem carta nova: o que sobra de um segundo fato vai para o macete. *(1)*
+  Por quê: é a mesma pergunta mais bem escrita; uma versão nova só dobraria as cartas dele.
 - Uma carta que já segue as regras fica como está. *(1)*
-- Uma carta que só repete o que as cartas novas já perguntam fica suspensa, sem carta nova no
-  lugar. *(1)*

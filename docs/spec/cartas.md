@@ -66,6 +66,9 @@ Matérias, tópicos e cartas: o que existe para estudar e como as cartas são cr
 - As cartas do baralho inicial que não seguiam `spec/boas-cartas.md` foram reescritas como cartas
   novas (`server/seed/biologia-revisao-1.json`), e as antigas ficam suspensas para todos. *(1)*
   Por quê: não escrevi o baralho carta a carta pelas telas do admin.
+- Depois, as cartas do sistema foram revisadas pela matriz do PAS 2: as decoreba, burocráticas ou
+  fora da matriz foram apagadas para todos, e as que não seguiam `spec/boas-cartas.md` foram
+  editadas no lugar (`server/seed/biologia-revisao-2.json`, com o motivo de cada uma). *(1)*
 - As cartas do arquivo que não têm tópico na lista da escola ganham tópicos próprios, depois dos da
   lista: Embriologia e planos corporais, Fisiologia humana e Ecologia em contexto (Cerrado e
   águas). *(1)*
