@@ -17,7 +17,9 @@
   },
   // Never edit a shipped migration; add the next tag.
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Group"] }],
-  // No cron trigger here: the Worker `cron-central` calls the `Cron` entrypoint (ADR-004).
+  // No cron here: the Worker `cron-central` calls the `Cron` entrypoint (ADR-004). The empty list is
+  // deliberate: omitting `triggers` leaves the schedule already set on Cloudflare in place.
+  "triggers": { "crons": [] },
   "vars": {
     // Public: the OAuth client ID from Google Cloud (BOOTSTRAP.md). The secret is a secret.
     "GOOGLE_CLIENT_ID": "625557632408-l0a0kblv0dfqtgtipsurfobgus16fski.apps.googleusercontent.com"
