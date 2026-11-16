@@ -123,7 +123,7 @@ Each step rereads the whole conversation, so long sessions and back-and-forth co
 - `src/ui` - React components. All colors, fonts, sizes and spacing live in `src/ui/theme/tokens.css`; shared components in `src/ui/components/`.
 - `server/application` - the server's use cases (`GroupService`), synchronous, on the `Sql`/`Clock`/`IdGenerator` ports; `schema.ts` holds the migrations.
 - `server/infrastructure`, `server/entry` - Durable Object, Worker, Google sign-in, cookies. `server/testing` - `node:sqlite` for tests.
-- `wrangler.jsonc` - the Worker: assets, Durable Object, cron, vars. Secrets via `wrangler secret put`; locally in `.dev.vars` (see `.dev.vars.example`).
+- `wrangler.jsonc` - the Worker: assets, Durable Object, vars. No cron trigger: the cron lives in the Worker `cron-central`, which calls the `Cron` entrypoint of `worker.ts` once a day at 06:00 UTC (ADR-004). Secrets via `wrangler secret put`; locally in `.dev.vars` (see `.dev.vars.example`).
 - `public/` - static files: manifest, icons, `_headers`.
 - `network-policy.ts` - the servers the app (`ALLOWED_ORIGINS`, `IMAGE_ORIGINS`) and the Worker (`SERVER_ORIGINS`) may talk to.
 - `scripts/` - `check-docs.mjs` (run by CI) and `setup-repo.mjs` (once per new repository), `ship.mjs` and `branches.mjs` (see Commands).

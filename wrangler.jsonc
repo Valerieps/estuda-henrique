@@ -1,4 +1,4 @@
-// Cloudflare Worker: the app's files, the API, the live connection and the cron (ADR-004).
+// Cloudflare Worker: the app's files, the API, the live connection and the `Cron` entrypoint (ADR-004).
 // Secrets are not here: set GOOGLE_CLIENT_SECRET and BOOTSTRAP_ADMIN_EMAILS with
 // `npx wrangler secret put <NAME>`, and locally in .dev.vars (see .dev.vars.example).
 {
@@ -17,8 +17,7 @@
   },
   // Never edit a shipped migration; add the next tag.
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Group"] }],
-  // One cron for every time-based job; each job decides whether it is due (GroupService.tick).
-  "triggers": { "crons": ["*/5 * * * *"] },
+  // No cron trigger here: the Worker `cron-central` calls the `Cron` entrypoint (ADR-004).
   "vars": {
     // Public: the OAuth client ID from Google Cloud (BOOTSTRAP.md). The secret is a secret.
     "GOOGLE_CLIENT_ID": "625557632408-l0a0kblv0dfqtgtipsurfobgus16fski.apps.googleusercontent.com"

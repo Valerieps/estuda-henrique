@@ -27,16 +27,14 @@ describe('cron entry points', () => {
     expect(tick).toHaveBeenCalledTimes(1);
   });
 
-  it('scheduled() does the same as runCron', async () => {
-    const { env, tick } = fakeEnv();
-    await worker.scheduled!({} as ScheduledController, env, ctx);
-    expect(tick).toHaveBeenCalledTimes(1);
-  });
-
   it('Cron.tick() does the same as runCron', async () => {
     const { env, tick } = fakeEnv();
     const entry = new (Cron as unknown as new (ctx: unknown, env: unknown) => Cron)(ctx, env);
     await entry.tick();
     expect(tick).toHaveBeenCalledTimes(1);
+  });
+
+  it('has no scheduled handler: the cron lives in cron-central', () => {
+    expect((worker as { scheduled?: unknown }).scheduled).toBeUndefined();
   });
 });

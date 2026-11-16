@@ -1,5 +1,5 @@
-// The Worker: serves the app's files, the API under /api, the live connection and the cron
-// (ADR-004). Everything about the group is delegated to the Group Durable Object.
+// The Worker: serves the app's files, the API under /api, the live connection and the `Cron`
+// entrypoint called by `cron-central` (ADR-004). Everything about the group is delegated to the Group Durable Object.
 import { WorkerEntrypoint } from 'cloudflare:workers';
 import type { ApiError, ApiResult } from '../../src/application/api-contract';
 import { IMAGE_MIMES, MAX_IMAGE_BYTES } from '../application/images';
@@ -205,7 +205,4 @@ export default {
     return env.ASSETS.fetch(request);
   },
 
-  async scheduled(_controller, env, ctx): Promise<void> {
-    await runCron(env, ctx);
-  },
 } satisfies ExportedHandler<Env>;

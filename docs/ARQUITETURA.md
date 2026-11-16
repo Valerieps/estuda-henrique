@@ -11,14 +11,14 @@ O desenho técnico que o código não mostra sozinho.
 
 - **App:** web app (Vite + React + TypeScript), instalável (PWA). Fala só com a própria origem.
 - **Servidor:** um Cloudflare Worker serve os arquivos do app, a API em `/api`, a conexão ao vivo e
-  o cron. Todos os dados do grupo ficam num único Durable Object, `Group`, com SQLite. Ver ADR-004.
+  o ponto de entrada `Cron`, chamado uma vez por dia (06:00 UTC) pelo Worker `cron-central`. Todos os dados do grupo ficam num único Durable Object, `Group`, com SQLite. Ver ADR-004.
 - **Login:** Google, pelo fluxo de código OAuth no Worker, com cookie de sessão. Ver ADR-005.
 
 ```
 app (celular) ──POST /api/query|command──► Worker ──RPC──► Group (Durable Object, SQLite)
      ▲                                       ▲                    │
      └──────── WebSocket /api/live ──────────┘                    │ "mudou: members, invites…"
-                                             cron 5 min ──► tick  ▼
+                                             cron-central 1x/dia ──► Cron.tick  ▼
                                                      todos os apps abertos refazem a consulta
 ```
 
