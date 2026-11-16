@@ -15,9 +15,12 @@ database: it calls `POST /api/query/<name>` and `POST /api/command/<name>`, type
 - **Live updates:** each open app keeps one WebSocket to `/api/live`, accepted with the hibernation
   API. After a command, the object sends `{type: 'changed', topics}`; screens refetch those topics,
   and refetch everything after a reconnect.
-- **Time-based jobs:** one cron every 5 minutes calls `Group.tick()`; each job decides whether it is
-  due. Cron runs in UTC: a job tied to the local calendar converts the time itself.
-- **Plan:** Workers Free. Durable Objects with SQLite storage and cron triggers are included.
+- **Time-based jobs:** the cron lives in the separate Worker `cron-central`, which calls this
+  Worker's `Cron` entrypoint (`tick()`, service-binding RPC) once a day at 06:00 UTC; that calls
+  `Group.tick()`, and each job decides whether it is due. This Worker has no `triggers.crons`: the
+  Free plan allows 5 crons per account, so all apps share one. Cron runs in UTC: a job tied to the
+  local calendar converts the time itself.
+- **Plan:** Workers Free. Durable Objects with SQLite storage are included.
 - **Deploy:** Workers Builds, connected to the GitHub repository, runs `npm run build` and deploys
   `main`; other branches get a preview version (`wrangler preview`, configured by the `previews`
   block of `wrangler.jsonc`: its own empty `Group` namespace, no secrets). The build ends with
